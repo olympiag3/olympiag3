@@ -1,0 +1,28 @@
+#Spell:  Farcasting [9172]
+#
+Usage:  USE @@@@ <location>
+
+Required aura:  distance in provinces to <location>
+Required item:
+Time to cast:   seven days
+
+If successful, the location check for the next spell cast
+attempted will be made from the given location instead of
+the location the mage is in.
+
+The amount of aura consumed is equal to the distance in
+provinces from the mage's location to the target location.
+For instance, to project a cast into an adjoining province
+requires two aura.  To project a cast between any of the
+sublocations within a province requires one aura.
+
+The projected cast state will persist until the mage's next use
+of magic.  The mage may move before casting the next spell;
+movement will not alter the target location for spell projection.
+
+Unless the mage is projecting to the same location he is in,
+a magical shroud over the target location will cause this
+spell to fail.
+
+Farcasts may not be initiated between Hades, Faery and the real
+world.

@@ -1,0 +1,21 @@
+#Skill:  Incite mob violence [9525]
+
+Usage:  INCITE <mob> <target>
+Time:   seven days
+
+Speak out against the target in such as a way as to inspire
+public hatred and ire.  The target will be made to seem a
+malicious influence responsibile for all of the common man's
+troubles.
+
+An existing crowd of peasants must be specified as the first
+argument, and the target of their violence as the second.
+The mob may not already be stacked under another noble who
+has rallied it.
+
+There is a 50% chance that the mob will be roused to attack
+the target.
+
+There is also a 33% chance that patrons in any local inns will
+learn that the noble is trying to incite a mob to violence
+against the target.

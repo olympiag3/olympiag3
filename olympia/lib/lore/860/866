@@ -1,0 +1,12 @@
+#Spell:  Notify if gate unsealed [9119]
+#
+Usage:  USE @@@@ <gate> <key>
+
+Required aura:  five points
+Required item:
+Time to cast:   seven days
+
+Inform the sealer of the gate if the seal is broken, and of the
+identity of the mage who removes the seal.  The gate must be
+present in the current location to apply this spell.  However,
+notification will occur wherever the caster happens to be.

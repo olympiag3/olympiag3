@@ -1,0 +1,21 @@
+#Skill:  Construct catapult [9541]
+#
+Usage:  USE @@@@
+
+Requires:  three wood [77]
+           three workers [11]
+
+Produces:  one catapult [61]
+
+Time:      fourteen days
+
+The engineer directs the construction of a wheeled wooden frame
+containing a mechanism to supply stress to the end of a long
+wooden pole.  The pole contains a basket which may be loaded
+with stones or other missiles to be hurled against the enemy's
+walls, or over them.  A winch to lower the pole and a release
+mechanism finish the siege engine.
+
+Catapults are sometimes loaded with the bodies of the enemy's
+dead and hurled over their walls, to dishearten the besieged and
+spread disease amongst them.

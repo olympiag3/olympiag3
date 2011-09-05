@@ -1,0 +1,25 @@
+#Skill:  Harvest lumber [9568]
+#
+Usage:     WOOD [number] [days]
+Time:      as given or necessary
+Requires:  at least one worker [11]
+
+Workers enter the forest and select trees which are suitable for felling
+and sawing.  Lumber is used in the construction of ships, buildings and
+some weapons.  Timber is also used to support the roofs of mine shafts.
+
+Must be used in a forest province.  Forests generate 30 wood [77] each
+month.
+
+Examples:
+
+    wood         # obtain as much wood as possible
+    wood 25      # stop after getting 25 wood
+    wood 0 5     # cut timber for five days
+    wood 25 5    # stop after five days, or 25 wood, whichever
+                 # comes first
+
+In all cases, timber cutting will cease as soon as the forest's supply
+of wood for the month has been exhausted.
+
+WOOD is an alias for COLLECT 77.

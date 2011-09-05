@@ -1,0 +1,17 @@
+#Skill:  Fight to the death [9505]
+Usage:   USE @@@@ <0|1>
+Time:    0 days
+
+Normally a side will break when its offensive plus defensive total
+falls by 50% or more.  Knowledge of @@@@ allows a leader to override
+this default break point and set it to 100% instead.
+
+    Break at 50% losses:   USE @@@@ 1  (default)
+    Fight to the death:    USE @@@@ 0
+
+During combat, only the stack leader's setting for @@@@ is checked.
+@@@@ works both for attacking and defending stacks.
+
+Note that prisoners may still be taken from a side fighting to the
+death, as wounded nobles may be too weak to resist being taken
+captive.

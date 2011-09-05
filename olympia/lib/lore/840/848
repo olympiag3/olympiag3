@@ -1,0 +1,21 @@
+#Spell:  Detect location scry [9171]
+#
+Usage:  USE @@@@
+
+Required aura:  one point
+Required item:  none
+Time to cast:   seven days
+
+Knowledge of @@@@ will inform the mage of attempts made by other
+magicians to scry the mage's current location.  No USE is required
+in order for scry attempts to be detected.  The skill is used
+automatically whenever the mage's location is the target of an
+location scry spell.
+
+USE of the skill will cause the magician to practice scry detection.
+Practice should improve the experience rating with this skill over
+time, and cause the mage to become more adept at discovering scry
+attempts and identifying their source.
+
+Aura is only consumed by this spell when it is used for practice.
+No aura is depleted when a scry is detected.

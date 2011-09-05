@@ -1,0 +1,15 @@
+#Spell:  Destroy magical artifact [9164]
+#
+Usage:  USE 9164 <artifact>
+
+Required aura:  two points
+Required item:  a magical artifact
+Time to cast:   seven days
+
+Attempt to destroy a magical artifact.  The artifact must be in the
+caster's possession.  Some artifacts can only be destroyed in the
+location in which they were created.
+
+Any spells contained in the artifact will be lost when it is destroyed.
+Any aura trapped in the artifact will be released into the caster's
+current aura rating.

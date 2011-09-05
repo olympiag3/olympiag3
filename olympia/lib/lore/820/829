@@ -1,0 +1,10 @@
+#Spell:  Renew storm strength [9193]
+#
+Usage:  USE @@@@ <storm> <aura>
+
+Required aura:  as given
+Time to cast:   three days
+
+Invest aura in an existing storm.  The storm must be in the same
+province as the caster.  Each point of the mage's aura used will
+add two points of aura to the storm's strength.

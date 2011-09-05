@@ -1,0 +1,21 @@
+#Skill:  Construct siege tower [9542]
+#
+Usage:  USE @@@@
+
+Requires:  three wood [77]
+           three leather [80]
+           three workers [11]
+
+Produces:  one seige tower [62]
+
+Time:      fourteen days
+
+The engineer directs three workers to build a wooden tower,
+covered with treated leather skins or iron plating to protect
+the tower from burning.  The tower contains several ladders
+and a platform from which soldiers may attack.
+
+In battle, the tower is wheeled up against an enemy's walls
+and used by attacking soldiers to match the height of the
+defenders.  The attackers may then climb from the tower onto
+the walls.

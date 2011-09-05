@@ -1,0 +1,19 @@
+#Skill:  Torture prisoner [9523]
+#
+Usage:  TORTURE <prisoner>
+Time:   seven days
+
+Torture is the practice of inflicting pain on a captive prisoner in
+order to extract information against the victim's will.
+
+Torture will attempt to learn what faction the prisoner belongs to.
+Each torture attempt inflicts a 50 point health loss on the prisoner.
+
+The chance of success depends on the prisoner's loyalty:
+
+	loyalty		chance
+	-------		------
+	oath-2		  0%
+	oath-1		 10%
+	contract	 50%
+	fear		100%

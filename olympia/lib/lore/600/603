@@ -1,0 +1,21 @@
+#Skill:  Fishing [9582]
+#
+Usage:     FISH [number of fish] [days]
+Requires:  at least one sailor
+
+Unit must be on a ship on the ocean in order to fish.  Each day
+spent fishing there is a 50% chance that the ship will come across
+a school of fish.  If fish are found, each sailor will produce one
+fish that day.  Provinces generate 50 fish per month which may be
+obtained by fishing.
+
+Examples:
+
+    fish         # obtain as many fish as possible
+    fish 25      # stop after getting 25 fish
+    fish 0 5     # fish for five days
+    fish 25 5    # stop after five days, or 25 fish, whichever
+                 # comes first
+
+In all cases, fishing will cease as soon as the stocks in the ocean
+province have been exhausted.

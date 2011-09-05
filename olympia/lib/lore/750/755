@@ -1,0 +1,13 @@
+#Skill:  Remove blessing from soldiers [9305]
+#
+Usage:  USE @@@@ <target>
+Time:   ten days
+
+Remove the blessing from all of the target's blessed soldiers.
+Any blessed soldiers possessed by the target will be converted
+back to regular soldiers.
+
+If a target is not specified, the target will default to the priest.
+The target must be present in the priest's location.
+
+This prayer has a 50% chance of success.

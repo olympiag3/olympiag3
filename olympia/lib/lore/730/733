@@ -1,0 +1,29 @@
+#Skill:  Find market for tradegood [733]
+#
+Usage:  USE @@@@ <tradegood>
+Time:   14 days
+
+Use of @@@@ will attempt to find a buyer for a rare
+tradegood in the local city market.  The trader must
+possess at least one of the tradegood that a buyer
+is being sought for.
+
+Markets to purchase rare tradegoods must be at least
+8 provinces away from the market selling the rare
+tradegood.  A city will purchase at most two rare
+tradegoods.  For a given tradegood, there is a 50%
+chance that a city will purchase it.
+
+If successful, the city market will begin buying the
+rare tradegood.  A trader can hope to earn 2000-3000
+gold in profit if a full quantity of the tradegood
+is transported between the originating and consuming
+cities and sold.
+
+When the tradegood ceases to be sold in the originating
+city, the purchasing city will also remove the item from
+its purchase list, thus making room for another tradegood
+to be bought.
+
+@@@@ must be used in a city in part of the regular world
+(not Hades, Faery, the Cloudlands, or Subworld.)

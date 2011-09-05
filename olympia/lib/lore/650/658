@@ -1,0 +1,35 @@
+#Skill:  Summon wild men [9585]
+#
+Usage:  USE @@@@
+        MAKE 98 1
+Time:   one day
+
+Wild men, or savages, inhabit remote parts of the world.  Savages
+communicate by beating their drums to indicate calls-to-arms,
+battle challenges, or victory celebrations.
+
+Use of @@@@ will attempt to summon wild men with drumbeats, and
+persuade them to stack with the noble.  Savages will remain with
+the noble for 3 months, during which time they will participate
+in any battles the noble fights.
+
+To summon wild men, the noble must first use the MAKE 98 1 order
+to produce a drum [98].  A drum requires 1 mallorn wood [70] to
+produce.  MAKE 98 1 requires knowledge of @@@@.
+
+The drum may be used to summon wild men with the USE @@@@ order.
+The noble should be in a remote province, preferably surrounded by
+areas uninhabited by other characters.  The noble should allow time
+for the savage men to hear and follow the drumbeats.  Any wild men
+summoned to the province will stack with the noble.
+
+For example:
+
+	make 98 1	# make a drum
+	use @@@@	# use the drum to summon the savages
+	wait time 15	# give savages time to arrive and
+			# stack with us
+
+The number of savage units in the world is limited.  If all of the
+available savages have already been summoned, none will come when
+the drum is used.

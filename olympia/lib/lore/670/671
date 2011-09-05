@@ -1,0 +1,50 @@
+#Skill:  Bribe noble [671]
+#
+Usage:   BRIBE <target> <gold> [flag]
+Time:    seven days
+
+Offer a character gold in an attempt to win their service.  The
+amount must be at least 250 gold, or the receiving noble will not
+consider it a serious offer.
+
+Nobles with oathbound loyalty ignore bribes.  They may accept the
+gift, but they will not renounce loyalty to their lord.
+
+Nobles with contract loyalty will consider the bribe if it meets
+or exceeds their current loyalty rating.  For example, a noble of
+loyalty contract-750 would ignore any bribe of less than 750 gold.
+
+Nobles with fear loyalty, or nobles not sworn to any lord, will
+seriously consider any bribe of at least 250 gold.
+
+If the receiving noble considers the bribe, there is a 33% chance
+they will renounce loyalty to their current lord, and swear fealty
+to the bribing character.  There is also a chance that they will
+report the bribe or pocket it for themselves.  In some cases they
+may even renounce loyalty to their lord, but not swear fealty to
+the briber, instead choosing to go off on their own.
+
+Characters who are successfully bribed will have loyalty contract-250
+to the bribing character.  If flag is 1, and the bribe attempt is
+successful, the bribed character will stack with the briber.
+
+Bribes will be refused by characters who have already switched
+lords during the month because of bribery.  For example, suppose
+Osswid successfully bribes Feasel, and Feasel swears loyalty to
+Osswid.  Later that turn, if Procrustes attempts to bribe Feasel,
+Feasel will refuse to accept the bribe.
+
+The bribing character will lose the number of NPs which have
+been invested in the bribed character if the bribe is successful.
+The previous owner of a bribed noble will have the invested NPs
+returned.
+
+Examples:
+
+    bribe 5499 750	# Offer [5499] 750 gold to switch factions.
+			# If successful, [5499] will not stack with the
+			# briber.
+
+    bribe 3409 300 1	# Offer [3409] 300 gold to switch factions.
+			# If successful, [3409] will stack with the briber.
+

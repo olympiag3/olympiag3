@@ -1,0 +1,18 @@
+#Spell:  Summon rain [9187]
+#
+Usage:  USE @@@@ <aura> ["Name of storm"]
+
+Required aura:  three or more points
+Time to cast:   seven days
+
+Summon a rain weather entity.  Rain storms may be summoned from
+forest or ocean provinces.  Once a location has produced a rain
+storm, another rain storm may not be summoned from that place
+until the first storm has dissipated.
+
+The storm will have a strength of twice the amount of aura invested
+in its summoning.  Storms lose one point of strength at the end of
+each month.  When a storm's strength reaches zero, it dissipates.
+
+While the storm exists, the summoner will get a location report
+for the storm's province.

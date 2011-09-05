@@ -1,0 +1,14 @@
+#Spell:  Jump through gate [9116]
+#
+Usage:  USE @@@@ <gate> [key]
+
+Required aura:  one point for each 50 weight
+Required item:  none
+Time to cast:   one day
+
+The caster will teleport through the specified gate.  The gate
+must be present in the current location.  If the gate is sealed
+with a key, the key must be supplied for the jump to succeed.
+
+One point of aura is required for each 50 units of weight in the
+caster's stack to be transported.

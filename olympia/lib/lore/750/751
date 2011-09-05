@@ -1,0 +1,13 @@
+#Skill:  Receive vision [9301]
+#
+Usage:  USE @@@@ <target>
+Time:   ten days
+
+Receive a vision of a character, place or unique item.  A
+character may only see a vision for a particular target once.
+
+Visions will fail if the target is in a different world than
+the priest, i.e. if the priest is in the normal world, but
+the target is in Faery or Hades.
+
+Each attempt to receive a vision has a 50% chance of success.

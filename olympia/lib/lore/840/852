@@ -1,0 +1,12 @@
+#Spell:  Banish undead [9197]
+#
+Usage:  USE @@@@
+
+Required aura:  number of undead in location
+Time to cast:   seven days
+
+Banish all undead from the caster's location.  Requires one aura
+point for every undead to be banished.  The spell is all-or-none;
+if sufficient aura is not available to banish all of the undead at
+once, the spell fails, and no undead will be banished.  (No aura
+is used if the spell fails, however).

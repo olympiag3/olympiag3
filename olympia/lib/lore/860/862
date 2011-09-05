@@ -1,0 +1,12 @@
+#Spell:  Detect gates [9115]
+#
+Usage:  USE @@@@
+
+Required aura:  one point
+Required item:  none
+Time to cast:   seven days
+
+Identify any gates present in the current location.
+
+If there are no gates in the caster's location, Detect gates [@@@@]
+will indicate how far away the nearest gate is.

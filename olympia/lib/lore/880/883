@@ -1,0 +1,17 @@
+#Spell:  Reveal region of artifact creation [9109]
+#
+Usage:  USE @@@@ <artifact> [aura]
+
+Required aura:  one or more points
+Required item:
+Time to cast:   seven days
+
+Reveal the location in which a magical magical artifact was forged.
+The artifact in question must be possessed by the caster.
+
+Some magical artifacts may only be destroyed in the location where
+they were constructed.
+
+The artifact may be shrouded against magical inspection.  If so,
+a greater amount of aura must be specified with @@@@ than was
+used to apply the shroud.

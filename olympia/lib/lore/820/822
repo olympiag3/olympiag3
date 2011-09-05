@@ -1,0 +1,15 @@
+#Spell:  Bind storm to ship [9134]
+#
+Usage:  BIND <storm>
+
+Required aura:  three or more points
+Time to cast:   seven days
+
+Bind an existing storm to a ship.  The caster must be the owner of
+the storm (having summoned it himself, or siezed control of it),
+and must be on the ship the storm is to be bound to.
+
+Subsequent movement of the ship will cause the storm to follow.
+This can be especially useful if a wind storm is bound to a
+roundship, as the roundship will enjoy faster travel while the
+aura of the wind storm lasts.

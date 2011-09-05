@@ -1,0 +1,36 @@
+#Skill:  Summon demon lord [9181]
+#
+Usage:  USE @@@@ [aura]
+
+Required aura:  three to eight points
+Time to cast:   seven days
+
+Summon a demon lord unit from a graveyard.  The demon lord will
+appear with 15-25 undead and stack with the summoner.
+
+Each graveyard will support the summoning of one demon lord.  No
+further demon lord units may be summoned from a graveyard until
+the graveyard's demon lord has been destroyed or banished.
+
+The amount of aura invested in the summoning determines the
+strength of the demon lord.  The default aura is three points.
+
+	aura	attack/defense
+	----	--------------
+	 3	  (100,100)
+	 4	  (150,150)
+	 5	  (190,190)
+	 6	  (220,220)
+	 7	  (240,240)
+	 8	  (250,250)
+
+Each undead accompanying the demon lord fights with attack-10,
+defense-10.
+
+The demon lord's service is secured with a bond which lasts five
+months, unless renewed.  Demon lords should be banished or have
+their bonds renewed before the five months expires, or they may
+exercise their wrath on the summoner.
+
+Other Necromatic spells provide for banishment of demon lords and
+renewal of their loyalty bonds.

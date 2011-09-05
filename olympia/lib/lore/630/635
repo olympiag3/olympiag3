@@ -1,0 +1,17 @@
+#Skill:  Conceal faction [9591]
+#
+Usage:  automatic when necessary
+
+Knowledge of @@@@ causes a character to keep its faction affiliation
+secret.  Other units attempting to learn the what player the unit
+belongs with the skill Determine character's lord [9521] will fail.
+
+Permissions set for the player of a character concealing its faction
+affiliation will not include the character.  For example, suppose
+unit [5499] is concealing the fact that it belongs to player [613].
+Permissions declared for player [613] (such as ADMIT, DEFEND, etc.)
+will not include the sneaky unit [5499], since [5499] will not admit
+to an affiliation with [613].
+
+Furthermore, such units will not DEFEND units from their own faction
+by default, since this might reveal their identity.

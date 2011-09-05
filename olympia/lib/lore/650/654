@@ -1,0 +1,39 @@
+#Skill: Breed beasts [654]
+#
+Usage:  BREED <item> <item>
+Time:   seven days
+
+Attempt to breed two animals together to produce an offspring.
+Not all animals produce successful offspring.  Occasionally,
+cross-breeding different beasts will produce strange results.
+
+For example:
+
+	To breed two wild horses together:
+
+		BREED 51 51
+
+	To attempt a cross-breed of a horse and an ox:
+
+		BREED 51 76
+
+Because some animals are often unpredictable and violent, there
+is a 20% chance that one of the breeding parents will be killed
+in the attempt.
+
+The time necessary for the BREED command to function is
+dependent on the type of animal produced:
+ 
+     beast                   days
+     -----                   ----
+     dragon [286]             45
+     giant bird [281]         28
+     giant spider [278]       21
+     chimera [284]            21
+     nazgul [55]              14
+     lion [280]               14
+     harpie [285]             14
+     all other beasts          7
+
+Wild horses [51], riding horses [52] and warmounts [53] may be used
+interchangably with BREED.

@@ -1,0 +1,23 @@
+#Spell:  Shroud location from magical scry [9142]
+#
+Usage:  USE @@@@ [aura]
+
+Required aura:  one or more points, as given
+Required item:
+Time to cast:   three days
+
+Creates a magical shroud over the mage's current province.  The
+shroud hinders attempts by distant mages to view the location by
+magical scrying.
+
+The shroud is invested with twice the aura used in its creation.
+A mage attempting to view the location from a distance with a
+scry spell must expend a greater amount of aura than the shroud
+possesses to succeed.
+
+The shroud loses one point of aura at the end of each month.
+Successive uses of @@@@ are additive.  For example, USE @@@@ 1
+followed by USE @@@@ 3 will result in a location shroud with an
+aura of eight points.
+
+The default aura to use is one point.

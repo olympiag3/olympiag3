@@ -1,0 +1,732 @@
+1109:0:0:> stop
+1109:0:0:No order is currently executing.
+100:0:0:> stop
+100:0:0:Independent player~[100] may not issue that order.
+100:0:0:> work
+100:0:0:Unrecognized command.
+2021:0:1:> work
+2021:0:1:Unrecognized command.
+2019:0:1:> use 9102 4 "Ring of power"
+2019:0:1:Attempt to forge an auraculum.
+2020:0:1:> found "City of Hope"
+2020:0:1:Must be in a province to found a city.
+2021:0:1:> wait unit cw15
+2020:0:1:> attack 2022
+2020:0:1:[2022] is not here.
+2020:0:1:> fail
+2020:0:1:Unrecognized command.
+2020:0:1:> move e
+2020:0:1:No visible east route from Castle~[jg99].
+2020:0:1:> [skipped] &move e
+2020:0:1:> explore
+2020:0:7:Exploration uncovers no new features.
+2019:0:7:The Archymanyaged of Pelenth~[2019] lost 13 health.
+2020:0:8:> explore
+2019:0:14:Created Ring of power~[kn91].
+2019:0:14:Learned Advanced sorcery~[166].
+2019:0:14:Maximum aura now 3.
+2020:0:14:Exploration uncovers no new features.
+2019:0:14:The Archymanyaged of Pelenth~[2019] lost 22 health.
+2019:0:15:> hire "Feasel the Wicked"
+2019:0:15:Unrecognized command.
+2019:0:15:> out
+2019:0:15:Travel to Plain~[db34] will take one day.
+22873:0:15:The Archymanyaged of Pelenth~[2019], lord~2022, with five~workers, 112~peasants, left for Plain~[db34].
+2019:0:15:Arrival at Plain~[db34].
+18034:0:15:The Archymanyaged of Pelenth~[2019], lord~2022, with five~workers, 112~peasants, arrived.
+2019:0:16:> buy 10 1 100
+2019:0:16:Try to buy one~peasant~[10] for 100~gold.
+2019:0:16:> buy 79 3 74
+2019:0:16:Try to buy three~iron~[79] for 74~gold each.
+2019:0:16:> sell 15 1 50
+2019:0:16:Try to sell one~elite guard~[15] for 50~gold.
+2019:0:16:> sell 19 11 12
+2019:0:16:Try to sell 11~sailors~[19] for 12~gold each.
+2019:0:16:> n
+2019:0:16:Travel to Plain~[da34] will take seven days.
+18034:0:16:The Archymanyaged of Pelenth~[2019], lord~2022, with five~workers, 112~peasants, left for Plain~[da34].
+2019:0:21:The Archymanyaged of Pelenth~[2019] lost 13 health.
+2019:0:22:Arrival at Plain~[da34].
+17934:0:22:The Archymanyaged of Pelenth~[2019], lord~2022, with five~workers, 112~peasants, arrived from Plain~[db34].
+2019:0:23:> n
+2019:0:23:A sea-worthy ship is required for travel across water.
+2019:0:23:> use 120
+2019:0:23:Skill schools have no direct use.  Only subskills within a school may be used.
+2019:0:23:> build galley "HMS Pinafore"
+2019:0:23:Created HMS Pinafore~[gv23], galley-in-progress.
+17934:0:23:The Archymanyaged of Pelenth~[2019] began construction of HMS Pinafore~[gv23], galley-in-progress.
+2019:0:28:The Archymanyaged of Pelenth~[2019] lost 15 health.
+2020:0:30:Collected 1,200~gold in taxes.
+2019:0:30:Paid maintenance of 122~gold.
+2020:0:30:Paid maintenance of 3~gold.
+2022:0:30:Maintenance costs are 10~gold, can afford 0~gold.
+2022:0:30:Three~peasants starved.
+2022:0:30:One~archer left service.
+2022:0:30:Two~soldiers left service.
+4:0::Forest~[cu26], forest, in Lesser Atnos
+4:0::------------------------------------------------------------------------
+4:0::Routes leaving Forest~[cu26]: 
+4:3::North, to Forest~[ct26], 8~days
+4:3::East, to Ocean~[cu27], Atnos Sea, impassable
+4:3::South, to Ocean~[cv26], Atnos Sea, impassable
+4:3::West, to Forest~[cu25], 8~days
+4:0::
+4:0::Inner locations:
+4:3::City~[ew66], port city, safe haven, 1 day
+4:3::Temple~[ew67], temple, 1 day
+4:0::
+4:0::Seen here:
+4:3::Faust~[3591], lord~812
+4:3::Candide~[5499], lord~3591
+4:0::
+4:0::Plain~[da34], plain, in West Camaris
+4:0::------------------------------------------------------------------------
+4:0::Routes leaving Plain~[da34]: 
+4:3::North, to Ocean~[cz34], South Sea, 1~day
+4:3::East, to Plain~[da35], 7~days
+4:3::South, to Plain~[db34], 7~days
+4:3::West, to Plain~[da33], 7~days
+4:0::
+4:0::Inner locations:
+4:3::Sacred grove~[ex50], sacred grove, 1 day
+4:0::
+4:0::Ships docked at port:
+4:3::HMS Pinafore~[gv23], galley-in-progress, 16% completed, owner:
+4:6/3::The Archymanyaged of Pelenth~[2019], lord~2022, with five~workers, 112~peasants
+4:0::
+4:0::Plain~[db34], plain, in West Camaris
+4:0::------------------------------------------------------------------------
+4:0::Routes leaving Plain~[db34]: 
+4:3::North, to Plain~[da34], 7~days
+4:3::East, to Plain~[db35], 7~days
+4:3::South, to Plain~[dc34], 7~days
+4:3::West, to Forest~[db33], 8~days
+4:0::
+4:0::Inner locations:
+4:3::Graveyard~[ex73], graveyard, hidden, 1 day
+4:0::
+4:0::City~[ew66], port city, in province Forest~[cu26], safe haven
+4:0::------------------------------------------------------------------------
+4:0::Routes leaving City~[ew66]: 
+4:3::East, to Ocean~[cu27], Atnos Sea, 1~day
+4:3::South, to Ocean~[cv26], Atnos Sea, 1~day
+4:3::Out, to Forest~[cu26], 1~day
+4:0::
+4:0::Skills taught here:
+4:3::Shipcraft~[120], Combat~[121], Stealth~[122], Construction~[125], Alchemy~[126], Forestry~[128], Artifact construction~[164]
+4:0::
+4:0::Inner locations:
+4:3::Castle~[jg99], castle, defense~20, 13%~damaged, owner:
+4:6/3::Law Netexus~[2020], unsworn, with three~peasants
+4:6/3::Feasel the Wicked~[1109], lord~2020
+4:6/3::Drakkar the Trader~[1752], lord~2020
+4:6/3::Alion Krysaka~[2785], lord~2020
+4:0::
+4:0::Seen here:
+4:3::Kosar the Indefectible~[2022], lord~3682, accompanied~by:
+4:6/3::Osswid the Constructor~[2021], lord~1109
+4:6/3::Dr. Pangloss~[3682], lord~2021
+4:0::
+4:0::Market report:
+4:3::
+4:3::trade    who    price    qty   item
+4:3::-----    ---    -----    ---   ----
+4:3::  buy   ew66        2    100   fish~[87]
+4:3::  buy   ew66        7      9   clay pots~[95]
+4:3::  buy   ew66        4     15   woven baskets~[94]
+4:3:: sell   ew66        5     25   fish oil~[97]
+4:0::
+4:0::Graveyard~[ex73], graveyard, in province Plain~[db34]
+4:0::------------------------------------------------------------------------
+4:0::Routes leaving Graveyard~[ex73]: 
+4:3::Out, to Plain~[db34], 1~day
+4:0::
+4:0::Castle~[jg99], castle, in Forest~[cu26]
+4:0::------------------------------------------------------------------------
+4:0::Routes leaving Castle~[jg99]: 
+4:3::Out, to City~[ew66], 0~days
+4:0::
+4:0::Seen here:
+4:3::Law Netexus~[2020], unsworn, with three~peasants, accompanied~by:
+4:6/3::Feasel the Wicked~[1109], lord~2020
+4:6/3::Drakkar the Trader~[1752], lord~2020
+4:6/3::Alion Krysaka~[2785], lord~2020
+4:0::
+5:0::
+5:0::begin 100  # Independent player
+5:0::
+5:0::unit 2020  # Law Netexus
+5:0::
+5:0::unit 1109  # Feasel the Wicked
+5:0::
+5:0::unit 2021  # Osswid the Constructor
+5:3::# > wait unit cw15 (still~executing)
+5:3::stack
+5:3::hire "Feasel the Wicked"
+5:3::wait time 1
+5:3::wait time 5 day 17
+5:3::wait time 1 day 20
+5:3::study 120
+5:0::
+5:0::unit 3682  # Dr. Pangloss
+5:0::
+5:0::unit 2022  # Kosar the Indefectible
+5:0::
+5:0::unit 2019  # The Archymanyaged of Pelenth
+5:3::# > build galley "HMS Pinafore" (still~executing)
+5:0::
+5:0::unit 1752  # Drakkar the Trader
+5:0::
+5:0::unit 2785  # Alion Krysaka
+5:0::
+5:0::end
+1109:3::
+1109:3/16::Location:       Castle~[jg99], in City~[ew66], in province Forest~[cu26], in Lesser Atnos
+1109:3/16::Sworn to:       Law Netexus~[2020]
+1109:3::Loyalty:        Oath-1
+1109:3::Vassals:        Osswid the Constructor~[2021]
+1109:3/16::Stacked under:  Law Netexus~[2020]
+1109:3::Stacked over:   Drakkar the Trader~[1752]
+1109:3::Health:         100%
+1109:3::Behind:         0 (front line in combat)
+1109:3::Will pay fee:   none
+1109:3::
+1109:3::Skills known:
+1109:6::none
+1109:3::
+1109:3::Inventory:
+1109:3::           qty  name                           weight
+1109:3::           ---  ----                           ------
+1109:3::         1,000  gold~[1]                            0  
+1109:3::                                               ======
+1109:3::                                                    0
+1109:3::
+1109:3/20::Carrying capacity:  0/100 walking (0%), 100/0 mounted
+1109:3::
+1752:3::
+1752:3/16::Location:       Castle~[jg99], in City~[ew66], in province Forest~[cu26], in Lesser Atnos
+1752:3/16::Sworn to:       Law Netexus~[2020]
+1752:3::Loyalty:        Contract-0
+1752:3/16::Stacked under:  Feasel the Wicked~[1109]
+1752:3::Stacked over:   Alion Krysaka~[2785]
+1752:3::Health:         100%
+1752:3::Behind:         0 (front line in combat)
+1752:3::Will pay fee:   none
+1752:3::
+1752:3::Skills known:
+1752:6::none
+1752:3::
+1752:3::Inventory:
+1752:3::           qty  name                           weight
+1752:3::           ---  ----                           ------
+1752:3::         1,000  gold~[1]                            0  
+1752:3::                                               ======
+1752:3::                                                    0
+1752:3::
+1752:3/20::Carrying capacity:  0/100 walking (0%), 100/0 mounted
+1752:3::
+2019:3::
+2019:3/16::Location:       HMS Pinafore~[gv23], in province Plain~[da34], in West Camaris
+2019:3/16::Sworn to:       Kosar the Indefectible~[2022]
+2019:3::Loyalty:        Contract-966
+2019:3::Health:         7% (getting worse)
+2019:3::Behind:         0 (front line in combat)
+2019:3::Will pay fee:   none
+2019:3::
+2019:3::Current aura:   12
+2019:3::Maximum aura:   11 (3+8)
+2019:3::
+2019:3::Skills known:
+2019:6/6:: 120  Shipcraft
+2019:12/6::9502  Sailing, apprentice
+2019:12/6::9503  Shipbuilding, apprentice
+2019:6/6:: 121  Combat
+2019:6/6:: 123  Beastmastery
+2019:6/6:: 160  Magic
+2019:12/6::9101  Meditate, apprentice
+2019:6/6:: 164  Artifact construction
+2019:12/6::9102  Forge auraculum
+2019:6/6:: 166  Advanced sorcery
+2019:3::
+2019:3::Partially known skills:
+2019:6/6:: 129  Mining, 0/7
+2019:3::
+2019:3::Inventory:
+2019:3::           qty  name                           weight
+2019:3::           ---  ----                           ------
+2019:3::            28  gold~[1]                            0  
+2019:3::           112  peasants~[10]                  11,200  cap 11,200
+2019:3::             5  workers~[11]                      500  cap 500
+2019:3::             1  ox~[76]                         1,000  cap 1,500
+2019:3::             1  gate crystal~[83]                   0  
+2019:3::             1  Ring of power~[kn91]                3  
+2019:3::                                               ======
+2019:3::                                               12,703
+2019:3::
+2019:3/20::Carrying capacity:  3/13,300 walking (0%), 11,803/0 mounted
+2019:3::
+2019:3::Pending trades:
+2019:3::
+2019:6::trade    price    qty   item
+2019:6::-----    -----    ---   ----
+2019:6::  buy      100      1   peasant~[10]
+2019:6::  buy       74      3   iron~[79]
+2019:6:: sell       50      1   elite guard~[15]
+2019:6:: sell       12     11   sailor~[19]
+2019:3::
+2020:3::
+2020:3/16::Location:       Castle~[jg99], in City~[ew66], in province Forest~[cu26], in Lesser Atnos
+2020:3/16::Sworn to:       Independent player~[100]
+2020:3::Loyalty:        Oath-2
+2020:3::Vassals:        Feasel the Wicked~[1109]
+2020:3::                Drakkar the Trader~[1752]
+2020:3::                Alion Krysaka~[2785]
+2020:3::Heir:           Feasel the Wicked~[1109]
+2020:3::Stacked over:   Feasel the Wicked~[1109]
+2020:3::Health:         100%
+2020:3::Behind:         0 (front line in combat)
+2020:3::Will pay fee:   none
+2020:3::
+2020:3::Skills known:
+2020:6::none
+2020:3::
+2020:3::Inventory:
+2020:3::           qty  name                           weight
+2020:3::           ---  ----                           ------
+2020:3::         2,397  gold~[1]                            0  
+2020:3::             3  peasants~[10]                     300  cap 300
+2020:3::                                               ======
+2020:3::                                                  300
+2020:3::
+2020:3/20::Carrying capacity:  0/400 walking (0%), 400/0 mounted
+2020:3::
+2021:3::
+2021:3/16::Location:       City~[ew66], in province Forest~[cu26], in Lesser Atnos
+2021:3/16::Sworn to:       Feasel the Wicked~[1109]
+2021:3::Loyalty:        Oath-10
+2021:3::Vassals:        Dr. Pangloss~[3682]
+2021:3/16::Stacked under:  Kosar the Indefectible~[2022]
+2021:3::Health:         100%
+2021:3::Behind:         0 (front line in combat)
+2021:3::Will pay fee:   none
+2021:3::
+2021:3::Skills known:
+2021:6::none
+2021:3::
+2021:3::Inventory:
+2021:3::           qty  name                           weight
+2021:3::           ---  ----                           ------
+2021:3::           100  gold~[1]                            0  
+2021:3::                                               ======
+2021:3::                                                    0
+2021:3::
+2021:3/20::Carrying capacity:  0/100 walking (0%), 100/0 mounted
+2021:3::
+2022:3::
+2022:3/16::Location:       City~[ew66], in province Forest~[cu26], in Lesser Atnos
+2022:3/16::Sworn to:       Dr. Pangloss~[3682]
+2022:3::Loyalty:        Contract-0
+2022:3::Vassals:        The Archymanyaged of Pelenth~[2019]
+2022:3::Stacked over:   Osswid the Constructor~[2021]
+2022:3::                Dr. Pangloss~[3682]
+2022:3::Health:         100%
+2022:3::Behind:         0 (front line in combat)
+2022:3::Will pay fee:   none
+2022:3::
+2022:3::Skills known:
+2022:6::none
+2022:3::
+2022:3::Kosar the Indefectible~[2022] has no possessions.
+2022:3::
+2022:3/20::Carrying capacity:  0/100 walking (0%), 100/0 mounted
+2022:3::
+2785:3::
+2785:3/16::Location:       Castle~[jg99], in City~[ew66], in province Forest~[cu26], in Lesser Atnos
+2785:3/16::Sworn to:       Law Netexus~[2020]
+2785:3::Loyalty:        Contract-350
+2785:3/16::Stacked under:  Drakkar the Trader~[1752]
+2785:3::Health:         100%
+2785:3::Behind:         0 (front line in combat)
+2785:3::Will pay fee:   none
+2785:3::
+2785:3::Skills known:
+2785:6::none
+2785:3::
+2785:3::Inventory:
+2785:3::           qty  name                           weight
+2785:3::           ---  ----                           ------
+2785:3::         1,000  gold~[1]                            0  
+2785:3::                                               ======
+2785:3::                                                    0
+2785:3::
+2785:3/20::Carrying capacity:  0/100 walking (0%), 100/0 mounted
+2785:3::
+3682:3::
+3682:3/16::Location:       City~[ew66], in province Forest~[cu26], in Lesser Atnos
+3682:3/16::Sworn to:       Osswid the Constructor~[2021]
+3682:3::Loyalty:        Contract-4050
+3682:3::Vassals:        Kosar the Indefectible~[2022]
+3682:3/16::Stacked under:  Kosar the Indefectible~[2022]
+3682:3::Health:         100%
+3682:3::Behind:         0 (front line in combat)
+3682:3::Will pay fee:   none
+3682:3::
+3682:3::Skills known:
+3682:6::none
+3682:3::
+3682:3::Dr. Pangloss~[3682] has no possessions.
+3682:3::
+3682:3/20::Carrying capacity:  0/100 walking (0%), 100/0 mounted
+3682:3::
+0:0::From: olympia@rt.com (Olympia PBM)
+0:0::Subject: Olympia turn 7 report
+0:0::
+0:0::Olympia turn 7 report for Independent player~[100].
+0:0::Season "Waning days", month 7, in the year 1.
+0:0::
+0:3::Noble points:  3     (0 gained, 0 spent)
+0:0::
+0:0::unit  loc undr lord loyal heal B CA gold peas work sail figh name
+0:0::---- ---- ---- ---- ----- ---- - -- ---- ---- ---- ---- ---- ----
+0:0::2020 jg99       100 o2    100  0    2397    3                Law Netexus
+0:0::1109 jg99 2020 2020 o1    100  0    1000                     Feasel
+0:0::2021 ew66 2022 1109 o10   100  0     100                     Osswid
+0:0::3682 ew66 2022 2021 c4050 100  0                             Dr. Pangloss
+0:0::2022 ew66      3682 c0    100  0                             Kosar
+0:0::2019 gv23      2022 c966    7- 0 12   28  112    5           Archymanyaged
+0:0::1752 jg99 1109 2020 c0    100  0    1000                     Drakkar
+0:0::2785 jg99 1752 2020 c350  100  0    1000                     Alion Krysaka
+0:0::                                    ==== ==== ==== ==== ====
+0:0::                                    5525  115    5          
+0:0::
+0:0::Location                        Stack
+0:0::--------                        -----
+0:0::Lesser Atnos
+0:0::  Forest~[cu26]
+0:0::    City~[ew66]                 Kosar the Indefectible~[2022]
+0:0::                                   Osswid the Constructor~[2021]
+0:0::                                   Dr. Pangloss~[3682]
+0:0::      Castle~[jg99]             Law Netexus~[2020]
+0:0::                                   Feasel the Wicked~[1109]
+0:0::                                   Drakkar the Trader~[1752]
+0:0::                                   Alion Krysaka~[2785]
+0:0::West Camaris
+0:0::  Plain~[da34]
+0:0::      HMS Pinafore~[gv23]       The Archymanyaged of Pelenth~[2019]
+0:0::
+0:0::stack  total wt  walk wt  walk cap      ride wt  ride cap    
+0:0::-----  --------  -------  --------      -------  --------    
+0:0:: 2020       700        0       700 0%       700         0    
+0:0:: 1109       300        0       300 0%       300         0    
+0:0:: 2021       100        0       100 0%       100         0    
+0:0:: 3682       100        0       100 0%       100         0    
+0:0:: 2022       300        0       300 0%       300         0    
+0:0:: 2019    12,803        3    13,300 0%    11,803         0    
+0:0:: 1752       200        0       200 0%       200         0    
+0:0:: 2785       100        0       100 0%       100         0    
+0:0::
+2:0::Lore for Shipcraft~[120]
+2:0::------------------------
+2:0::All skills concerning ocean travel fall under this category.
+2:0::Shipcraft encompasses the building and repair of ships,
+2:0::training of sailors, and navigation at sea.
+2:0::
+2:0::The following skills may be studied directly once Shipcraft is known:
+2:0::
+2:3::num   skill                              time to learn
+2:3::---   -----                              -------------
+2:3::9502  Sailing                            one~week     
+2:3::9503  Shipbuilding                       one~week     
+2:3::9554  Add ram to galley                  two~weeks    
+2:3::9582  Fishing                            one~week     
+2:0::
+2:0::
+2:0::Lore for Combat~[121]
+2:0::---------------------
+2:0::The student of combat learns the training of soldiers and how
+2:0::to lead them well in battle.  With study and experience, the
+2:0::battle lord will find strategies to be used in difficult combat
+2:0::situations.
+2:0::
+2:0::The following skills may be studied directly once Combat is known:
+2:0::
+2:3::num   skill                              time to learn
+2:3::---   -----                              -------------
+2:3::9579  Archery                            one~week     
+2:3::9580  Swordplay                          one~week     
+2:3::9581  Weaponsmithing                     one~week     
+2:0::
+2:0::
+2:0::Lore for Beastmastery~[123]
+2:0::---------------------------
+2:0::Beastmastery spans the capture, training and breeding of
+2:0::all manner of animals, both wild and domestic.  Common
+2:0::Beastmastery skills are used to capture and train horses
+2:0::for travel or combat.  Higher level skills within this
+2:0::category concern the care and use of stranger beasts.
+2:0::
+2:0::The following skills may be studied directly once Beastmastery is known:
+2:0::
+2:3::num   skill                              time to learn
+2:3::---   -----                              -------------
+2:3::9517  Catch wild horses                  one~week     
+2:3::9529  Train wild horse to riding horse   one~week     
+2:3::9530  Train wild horse to warmount       two~weeks    
+2:0::
+2:0::
+2:0::Lore for Mining~[129]
+2:0::---------------------
+2:0::Mining is the skill of sinking deep shafts into mountainous
+2:0::provinces for the purpose of extracting valuable elements.
+2:0::Most mining skills require a mine shaft to be constructed
+2:0::first with Build mine [9562].  Quarry building stone [9566]
+2:0::is an exception.  Building stones may be cut on the surface
+2:0::in mountain provinces.
+2:0::
+2:0::The likelihood of death because of cave-ins or poisonous gases
+2:0::seeping into the shafts tends to make mining dangerous work.
+2:0::
+2:0::The following skills may be studied directly once Mining is known:
+2:0::
+2:3::num   skill                              time to learn
+2:3::---   -----                              -------------
+2:3::9563  Mine iron                          one~week     
+2:3::9564  Mine gold                          one~week     
+2:0::
+2:0::Further skills may be found through research.
+2:0::
+2:0::Lore for Magic~[160]
+2:0::--------------------
+2:0::No apprentice magician can rightfully don the robes of his order without
+2:0::some knowledge of Magic [160].  Magic contains many spells useful on
+2:0::their own, as well as in conjunction with spells from the other schools 
+2:0::of sorcery.
+2:0::
+2:0::The following skills may be studied directly once Magic is known:
+2:0::
+2:3::num   skill                              time to learn
+2:3::---   -----                              -------------
+2:3::9101  Meditate                           one~week     
+2:3::9105  View current aura level of others  two~weeks    
+2:3::9146  Heal                               one~week     
+2:0::
+2:0::Further skills may be found through research.
+2:0::
+2:0::Lore for Artifact construction~[164]
+2:0::------------------------------------
+2:0::The domain of high level wizards, artifact construction concerns
+2:0::the creation and manipulation of items which may focus and store
+2:0::aura, contain spells, or have other magical properties.
+2:0::
+2:0::The following skills may be studied directly once Artifact construction is known:
+2:0::
+2:3::num   skill                              time to learn
+2:3::---   -----                              -------------
+2:3::9108  Reveal creator of artifact         one~week     
+2:3::9109  Reveal where artifact was created  one~week     
+2:3::9164  Destroy artifact                   one~week     
+2:0::
+2:0::Further skills may be found through research.
+2:0::
+2:0::Lore for Advanced sorcery~[166]
+2:0::-------------------------------
+2:0::<lore sheet not available>
+2:0::
+2:0::Skill:  Meditate~[9101]
+2:0::-----------------------
+2:0::Usage:  USE 9101
+2:0::
+2:0::Required aura:  none
+2:0::Required item:
+2:0::Time to cast:   seven days
+2:0::
+2:0::The magician enters a restful trance which regenerates body, mind
+2:0::and current aura level.  Current aura level will rise by one point.
+2:0::Meditation is limited to raising current aura to one point above
+2:0::maximum aura.
+2:0::
+2:0::Skill:  Forge auraculum~[9102]
+2:0::------------------------------
+2:0::Usage:  USE 9102 <aura-level> "Name"
+2:0::
+2:0::Required aura:   as specified by caster
+2:0::Required items:  100 gold, 5 mithril
+2:0::Time to cast:    fourteen days
+2:0::
+2:0::Forge a magical auraculum, giving it the specified name.
+2:0::
+2:0::   An auraculum is a magical artifact which concentrates and amplifies
+2:0::   a mage's power.  A permanent investment of maximum aura is made when
+2:0::   constructing the auraculum.  The artifact doubles the invested aura.
+2:0::   However, since a portion of the mage's pneuma has been bound in the
+2:0::   auraculum, it is important to safeguard it from being lost or stolen.
+2:0::
+2:0::In addition to depleting the caster's current aura level, the specified
+2:0::aura amount will be permanently removed from the magician's maximum aura
+2:0::rating.  The new object, while possessed by its maker, will augment the
+2:0::mage's maximum aura rating by twice the amount of aura invested in its
+2:0::creation.
+2:0::
+2:0::Creation of an auraculum also grants knowledge of the Advanced sorcery
+2:0::magical skill category.  Advanced sorcery may not be learned in any
+2:0::other way.
+2:0::
+2:0::Example:
+2:0::
+2:0::   A mage of current aura level 10, maximum aura 10 who issues
+2:0::   USE 9102 5 "Ring of power" will be reduced to current aura level 5,
+2:0::   maximum aura level 5.  However, the new artifact will add 10 points
+2:0::   to the maximum aura rating of its creator, but only while it is in
+2:0::   his possession.
+2:0::
+2:0::       Current aura:   10
+2:0::       Maximum aura:   10
+2:0::
+2:0::    1: > use 9102 5 "Ring of power"
+2:0::    1: Attempt to forge an auraculum.
+2:0::       ...
+2:0::   14: Created Ring of power [js80].
+2:0::   14: Learned Advanced sorcery [166].
+2:0::
+2:0::       Current aura:   5
+2:0::       Maximum aura:   15 (5+10)
+2:0:: 
+2:0::Characters other than the auraculum's creator do not receive an aura
+2:0::bonus from possession of the object.
+2:0::
+2:0::Since the mage has bound a portion of his aura into the artifact, its
+2:0::destruction would deal him an instant, fatal blow.  Thus, the creator
+2:0::of such an object should use all means to prevent it from being lost
+2:0::or stolen.  However, magical items of such power are hard to destroy.
+2:0::An auraculum may only be destroyed in the province in which it was
+2:0::created.
+2:0::
+2:0::This spell may only be used once.  A magician may only create one
+2:0::auraculum during his lifetime.
+2:0::
+2:0::The creator of the artifact may change its name later with the
+2:0::NAME order.  The object must be possessed in order to rename it.
+2:0::
+2:0::   > name js80 "Wooden staff"
+2:0::   Ring of power [js80] will now be known as Wooden staff [js80].
+2:0::
+2:0::Skill:  Sailing~[9502]
+2:0::----------------------
+2:0::Usage:  USE 9502 <direction or location>
+2:0::Or:     SAIL <direction or location>
+2:0::
+2:0::Requires:  character must be ship's captain
+2:0::Time:      varies with route taken
+2:0::
+2:0::Pilot a ship in the given direction, or to the specified
+2:0::location.  If a location is specified, there must be a direct
+2:0::route to it from the current location of the ship.
+2:0::
+2:0::Compass points may be abbreviated:  N, S, E, W.
+2:0::
+2:0::The character issuing the Pilot ship order must occupy the
+2:0::first position inside the ship (the character must be the
+2:0::captain of the ship).
+2:0::
+2:0::The captain must have a crew to assist in the handling of the
+2:0::ship.  Galleys require fourteen sailors as oarsmen to row the ship.
+2:0::Roundships require at least eight sailors to man the ship's rigging.
+2:0::
+2:0::        ship            crew
+2:0::        ----            ----
+2:0::        galley          14 sailors
+2:0::        roundship       8 sailors
+2:0::
+2:0::If the required number of crew are not available, travel is still
+2:0::possible, but will take an extra day for each hand the crew is short.
+2:0::
+2:0::For example, a galley with only 10 men at the oars will take four
+2:0::extra days to travel across an ocean route.  A roundship with no
+2:0::sailors at all would take eight extra days to traverse a route.
+2:0::
+2:0::Galleys perform equally well regardless of wind conditions.
+2:0::Roundships may be becalmed and unable to travel.  In the presence
+2:0::of favorable wind they will travel across ocean routes in half
+2:0::the rated time.
+2:0::
+2:0::Overloaded ships do not sail well.  They may take longer than
+2:0::expected to travel across routes, and are almost certain to
+2:0::capsize and sink in a storm.  Captains should be careful not
+2:0::to leave port in a vessel carrying too much cargo.
+2:0::
+2:0::For convenience, one may use the SAIL order rather than "USE 9502".
+2:0::Knowledge of Pilot ship [9502] is still required, however.
+2:0::
+2:0::Skill:  Shipbuilding~[9503]
+2:0::---------------------------
+2:0::Usage:     BUILD galley "Name of ship"
+2:0::or         BUILD roundship "Name of ship"
+2:0::
+2:0::Requires:  at least three workers [11]
+2:0::	   50 wood [77] for a galley, 100 wood for a roundship
+2:0::
+2:0::Time:      250 worker-days for a galley, 500 for a roundship
+2:0::
+2:0::To begin construction of a ship, the shipbuilder should unstack from
+2:0::beneath other characters and issue one of the BUILD orders.  The lumber
+2:0::will immediately be deducted from the shipbuilder's inventory and put
+2:0::to use building the new ship.  The shipbuilder and his workers will be
+2:0::placed inside the new ship.
+2:0::
+2:0::As soon as the required number of worker-days has been invested in
+2:0::construction, the ship will be christened and declared seaworthy.
+2:0::
+2:0::To resume construction of a partially completed ship, first enter the
+2:0::ship, then issue the either "build galley" or "build roundship".
+2:0::
+2:0::Ships may only be built in locations with a passable route to an
+2:0::ocean, such as a port city.
+2:0::
+1:0::#include 0
+1:0::
+1:0::#include 4
+1:0::Independent player~[100]
+1:0::------------------------------------------------------------------------
+1:0::#include 100
+1:0::
+1:0::Feasel the Wicked~[1109]
+1:0::------------------------------------------------------------------------
+1:0::#include 1109
+1:0::Drakkar the Trader~[1752]
+1:0::------------------------------------------------------------------------
+1:0::#include 1752
+1:0::The Archymanyaged of Pelenth~[2019]
+1:0::------------------------------------------------------------------------
+1:0::#include 2019
+1:0::Law Netexus~[2020]
+1:0::------------------------------------------------------------------------
+1:0::#include 2020
+1:0::Osswid the Constructor~[2021]
+1:0::------------------------------------------------------------------------
+1:0::#include 2021
+1:0::Kosar the Indefectible~[2022]
+1:0::------------------------------------------------------------------------
+1:0::#include 2022
+1:0::Alion Krysaka~[2785]
+1:0::------------------------------------------------------------------------
+1:0::#include 2785
+1:0::Dr. Pangloss~[3682]
+1:0::------------------------------------------------------------------------
+1:0::#include 3682
+1:0::Plain~[da34], plain, in West Camaris
+1:0::------------------------------------------------------------------------
+1:0::#include 17934
+1:0::
+1:0::Plain~[db34], plain, in West Camaris
+1:0::------------------------------------------------------------------------
+1:0::#include 18034
+1:0::
+1:0::Graveyard~[ex73], graveyard, in province Plain~[db34]
+1:0::------------------------------------------------------------------------
+1:0::#include 22873
+1:0::
+1:0::#include 2
+1:0::Order template
+1:0::------------------------------------------------------------------------
+1:0::#include 5
+1:0::

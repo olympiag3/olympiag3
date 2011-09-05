@@ -1,0 +1,13 @@
+#Skill:  Learn of richest nearby noble [9522]
+#
+Usage:  USE @@@@
+Time:   seven days
+
+Must be used in an inn.  The character will chat with the local
+patrons of the inn, inquiring as to the recent comings and goings
+of other nearby characters, paying special attention to clues
+which would indicate the presence of wealthy units.
+
+Use of @@@@ will reveal the identity of the richest noble within
+three provinces of the inn.  Any character with less than 500
+gold is not considered wealthy, and is ignored by @@@@.

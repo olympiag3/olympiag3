@@ -1,0 +1,13 @@
+#Spell:  Meditate [9101]
+#
+Usage:  USE @@@@
+
+Required aura:  none
+Time to cast:   seven days
+
+The magician enters a restful trance which regenerates body, mind
+and current aura level.  Current aura level will rise by one point
+or 5% of the mage's maximum aura level, whichever is higher.
+
+Meditation is limited to raising current aura to one point above
+maximum aura.

@@ -1,0 +1,22 @@
+#Skill:  Mine gold [9564]
+#
+Usage:  USE @@@@
+
+Requires:  ten workers
+Time:      7 days
+
+Gold is widely accepted as a currency in Olympia.  Its
+scarcity lends gold a high value, but it is not so rare
+that it cannot be used in the everyday exchange of goods.
+It has a high value, but weighs little, and thus is easy to
+carry.  Gold is also readily assayable to guarantee its value.
+
+The character must be in a mine shaft to USE @@@@.  The mine's
+monthly yield of gold will be obtained.  Once mined, no further
+gold can be mined until the next month.
+
+Use of this skill will cause the mine shaft to become one-third
+of a level deeper.
+
+The quantity of gold obtained will vary with the depth of the
+shaft.

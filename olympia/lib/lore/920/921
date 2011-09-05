@@ -1,0 +1,14 @@
+#Spell:  Trance [9201]
+#
+Usage:  TRANCE
+
+Required aura:   none
+Time to cast:    28 days
+
+Causes the mage enters a deep trance which lasts nearly an
+entire month.  Upon completition, the mage is cured of any
+illness or injury.  The mage's current aura rating will be
+raised to 2/3 of his maximum effective rating (maximum
+aura rating plus bonuses from any items held.)  If the
+mage's current aura rating is already higher than 2/3 of
+his maximum, the current aura rating will be unchanged.

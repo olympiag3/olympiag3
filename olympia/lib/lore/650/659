@@ -1,0 +1,12 @@
+#Skill:  Persuade wild men to remain [9586]
+#
+Usage:  USE @@@@ <savage>
+Time:   seven days
+
+Usage of @@@@ will induce a group of wild men to remain stacked with
+the noble that summoned them.  An application of @@@@ will add two
+months to the duration the wild men will stay with the noble, to a
+maximum of four months.
+
+The savage unit to be persuaded to remain must be specified as an
+argument to USE @@@@.
