@@ -1,8 +1,10 @@
 
 
 #include	<stdio.h>
+#include <string.h>
+#include <libc/unistd.h>
+#include <libc/dirent.h>
 #include	<sys/types.h>
-#include	<dirent.h>
 #include	"z.h"
 #include	"oly.h"
 
@@ -39,34 +41,67 @@ fetch_inp(FILE *fp)
 	return str_save(s);
 }
 
+// by Cappinator:
+// Added a get_city_id method that retrieves the
+// internal id of a starting city from a file
+// instead of using hard coded ones.
+static int get_city_id(char *start_city) {
+  FILE *fp;
+  char *fnam;
+  char *s;
+  char idxs[1];
+  int id = 0;
+  char ids[5];
+  char *cname;
+  int i;
+  int rnd_id_cnt;
+  int rnd_line_cur;
+  int rnd_id = 0;
+
+  fnam = sout("%s/startloc", libdir);
+  fp = fopen(fnam, "r");
+
+  if (fp == NULL) {
+    fprintf(stderr, "error: could not read startloc file.");
+    return 0;
+  }
+
+  rnd_id_cnt = rnd(1, 6);
+  rnd_line_cur = 1;
+
+  while (s = getlin(fp)) {
+	  if (strlen(s) > 9) {
+		strncpy(idxs, &s[0], 1);
+		strncpy(ids, &s[2], 5);
+		id = atoi(ids);
+		if (rnd_id_cnt == rnd_line_cur)
+			rnd_id = id;
+		cname = &s[8];
+		if (strncmp(idxs, start_city, 1) == 0) {
+			fclose(fp);
+			return id;
+		}
+	  }
+	  rnd_line_cur++;
+  }
+
+  fclose(fp);
+
+  return rnd_id;
+}
 
 static int
 pick_starting_city(char *start_city)
 {
-	int n = atoi(start_city);
-
-	if (n == 0)
-		n = rnd(1,6);
-
-	switch (n) {
-	case 1:	return 57140;	/* Drassa */
-	case 2: return 58736;	/* Rimmon */
-	case 3: return 57081;	/* Greyfell */
-	case 4: return 58423;	/* Port Aurnos */
-	case 5: return 58112;	/* Yellowleaf */
-	case 6: return 58335;	/* Harn */
-
-	default:
-		return 57140;	/* Drassa */
-	}
+	return get_city_id(start_city);
 }
-
 
 static int
 add_new_player(int pl, char *faction, char *character, char *start_city,
 			char *full_name, char *email)
 {
 	int who;
+  	int t = sysclock.turn;
 	struct entity_char *cp;
 	struct entity_player *pp;
 
@@ -83,7 +118,11 @@ add_new_player(int pl, char *faction, char *character, char *start_city,
 
 	pp->full_name = full_name;
 	pp->email = email;
-	pp->noble_points = 12;
+
+  	// by Cappinator: 
+    // Changed starting faction noble points
+  	pp->noble_points = 18 + (t/8);
+
 	pp->first_turn = sysclock.turn + 1;
 	pp->last_order_turn = sysclock.turn;
 
@@ -103,11 +142,24 @@ add_new_player(int pl, char *faction, char *character, char *start_city,
 
 	gen_item(who, item_peasant, 25);
 	gen_item(who, item_gold, 200);
-	gen_item(pl, item_gold, 3000);		/* CLAIM item */
+
+	// by Cappinator:
+	// Changed starting faction claim gold
+	gen_item(pl, item_gold, 5000);		/* CLAIM item */
+
 	gen_item(pl, item_lumber, 50);		/* CLAIM item */
 	gen_item(pl, item_stone, 100);		/* CLAIM item */
 
-	p_player(pl)->fast_study = 100;		/* instant study days */
+	// by Cappinator:
+	// Added 5 riding horses to starting faction claim pool
+	gen_item(pl, item_riding_horse, 5);   /* CLAIM item added by Cappy */
+  
+	// by Cappinator:
+	// Changed starting faction fast study days
+	if (t < 101)
+		p_player(pl)->fast_study = 198 + (t * 2);       /* instant study days */
+	else
+		p_player(pl)->fast_study = 400;
 
 	ilist_append(&new_players, pl);
 	ilist_append(&new_chars, who);
@@ -157,7 +209,7 @@ make_new_players()
 {
 	DIR *d;
 	struct dirent *e;
-	char *acct_dir = "/u/oly/act";
+	char *acct_dir = "act";
 	char *fnam;
 	char *acct;
 	FILE *fp;
@@ -178,7 +230,7 @@ make_new_players()
 
 		acct = e->d_name;
 
-		fnam = sout("%s/%s/Join-g2", acct_dir, acct);
+		fnam = sout("%s/%s/Join-g3", acct_dir, acct);
 
 		fp = fopen(fnam, "r");
 		if (fp == NULL)
@@ -205,15 +257,15 @@ rename_act_join_files()
 	char acct[LEN];
 	char *old_name;
 	char *new_name;
-	char *acct_dir = "/u/oly/act";
+	char *acct_dir = "act";
 
 	for (i = 0; i < ilist_len(new_players); i++)
 	{
 		pl = new_players[i];
-		sprintf(acct, box_code_less(pl));
+		strcpy(acct, box_code_less(pl));
 
-		old_name = sout("%s/%s/Join-g2", acct_dir, acct);
-		new_name = sout("%s/%s/Join-g2-", acct_dir, acct);
+		old_name = sout("%s/%s/Join-g3", acct_dir, acct);
+		new_name = sout("%s/%s/Join-g3-", acct_dir, acct);
 
 		if (rename(old_name, new_name) < 0)
 		{
@@ -245,11 +297,11 @@ new_player_banners()
 
 		html(pl, "<center>");
 
-		html(pl, "<img src=\"http://www.pbm.com//gif/head.gif\""
+		html(pl, "<img src=\"head.gif\""
 			"align=middle width=100 height=100 alt=\"\">");
 
 		html(pl, "<h1>");
-		wout(pl, "Olympia G2 turn %d", sysclock.turn);
+		wout(pl, "Olympia G3 turn %d", sysclock.turn);
 		wout(pl, "Initial Position Report for %s.", box_name(pl));
 		html(pl, "</h1>");
 
@@ -269,7 +321,7 @@ new_player_banners()
 		out(pl, "");
 #endif
 
-		wout(pl, "Welcome to Olympia G2!");
+		wout(pl, "Welcome to Olympia G3!");
 		wout(pl, "");
 		wout(pl, "This is an initial position report for your new "
 					"faction.");
@@ -386,6 +438,11 @@ mail_initial_reports()
 		s = sout("%s/log/%d", libdir, pl);
 		t = sout("%s/save/%d/%d", libdir, sysclock.turn, pl);
 
+		// by Cappinator:
+		// Added this to create the folders on a Windows machine
+		make_dir(sout("%s\\save", libdir));
+		make_dir(sout("%s\\save\\%d", libdir, sysclock.turn));
+
 		ret = rename(s, t);
 
 		if (ret < 0)
@@ -449,11 +506,11 @@ new_player_list_sup(int who, int pl)
 
 	if (*s)
 	{
-		style(TEXT);
+		style(STYLE_TEXT);
 		out(who, "       %s", s);
 		style(0);
 
-		style(HTML);
+		style(STYLE_HTML);
 		out(who, "       %s", t);
 		style(0);
 	}
