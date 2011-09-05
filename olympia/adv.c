@@ -3,6 +3,7 @@
  */
 
 #include	<stdio.h>
+#include 	<stdlib.h>
 #include	"z.h"
 #include	"oly.h"
 
