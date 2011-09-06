@@ -192,7 +192,7 @@ v_use_slave(struct command *c)
 	assert(kind(item) == T_item);
 	creator = item_creator(item);
 
-	log(LOG_SPECIAL, "%s drinks a slavery potion to %s\n",
+	log_write(LOG_SPECIAL, "%s drinks a slavery potion to %s\n",
 				box_name(c->who), box_name(creator));
 
 	wout(c->who, "%s drinks the potion...", just_name(c->who));
