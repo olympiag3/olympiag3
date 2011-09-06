@@ -98,7 +98,7 @@ d_forge_palantir(struct command *c)
 
 	wout(c->who, "Created %s.", box_name(new));
 
-	log(LOG_SPECIAL, "%s created %s.", box_name(c->who), box_name(new));
+	log_write(LOG_SPECIAL, "%s created %s.", box_name(c->who), box_name(new));
 
 	return TRUE;
 }
@@ -148,14 +148,14 @@ d_use_palantir(struct command *c)
 
 	if (loc_shroud(target) || diff_region(c->who, target))
 	{
-		log(LOG_CODE, "Murky palantir result, who=%s, targ=%s",
+		log_write(LOG_CODE, "Murky palantir result, who=%s, targ=%s",
 				box_code_less(c->who), box_code_less(target));
 		wout(c->who, "Only murky, indistinct images are seen in "
 							"the palantir.");
 		return FALSE;
 	}
 
-	log(LOG_CODE, "Palantir scry, who=%s, targ=%s",
+	log_write(LOG_CODE, "Palantir scry, who=%s, targ=%s",
 				box_code_less(c->who), box_code_less(target));
 
 	p_item_magic(item)->one_turn_use++;
@@ -306,7 +306,7 @@ destroy_item(struct command *c, int item)
 						nice_num(aura));
 		}
 
-		log(LOG_SPECIAL, "%s destroyed %s (%s, creator=%s)",
+		log_write(LOG_SPECIAL, "%s destroyed %s (%s, creator=%s)",
 				box_name(c->who), box_name(item),
 				subkind_s[subkind(item)],
 				box_name(item_creator(item)));
@@ -747,7 +747,7 @@ notify_others_auraculum(int who, int item)
 	}
 	next_char;
 
-	log(LOG_SPECIAL, "%s created %s, %s.",
+	log_write(LOG_SPECIAL, "%s created %s, %s.",
 					box_name(who),
 					box_name(item),
 					subkind_s[subkind(item)]);
@@ -973,7 +973,7 @@ swear_token_units(int item, int target)
 {
 	int i;
 
-	log(LOG_MISC, "%s got npc token %s",
+	log_write(LOG_MISC, "%s got npc token %s",
 				box_name(target), box_name(item));
 
 	assert(subkind(item) == sub_npc_token);
@@ -1006,7 +1006,7 @@ melt_token_units(int item)
 		if (first)
 		{
 			first = FALSE;
-			log(LOG_MISC, "Melting token units for %s.", box_name(item));
+			log_write(LOG_MISC, "Melting token units for %s.", box_name(item));
 		}
 
 		wout(subloc(who), "%s melts into the ground and vanishes.", box_name(who));
@@ -1040,12 +1040,12 @@ add_token_unit_sup(int item)
 
 	if (new < 0)
 	{
-		log(LOG_CODE, "  FAILed to add unit to token %s",
+		log_write(LOG_CODE, "  FAILed to add unit to token %s",
 				box_code_less(item));
 		return;
 	}
 
-	log(LOG_MISC, "  adding %s to %s", box_name(new), box_name(item));
+	log_write(LOG_MISC, "  adding %s to %s", box_name(new), box_name(item));
 
 	if (beast_capturable(new))
 		p_char(new)->break_point = 0;
@@ -1068,7 +1068,7 @@ add_token_units(int item)
 	int l;
 	struct entity_player *p;
 
-	log(LOG_MISC, "add_token_units(%s)", box_name(item));
+	log_write(LOG_MISC, "add_token_units(%s)", box_name(item));
 
 	assert(subkind(item) == sub_npc_token);
 
@@ -1097,7 +1097,7 @@ move_token(int item, int from, int to)
 {
 	int to_pl = token_player(to);
 
-	log(LOG_MISC, "Token %s moved from %s (%s) to %s (%s)",
+	log_write(LOG_MISC, "Token %s moved from %s (%s) to %s (%s)",
 			box_name(item),
 			box_name(from),
 			box_name(token_player(from)),
@@ -1107,7 +1107,7 @@ move_token(int item, int from, int to)
 	if (token_player(from) == indep_player &&
 	    ilist_len(p_player(item)->units) == 0)
 	{
-		log(LOG_SPECIAL, "token %s from %d to 1.",
+		log_write(LOG_SPECIAL, "token %s from %d to 1.",
 					box_code_less(item),
 					item_token_num(item));
 		p_item_magic(item)->token_num = 1;
@@ -1165,7 +1165,7 @@ check_token_units()
 		{
 			if (kind(unit) != T_char)
 			{
-				log(LOG_CODE, "%s holds unit %s which is %s, player(unit) = %s, owner = %s",
+				log_write(LOG_CODE, "%s holds unit %s which is %s, player(unit) = %s, owner = %s",
 					box_code(unit), box_code(unit),
 					kind_s[kind(unit)],
 					box_code_less(player(unit)),
@@ -1324,7 +1324,10 @@ d_forge_art_x(struct command *c)
 	}
 
 	charge_aura(c->who, aura);
-	charge(c->who, 500);
+
+	// by Cappinator:
+	// Removed duplicate charge of 500 gold
+
 	consume_item(c->who, rare_item, 1);
 
 	new = create_unique_item(c->who, 0);
@@ -1422,7 +1425,7 @@ v_suffuse_ring(struct command *c, int kind)
 	int num;
 	struct item_ent *t;
 
-	log(LOG_SPECIAL, "Golden ring %s used by %s",
+	log_write(LOG_SPECIAL, "Golden ring %s used by %s",
 			box_code_less(item), box_code_less(player(c->who)));
 
 	if (rnd(1,3) == 1)
