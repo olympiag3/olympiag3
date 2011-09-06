@@ -1,5 +1,5 @@
-
 #include	<stdio.h>
+#include <stdlib.h>
 #include	"z.h"
 #include	"oly.h"
 
@@ -172,7 +172,11 @@ v_use_death(struct command *c)
 	wout(c->who, "It's poison!");
 
 	p_char(c->who)->sick = TRUE;
-	add_char_damage(c->who, 50, MATES);
+
+	// by Cappinator:
+	// This should damage the noble with 100 damage,
+	// instead of 50.
+	add_char_damage(c->who, 100, MATES);
 
 	return TRUE;
 }
@@ -298,10 +302,13 @@ d_lead_to_gold(struct command *c)
 				just_name_qty(item_gold, qty*10));
 
 	consume_item(c->who, item_lead, qty);
-	consume_item(c->who, item_farrenstone, 1);
+
+	// by Cappinator:
+	// Removed the code that consumes the farrentstone
+	// Catalysts are never consumed!
+
 	gen_item(c->who, item_gold, qty * 10);
 	gold_lead_to_gold += qty * 10;
 
 	return TRUE;
 }
-
