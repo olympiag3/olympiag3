@@ -3,6 +3,7 @@
  */
 
 #include	<stdio.h>
+#include 	<stdlib.h>
 #include	"z.h"
 #include	"oly.h"
 
@@ -306,6 +307,13 @@ v_reveal_mage(struct command *c)
 	if (!check_aura(c->who, aura))
 		return FALSE;
 
+	// by Cappinator:
+	// Add a check that verifies of the given category is a valid skill/category id
+  	if (!valid_box(category)) {
+		wout(c->who, "%i is not a valid skill category.", category);
+		return FALSE;
+  	}
+
 	if (skill_school(category) != category || !magic_skill(category))
 	{
 		wout(c->who, "%s is not a magical skill category.",
@@ -505,7 +513,7 @@ d_view_aura(struct command *c)
 	if (first)
 	{
 		wout(c->who, "No mages are seen here.");
-		log(LOG_CODE, "d_view_aura: not a mage?\n");
+		log_write(LOG_CODE, "d_view_aura: not a mage?\n");
 	}
 
 	return TRUE;
@@ -882,4 +890,3 @@ d_tap_health(struct command *c)
 
 	return TRUE;
 }
-
