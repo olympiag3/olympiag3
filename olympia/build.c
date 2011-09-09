@@ -1,5 +1,6 @@
 
 #include	<stdio.h>
+#include 	<string.h>
 #include	"z.h"
 #include	"oly.h"
 
@@ -466,7 +467,6 @@ create_new_building(struct command *c, struct build_ent *bi, int where)
 int
 start_build(struct command *c, struct build_ent *bi, int new)
 {
-	int i;
 	char *new_name;
 	struct entity_subloc *p;
 	int pl = player(c->who);
@@ -611,6 +611,10 @@ daily_build(struct command *c, struct build_ent *bi)
 /*
  *  Materials check
  */
+
+	// by Cappinator:
+	// TODO: Fix bug: if 2/5 or more of the effort is given
+	// in one day, only 1/5 of the materials is deducted.
 
 	if (bi->req_item > 0)
 	{
@@ -795,7 +799,7 @@ d_build(struct command *c)
 
 	if (t == NULL)
 	{
-		log(LOG_CODE, "d_build: t is NULL (%s)", c->parse[1]);
+		log_write(LOG_CODE, "d_build: t is NULL (%s)", c->parse[1]);
 		out(c->who, "Internal error.");
 		return FALSE;
 	}
