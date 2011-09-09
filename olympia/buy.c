@@ -1,5 +1,6 @@
 
 
+#include 	<stdlib.h>
 #include	<stdio.h>
 #include	"z.h"
 #include	"oly.h"
@@ -244,7 +245,7 @@ attempt_trade(struct trade *buyer, struct trade *seller)
 			gold_pot_basket += cost;
 		else if (item == item_opium)
 		{
-			log(LOG_SPECIAL, "%s earned %s selling opium.",
+			log_write(LOG_SPECIAL, "%s earned %s selling opium.",
 					box_name(seller->who), gold_s(cost));
 			gold_opium += cost;
 		}
