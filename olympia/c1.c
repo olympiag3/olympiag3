@@ -1,5 +1,7 @@
 
 #include	<stdio.h>
+#include 	<stdlib.h>
+#include 	<string.h>
 #include	"z.h"
 #include	"oly.h"
 
@@ -69,7 +71,7 @@ find_lost_items(int who, int where)
 	move_item(where, who, item, 1);
 	wout(who, "%s found one %s.", box_name(who), box_name(item));
 
-	log(LOG_MISC, "%s found %s in %s.",
+	log_write(LOG_MISC, "%s found %s in %s.",
 			box_name(who), box_name(item),
 			char_rep_location(where));
 
@@ -755,7 +757,12 @@ next_np_turn(int pl)
 
 	ct = (7 - (sysclock.turn + 1) % NUM_MONTHS);
 	/* ct = (7 - (sysclock.turn + 1)) % NUM_MONTHS; */
-	ft = p->first_turn % NUM_MONTHS;
+
+	// by Cappinator:
+	// All factions gain noble points on turns 8, 16, 24, etc...
+	// ft = p->first_turn % NUM_MONTHS;
+	ft = 2;
+
 	n = (ft + ct) % NUM_MONTHS;
 
 	return n;
@@ -1630,6 +1637,10 @@ i_wait(struct command *c)
 int
 v_split(struct command *c)
 {
+	// by Cappinator:
+	// split command is no longer supported
+	out(c->who, "This command is no longer supported.");
+/*
 	int lines = c->a;
 	int bytes = c->b;
 	struct entity_player *p;
@@ -1663,7 +1674,7 @@ v_split(struct command *c)
 		out(c->who, "Reports will be split at %d lines.", lines);
 	else
 		out(c->who, "Reports will be split at %d bytes.", bytes);
-
+*/
 	return 0;
 }
 
