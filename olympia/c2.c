@@ -1,5 +1,7 @@
 
 #include	<stdio.h>
+#include 	<stdlib.h>
+#include 	<string.h>
 #include	<time.h>
 #include	"z.h"
 #include	"oly.h"
@@ -100,8 +102,8 @@ drop_player(int pl)
 			s = rp_player(pl)->full_name;
 	}
 
-	log(LOG_DROP, "Dropped player %s", box_name(pl));
-	log(LOG_DROP, "    %s <%s>", s, email);
+	log_write(LOG_DROP, "Dropped player %s", box_name(pl));
+	log_write(LOG_DROP, "    %s <%s>", s, email);
 
 	if (save_flag)
 	{
@@ -406,20 +408,20 @@ times_masthead()
 	}
 	next_player;
 
-	sprintf(turn_s, "turn %d  %d players", sysclock.turn, nplayers);
-	sprintf(issue_s, "issue g2-%d", sysclock.turn);
+	sprintf(turn_s, "turn %d %d players", sysclock.turn, nplayers);
+	sprintf(issue_s, "issue g3-%d", sysclock.turn);
 
-	fprintf(fp, "From: olympia@pbm.com (Olympia PBEM)\n");
-	fprintf(fp, "Subject: Olympia Times g2-%d\n", sysclock.turn);
-	fprintf(fp, "To: olympia@pbm.com\n");
-	fprintf(fp, "Bcc: totimes-g2\n\n");
+	fprintf(fp, "From: g3@olympia.v-labs.be(Olympia g3)\n");
+	fprintf(fp, "Subject: Times g3-%d\n", sysclock.turn);
+	fprintf(fp, "To: g3@olympia.v-labs.be\n");
+//	fprintf(fp, "Bcc: totimes-g2\n\n");
 	fprintf(fp, "   +----------------------------------------------------------------------+\n");
 	fprintf(fp, "   | The Olympia Times                                  %17s |\n", issue_s);
 	fprintf(fp, "   | %-68s |\n", date);
 	fprintf(fp, "   |                                                                      |\n");
-	fprintf(fp, "   | %-48s http://www.pbm.com/ |\n", turn_s);
+	fprintf(fp, "   | %s !game_email! |\n", turn_s);
 	fprintf(fp, "   +----------------------------------------------------------------------+\n\n");
-	fprintf(fp, "               Questions, comments, to play:  info@pbm.com\n\n");
+	fprintf(fp, "               Questions, comments, to play:  http://olympia.v-labs.be/g3\n\n");
 	fprintf(fp, "                             Olympia PBEM\n\n");
 	fprintf(fp, "                                *  *  *\n\n");
 	fprintf(fp, "                                *  *  *\n\n");
@@ -657,7 +659,10 @@ d_archery(struct command *c)
 
 	if (rnd(1,100) <= 5)
 		amount = 10;
-	else if (p->defense < 100)
+	// by Cappinator:
+	// Fixed bug where defense was checked instead of
+	// missile rating when determining the random factor
+	else if (p->missile < 100)
 		amount = rnd(3,5);
 	else
 		amount = rnd(1,3);
@@ -757,7 +762,7 @@ v_claim(struct command *c)
 	   (kind(item) != T_item || has_item(pl, item) < 1) &&
 	    qty == 0)
 	{
-		log(LOG_CODE, "correcting CLAIM for %s:  %s",
+		log_write(LOG_CODE, "correcting CLAIM for %s:  %s",
 				box_code_less(player(c->who)), c->line);
 
 		wout(c->who, "(assuming you meant CLAIM %d %d)", item_gold, item);
@@ -873,7 +878,7 @@ v_board(struct command *c)
 		return FALSE;
 	}
 
-	log(LOG_SPECIAL, "BOARD for %s", box_name(player(c->who)));
+	log_write(LOG_SPECIAL, "BOARD for %s", box_name(player(c->who)));
 
 	v = parse_exit_dir(c, subloc(c->who), "board");
 
@@ -1066,7 +1071,7 @@ v_ferry(struct command *c)
 	where = subloc(ship);
 
 	wout(where, "%s sounds a blast on its horn.", box_name(ship));
-	log(LOG_SPECIAL, "FERRY for %s", box_name(player(c->who)));
+	log_write(LOG_SPECIAL, "FERRY for %s", box_name(player(c->who)));
 
 	p_magic(ship)->ferry_flag = TRUE;
 
