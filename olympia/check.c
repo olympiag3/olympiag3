@@ -1,7 +1,7 @@
 
 #include	<stdio.h>
-#include 	<stdlib.h>
-#include 	<string.h>
+#include <stdlib.h>
+#include <string.h>
 #include	"z.h"
 #include	"oly.h"
 
@@ -479,7 +479,7 @@ check_moving()
 
 		c = rp_command(i);
 
-		if (c == NULL || c->state != RUN)
+		if (c == NULL || c->state != STATE_RUN)
 		{
 			fprintf(stderr, "\t%s moving but no command\n",
 						box_name(i));
