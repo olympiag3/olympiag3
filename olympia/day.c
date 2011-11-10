@@ -1,5 +1,7 @@
 
 #include	<stdio.h>
+#include	<stdlib.h>
+#include	<string.h>
 #include	"z.h"
 #include	"oly.h"
 
@@ -346,9 +348,9 @@ default_garrison_pay()
 		if (parent == 0 || !default_garrison(parent))
 			continue;
 
-		gen_item(who, item_gold, 1);
+		gen_item(who, item_gold, 4);
 
-		wout(who, "Received %s from %s.", gold_s(1), box_name(parent));
+		wout(who, "Received %s from %s.", gold_s(4), box_name(parent));
 	}
 	next_char;
 }
@@ -542,18 +544,6 @@ decrement_loc_barrier()
 	{
 		p = rp_loc(where);
 
-#if 1
-		/* start to clean up old illegal loc barriers */
-
-		if (p && p->barrier < 0 && loc_depth(where) == LOC_build)
-		{
-			assert(sysclock.turn == 50);
-			wout(where, "The barrier over %s will dissipate at the end of turn 57.",
-				box_name(where));
-			p->barrier = 8;
-		}
-#endif
-
 		if (p && p->barrier > 0)
 		{
 		    p->barrier--;
@@ -629,7 +619,7 @@ noncreator_curse_erode()
 #if 0
 			if (kind(im->creator) != T_char)	/* lazy cleanup */
 			{
-			    log(LOG_CODE, "noncreator_curse_erode: "
+			    log_write(LOG_CODE, "noncreator_curse_erode: "
 					"lazy cleanup (creat=%d,item=%d,"
 					"curse=%d)",
 					im->creator,
@@ -649,11 +639,11 @@ noncreator_curse_erode()
 
 
 #if 1
-			log(LOG_CODE, "noncreator_curse_erode: NOTYET!");
+			log_write(LOG_CODE, "noncreator_curse_erode: NOTYET!");
 #else
 			    delta_loyalty(who, -(im->curse_loyalty), TRUE);
 
-			    log(LOG_SPECIAL, "%s loses %d loyalty from a "
+			    log_write(LOG_SPECIAL, "%s loses %d loyalty from a "
 					"curse on %s.",
 					box_name(who), im->curse_loyalty,
 					box_name(e->item));
@@ -734,7 +724,7 @@ loyalty_decay()
 		    p->loy_kind == LOY_contract &&
 		    rnd(1,2) == 1)
 		{
-			log(LOG_DEATH, "%s deserts, %s", box_name(who), loyal_s(who));
+			log_write(LOG_DEATH, "%s deserts, %s", box_name(who), loyal_s(who));
 			unit_deserts(who, indep_player, TRUE, LOY_unsworn, 0);
 			continue;
 		}
@@ -749,7 +739,7 @@ loyalty_decay()
 			p->loy_rate--;
 			if (p->loy_rate <= 0 && rnd(1,2) == 1)
 			{
-				log(LOG_DEATH, "%s deserts, %s", box_name(who), loyal_s(who));
+				log_write(LOG_DEATH, "%s deserts, %s", box_name(who), loyal_s(who));
 				unit_deserts(who, indep_player, TRUE, LOY_unsworn, 0);
 			}
 			break;
@@ -842,8 +832,8 @@ auto_drop()
 		    }
 
 		    queue(pl, "quit");
-		    log(LOG_SPECIAL, "Queued drop for %s", box_name(pl));
-		    log(LOG_SPECIAL, "    %s <%s>", s, email);
+		    log_write(LOG_SPECIAL, "Queued drop for %s", box_name(pl));
+		    log_write(LOG_SPECIAL, "    %s <%s>", s, email);
 		}
 	}
 	next_pl_regular;
@@ -1423,7 +1413,7 @@ compute_civ_levels()
 	int flag;
 	int i;
 	int dest_civ;
-	int crown_loc;
+	int crown_loc = -1;
  
 	int flag_castle;
 	int flag_tower;
@@ -1434,8 +1424,10 @@ compute_civ_levels()
 
 	int prev_loc = -1;
 
-	crown_loc = province(item_unique(RELIC_CROWN));
-
+	if (bx[RELIC_CROWN]) {
+		int crown = item_unique(RELIC_CROWN);
+		crown_loc = province(crown);
+	}
 	stage("compute_civ_levels()");
 
 	clear_temps(T_loc);
@@ -1660,25 +1652,25 @@ special_locs_open()
 	{
 		if (summerbridge(i) == 1)
 		{
-			log(LOG_CODE, "%s open to the north.", box_name(i));
+			log_write(LOG_CODE, "%s open to the north.", box_name(i));
 			wout(i, "The swamps of Summerbridge have dried "
 					"enough to permit passage north.");
 		}
 		else if (summerbridge(i) == 2)
 		{
-			log(LOG_CODE, "%s open to the south.", box_name(i));
+			log_write(LOG_CODE, "%s open to the south.", box_name(i));
 			wout(i, "The swamps of Summerbridge have dried "
 					"enough to permit passage south.");
 		}
 		else if (uldim(i) == 3)
 		{
-			log(LOG_CODE, "%s open to the south.", box_name(i));
+			log_write(LOG_CODE, "%s open to the south.", box_name(i));
 			wout(i, "The snows blocking Uldim pass to the south "
 				"have melted.");
 		}
 		else if (uldim(i) == 4)
 		{
-			log(LOG_CODE, "%s open to the north.", box_name(i));
+			log_write(LOG_CODE, "%s open to the north.", box_name(i));
 			wout(i, "The snows blocking Uldim pass to the north "
 				"have melted.");
 		}
@@ -1696,25 +1688,25 @@ special_locs_close()
 	{
 		if (summerbridge(i) == 1)
 		{
-			log(LOG_CODE, "%s closed to the north.", box_name(i));
+			log_write(LOG_CODE, "%s closed to the north.", box_name(i));
 			wout(i, "Seasonal rains have made Summerbridge an "
 				"impassable bog to the north.");
 		}
 		else if (summerbridge(i) == 2)
 		{
-			log(LOG_CODE, "%s closed to the south.", box_name(i));
+			log_write(LOG_CODE, "%s closed to the south.", box_name(i));
 			wout(i, "Seasonal rains have made Summerbridge an "
 				"impassable bog to the south.");
 		}
 		else if (uldim(i) == 3)
 		{
-			log(LOG_CODE, "%s closed to the south.", box_name(i));
+			log_write(LOG_CODE, "%s closed to the south.", box_name(i));
 			wout(i, "Falling snow blocks Uldim pass to the south "
 				"for the winter.");
 		}
 		else if (uldim(i) == 4)
 		{
-			log(LOG_CODE, "%s closed to the north.", box_name(i));
+			log_write(LOG_CODE, "%s closed to the north.", box_name(i));
 			wout(i, "Falling snow blocks Uldim pass to the north "
 				"for the winter.");
 		}
