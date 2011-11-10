@@ -9,6 +9,8 @@
  */
 
 #include	<stdio.h>
+#include 	<stdlib.h>
+#include 	<string.h>
 #include	"z.h"
 #include	"oly.h"
 
@@ -264,6 +266,9 @@ lead_char_pos(struct fight **l)
 		return 1;
 
 	assert(FALSE);
+
+	// To force VS to stop complaining
+	return 0;
 }
 
 
@@ -567,16 +572,16 @@ init_attack_defense(struct fight **l)
 				assert(f->defense > 0);
 			}
 
-			if (combat_wind || combat_rain)
-			{
+			if (combat_fog) {
+				f->missile /= 4;
+			} else if (combat_wind || combat_rain) {
 				if (f->kind == item_archer)
 					f->missile /= 2;
 				else if (f->kind == item_elite_arch)
 					f->missile /= 2;
 				else if (f->kind == item_crossbowman)
 					f->missile /= 4;
-			} else if (combat_fog)
-				f->missile /= 4;
+			}
 
 			if (f->kind == item_pirate)
 			{
@@ -1134,6 +1139,9 @@ find_attacker(struct fight **l, int man, struct fight **enemy)
 	}
 
 	assert(FALSE);
+
+	// To force VS to stop complaining
+	return 0;
 }
 
 
@@ -1150,6 +1158,9 @@ find_defender(struct fight **l, int man, struct fight **enemy)
 	}
 
 	assert(FALSE);
+
+	// To force VS to stop complaining
+	return 0;
 }
 
 
@@ -1373,7 +1384,7 @@ deduct_dead(struct fight **l_a, struct fight **l_b, int inherit)
 		    count_man_items(l_a[i]->unit) == 0)
 		{
 			if (l_a[i]->new_health || l_a[i]->num)
-				log(LOG_CODE, "%s lost all men, zeroed out",
+				log_write(LOG_CODE, "%s lost all men, zeroed out",
 						box_name(l_a[i]->unit));
 
 			l_a[i]->new_health = 0;
@@ -1443,8 +1454,11 @@ determine_noble_wounds(struct fight **l)
 
 		if (l[i]->sav_num <= 0)
 			l[i]->new_health = 0;
-		else
+		else {
 			l[i]->new_health = max(l[i]->sav_num - rnd(1,100), 0);
+			if (l[i]->new_health < 0)
+				l[i]->new_health = 0;
+		}
 	}
 }
 
@@ -2038,7 +2052,7 @@ best_here_pos(struct fight **l, int where)
 	}
 
 	if (best == 99999)
-		log(LOG_CODE, "best_here_pos: best == 99999, day=%d, l[0]=%s",
+		log_write(LOG_CODE, "best_here_pos: best == 99999, day=%d, l[0]=%s",
 				sysclock.day, box_code_less(lead_char(l)));
 
 	return best;
@@ -2063,7 +2077,7 @@ combat_stop_movement(int who, struct fight **l)
 		wout(VECT, "Loss in battle cancels movement.");
 		restore_output_vector(tmp);
 
-		log(LOG_CODE,
+		log_write(LOG_CODE,
 			"battle interrupts sailing, who=%d, where=%d",
 			ship, subloc(who));
 		return;
@@ -2080,7 +2094,7 @@ combat_stop_movement(int who, struct fight **l)
 			restore_output_vector(tmp);
 
 #if 0
-			log(LOG_CODE,
+			log_write(LOG_CODE,
 				"battle interrupts movement, who=%d, where=%d",
 				l[i]->unit, subloc(l[i]->unit));
 #endif
@@ -2143,7 +2157,7 @@ reconcile(int winner, struct fight **l_a, struct fight **l_b)
 		demote_units(winner, l_b);
 
 		if (combat_sea)
-		    log(LOG_CODE, "sea combat unchecked NOTYET case, who=%s",
+		    log_write(LOG_CODE, "sea combat unchecked NOTYET case, who=%s",
 						box_name(winner));
 
 /*
