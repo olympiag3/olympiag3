@@ -1,5 +1,6 @@
 
 #include	<stdio.h>
+#include	<string.h>
 #include	"z.h"
 #include	"oly.h"
 
@@ -265,7 +266,7 @@ liner_desc_ship(int n)
 		strcat(buf, ", with ram");
 
 	if (fee = board_fee(n))
-		strcat(buf, ", %s per 100 wt. to board", gold_s(fee));
+		strcat(buf, sout(", %s per 100 wt. to board", gold_s(fee)));
 
 	return sout("%s", buf);
 }
@@ -539,6 +540,7 @@ liner_desc(int n)
 	default:
 		assert(FALSE);
 	}
+	return 0;
 }
 
 
