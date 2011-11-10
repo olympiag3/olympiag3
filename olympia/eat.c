@@ -1,7 +1,10 @@
 
 #include	<stdio.h>
 #include	<sys/types.h>
-#include	<dirent.h>
+#include	<libc/dirent.h>
+#include	<string.h>
+#include	<libc/unistd.h>
+#include	<libc/sys/stat.h>
 #include	"z.h"
 #include	"oly.h"
 
@@ -1010,8 +1013,7 @@ eat_banner()
 	}
 
 	out(eat_pl, "Subject: Acknowledge");
-	out(eat_pl, "X-Loop: orders@g2.pbm.com");
-	out(eat_pl, "Bcc: g2watch");
+	out(eat_pl, "X-Loop: orders.g3.olympia@gmail.com");
 	out(eat_pl, "");
 	out(eat_pl, "     - Olympia order scanner -");
 	out(eat_pl, "");
@@ -1078,7 +1080,7 @@ eat(char *fnam)
 	fclose(fp);
 
 	if (!okay_flag) {
-		fprintf(stderr, "%s spam, ignoring\n");
+		fprintf(stderr, "%s spam, ignoring\n", fnam);
 		return;
 	}
 
@@ -1129,8 +1131,19 @@ eat(char *fnam)
 		ret = system(sout("g2rep %s/log/%d | %srmail %s g2watch",
 				libdir, eat_pl, entab(eat_pl), who_to));
 #else
+		if (win_flag) {
+			system(sout("g2rep %s\\log\\%d >> conf\\%d", libdir, eat_pl, eat_pl));
+			if (player_notab(eat_pl))
+				system(sout("entab %s\\conf\\%d conf\\%d", libdir, eat_pl, eat_pl));
+			ret = system(sout("sendmail conf\\%d", eat_pl));
+			system(sout("del conf\\%d", eat_pl));
+		} else {
 		ret = system(sout("g2rep %s/log/%d | %ssendmail -t",
 				libdir, eat_pl, entab(eat_pl)));
+		}
+
+
+
 #endif
 
 		if (ret)
