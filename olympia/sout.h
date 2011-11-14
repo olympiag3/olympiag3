@@ -64,3 +64,6 @@ extern int out_alt_who;			/* used if path == MASTER */
 extern char *spaces;
 extern int spaces_len;
 
+void log_write(int k, const char *format, ...);
+void out(int who, const char *format, ...);
+#define wout out
