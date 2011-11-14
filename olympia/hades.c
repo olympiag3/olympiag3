@@ -1,6 +1,5 @@
 
 #include	<stdio.h>
-#include	<unistd.h>
 #include	"z.h"
 #include	"oly.h"
 
@@ -27,6 +26,7 @@ create_hades()
 	int i;
 	int north, east, south, west;
 	struct entity_loc *p;
+	char *pw;
 
 /*
  *  Create region wrapper for Hades
@@ -46,7 +46,20 @@ create_hades()
 	hades_player = 205;
 	alloc_box(hades_player, T_player, sub_pl_npc);
 	set_name(hades_player, "King of Hades");
-	p_player(hades_player)->password = str_save("noyoudont");
+
+	/* To override the default password below, create/edit the file "PWD" which contains:
+
+fairy fairypassword
+combat combatpassword
+
+	   The string up to the first whitespace contains the keyword used to look up the password below
+	   The string after the whitespace contains the password to use instead of the default one
+	 */
+
+	pw = read_pw("hades");
+	if (pw == NULL)
+		pw = "noyoudont";
+	p_player(hades_player)->password = pw;
 
 /*
  *  Fill map[row,col] with locations.
