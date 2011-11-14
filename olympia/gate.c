@@ -423,6 +423,8 @@ v_unseal_gate(struct command *c)
 	}
 
 	c->d = sealed;		/* pass gate key to d_jump_gate */
+
+	return TRUE;
 }
 
 
