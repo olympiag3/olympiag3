@@ -1,5 +1,6 @@
 
 #include	<stdio.h>
+#include	<string.h>
 #include	"z.h"
 #include	"oly.h"
 
@@ -367,7 +368,7 @@ int
 v_pledge(struct command *c)
 {
 	int target = c->a;
-	int n;
+	int n = 0;
 
 	if (target == c->who)
 	{
@@ -486,7 +487,7 @@ garrison_gold()
 			continue;
 		}
 
-		remain /= 5;		/* 20% of remains go to land owner */
+		remain /= 2;		/* 50% of remains go to land owner */
 
 		castle = garrison_castle(garr);
 
@@ -589,6 +590,7 @@ rank_s(int who)
 	default:
 		assert(FALSE);
 	}
+  return 0;
 }
 
 
@@ -987,6 +989,8 @@ v_decree(struct command *c)
 	default:
 		assert(FALSE);
 	}
+
+	return FALSE;
 }
 
 
