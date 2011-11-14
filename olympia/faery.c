@@ -1,6 +1,5 @@
 
 #include	<stdio.h>
-#include	<unistd.h>
 #include	"z.h"
 #include	"oly.h"
 
@@ -25,6 +24,7 @@ create_faery()
 	int north, east, south, west;
 	struct entity_loc *p;
 	int sk;
+   char *pw;
 
 
 /*
@@ -219,7 +219,20 @@ create_faery()
 	faery_player = 204;
 	alloc_box(faery_player, T_player, sub_pl_npc);
 	set_name(faery_player, "Faery player");
-	p_player(faery_player)->password = str_save("noyoudont");
+
+	/* To override the default password below, create/edit the file "PWD" which contains:
+
+fairy fairypassword
+combat combatpassword
+
+	   The string up to the first whitespace contains the keyword used to look up the password below
+	   The string after the whitespace contains the password to use instead of the default one
+	 */
+
+	pw = read_pw("faery");
+	if (pw == NULL)
+		pw = "noyoudont";
+	p_player(faery_player)->password = pw;
 
 	printf("faery loc is %s\n", box_name(map[1][1]));
 }
@@ -319,7 +332,7 @@ warn_human(int who, int targ)
 	queue(who, "message 1 %s", box_code_less(targ));
 	queue(who, "You are not welcome in Faery.  Leave, "
 				"or you will be killed.");
-	log(LOG_SPECIAL, "Faery hunt warned %s.", box_name(targ));
+	log_write(LOG_SPECIAL, "Faery hunt warned %s.", box_name(targ));
 }
 
 
@@ -461,7 +474,7 @@ swap_region_locs(int reg)
 		p2->prov_dest = tmp;
 	}
 
-	log(LOG_CODE, "Swapped %s and %s in %s", box_name(l[0]), box_name(l[1]), box_name(reg));
+	log_write(LOG_CODE, "Swapped %s and %s in %s", box_name(l[0]), box_name(l[1]), box_name(reg));
 }
 #endif
 
