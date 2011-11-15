@@ -457,7 +457,7 @@ v_locate_char(struct command *c)
 	int target = c->a;
 	int aura = c->b;
 
-	if ((kind(target) != T_char) || (subkind(target) != sub_dead_body))
+	if ((kind(target) != T_char) || (subkind(target) == sub_dead_body))
 	{
 		wout(c->who, "%s is not a character.", box_code(target));
 		return FALSE;
