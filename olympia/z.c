@@ -1,5 +1,8 @@
 
 #include	<stdio.h>
+#include	<string.h>
+#include	<stdlib.h>
+#include	<libc/unistd.h>
 #include	"z.h"
 
 
@@ -32,9 +35,6 @@ int realloc_size = 0;
  *  overrunning a region returned from malloc/realloc, or by calling
  *  free with a pointer that wasn't obtained from malloc or free.
  */
-  
-extern void *malloc();
-extern void *realloc();
 
 void *my_malloc(unsigned size)
 {
@@ -51,7 +51,7 @@ void *my_malloc(unsigned size)
 		exit(1);
 	}
 
-	bzero(p, size);
+	memset(p, '\0', size);
 
 	*((int *) p) = size;
 	*((int *) (p+sizeof(int))) = 0xDEADBEEF;
@@ -158,7 +158,7 @@ getlin(FILE *fp)
 {
 	static char *buf = NULL;
 	static unsigned int size = 0;
-	int len;
+	unsigned int len;
 	int c;
 
 	len = 0;
@@ -254,12 +254,16 @@ static int line_fd = -1;
 static char *point;
 
 
+void
+closefile(char *path) {
+	if (line_fd >= 0)
+		close(line_fd);
+}
+
 int
 readfile(char *path)
 {
 
-	if (line_fd >= 0)
-		close(line_fd);
 
 	line_fd = open(path, 0);
 
@@ -282,7 +286,7 @@ readlin()
 {
 	static char *buf = NULL;
 	static unsigned int size = 0;
-	int len;
+	unsigned int len;
 	int c;
 
 	len = 0;
@@ -797,7 +801,7 @@ ilist_copy(ilist l)
 	assert(&base[2] == l);
 
 	copy_base = my_malloc(base[1] * sizeof(*base));
-	bcopy(base, copy_base, (base[0] + 2) * sizeof(*base));
+	memcpy(copy_base, base, (base[0] + 2) * sizeof(*base));
 
 	return &copy_base[2];
 }
@@ -858,7 +862,7 @@ ilist_test()
 	ilist y;
 
 	setbuf(stdout, NULL);
-	bzero(&x, sizeof(x));
+	memset(&x, '\0', sizeof (x));
 
 	printf("len = %d\n", ilist_len(x));
 
