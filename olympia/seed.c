@@ -1,5 +1,6 @@
 
 #include	<stdio.h>
+#include	<stdlib.h>
 #include	"z.h"
 #include	"oly.h"
 
@@ -297,12 +298,10 @@ compute_dist()
 
 
 int
-int_comp(a, b)
-int *a;
-int *b;
+int_comp(void *a, void *b)
 {
 
-	return *a - *b;
+	return *(int *)a - *(int *)b;
 }
 
 
@@ -381,6 +380,8 @@ seed_city_skill(int where)
 void
 seed_city_trade(int where)
 {
+	int qty = 0;
+	int cst = 0;
 	int prov = province(where);
 	int prov_kind = subkind(prov);
 	struct entity_subloc *p = rp_subloc(where);
@@ -428,15 +429,17 @@ seed_city_trade(int where)
 	}
 
 	if (rnd(1,2) == 1)
-		add_city_trade(where, CONSUME, item_pot, 9, 7, 0);
+		add_city_trade(where, CONSUME, item_pot, 17, 7, 0);
 	else
-		add_city_trade(where, CONSUME, item_basket, 15, 4, 0);
+		add_city_trade(where, CONSUME, item_basket, 30, 4, 0);
 
 	if (prov_kind == sub_plain)
 	{
 		add_city_trade(where, PRODUCE, item_ox, 5, 100, 0);
-		add_city_trade(where, PRODUCE, item_riding_horse, rnd(2,3),
-							rnd(20,30) * 5, 0);
+		qty = rnd(2,3);
+		cst = rnd(20,30);
+		add_city_trade(where, PRODUCE, item_riding_horse, qty, cst * 5, 0);
+		add_city_trade(where, CONSUME, item_riding_horse, qty, cst * 5 / 2, 0);
 	}
 	else if (rnd(1,3) == 1)
 		add_city_trade(where, CONSUME, item_hide, rnd(3,6),
@@ -444,14 +447,17 @@ seed_city_trade(int where)
 
 	if (prov_kind == sub_mountain)
 	{
-		add_city_trade(where, PRODUCE, item_iron, rnd(1,2),
-						rnd(25,30), 0);
+		qty = rnd(1,2);
+		cst = rnd(25,30);
+		add_city_trade(where, PRODUCE, item_iron, qty, cst, 0);
+		add_city_trade(where, CONSUME, item_iron, qty, cst / 2, 0);
 	}
 
 	if (prov_kind == sub_forest)
 	{
-		add_city_trade(where, PRODUCE, item_lumber, 25,
-						rnd(11,15), 0);
+		cst = rnd(11,15);
+		add_city_trade(where, PRODUCE, item_lumber, 25, cst, 0);
+		add_city_trade(where, CONSUME, item_lumber, 25, cst / 2, 0);
 	}
 
 	if (p && ilist_lookup(p->teaches, sk_alchemy) >= 0)
@@ -515,6 +521,7 @@ seed_phase_two()
 	seed_city_near_lists();
 	seed_cookies();
 	add_city_garrisons();
+	close_logfile();
 }
 
 
