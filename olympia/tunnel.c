@@ -1,6 +1,5 @@
 
 #include	<stdio.h>
-#include	<unistd.h>
 #include	"z.h"
 #include	"oly.h"
 
@@ -17,7 +16,6 @@ create_subworld()
 	int r, c;
 	int map[SUB_SZ+1][SUB_SZ+1];
 	int n;
-	int i;
 	int north, east, south, west;
 	struct entity_loc *p;
 
@@ -283,7 +281,6 @@ fill_out_level(int map[SZ+2][SZ+2][MAX_LEVELS], int l)
 static int
 add_chamber(int map[SZ+2][SZ+2][MAX_LEVELS], int l)
 {
-	int r, c;
 	int dir = rnd(1,4);
 	int new;
 	int square;
@@ -302,6 +299,8 @@ add_chamber(int map[SZ+2][SZ+2][MAX_LEVELS], int l)
 	p_loc(new)->prov_dest[exit_opposite[dir]-1] = square;
 
 	fprintf(stderr, "tunnel chamber accessible from %s\n", box_code_less(square));
+
+	return 0;
 }
 
 
