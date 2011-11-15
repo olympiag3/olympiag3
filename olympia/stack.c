@@ -46,6 +46,8 @@ here_precedes(int a, int b)
 			return FALSE;
 
 	assert(FALSE);
+
+	return 0;
 }
 
 
@@ -318,7 +320,7 @@ prisoner_escapes(int who)
 		wout(leader, "%s jumped overboard and presumably "
 					"drowned.", just_name(who));
 
-		log(LOG_SPECIAL, "!! Someone swam ashore, who=%s",
+		log_write(LOG_SPECIAL, "!! Someone swam ashore, who=%s",
 						box_code_less(who));
 	}
 
@@ -402,7 +404,7 @@ drop_stack(int who, int to_drop)
 
 	if (release_swear_flag)
 	{
-		log(LOG_SPECIAL, "%s frees a swear_on_release prisoner",
+		log_write(LOG_SPECIAL, "%s frees a swear_on_release prisoner",
 					box_name(who));
 
 		if (rnd(1,5) < 5)
@@ -640,6 +642,8 @@ move_prisoner(int who, int target, int pris)
 		p_magic(pris)->swear_on_release = TRUE;
 
 	assert(rp_char(pris)->prisoner);
+
+	return 0;
 }
 
 
@@ -769,7 +773,7 @@ v_surrender(struct command *c)
 		return FALSE;
 	}
 
-	log(LOG_SPECIAL, "Player %s surrenders %s",
+	log_write(LOG_SPECIAL, "Player %s surrenders %s",
 			box_code_less(player(c->who)),
 			box_name(c->who));
 
@@ -818,6 +822,8 @@ promote_after(int a, int b)
 		return FALSE;
 
 	assert(FALSE);
+
+	return 0;
 }
 
 
