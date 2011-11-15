@@ -375,9 +375,9 @@ orders_template_sup(int who, int num, int pl)
 		out(who, "#");
 	    }
 
-	    if (c && (c->state == RUN || c->state == LOAD))
+	    if (c && (c->state == STATE_RUN || c->state == STATE_LOAD))
 	    {
-		if (c->state == RUN)
+		if (c->state == STATE_RUN)
 		{
 			if (c->wait < 0)
 			    time_left = " (still~executing)";
