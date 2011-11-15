@@ -1,6 +1,9 @@
 
 #include <stdio.h>
+#include <memory.h>
+#include <stdlib.h>
 #include <fcntl.h>
+#include "z.h"
 
 /*
  *  Random number generator built on top of MD5
@@ -93,11 +96,11 @@ xMD5Update(struct xMD5Context *ctx, byte const *buf, int len)
 
 	t = 64 - (t & 0x3f);	/* Space available in ctx->in (at least 1) */
 	if ((unsigned)t > len) {
-		bcopy(buf, (byte *)ctx->in + 64 - (unsigned)t, len);
+		memcpy((byte *)ctx->in + 64 - (unsigned)t, buf, len);
 		return;
 	}
 	/* First chunk is an odd size */
-	bcopy(buf,(byte *)ctx->in + 64 - (unsigned)t, (unsigned)t);
+	memcpy((byte *)ctx->in + 64 - (unsigned)t, buf, (unsigned)t);
 	byteSwap(ctx->in, 16);
 	xMD5Transform(ctx->buf, ctx->in);
 	buf += (unsigned)t;
@@ -105,7 +108,7 @@ xMD5Update(struct xMD5Context *ctx, byte const *buf, int len)
 
 	/* Process data in 64-byte chunks */
 	while (len >= 64) {
-		bcopy(buf, ctx->in, 64);
+		memcpy(ctx->in, buf, 64);
 		byteSwap(ctx->in, 16);
 		xMD5Transform(ctx->buf, ctx->in);
 		buf += 64;
@@ -113,7 +116,7 @@ xMD5Update(struct xMD5Context *ctx, byte const *buf, int len)
 	}
 
 	/* Handle any remaining bytes of data. */
-	bcopy(buf, ctx->in, len);
+	memcpy(ctx->in, buf, len);
 }
 
 /*
@@ -133,13 +136,13 @@ xMD5Final(byte digest[16], struct xMD5Context *ctx)
 	count = 56 - 1 - count;
 
 	if (count < 0) {	/* Padding forces an extra block */
-		bzero(p, count+8);
+		memset(p, '\0', count+8);
 		byteSwap(ctx->in, 16);
 		xMD5Transform(ctx->buf, ctx->in);
 		p = (byte *)ctx->in;
 		count = 56;
 	}
-	bzero(p, count+8);
+	memset(p, '\0', count+8);
 	byteSwap(ctx->in, 14);
 
 	/* Append length in bits and transform */
@@ -148,8 +151,8 @@ xMD5Final(byte digest[16], struct xMD5Context *ctx)
 	xMD5Transform(ctx->buf, ctx->in);
 
 	byteSwap(ctx->buf, 4);
-	bcopy(ctx->buf, digest, 16);
-	bzero(ctx,sizeof(ctx));
+	memcpy(digest, ctx->buf, 16);
+	memset(ctx, '\0', sizeof(ctx));
 }
 
 
@@ -271,25 +274,26 @@ static unsigned long digest[4];
 
 void load_seed(char *fnam)
 {
-	int fd;
+	FILE *fd;
 
-	fd = open(fnam, O_RDONLY);
-	if (fd >= 0)
-	{
-		read(fd, digest, 16);
-		close(fd);
-	}
+	if (fopen_s(&fd, fnam, "rb") == 0) {
+		if (fd >= 0) {
+			fread(digest, 1, 16, fd);
+			fclose(fd);
+		}
+	} else
+		printf("%s could not be opened.\n", fnam);
 }
 
 void save_seed(char *fnam)
 {
-	int fd;
+	FILE *fd;
 
-	fd = open(fnam, O_WRONLY|O_CREAT, 0600);
+	fd = fopen(fnam, "wb+");
 	if (fd >= 0)
 	{
-		write(fd, digest, 16);
-		close(fd);
+		fwrite(digest, 1, 16, fd);
+		fclose(fd);
 	}
 }
 
