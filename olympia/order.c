@@ -1,7 +1,9 @@
 
 #include	<stdio.h>
 #include	<sys/types.h>
-#include	<dirent.h>
+#include	<libc/sys/stat.h>
+#include	<libc/dirent.h>
+#include	<libc/unistd.h>
 #include	"z.h"
 #include	"oly.h"
 
@@ -140,7 +142,7 @@ flush_unit_orders(int pl, int who)
 	if (player(who) == pl)
 	{
 		c = rp_command(who);
-		if (c && c->state == LOAD)
+		if (c && c->state == STATE_LOAD)
 			command_done(c);
 	}
 }
@@ -273,6 +275,8 @@ load_player_orders(int pl)
 
 		queue_order(pl, unit, p);
 	}
+
+	closefile(fnam);
 }
 
 
@@ -321,8 +325,12 @@ save_orders()
 {
 	int i;
 
-	system(sout("rm -rf %s/orders", libdir));
-	mkdir(sout("%s/orders", libdir), 0755);
+	if (win_flag) {
+		system(sout("del /s /Q /F %s\\orders\\*", libdir));
+	} else {
+		system(sout("rm -rf %s/orders", libdir));
+		mkdir(sout("%s/orders", libdir), 0755);
+	}
 
 	loop_player(i)
 	{
@@ -434,7 +442,7 @@ orders_other(int who, int pl)
 			struct order_list *l =
 				rp_order_head(pl, p->orders[i]->unit);
 
-			if ((c == NULL || c->state == DONE) &&
+			if ((c == NULL || c->state == STATE_DONE) &&
 			    (l == NULL || ilist_len(l->l) == 0))
 				continue;
 		}
