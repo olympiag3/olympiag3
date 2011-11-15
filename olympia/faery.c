@@ -24,7 +24,7 @@ create_faery()
 	int north, east, south, west;
 	struct entity_loc *p;
 	int sk;
-   char *pw;
+	char *pw;
 
 
 /*
