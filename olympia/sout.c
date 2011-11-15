@@ -1,6 +1,9 @@
 
 #include	<stdio.h>
+#include	<stdarg.h>
+#include	<string.h>
 #include	<limits.h>
+#include	<libc/sys/stat.h>
 #include	"z.h"
 #include	"oly.h"
 
@@ -23,7 +26,6 @@ int spaces_len;
 init_spaces()
 {
 	int i;
-	extern char *malloc();
 
 	spaces_len = 150;
 	spaces = my_malloc(spaces_len+1);
@@ -122,7 +124,7 @@ open_fp(struct fp_ent *p, int player)
 
 	p->player = player;
 
-	sprintf(fnam, "%s/log/%d", libdir, player);
+	sprintf(fnam, "%s/LOG/%d", libdir, player);
 
 	p->fp =	fopen(fnam, "a+");
 	if (p->fp == NULL)
@@ -191,7 +193,7 @@ grab_fp(int player)
 void
 open_logfile_nondestruct()
 {
-	mkdir(sout("%s/log", libdir), 0755);
+	mkdir(sout("%s/LOG", libdir), 0755);
 }
 
 
@@ -202,8 +204,13 @@ open_logfile()
 	if (immediate)
 		return;
 
-	system(sout("rm	-rf %s/log", libdir));
-	mkdir(sout("%s/log", libdir), 0755);
+	if (win_flag) {
+		system(sout("rd /s /q %s\\LOG", libdir));
+		mkdir(sout("%s\\LOG", libdir), 0755);
+	} else {
+		system(sout("rm -rf %s/LOG", libdir));
+		mkdir(sout("%s/LOG", libdir), 0755);
+	}
 }
 
 
@@ -242,7 +249,7 @@ static int prev_style = 0;
 
 void style(int n)
 {
-	if (n == PREV)
+	if (n == STYLE_PREV)
 		style_html = prev_style;
 	else
 	{
@@ -451,27 +458,23 @@ out_sup(int who, char *s)
 }
 
 
-out(who, format, a1, a2, a3, a4, a5, a6, a7, a8, a9, aa, ab, ac)
-int who;
-char *format;
-long a1, a2, a3, a4, a5, a6, a7, a8, a9, aa, ab, ac;
+void
+vout(int who, const char *format, va_list vargs)
 {
 	char buf[LEN];
 
-	sprintf(buf, format, a1, a2, a3, a4, a5, a6, a7, a8, a9, aa, ab, ac);
+	vsnprintf(buf, LEN, format, vargs);
 	out_sup(who, buf);
 }
 
-
-wout(who, format, a1, a2, a3, a4, a5, a6, a7, a8, a9, aa, ab, ac)
-int who;
-char *format;
-long a1, a2, a3, a4, a5, a6, a7, a8, a9, aa, ab, ac;
+void
+out(int who, const char *format, ...)
 {
-	char buf[LEN];
+	va_list ap;
 
-	sprintf(buf, format, a1, a2, a3, a4, a5, a6, a7, a8, a9, aa, ab, ac);
-	out_sup(who, buf);
+	va_start(ap, format);
+	vout(who, format, ap);
+	va_end(ap);
 }
 
 
@@ -498,10 +501,10 @@ long a1, a2, a3, a4, a5, a6, a7, a8, a9, aa, ab, ac;
 {
 	char buf[LEN];
 
-	style(HTML);
+	style(STYLE_HTML);
 	sprintf(buf, format, a1, a2, a3, a4, a5, a6, a7, a8, a9, aa, ab, ac);
 	out_sup(who, buf);
-	style(PREV);
+	style(STYLE_PREV);
 }
 
 
@@ -599,7 +602,7 @@ void
 lines(int who, char *s)
 {
 
-	style(HTML);
+	style(STYLE_HTML);
 
 	{
 		char *p;
@@ -632,7 +635,7 @@ lines(int who, char *s)
 #endif
 	}
 
-	style(TEXT);
+	style(STYLE_TEXT);
 	wout(who, "%s", s);
 
 	{
@@ -668,20 +671,21 @@ match_lines(int who, char *s)
 }
 
 
-log(k, format, a1, a2, a3, a4, a5, a6, a7, a8, a9, aa, ab, ac)
-int k;
-char *format;
-long a1, a2, a3, a4, a5, a6, a7, a8, a9, aa, ab, ac;
+void
+log_write(int k, const char *format, ...)
 {
 	int save_out_path = out_path;
 	int save_out_alt_who = out_alt_who;
+	va_list ap;
 
 	assert(k >= 10 && k <= 20);
 
 	out_path = MASTER;
 	out_alt_who = k;
 
-	out(gm_player, format, a1, a2, a3, a4, a5, a6, a7, a8, a9, aa, ab, ac);
+	va_start(ap, format);
+	vout(gm_player, format, ap);
+	va_end(ap);
 
 	out_path = save_out_path;
 	out_alt_who = save_out_alt_who;
