@@ -1,5 +1,6 @@
 
 #include	<stdio.h>
+#include	<stdlib.h>
 #include	"z.h"
 #include	"oly.h"
 
@@ -368,7 +369,7 @@ init_savage_attacks()
 		if (loc_depth(fort) != LOC_build)
 			continue;
 
-		if (rnd(1,100) == 1)
+		if (rnd(1,100) != 1)
 			continue;
 
 		where = subloc(fort);
