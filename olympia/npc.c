@@ -513,7 +513,7 @@ queue_npc_orders()
 		if (is_prisoner(who))
 			continue;
 
-		if (rp_command(who) && rp_command(who)->state != DONE)
+		if (rp_command(who) && rp_command(who)->state != STATE_DONE)
 			continue;		/* running an order */
 
 		if (top_order(indep_player, who))
