@@ -1,6 +1,5 @@
 
 #include	<stdio.h>
-#include	<unistd.h>
 #include	"z.h"
 #include	"oly.h"
 
