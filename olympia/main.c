@@ -1,6 +1,7 @@
-
+#include	<stdlib.h>
 #include	<stdio.h>
-#include	<unistd.h>
+#include	<libc/sys/stat.h>
+#include	<libc/unistd.h>
 #include	"z.h"
 #include	"oly.h"
 
@@ -10,213 +11,17 @@
  *  to make them easier to read.
  */
 
+void setup_html_all(void);
+
 int pretty_data_files = FALSE;
 
-int immediate = TRUE;
+int immediate = FALSE;
 int immed_after = FALSE;
 int immed_see_all = FALSE;
 int flush_always = FALSE;
 int time_self = FALSE;		/* print timing info */
 int save_flag = FALSE;
-
-main(argc, argv)
-int argc;
-char **argv;
-{
-	extern int optind, opterr;
-	extern char *optarg;
-	int errflag = 0;
-	int c;
-	int run_flag = FALSE;
-	int add_flag = FALSE;
-	int eat_flag = FALSE;
-	int mail_now = FALSE;
-	int acct_flag = FALSE;
-	int html_flag = FALSE;
-
-	printf("\tsizeof(struct box) = %d\n", sizeof(struct box));
-	setbuf(stderr, NULL);
-
-	call_init_routines();
-
-	while ((c = getopt(argc, argv, "aefirl:pR?StMTAh")) != EOF)
-	{
-		switch (c)
-		{
-		case 'a':
-			add_flag = TRUE;
-			immediate = FALSE;
-			break;
-
-		case 'A':
-			acct_flag = TRUE;
-			break;
-
-		case 'f':
-			flush_always = TRUE;
-			setbuf(stdout, NULL);
-			break;
-
-		case 'e':
-			eat_flag = TRUE;
-			immediate = FALSE;
-			break;
-
-		case 'i':
-			immed_after = TRUE;
-			break;
-
-		case 'l':		/* set libdir */
-			libdir = str_save(optarg);
-			break;
-
-		case 'p':
-			pretty_data_files = !pretty_data_files;
-			break;
-
-		case 'r':		/* run a turn */
-			immediate = FALSE;
-			run_flag = TRUE;
-			break;
-
-		case 'R':		/* test random number generator */
-			test_random();
-			exit(0);
-
-		case 'S':		/* save database when done */
-			save_flag = TRUE;
-			break;
-
-		case 't':
-			ilist_test();
-			exit(0);
-
-		case 'T':
-			time_self = TRUE;
-			break;
-
-		case 'M':
-			mail_now = TRUE;
-			break;
-
-		case 'h':
-			html_flag = TRUE;
-			break;
-
-		default:
-			errflag++;
-		}
-	}
-
-	if (errflag)
-	{
-	    fprintf(stderr, "usage: oly [options]\n");
-	    fprintf(stderr, "  -a        Add new players mode\n");
-	    fprintf(stderr, "  -e        Eat orders from libdir/spool\n");
-	    fprintf(stderr, "  -f        Don't buffer files for debugging\n");
-	    fprintf(stderr, "  -i        Immediate mode\n");
-	    fprintf(stderr, "  -l dir    Specify libdir, default ./lib\n");
-	    fprintf(stderr, "  -p        Don't make data files pretty\n");
-	    fprintf(stderr, "  -r        Run a turn\n");
-	    fprintf(stderr, "  -R        Test the random number generator\n");
-	    fprintf(stderr, "  -S        Save the database at completion\n");
-	    fprintf(stderr, "  -t        Test ilist code\n");
-	    fprintf(stderr, "  -T        Print timing info\n");
-	    fprintf(stderr, "  -M        Mail reports\n");
-	    fprintf(stderr, "  -A        Charge player accounts\n");
-	    exit(1);
-	}
-
-	load_db();
-
-	if (eat_flag)
-	{
-		eat_loop();
-		exit(0);
-	}
-
-	if (run_flag)
-	{
-		open_logfile();
-		open_times();
-
-		show_day = TRUE;
-		process_orders();
-		post_month();
-		show_day = FALSE;
-
-		determine_output_order();
-		turn_end_loc_reports();
-		list_order_templates();
-		player_ent_info();
-		character_report();
-
-		player_banner();
-		if (acct_flag)
-			charge_account();
-		report_account();
-		summary_report();
-		player_report();
-
-		scan_char_skill_lore();
-		show_lore_sheets();
-		gm_report(gm_player);
-
-		gm_show_all_skills(skill_player);
-
-		add_new_players();
-		gen_include_section();		/* must be last */
-		close_logfile();
-
-		write_player_list();
-		write_email();
-		write_totimes();
-		write_forwards();
-		write_factions();
-	}
-
-	if (add_flag)
-	{
-		new_player_top(mail_now);
-		mail_now = FALSE;
-	}
-
-	if (immediate || immed_after)
-	{
-		immediate = TRUE;
-
-		open_logfile();
-		immediate_commands();
-		close_logfile();
-	}
-
-	check_db();			/* check database integrity */
-
-	if (save_flag)
-		save_db();
-
-	if (save_flag && run_flag)
-		save_logdir();
-
-	if (mail_now)
-		mail_reports();
-
-	if (mail_now || html_flag)
-		setup_html_all();
-
-	times_masthead();
-	close_times();
-	stage(NULL);
-
-	{
-	extern int malloc_size, realloc_size;
-
-	printf("\tmalloc, realloc = %d, %d\n", malloc_size, realloc_size);
-	}
-
-	exit(0);
-}
-
+int win_flag = FALSE;
 
 call_init_routines()
 {
@@ -229,7 +34,7 @@ call_init_routines()
 }
 
 
-write_totimes()
+void write_totimes(void)
 {
 	FILE *fp;
 	char *fnam;
@@ -261,7 +66,7 @@ write_totimes()
 }
 
 
-write_email()
+void write_email(void)
 {
 	FILE *fp;
 	char *fnam;
@@ -293,7 +98,6 @@ list_a_player(FILE *fp, int pl, int *flag)
 {
 	struct entity_player *p;
 	char *s;
-	int n;
 	char c;
 	char *email;
 
@@ -332,7 +136,7 @@ list_a_player(FILE *fp, int pl, int *flag)
 }
 
 
-write_player_list()
+void write_player_list(void)
 {
 	FILE *fp;
 	char *fnam;
@@ -375,7 +179,7 @@ write_player_list()
 write_forward_sup(int who_for, int target, FILE *fp)
 {
 	int pl;
-	char *s, *u;
+	char *s;
 
 	pl = player(who_for);
 	s = player_email(pl);
@@ -387,7 +191,7 @@ write_forward_sup(int who_for, int target, FILE *fp)
 }
 
 
-write_forwards()
+void write_forwards(void)
 {
 	FILE *fp;
 	char *fnam;
@@ -434,7 +238,7 @@ write_forwards()
 write_faction_sup(int who_for, int target, FILE *fp)
 {
 	int pl;
-	char *s, *u;
+	char *s;
 
 	pl = player(who_for);
 	s = player_email(pl);
@@ -446,12 +250,11 @@ write_faction_sup(int who_for, int target, FILE *fp)
 }
 
 
-write_factions()
+void write_factions(void)
 {
 	FILE *fp;
 	char *fnam;
-	int i, j;
-	ilist l;
+	int i;
 
 	fnam = sout("%s/factions", libdir);
 
@@ -492,7 +295,10 @@ send_rep(int pl, int turn)
 	if (p == NULL || p->email == NULL || *p->email == '\0')
 		return FALSE;
 
-	sprintf(report, "/tmp/sendrep%d.%s", getpid(), box_code_less(pl));
+	if (win_flag)
+		sprintf(report, "tmp/sendrep%d.%s", getpid(), box_code_less(pl));
+	else
+		sprintf(report, "/tmp/sendrep%d.%s", getpid(), box_code_less(pl));
 
 	fp = fopen(report, "w");
 	if (fp == NULL)
@@ -507,7 +313,7 @@ send_rep(int pl, int turn)
 		fprintf(fp, "Reply-To: %s\n", reply_host);
 	fprintf(fp, "To: %s (%s)\n", p->email,
 			p->full_name ? p->full_name : "???");
-	fprintf(fp, "Subject: Olympia g2 turn %d report\n", turn);
+	fprintf(fp, "Subject: Turn %d report\n", turn);
 	fprintf(fp, "\n");
 	fclose(fp);
 
@@ -523,7 +329,10 @@ send_rep(int pl, int turn)
 			return FALSE;
 		}
 
-		fnam = sout("/tmp/zrep.%d", pl);
+		if (win_flag)
+			fnam = sout("tmp/zrep.%d", pl);
+		else
+			fnam = sout("/tmp/zrep.%d", pl);
 
 		ret = system(sout("gzcat %s > %s", zfnam, fnam));
 
@@ -536,10 +345,21 @@ send_rep(int pl, int turn)
 		}
 	}
 
-	if (player_notab(pl))
-		cmd = sout("g2rep %s >> %s", fnam, report);
-	else
-		cmd = sout("g2rep %s | entab >> %s", fnam, report);
+	if (win_flag) {
+		system(sout("g2rep %s >> rep\\%d_%d.txt", fnam, turn, pl));
+		if (player_notab(pl)) {
+			cmd = sout("g2rep %s >> %s", fnam, report);
+		} else {
+			system(sout("g2rep %s >> %s", fnam, report));
+			cmd = sout("entab %s %s", report, report);
+		}
+	} else {
+		if (player_notab(pl)) {
+			cmd = sout("g2rep %s >> %s", fnam, report);
+		} else {
+			cmd = sout("g2rep %s | entab >> %s", fnam, report);
+		}
+	}
 
 	ret = system(cmd);
 
@@ -554,10 +374,16 @@ send_rep(int pl, int turn)
 	}
 
 	if (split_lines == 0 && split_bytes == 0)
-		cmd = sout("sendmail -t -odq < %s", report);
-	else
+	{
+		if (win_flag) {
+			cmd = sout("sendmail %s", report);
+		} else {
+			cmd = sout("sendmail -t -odq < %s", report);
+		}
+	} else {
 		cmd = sout("mailsplit -s %d -l %d -c 'sendmail -t -odq' < %s",
 				split_bytes, split_lines, report);
+	}
 
 	fprintf(stderr, "   %s\n", cmd);
 	ret = system(cmd);
@@ -598,32 +424,18 @@ struct command *c;
 	return TRUE;
 }
 
-setup_html_all()
-{
-	int pl;
-
-	stage("setup_html()");
-
-	loop_player(pl)
-	{
-		setup_html_dir(pl);
-		set_html_pass(pl);
-		output_html_rep(pl);
-	}
-	next_player;
-
-	copy_public_turns();
-}
-
-setup_html_dir(pl)
-int pl;
+void setup_html_dir(int pl)
 {
 	char fnam[LEN];
 	char fnam2[LEN];
 	FILE *fp;
 
 	sprintf(fnam, "%s/html/%s", libdir, box_code_less(pl));
-	mkdir(fnam, 0755);
+	if (win_flag) {
+		system(sout("mkdir %s\\html\\%s", libdir, box_code_less(pl)));
+	} else {
+		mkdir(fnam, 0755);
+	}
 
 	sprintf(fnam2, "%s/.htaccess", fnam);
 
@@ -653,19 +465,46 @@ int pl;
 	char buf[LEN];
 	struct entity_player *p;
 	char *pw;
+	int ret;
 
 	p = rp_player(pl);
 	if (p == NULL)
 		return;
 
 	pw = p->password;
-	if (pw == NULL)
-		pw = "slartibartfast";
+	if (pw == NULL) {
 
-	sprintf(buf, "/usr/local/bin/htpass /u/oly/g2/lib/ht-passwords %s \"%s\"",
-				box_code_less(pl), pw);
+	/* To override the default password below, create/edit the file "PWD" which contains:
 
-	system(buf);
+fairy fairypassword
+combat combatpassword
+random randompassword
+
+	   The string up to the first whitespace contains the keyword used to look up the password below
+	   The string after the whitespace contains the password to use instead of the default one
+	 */
+		
+		pw = read_pw("random");
+		if (pw == NULL)
+			pw = "slartibartfast";
+
+	}
+
+	if (win_flag) {
+		sprintf(buf, "htpasswd -b lib\\.htpasswd %s \"%s\"",
+		box_code_less(pl), pw);
+		ret = system(buf);
+		if (ret) {
+			sprintf(buf, "htpasswd -c -b lib\\.htpasswd %s \"%s\"",
+			box_code_less(pl), pw);
+			system(buf);
+		}
+	} else {
+		sprintf(buf, "/usr/local/bin/htpass /u/oly/g2/lib/ht-passwords %s \"%s\"",
+					box_code_less(pl), pw);
+		system(buf);
+	}
+
 }
 
 output_html_rep(pl)
@@ -673,7 +512,6 @@ int pl;
 {
 	char fnam[LEN];
 	char fnam2[LEN];
-	FILE *fp;
 
 	sprintf(fnam, "%s/html/%s/index.html", libdir, box_code_less(pl));
 	sprintf(fnam2, "%s/html/%s/prev.html", libdir, box_code_less(pl));
@@ -689,6 +527,7 @@ int pl;
 copy_public_turns()
 {
 	char fnam[LEN];
+	char fnam2[LEN];
 	char cmd[LEN];
 	int pl;
 
@@ -697,13 +536,232 @@ copy_public_turns()
 		if (!player_public_turn(pl))
 			continue;
 
-		sprintf(fnam, "%s/html/%s", libdir, box_code_less(pl));
 
-		sprintf(cmd, "sed -e '/Account summary/,/Balance/d' -e 's/^begin %s.*$/begin %s/' %s/index.html > %s.html",
-				box_code_less(pl), box_code_less(pl),
-				fnam, fnam);
-		system(cmd);
+		if (win_flag) {
+			sprintf(fnam, "%s\\html\\%s\\index.html", libdir, box_code_less(pl));
+			sprintf(fnam2, "public\\%s.html", box_code_less(pl));
+			sprintf(cmd, "copy %s %s", fnam, fnam2);
+			printf(cmd);
+			system(cmd);
+		} else {
+			sprintf(fnam, "%s/html/%s", libdir, box_code_less(pl));
+			sprintf(cmd, "sed -e '/Account summary/,/Balance/d' -e 's/^begin %s.*$/begin %s/' %/index.html > %s.html",
+					box_code_less(pl), box_code_less(pl),
+					fnam, fnam);
+			system(cmd);
+		}
 	}
 	next_player;
 }
 
+void
+setup_html_all(void)
+{
+	int pl;
+
+	stage("setup_html()");
+
+	loop_player(pl) {
+		setup_html_dir(pl);
+		set_html_pass(pl);
+		output_html_rep(pl);
+	}
+	next_player;
+
+	copy_public_turns();
+}
+
+int
+main(int argc, char **argv)
+{
+	extern int optind, opterr;
+	extern char *optarg;
+	int errflag = 0;
+	int c;
+	int run_flag = FALSE;
+	int add_flag = FALSE;
+	int eat_flag = FALSE;
+	int mail_now = FALSE;
+	int acct_flag = FALSE;
+	int html_flag = FALSE;
+
+	printf("\tsizeof(struct box) = %d\n", sizeof (struct box));
+	setbuf(stderr, NULL);
+
+	call_init_routines();
+
+	while ((c = getopt(argc, argv, "waefirl:pR?StMTAh")) != EOF) {
+		switch (c) {
+	case 'w':
+			win_flag = TRUE;
+		break;
+
+		case 'a':
+			add_flag = TRUE;
+			immediate = FALSE;
+			break;
+
+		case 'A':
+			acct_flag = TRUE;
+			break;
+
+		case 'f':
+			flush_always = TRUE;
+			setbuf(stdout, NULL);
+			break;
+
+		case 'e':
+			eat_flag = TRUE;
+			immediate = FALSE;
+			break;
+
+		case 'i':
+			immed_after = TRUE;
+			break;
+
+		case 'l':									/* set libdir */
+			libdir = str_save(optarg);
+			break;
+
+		case 'p':
+			pretty_data_files = !pretty_data_files;
+			break;
+
+		case 'r':									/* run a turn */
+			immediate = FALSE;
+			run_flag = TRUE;
+			break;
+
+		case 'R':									/* test random number generator */
+			test_random();
+			return 0;
+
+		case 'S':									/* save database when done */
+			save_flag = TRUE;
+			break;
+
+		case 't':
+			ilist_test();
+			return 0;
+
+		case 'T':
+			time_self = TRUE;
+			break;
+
+		case 'M':
+			mail_now = TRUE;
+			break;
+
+		case 'h':
+			html_flag = TRUE;
+			break;
+
+		default:
+			errflag++;
+		}
+	}
+
+	if (errflag) {
+		fprintf(stderr, "usage: oly [options]\n");
+		fprintf(stderr, "	-w				Windows mode\n");
+		fprintf(stderr, "	-a				Add new players mode\n");
+		fprintf(stderr, "	-e				Eat orders from libdir/spool\n");
+		fprintf(stderr, "	-f				Don't buffer files for debugging\n");
+		fprintf(stderr, "	-i				Immediate mode\n");
+		fprintf(stderr, "	-l dir		Specify libdir, default ./lib\n");
+		fprintf(stderr, "	-p				Don't make data files pretty\n");
+		fprintf(stderr, "	-r				Run a turn\n");
+		fprintf(stderr, "	-R				Test the random number generator\n");
+		fprintf(stderr, "	-S				Save the database at completion\n");
+		fprintf(stderr, "	-t				Test ilist code\n");
+		fprintf(stderr, "	-T				Print timing info\n");
+		fprintf(stderr, "	-M				Mail reports\n");
+		fprintf(stderr, "	-A				Charge player accounts\n");
+		return 1;
+	}
+
+	load_db();
+
+	if (eat_flag) {
+		eat_loop();
+		return 0;
+	}
+
+	if (run_flag) {
+		open_logfile();
+		open_times();
+
+		show_day = TRUE;
+		process_orders();
+		post_month();
+		show_day = FALSE;
+
+		determine_output_order();
+		turn_end_loc_reports();
+		list_order_templates();
+		player_ent_info();
+		character_report();
+
+		player_banner();
+		if (acct_flag)
+			charge_account();
+		report_account();
+		summary_report();
+		player_report();
+
+		scan_char_skill_lore();
+		show_lore_sheets();
+		gm_report(gm_player);
+
+		gm_show_all_skills(skill_player);
+
+		add_new_players();
+		gen_include_section();			/* must be last */
+		close_logfile();
+
+		write_player_list();
+		write_email();
+		write_totimes();
+		write_forwards();
+		write_factions();
+	}
+
+	if (add_flag) {
+		new_player_top(mail_now);
+		mail_now = FALSE;
+	}
+
+	if (immediate || immed_after) {
+		immediate = TRUE;
+
+		open_logfile();
+		immediate_commands();
+		close_logfile();
+	}
+
+	check_db();									 /* check database integrity */
+
+	if (save_flag)
+		save_db();
+
+	if (save_flag && run_flag)
+		save_logdir();
+
+	if (mail_now)
+		mail_reports();
+
+	if (mail_now || html_flag)
+		setup_html_all();
+
+	times_masthead();
+	close_times();
+	stage(NULL);
+
+	{
+		extern int malloc_size, realloc_size;
+
+		printf("\tmalloc, realloc = %d, %d\n", malloc_size, realloc_size);
+	}
+
+	return 0;
+}
