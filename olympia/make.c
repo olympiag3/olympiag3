@@ -1,5 +1,6 @@
 
 #include	<stdio.h>
+#include	<stdlib.h>
 #include	"z.h"
 #include	"oly.h"
 
@@ -475,7 +476,7 @@ d_make(struct command *c)
 	if (t == NULL)
 	{
 		out(c->who, "Internal error.");
-		log(LOG_CODE, "d_make: t is NULL, who=%d", c->who);
+		log_write(LOG_CODE, "d_make: t is NULL, who=%d", c->who);
 		return FALSE;
 	}
 
@@ -497,7 +498,7 @@ i_make(struct command *c)
 	if (t == NULL)
 	{
 		out(c->who, "Internal error.");
-		log(LOG_CODE, "i_make: t is NULL, who=%d", c->who);
+		log_write(LOG_CODE, "i_make: t is NULL, who=%d", c->who);
 		return FALSE;
 	}
 
