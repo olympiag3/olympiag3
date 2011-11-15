@@ -1,5 +1,6 @@
 
 #include	<stdio.h>
+#include	<string.h>
 #include	"z.h"
 #include	"oly.h"
 
@@ -46,11 +47,11 @@ immediate_commands()
 		c->wait = cmd_tbl[c->cmd].time;
 		c->poll = cmd_tbl[c->cmd].poll;
 		c->days_executing = 0;
-		c->state = LOAD;
+		c->state = STATE_LOAD;
 
 		do_command(c);
 
-		while (c->state == RUN)
+		while (c->state == STATE_RUN)
 		{
 			evening = 1;
 			finish_command(c);
