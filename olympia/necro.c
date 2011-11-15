@@ -1,5 +1,6 @@
 
 #include	<stdio.h>
+#include	<stdlib.h>
 #include	"z.h"
 #include	"oly.h"
 
@@ -108,7 +109,7 @@ d_undead_lord(struct command *c)
 
 	if (undead == 0)
 	{
-		log(LOG_CODE, "d_undead_lord: why not?");
+		log_write(LOG_CODE, "d_undead_lord: why not?");
 		wout(c->who, "Unable to summon a demon lord.");
 		return FALSE;
 	}
@@ -230,6 +231,10 @@ get_some_skills(int who, int body, int chance)
 	{
 		parent = skill_school(e->skill);
 		if (parent != e->skill)
+			continue;
+
+		// Prevent Advanced Sorcery to be learned this way
+		if (e->skill == 920)
 			continue;
 
 		if (has_skill(who, e->skill))
@@ -482,7 +487,7 @@ d_aura_blast(struct command *c)
 	wout(VECT, "%s blasts %s with a burst of aura!",
 			box_name(c->who), box_name(target));
 
-	log(LOG_SPECIAL, "%s blasts %s with a burst of aura!",
+	log_write(LOG_SPECIAL, "%s blasts %s with a burst of aura!",
 			box_name(c->who), box_name(target));
 
 	if (has_skill(target, sk_absorb_blast))
