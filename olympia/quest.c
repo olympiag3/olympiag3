@@ -184,7 +184,7 @@ make_teach_book(int who, int questor)
 	}
 	else
 	{
-		log(LOG_CODE, "?? %s knows all skills?", box_code(questor));
+		log_write(LOG_CODE, "?? %s knows all skills?", box_code(questor));
 		fprintf(stderr, "?? %s knows all skills?", box_code(questor));
 		return;
 	}
@@ -411,6 +411,8 @@ choose_quest_monster(int where)
 		}
 
 	assert(FALSE);
+
+	return 0;
 }
 
 
@@ -597,6 +599,12 @@ v_quest(struct command *c)
 	if (quest_monster[i].terr == 0)
 	{
 		wout(c->who, "There are no quests to be found here.");
+		return FALSE;
+	}
+
+	if (subloc_quest(where)) {
+		wout(c->who, "This area has been quested in recently, "
+			"nothing of interest is found.");
 		return FALSE;
 	}
 
