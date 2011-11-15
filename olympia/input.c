@@ -1,5 +1,7 @@
 
 #include	<stdio.h>
+#include	<stdlib.h>
+#include	<string.h>
 #include	"z.h"
 #include	"oly.h"
 
@@ -481,11 +483,11 @@ set_state(struct command *c, int state, int new_pri)
 
 	switch (c->state)
 	{
-	case RUN:
+	case STATE_RUN:
 		ilist_rem_value_uniq(&run_q, c->who);
 		break;
 
-	case LOAD:
+	case STATE_LOAD:
 		ilist_rem_value_uniq(&load_q[c->pri], c->who);
 		break;
 	}
@@ -494,11 +496,11 @@ set_state(struct command *c, int state, int new_pri)
 
 	switch (c->state)
 	{
-	case RUN:
+	case STATE_RUN:
 		ilist_append(&run_q, c->who);
 		break;
 
-	case LOAD:
+	case STATE_LOAD:
 		ilist_append(&load_q[new_pri], c->who);
 		break;
 	}
@@ -512,11 +514,11 @@ set_state(struct command *c, int state, int new_pri)
  *
  *  Sets c->state:
  *
- *	DONE	no more commands remain in the queue
- *	LOAD	command loaded and ready to run
- *	ERROR	player command has an error.
+ *	STATE_DONE	no more commands remain in the queue
+ *	STATE_LOAD	command loaded and ready to run
+ *	STATE_ERROR	player command has an error.
  *
- *	Note that both LOAD and ERROR states are passed to do_command.
+ *	Note that both STATE_LOAD and STATE_ERROR states are passed to do_command.
  *	do_commmand will report error states to the player.
  */
 
@@ -529,7 +531,7 @@ load_command(struct command *c)
 
 	if (!get_command(c->who, buf))
 	{
-		set_state(c, DONE, 0);
+		set_state(c, STATE_DONE, 0);
 		return FALSE;
 	}
 
@@ -537,7 +539,7 @@ load_command(struct command *c)
 	{
 		int pri = cmd_tbl[c->cmd].pri;
 
-		set_state(c, LOAD, pri);
+		set_state(c, STATE_LOAD, pri);
 
 		c->pri = pri;
 		c->wait = cmd_tbl[c->cmd].time;
@@ -546,7 +548,7 @@ load_command(struct command *c)
 	}
 	else
 	{
-		set_state(c, ERROR, 0);
+		set_state(c, STATE_ERROR, 0);
 	}
 
 	return TRUE;
@@ -559,7 +561,7 @@ command_done(struct command *c)
 
 	if (immediate)
 	{
-		set_state(c, DONE, 0);
+		set_state(c, STATE_DONE, 0);
 		return;
 	}
 
@@ -614,7 +616,7 @@ finish_command(struct command *c)
 			c->status = (*cmd_tbl[c->cmd].finish)(c);
 	}
 
-	if (c->state == RUN && (c->status == FALSE || c->wait == 0))
+	if (c->state == STATE_RUN && (c->status == FALSE || c->wait == 0))
 		command_done(c);
 
 	return c->status;
@@ -635,7 +637,7 @@ do_command(struct command *c)
 					cmd_tbl[c->cmd].name);
 	}
 
-	if (c->state == ERROR)
+	if (c->state == STATE_ERROR)
 	{
 		out(c->who, "Unrecognized command.");
 		c->status = FALSE;
@@ -656,7 +658,7 @@ do_command(struct command *c)
  */
 		p_player(player(c->who))->cmd_count++;
 
-		set_state(c, RUN, 0);
+		set_state(c, STATE_RUN, 0);
 
 		assert(c->days_executing == 0);
 
@@ -669,7 +671,7 @@ do_command(struct command *c)
 	{
 		command_done(c);
 	}
-	else if (c->wait == 0 && c->state == RUN)
+	else if (c->wait == 0 && c->state == STATE_RUN)
 	{
 		c->status = finish_command(c);
 	}
@@ -695,22 +697,22 @@ init_load_sup(int who)
 	{
 		c = p_command(who);
 		c->who = who;
-		c->state = DONE;
+		c->state = STATE_DONE;
 	}
 
 	assert(who == c->who);
 
 	switch (c->state)
 	{
-	case LOAD:
+	case STATE_LOAD:
 		ilist_append(&load_q[c->pri], c->who);
 		break;
 
-	case RUN:
+	case STATE_RUN:
 		ilist_append(&run_q, c->who);
 		break;
 
-	case DONE:
+	case STATE_DONE:
 		load_command(c);
 		break;
 
@@ -753,7 +755,7 @@ min_pri_ready()
 			c = rp_command(load_q[pri][i]);
 
 			assert(c);
-			assert(c->state == LOAD);
+			assert(c->state == STATE_LOAD);
 			assert(c->pri == pri);
 
 			if (!is_prisoner(c->who) &&
@@ -779,7 +781,7 @@ init_wait_list()
 	{
 		c = rp_command(i);
 
-		if (c && c->state == RUN && c->cmd == cmd_wait)
+		if (c && c->state == STATE_RUN && c->cmd == cmd_wait)
 			ilist_append(&wait_list, i);
 	}
 	next_char;
@@ -795,7 +797,7 @@ check_all_waits()
 	for (i = 0; i < ilist_len(wait_list); i++)
 	{
 		c = rp_command(wait_list[i]);
-		if (c && c->state == RUN && c->cmd == cmd_wait)
+		if (c && c->state == STATE_RUN && c->cmd == cmd_wait)
 		{
 			assert(c->wait == -1);
 			finish_command(c);
@@ -846,7 +848,7 @@ start_phase()
 			c = rp_command(i);
 			assert(c != NULL);
 
-			if (c->state == LOAD &&
+			if (c->state == STATE_LOAD &&
 			    c->pri == pri &&
 			    !is_prisoner(i) &&
 			    !char_moving(i) &&
@@ -883,13 +885,13 @@ evening_phase()
 		c = rp_command(i);
 		assert(c);
 
-		if (c->state != RUN)
+		if (c->state != STATE_RUN)
 			continue;
 
 		if (c->second_wait)
 			continue;
 
-		assert(c->state == RUN);
+		assert(c->state == STATE_RUN);
 
 		c->days_executing++;
 #if 0
@@ -952,7 +954,7 @@ process_player_orders()
 /*
  *  pl can switch to T_deleted as a result of a quit order
  */
-		while (kind(pl) == T_player && c->state == LOAD)
+		while (kind(pl) == T_player && c->state == STATE_LOAD)
 		{
 			do_command(c);
 
@@ -986,13 +988,13 @@ interrupt_order(int who)
 	if (c == NULL)
 		return;
 
-	if (c->state == RUN)
+	if (c->state == STATE_RUN)
 	{
 		if (cmd_tbl[c->cmd].interrupt != NULL)
 			c->status = (*cmd_tbl[c->cmd].interrupt)(c);
 
 		command_done(c);
-		assert(c->state != RUN);
+		assert(c->state != STATE_RUN);
 	}
 }
 
