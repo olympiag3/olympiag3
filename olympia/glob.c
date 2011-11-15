@@ -4,8 +4,8 @@
 #include	"oly.h"
 
 
-char *from_host = "skrenta@pbm.com (Rich skrenta)";
-char *reply_host = "skrenta@pbm.com (Rich skrenta)";
+char *from_host = "g3@olympia.v-labs.be";
+char *reply_host = "g3@olympia.v-labs.be";
 
 struct box **bx;		/* all possible entities */
 int box_head[T_MAX];		/* heads of x_next_kind chain */
@@ -25,40 +25,96 @@ int post_has_been_run = FALSE;
 int garrison_magic = 999;
 
 
-int v_look(), v_stack(), v_unstack(), v_promote(), v_die();
-int v_explore(), d_explore(), v_name(), v_banner(), v_notab();
-int v_move(), d_move(), v_sail(), d_sail(), i_sail();
-int v_give(), v_pay(), v_repair(), d_repair(), i_repair(), v_claim();
-int v_swear(), v_form(), d_form(), v_use(), d_use(), i_use();
-int v_study(), d_study(), v_research(), d_research(), v_format();
-int v_wait(), d_wait(), i_wait(), v_flag(), v_discard(), v_guard();
-int v_recruit(), v_make(), d_make(), i_make(), v_pillage(), d_pillage();
-int v_attack(), v_behind(), v_bribe(), d_bribe();
-int v_buy(), v_sell(), v_execute(), v_surrender();
-int v_honor(), v_oath(), v_terrorize(), d_terrorize(), v_quit();
-int v_build(), d_build(), v_quarry(), v_fish(), v_emote();
-int v_post(), v_message(), v_rumor(), v_press(), v_public();
-int v_collect(), d_collect(), i_collect(), v_raze(), d_raze();
-int v_wood(), v_yew(), v_catch(), v_mallorn(), v_stop();
-int v_raise(), d_raise(), v_rally(), d_rally(), v_reclaim();
-int v_incite(), v_forget(), v_garrison(), v_pledge();
-int v_fly(), d_fly(), v_sneak(), d_sneak();
-int v_admit(), v_hostile(), v_defend(), v_neutral(), v_att_clear();
-int v_hide(), d_hide(), v_contact(), v_seek(), d_seek();
-int v_opium(), v_get(), v_breed(), d_breed(), v_decree(), v_ungarrison();
-int v_torture(), d_torture(), v_trance(), d_trance();
-int v_fee(), v_board(), v_ferry(), v_unload(), v_split();
-int v_bind_storm(), d_bind_storm(), v_credit(), v_xyzzy(), v_plugh();
-int v_fullname(), v_times(), v_improve(), d_improve();
-int v_quest(), d_quest(), v_accept();
+int v_look(struct command *c), v_stack(struct command *c),
+v_unstack(struct command *c), v_promote(struct command *c),
+v_die(struct command *c);
+int v_explore(struct command *c), d_explore(struct command *c),
+v_name(struct command *c), v_banner(struct command *c),
+v_notab(struct command *c);
+int v_move(struct command *c), d_move(struct command *c),
+v_sail(struct command *c), d_sail(struct command *c),
+i_sail(struct command *c);
+int v_give(struct command *c), v_pay(struct command *c),
+v_repair(struct command *c), d_repair(struct command *c),
+i_repair(struct command *c), v_claim(struct command *c);
+int v_swear(struct command *c), v_form(struct command *c),
+d_form(struct command *c), v_use(struct command *c), d_use(struct command *c),
+i_use(struct command *c);
+int v_study(struct command *c), d_study(struct command *c),
+v_research(struct command *c), d_research(struct command *c),
+v_format(struct command *c);
+int v_wait(struct command *c), d_wait(struct command *c),
+i_wait(struct command *c), v_flag(struct command *c),
+v_discard(struct command *c), v_guard(struct command *c);
+int v_recruit(struct command *c), v_make(struct command *c),
+d_make(struct command *c), i_make(struct command *c),
+v_pillage(struct command *c), d_pillage(struct command *c);
+int v_attack(struct command *c), v_behind(struct command *c),
+v_bribe(struct command *c), d_bribe(struct command *c);
+int v_buy(struct command *c), v_sell(struct command *c),
+v_execute(struct command *c), v_surrender(struct command *c);
+int v_honor(struct command *c), v_oath(struct command *c),
+v_terrorize(struct command *c), d_terrorize(struct command *c),
+v_quit(struct command *c);
+int v_build(struct command *c), d_build(struct command *c),
+v_quarry(struct command *c), v_fish(struct command *c),
+v_emote(struct command *c);
+int v_post(struct command *c), v_message(struct command *c),
+v_rumor(struct command *c), v_press(struct command *c),
+v_public(struct command *c);
+int v_collect(struct command *c), d_collect(struct command *c),
+i_collect(struct command *c), v_raze(struct command *c),
+d_raze(struct command *c);
+int v_wood(struct command *c), v_yew(struct command *c),
+v_catch(struct command *c), v_mallorn(struct command *c),
+v_stop(struct command *c);
+int v_raise(struct command *c), d_raise(struct command *c),
+v_rally(struct command *c), d_rally(struct command *c),
+v_reclaim(struct command *c);
+int v_incite(struct command *c), v_forget(struct command *c),
+v_garrison(struct command *c), v_pledge(struct command *c);
+int v_fly(struct command *c), d_fly(struct command *c),
+v_sneak(struct command *c), d_sneak(struct command *c);
+int v_admit(struct command *c), v_hostile(struct command *c),
+v_defend(struct command *c), v_neutral(struct command *c),
+v_att_clear(struct command *c);
+int v_hide(struct command *c), d_hide(struct command *c),
+v_contact(struct command *c), v_seek(struct command *c),
+d_seek(struct command *c);
+int v_opium(struct command *c), v_get(struct command *c),
+v_breed(struct command *c), d_breed(struct command *c),
+v_decree(struct command *c), v_ungarrison(struct command *c);
+int v_torture(struct command *c), d_torture(struct command *c),
+v_trance(struct command *c), d_trance(struct command *c);
+int v_fee(struct command *c), v_board(struct command *c),
+v_ferry(struct command *c), v_unload(struct command *c),
+v_split(struct command *c);
+int v_bind_storm(struct command *c), d_bind_storm(struct command *c),
+v_credit(struct command *c), v_xyzzy(struct command *c),
+v_plugh(struct command *c);
+int v_fullname(struct command *c), v_times(struct command *c),
+v_improve(struct command *c), d_improve(struct command *c);
+int v_quest(struct command *c), d_quest(struct command *c),
+v_accept(struct command *c);
 
-int v_enter(), v_exit(), v_north(), v_south(), v_east(), v_west();
+int v_enter(struct command *c), v_exit(struct command *c),
+v_north(struct command *c), v_south(struct command *c),
+v_east(struct command *c), v_west(struct command *c);
 
-int v_be(), v_listcmds(), v_poof(), v_see_all(), v_invent();
-int v_add_item(), v_sub_item(), v_dump(), v_makeloc(), v_seed();
-int v_lore(), v_know(), v_skills(), v_save(), v_postproc();
-int v_los(), v_kill(), v_take_pris(), v_ct(), v_fix(), v_fix2();
-int v_seedmarket(), v_relore(), v_remail();
+int v_be(struct command *c), v_listcmds(struct command *c),
+v_poof(struct command *c), v_see_all(struct command *c),
+v_invent(struct command *c);
+int v_add_item(struct command *c), v_sub_item(struct command *c),
+v_dump(struct command *c), v_makeloc(struct command *c),
+v_seed(struct command *c);
+int v_lore(struct command *c), v_know(struct command *c),
+v_skills(struct command *c), v_save(struct command *c),
+v_postproc(struct command *c);
+int v_los(struct command *c), v_kill(struct command *c),
+v_take_pris(struct command *c), v_ct(struct command *c),
+v_fix(struct command *c), v_fix2(struct command *c);
+int v_seedmarket(struct command *c), v_relore(struct command *c),
+v_remail(struct command *c);
 
 
 /*
