@@ -532,7 +532,7 @@ init_collect_list()
 	{
 		c = rp_command(i);
 
-		if (c && c->state == RUN && c->cmd == cmd_collect)
+		if (c && c->state == STATE_RUN && c->cmd == cmd_collect)
 			ilist_append(&collectors, i);
 	}
 	next_char;
@@ -712,6 +712,8 @@ mage_menial_how()
 	default:
 		assert(FALSE);
 	}
+
+	return 0;
 }
 
 
@@ -805,7 +807,7 @@ d_collect(struct command *c)
 	if (t == NULL)
 	{
 		out(c->who, "Internal error.");
-		log(LOG_CODE, "d_collect: t is NULL, who=%d", c->who);
+		log_write(LOG_CODE, "d_collect: t is NULL, who=%d", c->who);
 		return FALSE;
 	}
 
@@ -824,7 +826,7 @@ i_collect(struct command *c)
 	if (t == NULL)
 	{
 		out(c->who, "Internal error.");
-		log(LOG_CODE, "i_collect: t is NULL, who=%d", c->who);
+		log_write(LOG_CODE, "i_collect: t is NULL, who=%d", c->who);
 		return FALSE;
 	}
 
