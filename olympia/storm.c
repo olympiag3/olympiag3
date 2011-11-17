@@ -1,5 +1,6 @@
 
 #include	<stdio.h>
+#include	<string.h>
 #include	"z.h"
 #include	"oly.h"
 
@@ -204,6 +205,8 @@ new_storm(int new, int sk, int aura, int where)
 	}
 
 	show_to_garrison = FALSE;
+
+	return 0;
 }
 
 
@@ -479,7 +482,7 @@ d_summon_fog(struct command *c)
 	int where = c->d;
 	int new;
 
-	if (!may_cookie_npc(c->who, subloc(c->who), item_fog_cookie))
+	if (!may_cookie_npc(c->who, where, item_fog_cookie))
 		return FALSE;
 
 	if (!charge_aura(c->who, aura))
@@ -1099,6 +1102,8 @@ fog_excuse()
 	default:
 		assert(FALSE);
 	}
+
+	return 0;
 }
 
 
