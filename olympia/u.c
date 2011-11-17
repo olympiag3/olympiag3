@@ -1,5 +1,7 @@
 
 #include	<stdio.h>
+#include	<string.h>
+#include	<time.h>
 #include	"z.h"
 #include	"oly.h"
 
@@ -37,7 +39,7 @@ kill_stack_ocean(int who)
 						box_name(l[i]),
 						box_name(where));
 
-			log(LOG_SPECIAL, "kill_stack_ocean, swam "
+			log_write(LOG_SPECIAL, "kill_stack_ocean, swam "
 				"ashore, who=%s", box_code_less(l[i]));
 			move_stack(l[i], where);
 		}
@@ -146,7 +148,7 @@ new_char(int sk, int ni, int where, int health, int pl,
 
 
 int
-loc_depth(n)
+loc_depth(int n)
 {
 
 	switch (subkind(n))
@@ -213,6 +215,8 @@ loc_depth(n)
 		fprintf(stderr, "subkind is %d\n", subkind(n));
 		assert(FALSE);
 	}
+
+	return 0;
 }
 
 
@@ -491,15 +495,37 @@ dead_char_body(int pl, int who)
 }
 
 
+static int
+sub_item(int who, int item, int qty)
+{
+	int i;
+
+	assert(valid_box(who));
+	assert(valid_box(item));
+	assert(qty >= 0);
+
+	for (i = 0; i < ilist_len(bx[who]->items); i++)
+		if (bx[who]->items[i]->item == item)
+	{
+			if (bx[who]->items[i]->qty < qty)
+				return FALSE;
+
+			bx[who]->items[i]->qty -= qty;
+			return TRUE;
+		}
+
+	return FALSE;
+}
+
+
 void
 restore_dead_body(int owner, int who)
 {
 	struct entity_misc *pm;
 	struct entity_item *pi;
 	struct entity_char *pc;
-	static int sub_item();
 
-	log(LOG_CODE, "dead body revived: who=%s, owner=%s, player=%s",
+	log_write(LOG_CODE, "dead body revived: who=%s, owner=%s, player=%s",
 			box_code_less(who),
 			box_code_less(owner),
 			box_code_less(player(owner)));
@@ -590,7 +616,7 @@ kill_char(int who, int inherit)
 
 	p_char(who)->prisoner = TRUE;		/* suppress output */
 
-	log(LOG_DEATH, "%s %s in %s.", box_name(who),
+	log_write(LOG_DEATH, "%s %s in %s.", box_name(who),
 				char_melt_me(who) ? "melted" : "died",
 				char_rep_location(who));
 
@@ -620,8 +646,8 @@ kill_char(int who, int inherit)
 
 		p_char(who)->prisoner = FALSE;
 
-		log(LOG_SPECIAL, "%s transcends death", box_name(who));
-		log(LOG_SPECIAL, "...%s moved to %s",
+		log_write(LOG_SPECIAL, "%s transcends death", box_name(who));
+		log_write(LOG_SPECIAL, "...%s moved to %s",
 				box_name(who), box_name(hades_point));
 		p_char(who)->prisoner = FALSE;
 		p_char(who)->sick = FALSE;
@@ -828,7 +854,7 @@ sink_ship(int ship)
 	int storm;
 	int where = subloc(ship);
 
-	log(LOG_SPECIAL, "%s has sunk in %s.", box_name(ship),
+	log_write(LOG_SPECIAL, "%s has sunk in %s.", box_name(ship),
 					box_name(subloc(ship)));
 
 	wout(ship, "%s has sunk!", box_name(ship));
@@ -909,7 +935,7 @@ building_collapses(int fort)
 	int who;
 	int where = subloc(fort);
 
-	log(LOG_SPECIAL, "%s collapsed in %s.", box_name(fort),
+	log_write(LOG_SPECIAL, "%s collapsed in %s.", box_name(fort),
 					box_name(where));
 
 	vector_char_here(fort);
@@ -1283,7 +1309,7 @@ determine_unit_weights(int who, struct weights *w)
 
 	assert(kind(who) == T_char);
 
-	bzero(w, sizeof(*w));
+	memset(w, '\0', sizeof (*w));
 
 	unit_base = noble_item(who);
 	if (unit_base == 0)
@@ -1527,39 +1553,6 @@ ordinal(int n)
 	}
 }
 
-
-int
-mylog(int base, int num)
-{
-	int power = 1;
-	int value = base;
-
-	assert(base > 10);
-
-	num = num * 10;
-
-	while (value < num)
-	{
-		value = value * base / 10;
-		power++;
-	}
-
-	return power;
-}
-
-
-int
-my_sqrt(int n)
-{
-	int power = 1;
-
-	while (power * power <= n)
-		power++;
-
-	return power - 1;
-}
-
-
 char *
 cap(char *s)				/* return a capitalized copy of s */
 {
@@ -1716,29 +1709,6 @@ add_item(int who, int item, int qty)
 	ilist_append((ilist *) &bx[who]->items, (int) new);
 
 	investigate_possible_trade(who, item, 0);
-}
-
-
-static int
-sub_item(int who, int item, int qty)
-{
-	int i;
-
-	assert(valid_box(who));
-	assert(valid_box(item));
-	assert(qty >= 0);
-
-	for (i = 0; i < ilist_len(bx[who]->items); i++)
-		if (bx[who]->items[i]->item == item)
-		{
-			if (bx[who]->items[i]->qty < qty)
-				return FALSE;
-
-			bx[who]->items[i]->qty -= qty;
-			return TRUE;
-		}
-
-	return FALSE;
 }
 
 
@@ -1915,10 +1885,10 @@ find_nearest_land(int where)
 		}
 
 		if (try_two == 99)
-			log(LOG_CODE, "find_nearest_land: Plan B");
+			log_write(LOG_CODE, "find_nearest_land: Plan B");
 	}
 
-	log(LOG_CODE, "find_nearest_land: Plan C");
+	log_write(LOG_CODE, "find_nearest_land: Plan C");
 
 	{
 		ilist l = NULL;
@@ -1983,7 +1953,7 @@ drop_item(int who, int item, int qty)
 	if (who_gets == 0)
 		who_gets = province(who);	/* oh well */
 
-	log(LOG_CODE, "drop_item: %s from %s to %s", box_name(item),
+	log_write(LOG_CODE, "drop_item: %s from %s to %s", box_name(item),
 					box_name(subloc(who)),
 					box_name(who_gets));
 
@@ -2365,9 +2335,9 @@ void
 stage(char *s)
 {
 	extern int time_self;
-	static long old = 0;
-	static long first = 0;
-	long t;
+	static time_t old = 0;
+	static time_t first = 0;
+	time_t t;
 
 	if (!time_self)
 	{
@@ -2380,7 +2350,7 @@ stage(char *s)
 
 	if (old)
 	{
-		fprintf(stderr, "\t%d sec\n", t-old);
+		fprintf(stderr, "\t%d sec\n", (int)(t-old));
 	}
 	else
 		first = t;
@@ -2391,7 +2361,7 @@ stage(char *s)
 		fprintf(stderr, "%s", s);
 	}
 	else
-		fprintf(stderr, "%d seconds\n", t - first);
+		fprintf(stderr, "%d seconds\n", (int)(t - first));
 }
 
 
