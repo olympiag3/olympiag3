@@ -1,5 +1,6 @@
 
 #include	<stdio.h>
+#include	<string.h>
 #include	"z.h"
 #include	"oly.h"
 
@@ -267,8 +268,8 @@ move_exit_land(struct command *c, struct exit_view *v, int show)
 	if (delay > 1 && w.ride_cap >= w.ride_weight && swamp == FALSE)
 	{
 		delay -= delay / 2;
-		if (sysclock.turn <= 64)	/* XXX */
-			return delay;
+//		if (sysclock.turn <= 64)	/* XXX */
+//			return delay;
 	}
 	else
 	{
@@ -321,10 +322,10 @@ move_exit_land(struct command *c, struct exit_view *v, int show)
 		int men;
 		int extra;
 
-		if (sysclock.turn < 40)
-			nobles = count_stack_units(c->who);
-		else
-			nobles = count_stack_move_nobles(c->who);
+//		if (sysclock.turn < 40)
+//			nobles = count_stack_units(c->who);
+//		else
+		nobles = count_stack_move_nobles(c->who);
 
 		men = count_stack_figures(c->who) - nobles;
 
@@ -390,10 +391,10 @@ move_exit_fly(struct command *c, struct exit_view *v, int show)
 		int men;
 		int extra;
 
-		if (sysclock.turn < 40)
-			nobles = count_stack_units(c->who);
-		else
-			nobles = count_stack_move_nobles(c->who);
+//		if (sysclock.turn < 40)
+//			nobles = count_stack_units(c->who);
+//		else
+		nobles = count_stack_move_nobles(c->who);
 
 		men = count_stack_figures(c->who) - nobles;
 
@@ -441,7 +442,7 @@ static void
 restore_v_array(struct command *c, struct exit_view *v)
 {
 
-	bzero(v, sizeof(*v));
+	memset(v, '\0', sizeof(*v));
 
 	v->direction	= c->b;
 	v->destination	= c->c;
@@ -639,7 +640,7 @@ v_move(struct command *c)
 
 		cost = v->hades_cost * n;
 
-		log(LOG_SPECIAL, "%s (%s) tries to enter Hades",
+		log_write(LOG_SPECIAL, "%s (%s) tries to enter Hades",
 					box_name(player(c->who)),
 					box_name(c->who));
 
@@ -707,7 +708,7 @@ move_stack(int who, int where)
 
 	if (!in_faery(subloc(who)) && in_faery(where))
 	{
-		log(LOG_SPECIAL, "%s enters Faery at %s.",
+		log_write(LOG_SPECIAL, "%s enters Faery at %s.",
 				box_name(who), box_name(where));
 	}
 
@@ -890,6 +891,22 @@ check_ocean_chars()
 static int
 fly_check(struct command *c, struct exit_view *v)
 {
+	int owner;
+
+	if (v->in_transit) {
+		wout(c->who, "%s is underway.	Boarding is not "
+				 "possible.", box_name(v->destination));
+		return FALSE;
+	}
+
+	if (loc_depth(v->destination) == LOC_build &&
+			subkind(v->destination) != sub_sewer &&
+			(owner = building_owner(v->destination)) &&
+			!will_admit(owner, c->who, v->destination) && v->direction != DIR_OUT) {
+		wout(c->who, "%s refused to let us enter.", box_name(owner));
+		wout(owner, "Refused to let %s enter.", box_name(c->who));
+		return FALSE;
+	}
 
 	return TRUE;
 }
@@ -1160,7 +1177,7 @@ check_captain_loses_sailors(int qty, int target, int inform)
 
 	c = rp_command(target);
 
-	if (c == NULL || c->state != RUN || c->cmd != cmd_sail)
+	if (c == NULL || c->state != STATE_RUN || c->cmd != cmd_sail)
 		return;
 
 	now = has_item(target, item_sailor) + has_item(target, item_pirate);
@@ -1205,7 +1222,7 @@ check_captain_loses_sailors(int qty, int target, int inform)
 	assert(c->wait > 0);
 	c->wait += penalty;
 
-	log(LOG_SPECIAL, "Loss of sailors incurs penalty for %s.",
+	log_write(LOG_SPECIAL, "Loss of sailors incurs penalty for %s.",
 				box_code(player(target)));
 }
 
