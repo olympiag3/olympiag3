@@ -1,7 +1,8 @@
 
 #include	<stdio.h>
+#include	<stdlib.h>
+#include	<string.h>
 #include	<sys/types.h>
-#include	<dirent.h>
 #include	"z.h"
 #include	"oly.h"
 
@@ -1636,11 +1637,11 @@ player_banner()
 
 		html(pl, "<center>");
 
-		html(pl, "<img src=\"http://www.pbm.com//gif/head.gif\""
+		html(pl, "<img src=\"head.gif\""
 			"align=middle width=100 height=100 alt=\"\">");
 
 		html(pl, "<h1>");
-		wout(pl, "Olympia G2 turn %d", sysclock.turn);
+		wout(pl, "Olympia G3 turn %d", sysclock.turn);
 		wout(pl, "Report for %s.", box_name(pl));
 		html(pl, "</h1>");
 
@@ -1725,10 +1726,8 @@ report_account_sup(int pl)
 	style(0);
 
 	html(pl, "<hr><center><font size=+1>");
-	html(pl, "<a href=\"http://www.pbm.com/oly/g2rules/\">Rules</a>   "
-	"<a href=\"http://www.pbm.com/oly/times/\"><i>The Olympia Times</i></a>   "
-	"<a href=\"http://www.pbm.com/oly/g2turn/%s/prev.html\">Previous Turn</a>",
-			box_code_less(pl));
+	html(pl, "<a href=\"http://oly.v-labs.be/g3/node/11\">Rules</a>   "
+	"<a href=\"http://oly.v-labs.be/g3/node/409\"><i>The Olympia Times</i></a>   ");
 	html(pl, "</font></center>");
 
 	out(pl, "");
