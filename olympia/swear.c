@@ -1,5 +1,6 @@
 
 #include	<stdio.h>
+#include	<stdlib.h>
 #include	"z.h"
 #include	"oly.h"
 
@@ -175,7 +176,7 @@ set_lord(int who, int new_lord, int k, int lev)
 #if 0
 			assert(FALSE);
 #else
-		log(LOG_CODE, "assert fail: new_pl=%s, who=%s, nps=%d, old_pl=%s", box_code(new_pl), box_code(who), nps, box_code(old_pl));
+		log_write(LOG_CODE, "assert fail: new_pl=%s, who=%s, nps=%d, old_pl=%s", box_code(new_pl), box_code(who), nps, box_code(old_pl));
 #endif
 		wout(new_pl, "Paid %d NP%s for %s.", nps, add_s(nps),
 					box_name(who));
@@ -664,7 +665,7 @@ terrorize_vassal(struct command *c)
 	int severity = c->b;
 
 	if (severity < 1)
-		severity = 1;
+		severity = 3;
 
 	if (severity > char_health(target))
 		severity = char_health(target);
@@ -861,7 +862,7 @@ d_raise(struct command *c)
 
 	if (mob <= 0)
 	{
-		log(LOG_CODE, "d_raise mob <= 0");
+		log_write(LOG_CODE, "d_raise mob <= 0");
 		wout(c->who, "Failed to raise peasant mob.");
 		return FALSE;
 	}
@@ -943,6 +944,8 @@ d_rally(struct command *c)
 
 	flush_unit_orders(player(mob), mob);
 	interrupt_order(mob);
+
+	return FALSE;
 }
 
 
