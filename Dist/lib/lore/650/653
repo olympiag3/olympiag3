@@ -1,0 +1,20 @@
+#Skill: Use beasts in battle [9507]
+#
+Usage:  automatic when needed
+
+This skill grants the beastmaster the ability to control animals
+in battle.  Any wild animals in the possession of the beastmaster
+will be treated as additional fighters.
+
+For example, a character with 10 soldiers [12] and one lion [280]
+who did not know @@@@ would only use the soldiers in battle.
+However, a beastmaster with knowledge of @@@@ would also employ
+the lion in combat.
+
+Only the beasts directly possessed by the beastmaster will aid
+combat.  Animals owned by units which do not possess knowledge
+of @@@@ will not be used in battle.
+
+The following animals may be used in combat:
+
+$animal_fighters

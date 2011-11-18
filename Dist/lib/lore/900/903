@@ -1,0 +1,20 @@
+#Spell:  Summon ghost warriors [9179]
+#
+Usage:  MAKE 18 [days]
+
+Required aura:  one point per day
+Time to cast:   as given
+
+Each day of summoning requires one point of aura, and yields two
+ghost warriors.
+
+Ghost warriors [18] are spirits of dead soldiers summoned to fight
+again on the battlefield.  They have no substance, and thus are
+ineffectual attackers.  Opponents will still select them in combat,
+however, so they are useful for absorbing enemy hits.
+
+Ghost warriors have a attack and defense values of zero.  One hit
+by any attacker will cause them to vanish.
+
+One ghost warrior returns to the Land of the Dead at the end of
+each month.

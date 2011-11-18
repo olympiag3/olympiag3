@@ -1,0 +1,12 @@
+#Skill:  Train wild horse to riding horse [9529]
+#
+Usage:     MAKE 52
+
+Requires:  one wild horse [51]
+Produces:  one riding horse [52]
+
+Time:      three days
+
+Wild horses are first broken to saddle, then trained to respect
+and obey whatever riders they may serve.  Once broken, riding
+horses become too timid and docile to be of any use in battle.

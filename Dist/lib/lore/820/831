@@ -1,0 +1,16 @@
+#Spell:  Lightning bolt [9194]
+#
+Usage:  USE @@@@ <storm> <target> [aura]
+
+Required aura:  none
+Time to cast:   seven days
+
+Use a rain storm to deliver a lightning bolt against a target in the
+province.  Aura is the amount of storm strength to deliver in the
+blast.  If aura is not specified, the storm will expend all of its
+remaining engery in the bolt.  The mage does not need to be in the
+same location as the storm.
+
+The lightning bolt may be delivered against any building or character
+directly in the storm's province.  It will do an amount of damage
+equal to the strength of the bolt.

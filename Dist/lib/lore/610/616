@@ -1,0 +1,16 @@
+#Skill:  Swordplay [9580]
+#
+Usage:  USE @@@@
+Time:   seven days
+
+Use of @@@@ will cause the noble to spend time and effort practicing
+swordplay, for use in personal combat.  Each seven-day use of @@@@
+raises the noble's attack rating by 3-5 points if his starting
+level is less than 100, and 1-3 points thereafter.  5% of the time
+the noble will have an exceptionally good study period and will
+gain 10 points.
+
+Knowledge of Swordplay also allows the noble to train swordsmen,
+knights, and elite guards, via the TRAIN order.
+
+

@@ -1,0 +1,16 @@
+#Skill: Breed hound [661]
+#
+Usage:  USE @@@@
+Time:   28 days
+
+Breed and train for service one hound [295].
+
+There is a 50% chance that a given hound will bark
+if any stealth characters enter the same location as
+the character containing the hound.  Hounds also have
+a 50% chance of barking once per month (on a random day)
+if any stealth characters are present in the current
+location.
+
+Hounds halve the chance that prisoners will escape from the
+stack, and will bark each time an escape attempt is foiled.

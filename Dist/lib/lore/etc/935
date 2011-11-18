@@ -1,0 +1,11 @@
+# lore_barbarian_npc_token [9005]
+#
+You discover a dull wrought-iron crown, crudely fashioned.  When
+you place it upon your head, you sense the presence of several
+bands of barbarians nearby.  You find these units will respond to
+your mental control, and you can issue the following commands to
+your barbarian units:
+
+   ADMIT, ATTACK, BANNER, BEHIND, CONTACT, DEFAULT, DEFEND, DROP,
+   EXECUTE, FLAG, GIVE, HOSTILE, MOVE, NAME, NEUTRAL, PILLAGE,
+   PROMOTE, RAZE, SEEK, STACK, STOP, TAKE, TERRORIZE, UNSTACK, WAIT

@@ -1,0 +1,23 @@
+#Skill:  Mine iron [9563]
+#
+Usage:  USE @@@@
+
+Requires:  ten workers
+Time:      7 days
+
+Iron is widely used in the making of weapons and armor.  It
+is a required component of many of the weaponsmithing skill
+uses, and is also used for applying a metal tip to galley
+rams and battering rams.  An iron roof provides a protective
+cover for siege towers.
+
+The character must be in a mine shaft to USE @@@@.  The mine's
+monthly yield of iron will be obtained.  Once mined, no further
+iron can be mined until the next month.
+
+Use of this skill will cause the mine shaft to become one-third
+of a level deeper.
+
+The quantity of iron obtained will vary with the depth of the
+shaft.  The largest deposits of iron are usually found in
+shallow mines.

@@ -1,0 +1,121 @@
+5499:0:1:> found "City of Hope"
+5499:0:1:A province may only have one city.
+5499:0:1:> unit 5499
+5499:0:1:Candide~[5499] may not issue that order.
+5499:0:1:> use 99
+5499:0:1:99 is not a valid skill to use.
+5499:0:1:> wait
+4:0::Forest~[cu26], forest, in Lesser Atnos
+4:0::------------------------------------------------------------------------
+4:0::Routes leaving Forest~[cu26]: 
+4:3::North, to Forest~[ct26], 8~days
+4:3::East, to Ocean~[cu27], Atnos Sea, impassable
+4:3::South, to Ocean~[cv26], Atnos Sea, impassable
+4:3::West, to Forest~[cu25], 8~days
+4:0::
+4:0::Inner locations:
+4:3::City~[ew66], port city, safe haven, 1 day
+4:3::Temple~[ew67], temple, 1 day
+4:0::
+4:0::Seen here:
+4:3::Faust~[3591], lord~812
+4:3::Candide~[5499], lord~3591
+4:0::
+5:0::
+5:0::begin 812  # Fate
+5:0::
+5:0::unit 3591  # Faust
+5:0::
+5:0::unit 5499  # Candide
+5:3::# > wait (still~executing)
+5:0::
+5:0::end
+3591:3::
+3591:3/16::Location:       Forest~[cu26], in Lesser Atnos
+3591:3/16::Sworn to:       Fate~[812]
+3591:3::Loyalty:        Oath-2
+3591:3::Vassals:        Candide~[5499]
+3591:3::Health:         100%
+3591:3::Behind:         0 (front line in combat)
+3591:3::Will pay fee:   none
+3591:3::
+3591:3::Skills known:
+3591:6::none
+3591:3::
+3591:3::Inventory:
+3591:3::           qty  name                           weight
+3591:3::           ---  ----                           ------
+3591:3::         1,000  gold~[1]                            0  
+3591:3::                                               ======
+3591:3::                                                    0
+3591:3::
+3591:3/20::Carrying capacity:  0/100 walking (0%), 100/0 mounted
+3591:3::
+5499:3::
+5499:3/16::Location:       Forest~[cu26], in Lesser Atnos
+5499:3/16::Sworn to:       Faust~[3591]
+5499:3::Loyalty:        Contract-400
+5499:3::Health:         100%
+5499:3::Behind:         0 (front line in combat)
+5499:3::Will pay fee:   none
+5499:3::
+5499:3::Skills known:
+5499:6::none
+5499:3::
+5499:3::Inventory:
+5499:3::           qty  name                           weight
+5499:3::           ---  ----                           ------
+5499:3::         1,000  gold~[1]                            0  
+5499:3::                                               ======
+5499:3::                                                    0
+5499:3::
+5499:3/20::Carrying capacity:  0/100 walking (0%), 100/0 mounted
+5499:3::
+0:0::From: olympia@rt.com (Olympia PBM)
+0:0::To: skrenta@rt.com (Rich Skrenta)
+0:0::Subject: Olympia turn 7 report
+0:0::
+0:0::Olympia turn 7 report for Fate~[812].
+0:0::Season "Waning days", month 7, in the year 1.
+0:0::
+0:3::Noble points:  6     (1 gained, 0 spent)
+0:3::
+0:3::The next four nobles formed will cost 1 NP each.
+0:3::The five after that will cost 2 NP each.
+0:0::
+0:0::unit  loc undr lord loyal heal B CA gold peas work sail figh name
+0:0::---- ---- ---- ---- ----- ---- - -- ---- ---- ---- ---- ---- ----
+0:0::3591 cu26       812 o2    100  0    1000                     Faust
+0:0::5499 cu26      3591 c400  100  0    1000                     Candide
+0:0::                                    ==== ==== ==== ==== ====
+0:0::                                    2000                    
+0:0::
+0:0::Faction Hierarchy:
+0:0::
+0:3::Faust~[3591]
+0:6::Candide~[5499]
+0:0::
+0:0::Location                        Stack
+0:0::--------                        -----
+0:0::Lesser Atnos
+0:0::  Forest~[cu26]                 Faust~[3591]
+0:0::                                Candide~[5499]
+0:0::
+0:0::stack  total wt  walk wt  walk cap      ride wt  ride cap    
+0:0::-----  --------  -------  --------      -------  --------    
+0:0:: 3591       100        0       100 0%       100         0    
+0:0:: 5499       100        0       100 0%       100         0    
+0:0::
+1:0::#include 0
+1:0::
+1:0::#include 4
+1:0::Faust~[3591]
+1:0::------------------------------------------------------------------------
+1:0::#include 3591
+1:0::Candide~[5499]
+1:0::------------------------------------------------------------------------
+1:0::#include 5499
+1:0::Order template
+1:0::------------------------------------------------------------------------
+1:0::#include 5
+1:0::

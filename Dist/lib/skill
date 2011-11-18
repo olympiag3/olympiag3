@@ -1,0 +1,974 @@
+600 skill 0
+na Shipcraft
+SK
+ tl 21
+ of 601 602 603 
+
+601 skill 0
+na Sailing
+SK
+ tl 14
+ rs 600
+
+602 skill 0
+na Shipbuilding
+SK
+ tl 14
+ rs 600
+
+603 skill 0
+na Fishing
+SK
+ tl 14
+ rs 600
+
+610 skill 0
+na Combat
+SK
+ tl 21
+ of 611 612 613 614 615 616 617 
+
+611 skill 0
+na Survive fatal wound
+SK
+ tl 28
+ rs 610
+ ne 1
+
+612 skill 0
+na Fight to the death
+SK
+ tl 28
+ rs 610
+ ne 1
+
+613 skill 0
+na Construct catapult
+SK
+ tl 14
+ rs 610
+ rq	77 3 1 \
+	11 3 0
+ pr 61
+
+614 skill 0
+na Defense
+SK
+ tl 14
+ rs 610
+
+615 skill 0
+na Archery
+SK
+ tl 21
+ rs 610
+
+616 skill 0
+na Swordplay
+SK
+ tl 14
+ rs 610
+
+617 skill 0
+na Weaponsmithing
+SK
+ tl 14
+ rs 610
+
+630 skill 0
+na Stealth
+SK
+ tl 28
+ of 631 632 633 634 635 
+ re 636 637 639 641 
+
+631 skill 0
+na Petty thievery
+SK
+ tl 14
+ rs 630
+
+632 skill 0
+na Determine inventory of character
+SK
+ tl 14
+ rs 630
+
+633 skill 0
+na Determine skills of character
+SK
+ tl 14
+ rs 630
+
+634 skill 0
+na Determine character's lord
+SK
+ tl 14
+ rs 630
+
+635 skill 0
+na Conceal faction
+SK
+ tl 28
+ rs 630
+
+636 skill 0
+na Learn of richest nearby noble
+SK
+ tl 14
+ rs 630
+
+637 skill 0
+na Torture prisoner
+SK
+ tl 21
+ rs 630
+
+639 skill 0
+na Sneak into structure
+SK
+ tl 21
+ rs 630
+
+641 skill 0
+na Conceal self
+SK
+ tl 28
+ rs 630
+
+650 skill 0
+na Beastmastery
+SK
+ tl 28
+ of 651 652 653 654 655 656 
+ re 657 658 659 661
+ np 1
+
+651 skill 0
+na Bird spy
+SK
+ tl 21
+ rs 650
+
+652 skill 0
+na Capture beasts in battle
+SK
+ tl 28
+ rs 650
+ ne 1
+
+653 skill 0
+na Use beasts in battle
+SK
+ tl 28
+ rs 650
+ ne 1
+
+654 skill 0
+na Breed beasts
+SK
+ tl 28
+ rs 650
+
+655 skill 0
+na Catch wild horses
+SK
+ tl 14
+ rs 650
+
+656 skill 0
+na Train wild horse to riding horse
+SK
+ tl 14
+ rs 650
+
+657 skill 0
+na Train wild horse to warmount
+SK
+ tl 21
+ rs 650
+
+658 skill 0
+na Summon wild men
+SK
+ tl 21
+ rs 650
+
+659 skill 0
+na Persuade wild men to remain
+SK
+ tl 21
+ rs 658
+
+661 skill 0
+na Breed hound
+SK
+ tl 21
+ rs 650
+
+670 skill 0
+na Persuasion
+SK
+ tl 28
+ of 671 672 673 674 
+ re 675 676 
+
+671 skill 0
+na Bribe noble
+SK
+ tl 14
+ rs 670
+
+672 skill 0
+na Persuade oathbound noble
+SK
+ tl 21
+ rs 670
+
+673 skill 0
+na Raise peasant mob
+SK
+ tl 14
+ rs 670
+
+674 skill 0
+na Rally peasant mob
+SK
+ tl 21
+ rs 670
+
+675 skill 0
+na Incite mob violence
+SK
+ tl 21
+ rs 670
+
+676 skill 0
+na Train angry peasants
+SK
+ tl 14
+ rs 670
+
+680 skill 0
+na Construction
+SK
+ tl 21
+ of 681 682 
+
+681 skill 0
+na Construct siege tower
+SK
+ tl 14
+ rs 680
+ rq	77 3 1 \
+	80 3 1 \
+	11 3 0
+ pr 62
+
+682 skill 0
+na Stone quarrying
+SK
+ tl 14
+ rs 680
+
+690 skill 0
+na Alchemy
+SK
+ tl 28
+ of 691 692 693 
+ re 694 695 696 697 
+
+691 skill 0
+na Extract venom from ratspider
+SK
+ tl 21
+ rs 690
+ rq	81 1 1
+ pr 63
+
+692 skill 0
+na Make potion of slavery
+SK
+ tl 21
+ rs 690
+ rq	63 1 1
+
+693 skill 0
+na Brew healing potion
+SK
+ tl 21
+ rs 690
+ rq	65 1 1
+
+694 skill 0
+na Brew potion of death
+SK
+ tl 21
+ rs 690
+ rq	64 1 1
+
+695 skill 0
+na Record skill on scroll
+SK
+ tl 21
+ rs 690
+ rq	84 1 1
+
+696 skill 0
+na Collect rare elements
+SK
+ tl 14
+ rs 690
+
+697 skill 0
+na Turn lead into gold
+SK
+ tl 28
+ rs 690
+
+700 skill 0
+na Forestry
+SK
+ tl 21
+ of 701 702 703 704 705 
+ re 706 707 
+
+701 skill 0
+na Construct battering ram
+SK
+ tl 14
+ rs 700
+ rq	77 3 1 \
+	79 1 1 \
+	11 3 0
+ pr 60
+
+702 skill 0
+na Harvest lumber
+SK
+ tl 14
+ rs 700
+
+703 skill 0
+na Harvest yew
+SK
+ tl 14
+ rs 700
+
+704 skill 0
+na Collect rare foliage
+SK
+ tl 14
+ rs 700
+
+705 skill 0
+na Harvest mallorn wood
+SK
+ tl 14
+ rs 700
+
+706 skill 0
+na Harvest opium
+SK
+ tl 14
+ rs 700
+
+707 skill 0
+na Improve opium production
+SK
+ tl 14
+ rs 705
+
+720 skill 0
+na Mining
+SK
+ tl 21
+ of 721 722 
+ re 723 
+
+721 skill 0
+na Mine iron
+SK
+ tl 14
+ rs 720
+
+722 skill 0
+na Mine gold
+SK
+ tl 14
+ rs 720
+
+723 skill 0
+na Mine mithril
+SK
+ tl 14
+ rs 720
+
+730 skill 0
+na Trade
+SK
+ tl 21
+ of 731 732 733
+
+731 skill 0
+na Conceal identity of trader
+SK
+ tl 14
+ rs 730
+
+732 skill 0
+na Find tradegood for sale
+SK
+ tl 14
+ rs 730
+
+733 skill 0
+na Find market for tradegood
+SK
+ tl 14
+ rs 730
+
+750 skill 0
+na Religion
+SK
+ tl 35
+ of 751 
+ re 752 753 754 755 756 
+ np 1
+
+751 skill 0
+na Receive vision
+SK
+ tl 28
+ rs 750
+
+752 skill 0
+na Resurrect dead noble
+SK
+ tl 28
+ rs 750
+
+753 skill 0
+na Preparatory ritual
+SK
+ tl 21
+ rs 750
+
+754 skill 0
+na Lay to rest
+SK
+ tl 28
+ rs 750
+
+755 skill 0
+na Remove blessing from soldiers
+SK
+ tl 28
+ rs 750
+
+756 skill 0
+na Immunity from Vision
+SK
+ tl 28
+ rs 750
+
+800 skill magic
+na Magic
+SK
+ tl 28
+ of 801 802 803 804 805 
+ re 806 807 808 809 811 812 813 814 
+ np 1
+
+801 skill 0
+na Meditate
+SK
+ tl 14
+ rs 800
+
+802 skill 0
+na Perform common tasks for gold
+SK
+ tl 14
+ rs 800
+
+803 skill 0
+na Appear common
+SK
+ tl 14
+ rs 800
+
+804 skill 0
+na View current aura level of others
+SK
+ tl 21
+ rs 800
+
+805 skill 0
+na Reveal abilities of another mage
+SK
+ tl 14
+ rs 800
+
+806 skill 0
+na Tap health for aura
+SK
+ tl 21
+ rs 800
+
+807 skill 0
+na Heal
+SK
+ tl 21
+ rs 800
+
+808 skill 0
+na Modern magic script
+SK
+ tl 21
+ rs 800
+ rq	84 1 1
+
+809 skill 0
+na Shroud abilities from scry
+SK
+ tl 21
+ rs 800
+
+811 skill 0
+na Detect ability scry
+SK
+ tl 21
+ rs 800
+
+812 skill 0
+na Dispel ability shroud
+SK
+ tl 21
+ rs 800
+
+813 skill 0
+na Advanced meditation
+SK
+ tl 21
+ rs 800
+
+814 skill 0
+na Hinder meditation
+SK
+ tl 21
+ rs 800
+
+820 skill magic
+na Weather magic
+SK
+ tl 35
+ of 821 822 823 824 
+ re 825 826 827 828 829 831 832 833 
+ np 1
+
+821 skill 0
+na Fierce wind
+SK
+ tl 21
+ rs 820
+
+822 skill 0
+na Bind storm to ship
+SK
+ tl 21
+ rs 820
+
+823 skill 0
+na Scribe weather symbols
+SK
+ tl 21
+ rs 820
+ rq	84 1 1
+
+824 skill 0
+na Summon rain
+SK
+ tl 21
+ rs 820
+
+825 skill 0
+na Summon wind
+SK
+ tl 21
+ rs 820
+
+826 skill 0
+na Summon fog
+SK
+ tl 21
+ rs 820
+
+827 skill 0
+na Direct storm
+SK
+ tl 21
+ rs 820
+
+828 skill 0
+na Dissipate storm
+SK
+ tl 21
+ rs 820
+
+829 skill 0
+na Renew storm strength
+SK
+ tl 21
+ rs 820
+
+831 skill 0
+na Lightning bolt
+SK
+ tl 28
+ rs 820
+
+832 skill 0
+na Seize control of storm
+SK
+ tl 21
+ rs 820
+
+833 skill 0
+na Fog of death
+SK
+ tl 21
+ rs 820
+
+840 skill magic
+na Scrying
+SK
+ tl 35
+ of 841 
+ re 842 843 844 845 846 847 848 849 851 \
+	852 
+ np 1
+
+841 skill 0
+na Scry location
+SK
+ tl 21
+ rs 840
+
+842 skill 0
+na Shroud location from magical scry
+SK
+ tl 14
+ rs 840
+
+843 skill 0
+na Dispel location shroud
+SK
+ tl 21
+ rs 840
+
+844 skill 0
+na Ciphered writing of Areth-Pirn
+SK
+ tl 21
+ rs 840
+ rq	84 1 1
+
+845 skill 0
+na Create magical barrier
+SK
+ tl 21
+ rs 840
+
+846 skill 0
+na Remove magical barrier
+SK
+ tl 21
+ rs 840
+
+847 skill 0
+na Locate character
+SK
+ tl 21
+ rs 840
+
+848 skill 0
+na Detect location scry
+SK
+ tl 21
+ rs 840
+
+849 skill 0
+na Farcasting
+SK
+ tl 21
+ rs 840
+
+851 skill 0
+na Save farcast state
+SK
+ tl 21
+ rs 849
+
+852 skill 0
+na Banish undead
+SK
+ tl 21
+ rs 840
+
+860 skill magic
+na Gatecraft
+SK
+ tl 35
+ of 861 862 
+ re 863 864 865 866 867 868 869 871 872 
+ np 1
+
+861 skill 0
+na Teleport
+SK
+ tl 14
+ rs 860
+
+862 skill 0
+na Detect gates
+SK
+ tl 14
+ rs 860
+
+863 skill 0
+na Jump through gate
+SK
+ tl 14
+ rs 860
+
+864 skill 0
+na Seal gate
+SK
+ tl 14
+ rs 860
+
+865 skill 0
+na Unseal gate with key
+SK
+ tl 14
+ rs 860
+
+866 skill 0
+na Notify if gate unsealed
+SK
+ tl 14
+ rs 860
+
+867 skill 0
+na Forcefully unseal gate
+SK
+ tl 21
+ rs 860
+
+868 skill 0
+na Reveal gate key
+SK
+ tl 21
+ rs 860
+
+869 skill 0
+na Notify of gate jumps
+SK
+ tl 14
+ rs 860
+
+871 skill 0
+na Language of the Ancients
+SK
+ tl 21
+ rs 860
+ rq	84 1 1
+
+872 skill 0
+na Reverse jump through gate
+SK
+ tl 21
+ rs 860
+
+880 skill magic
+na Artifact construction
+SK
+ tl 42
+ of 881 882 883 
+ re 884 885 886 887 888 889 891 892 893 \
+	894 
+ np 1
+
+881 skill 0
+na Forge auraculum
+SK
+ tl 14
+ rs 880
+
+882 skill 0
+na Reveal creator of artifact
+SK
+ tl 14
+ rs 880
+
+883 skill 0
+na Reveal where artifact was created
+SK
+ tl 14
+ rs 880
+
+884 skill 0
+na Cloak creator of artifact
+SK
+ tl 28
+ rs 880
+ rq	1 100 1 \
+	82 5 1
+ ne 1
+
+885 skill 0
+na Cloak region of artifact creation
+SK
+ tl 14
+ rs 880
+
+886 skill 0
+na Curse noncreator loyalty
+SK
+ tl 14
+ rs 880
+
+887 skill 0
+na Forge magical weapon
+SK
+ tl 21
+ rs 880
+
+888 skill 0
+na Forge magical armor
+SK
+ tl 21
+ rs 880
+
+889 skill 0
+na Forge magical bow
+SK
+ tl 21
+ rs 880
+
+891 skill 0
+na Dispel cloaking from artifact
+SK
+ tl 21
+ rs 880
+
+892 skill 0
+na Arcane symbols
+SK
+ tl 21
+ rs 880
+
+893 skill 0
+na Destroy artifact
+SK
+ tl 21
+ rs 880
+ rq	84 1 1
+
+894 skill 0
+na Forge palantir
+SK
+ tl 21
+ rs 880
+ rq	82 1 1 \
+	83 1 1
+
+900 skill magic
+na Necromancy
+SK
+ tl 42
+ of 901 902 903 
+ re 904 905 906 907 908 909 911 
+ np 2
+
+901 skill 0
+na Transcend death
+SK
+ tl 28
+ rs 900
+ np 1
+
+902 skill 0
+na Runes of Evil
+SK
+ tl 21
+ rs 900
+ rq	84 1 1
+
+903 skill 0
+na Summon ghost warriors
+SK
+ tl 21
+ rs 900
+
+904 skill 0
+na Raise undead
+SK
+ tl 21
+ rs 900
+
+905 skill 0
+na Summon demon lord
+SK
+ tl 21
+ rs 900
+
+906 skill 0
+na Renew demon bond
+SK
+ tl 21
+ rs 900
+
+907 skill 0
+na Banish demon lord
+SK
+ tl 21
+ rs 900
+
+908 skill 0
+na Eating of the dead
+SK
+ tl 28
+ rs 900
+
+909 skill 0
+na Aura blast
+SK
+ tl 21
+ rs 900
+
+911 skill 0
+na Absorb aura blast
+SK
+ tl 21
+ rs 900
+
+920 skill magic
+na Advanced sorcery
+SK
+ tl 42
+ re 921 922 
+
+921 skill 0
+na Trance
+SK
+ tl 28
+ rs 920
+
+922 skill 0
+na Teleport items
+SK
+ tl 28
+ rs 920
+

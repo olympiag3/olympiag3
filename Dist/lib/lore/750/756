@@ -1,0 +1,26 @@
+#Skill:  Immunity from Vision [756]
+#
+Usage:  USE @@@@ [target]
+Time:   ten days
+
+Immunity from Vision allows a character to prevent scrys
+from the Receive Vision [751] skill, and when they
+succeed, to detect the identity of the visioning priest.
+
+Each use of [@@@@] increases the vision defense count
+of the target character by one point.  If a target is
+not specified, [@@@@] works on the priest himself.
+
+A vision attempt by a priest will fail if the count is 1
+or higher, and decrease the count by one.  If the count
+is zero, a vision by another priest against the
+character will succeed.
+
+Characters with Immunity from Vision [@@@@] will be
+notified of vision attempts against them, and will
+learn the identity of the visioning priest.
+
+Vision defense point are only deceased in response to
+a vision attempt from another priest.  The current
+vision defense level will be listed in the character's
+turn report.

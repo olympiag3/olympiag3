@@ -1,0 +1,21 @@
+#Skill:  Quarry building stone [9566]
+#
+Usage:     QUARRY [number of stones] [days]
+Requires:  at least one worker
+
+Building stone is used in the construction of temples, castles and
+towers.  Up to 50 stone may be removed from mountain provinces or
+rocky hills each month, or up to ten stone from desert provinces.
+
+Each worker will cut and prepare one building stone [78] per day.
+
+Examples:
+
+    quarry         # cut as much building stone as possible
+    quarry 25      # stop after cutting 25 stone
+    quarry 0 5     # quarry stone for five days
+    quarry 25 5    # stop after five days, or 25 stone, whichever
+                   # comes first
+
+In all cases, quarrying will cease as soon as the supply of ready stone
+in the province has been exhausted.

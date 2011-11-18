@@ -1,0 +1,17 @@
+#Spell:  Direct storm [9190]
+#
+Usage:  USE @@@@ <storm> <direction or destination>
+
+Required aura:  none
+Time to cast:   one day
+
+Direct an existing storm which the caster has previously summoned
+to move to an adjacent province at the end of the month.  Storms
+only move once per month, and may only exist at the province level
+(they may not move into sublocations or buildings.)
+
+The caster need not be in the same location as the storm in order
+to direct it.
+
+At the end of the month, the storm will move to its new province,
+and the mage will receive a report for the storm's new location.

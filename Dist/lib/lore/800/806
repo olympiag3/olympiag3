@@ -1,0 +1,17 @@
+#Spell:  Tap health for aura [9126]
+#
+Usage:  USE @@@@ <amount of aura>
+
+Required aura:  none
+Time to cast:   seven days
+
+The mage will dip into his own health to generate current aura.
+The health loss received is equal to five times the amount of
+aura generated.
+
+For example, USE @@@@ 10 would generate 10 points of current aura,
+and cause the mage to receive a 50 point wound.
+
+Use of this spell is dangerous, as any wound runs the risk of
+infection, and death could result.  See the section on Health
+in the rules for more information about wounds and healing.

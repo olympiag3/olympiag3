@@ -1,0 +1,23 @@
+#Spell:  Forge palantir [9176]
+#
+Usage:  USE @@@@
+
+Required aura:   eight
+Required items:  one mithril [82]
+                 one gate crystal [83]
+Time to cast:    ten days
+
+A palantir, or stone of far-seeing, is a crystal orb used to
+view images from a great distance.  Once created, the palantir
+may be used to view a distant location:
+
+	use <palantir> <location>
+
+For example, if a USE @@@@ creates Palantir [6289], then one may
+view City of Drassa [cx61] with the palantir by issuing the order:
+
+	use 6289 cx61
+
+Use of the palantir takes seven days.  Any character may use the
+palantir; no magical abilities are required.  However, a palantir
+may only be used once each turn.

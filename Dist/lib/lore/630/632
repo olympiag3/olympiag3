@@ -1,0 +1,7 @@
+#Skill:  Determine inventory of character [9519]
+#
+Usage:  USE @@@@ <character>
+Time:   seven days
+
+Sneakily learn the contents of the specified character's inventory.
+The spy must be in the same location as the target.

@@ -1,0 +1,18 @@
+#Skill:  Aura blast [9185]
+#
+Usage:  USE @@@@ <target> [aura] [have-left]
+
+Required aura:  as given
+Time to cast:   one day
+
+The mage directs a blast of raw energy at the target character.
+The target will suffer two points of damage for each point of
+aura used in the blast.  For example, USE @@@@ 5201 25 would
+send a blast of 25 aura at [5201], causing a 50 point wound.
+
+If aura is zero, all available current aura will be used.  If
+have-left is given, at least that much current aura will be
+retained, and not used for the blast
+
+It is not possible to aura blast between Hades, Faery and
+the real world.

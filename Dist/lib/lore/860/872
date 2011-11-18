@@ -1,0 +1,19 @@
+#Spell:  Reverse jump through gate [9165]
+#
+Usage:  USE @@@@ <gate> [key]
+
+Required aura:  two points for each 250 weight
+Required item:  none
+Time to cast:   one day
+
+Gates were long thought to be one way portals through space.
+Most mages believed that returning to the starting location
+required a second gate or a conventional journey.
+
+However, it is possible to jump back to a gate from the gate's
+destination.  Reversing the direction of teleportation is
+difficult, so the jump requires twice as much aura as a
+forward jump.
+
+As with a conventional jump, the mage must know the gate's
+entity number as well as the key, if necessary.

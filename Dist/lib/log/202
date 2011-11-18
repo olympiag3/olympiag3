@@ -1,0 +1,2030 @@
+5:0::
+5:0::begin 202  # Skill list
+5:0::
+5:0::end
+0:0::From: olympia@rt.com (Olympia PBM)
+0:0::Subject: Olympia turn 7 report
+0:0::
+0:0::Olympia turn 7 report for Skill list~[202].
+0:0::Season "Waning days", month 7, in the year 1.
+0:0::
+0:3::Noble points:  1     (0 gained, 0 spent)
+0:0::
+0:0::
+2:0::
+2:0::Skill listing:
+2:0::--------------
+2:0::
+2:0::Skill schools:
+2:0::
+2:0:: 120  Shipcraft                          one~week     
+2:0:: 121  Combat                             one~week     
+2:0:: 122  Stealth                            two~weeks    
+2:0:: 123  Beastmastery                       two~weeks    
+2:0:: 124  Persuasion                         two~weeks    
+2:0:: 125  Construction                       one~week     
+2:0:: 126  Alchemy                            two~weeks    
+2:0:: 128  Forestry                           one~week     
+2:0:: 129  Mining                             one~week     
+2:0:: 160  Magic                              two~weeks    1 NP req'd
+2:0:: 161  Weather magic                      three~weeks  1 NP req'd
+2:0:: 162  Scrying                            three~weeks  1 NP req'd
+2:0:: 163  Gatecraft                          three~weeks  1 NP req'd
+2:0:: 164  Artifact construction              four~weeks   1 NP req'd
+2:0:: 165  Necromancy                         four~weeks   2 NP req'd
+2:0:: 166  Advanced sorcery                   one~week     
+2:0::9541  Construct catapult                 one~week     
+2:0::
+2:0::Shipcraft~[120]
+2:3::9502  Sailing                            one~week     
+2:3::9503  Shipbuilding                       one~week     
+2:3::9554  Add ram to galley                  two~weeks    
+2:3::9582  Fishing                            one~week     
+2:0::
+2:0::Combat~[121]
+2:3::9579  Archery                            one~week     
+2:3::9580  Swordplay                          one~week     
+2:3::9581  Weaponsmithing                     one~week     
+2:0::
+2:0::Stealth~[122]
+2:3::9519  Determine inventory of character   one~week     
+2:3::9520  Determine skills of character      one~week     
+2:3::9521  Determine character's lord         one~week     
+2:3::9522  Determine vassals of a noble       one~week     
+2:3::9571  Prepare for raid                   one~week     
+2:0::
+2:0::Beastmastery~[123]
+2:3::9517  Catch wild horses                  one~week     
+2:3::9529  Train wild horse to riding horse   one~week     
+2:3::9530  Train wild horse to warmount       two~weeks    
+2:0::
+2:0::Persuasion~[124]
+2:3::9515  Bribe noble                        one~week     
+2:0::
+2:0::Construction~[125]
+2:3::9542  Construct siege tower              one~week     
+2:3::9566  Stone quarrying                    one~week     
+2:0::
+2:0::Alchemy~[126]
+2:3::9549  Extract venom from ratspider       two~weeks    
+2:3::9550  Make potion of slavery             two~weeks    
+2:3::9551  Brew healing potion                two~weeks    
+2:3::9552  Brew potion of death               two~weeks    
+2:3::9573  Record skill on scroll             two~weeks    1 NP req'd
+2:3::9584  Collect rare elements              one~week     
+2:0::
+2:0::Forestry~[128]
+2:3::9540  Construct battering ram            one~week     
+2:3::9568  Harvest lumber                     one~week     
+2:3::9569  Harvest yew                        one~week     
+2:3::9583  Collect rare foliage               one~week     
+2:0::
+2:0::Mining~[129]
+2:3::9563  Mine iron                          one~week     
+2:3::9564  Mine gold                          one~week     
+2:3::9565  Mine mithril                       one~week     
+2:0::
+2:0::Magic~[160]
+2:3::9101  Meditate                           one~week     
+2:3::9105  View current aura level of others  two~weeks    
+2:3::9106  Speed casting of next spell        two~weeks    
+2:3::9123  Reveal abilities of another mage   two~weeks    
+2:3::9146  Heal                               one~week     
+2:3::9147  Modern magic script                two~weeks    1 NP req'd
+2:3::9169  Shroud abilities from scry         two~weeks    
+2:3::9170  Detect ability scry                two~weeks    1 NP req'd
+2:3::9173  Dispel ability shroud              two~weeks    
+2:3::9174  Advanced meditation                two~weeks    1 NP req'd
+2:3::9175  Hinder meditation                  two~weeks    
+2:3::9178  Save speeded cast                  two~weeks    
+2:0::
+2:0::Weather magic~[161]
+2:3::9148  Script of the Elf-wizards          two~weeks    1 NP req'd
+2:0::
+2:0::Scrying~[162]
+2:3::9141  Scry location                      two~weeks    
+2:3::9142  Shroud location from magical scry  one~week     
+2:3::9143  Dispel location shroud             two~weeks    
+2:3::9151  Ciphered writing of Areth-Pirn     two~weeks    1 NP req'd
+2:3::9160  Create magical barrier             two~weeks    1 NP req'd
+2:3::9161  Remove magical barrier             two~weeks    
+2:3::9167  Locate character                   two~weeks    
+2:3::9171  Detect location scry               two~weeks    1 NP req'd
+2:3::9172  Farcasting                         two~weeks    1 NP req'd
+2:3::9177  Save farcast state                 two~weeks    
+2:0::
+2:0::Gatecraft~[163]
+2:3::9115  Detect gates                       one~week     
+2:3::9116  Jump through gate                  one~week     
+2:3::9117  Seal gate                          one~week     
+2:3::9118  Unseal gate with key               one~week     
+2:3::9119  Notify if gate unsealed            one~week     
+2:3::9120  Forcefully unseal gate             two~weeks    
+2:3::9121  Reveal gate key                    two~weeks    
+2:3::9122  Notify of gate jumps               one~week     
+2:3::9152  Language of the Ancients           two~weeks    1 NP req'd
+2:3::9165  Reverse jump through gate          two~weeks    
+2:0::
+2:0::Artifact construction~[164]
+2:3::9102  Forge auraculum                    three~weeks  
+2:3::9108  Reveal creator of artifact         one~week     
+2:3::9109  Reveal where artifact was created  one~week     
+2:3::9110  Cloak creator of artifact          one~week     
+2:3::9111  Cloak region of artifact creation  one~week     
+2:3::9113  Curse noncreator loyalty           two~weeks    
+2:3::9144  Dispel cloaking from artifact      two~weeks    
+2:3::9153  Arcane symbols                     two~weeks    1 NP req'd
+2:3::9164  Destroy artifact                   one~week     
+2:3::9176  Forge palantir                     two~weeks    
+2:0::
+2:0::Necromancy~[165]
+2:3::9154  Runes of Evil                      two~weeks    1 NP req'd
+2:0::
+2:0::Advanced sorcery~[166]
+2:0::
+2:0::Construct catapult~[9541]
+2:0::
+2:0::Lore for Shipcraft~[120]
+2:0::------------------------
+2:0::All skills concerning ocean travel fall under this category.
+2:0::Shipcraft encompasses the building and repair of ships,
+2:0::training of sailors, and navigation at sea.
+2:0::
+2:0::The following skills may be studied directly once Shipcraft is known:
+2:0::
+2:3::num   skill                              time to learn
+2:3::---   -----                              -------------
+2:3::9502  Sailing                            one~week     
+2:3::9503  Shipbuilding                       one~week     
+2:3::9554  Add ram to galley                  two~weeks    
+2:3::9582  Fishing                            one~week     
+2:0::
+2:0::
+2:0::Lore for Combat~[121]
+2:0::---------------------
+2:0::The student of combat learns the training of soldiers and how
+2:0::to lead them well in battle.  With study and experience, the
+2:0::battle lord will find strategies to be used in difficult combat
+2:0::situations.
+2:0::
+2:0::The following skills may be studied directly once Combat is known:
+2:0::
+2:3::num   skill                              time to learn
+2:3::---   -----                              -------------
+2:3::9579  Archery                            one~week     
+2:3::9580  Swordplay                          one~week     
+2:3::9581  Weaponsmithing                     one~week     
+2:0::
+2:0::
+2:0::Lore for Stealth~[122]
+2:0::----------------------
+2:0::Stealth includes the arts of theft, spying, assasination,
+2:0::kidnapping, and other covert activities.  Most stealth
+2:0::skills will not make use of soldiers or other followers,
+2:0::instead relying on the sneakiness of a lone character.
+2:0::
+2:0::The following skills may be studied directly once Stealth is known:
+2:0::
+2:3::num   skill                              time to learn
+2:3::---   -----                              -------------
+2:3::9519  Determine inventory of character   one~week     
+2:3::9520  Determine skills of character      one~week     
+2:3::9521  Determine character's lord         one~week     
+2:3::9522  Determine vassals of a noble       one~week     
+2:0::
+2:0::Further skills may be found through research.
+2:0::
+2:3::9571  Prepare for raid                   one~week     
+2:0::
+2:0::Lore for Beastmastery~[123]
+2:0::---------------------------
+2:0::Beastmastery spans the capture, training and breeding of
+2:0::all manner of animals, both wild and domestic.  Common
+2:0::Beastmastery skills are used to capture and train horses
+2:0::for travel or combat.  Higher level skills within this
+2:0::category concern the care and use of stranger beasts.
+2:0::
+2:0::The following skills may be studied directly once Beastmastery is known:
+2:0::
+2:3::num   skill                              time to learn
+2:3::---   -----                              -------------
+2:3::9517  Catch wild horses                  one~week     
+2:3::9529  Train wild horse to riding horse   one~week     
+2:3::9530  Train wild horse to warmount       two~weeks    
+2:0::
+2:0::
+2:0::Lore for Persuasion~[124]
+2:0::-------------------------
+2:0::The skill of smooth-tongued oratists, Persuasion involves
+2:0::the manipulation of others through eloquent verbal dialog.
+2:0::From subverting a noble's loyalty to rousing peasant mobs
+2:0::with firey speeches, Persuasion can a powerful tool or
+2:0::weapon.
+2:0::
+2:0::The following skills may be studied directly once Persuasion is known:
+2:0::
+2:3::num   skill                              time to learn
+2:3::---   -----                              -------------
+2:3::9515  Bribe noble                        one~week     
+2:0::
+2:0::
+2:0::Lore for Construction~[125]
+2:0::---------------------------
+2:0::The domain of engineers, builders and architects, Construction
+2:0::concerns the erection of inns, castles, city walls, and other
+2:0::fortifactions, as well as the training of workers.
+2:0::
+2:0::The following skills may be studied directly once Construction is known:
+2:0::
+2:3::num   skill                              time to learn
+2:3::---   -----                              -------------
+2:3::9542  Construct siege tower              one~week     
+2:3::9566  Stone quarrying                    one~week     
+2:0::
+2:0::
+2:0::Lore for Alchemy~[126]
+2:0::----------------------
+2:0::Called petty magician, druggist, and sometimes fool, the
+2:0::alchemist seeks to brew useful potions from elements and
+2:0::rare extracts.  A method to transmute matter into gold is
+2:0::eagerly sought, but remains unknown.
+2:0::
+2:0::The following skills may be studied directly once Alchemy is known:
+2:0::
+2:3::num   skill                              time to learn
+2:3::---   -----                              -------------
+2:3::9551  Brew healing potion                two~weeks    
+2:3::9552  Brew potion of death               two~weeks    
+2:3::9584  Collect rare elements              one~week     
+2:0::
+2:0::Further skills may be found through research.
+2:0::
+2:3::9549  Extract venom from ratspider       two~weeks    
+2:3::9550  Make potion of slavery             two~weeks    
+2:3::9573  Record skill on scroll             two~weeks    1 NP req'd
+2:0::
+2:0::Lore for Forestry~[128]
+2:0::-----------------------
+2:0::Forestry is skill at managing forests and harvesting their
+2:0::products, such as timber, yew, and rare foliage.
+2:0::
+2:0::The following skills may be studied directly once Forestry is known:
+2:0::
+2:3::num   skill                              time to learn
+2:3::---   -----                              -------------
+2:3::9540  Construct battering ram            one~week     
+2:3::9568  Harvest lumber                     one~week     
+2:3::9569  Harvest yew                        one~week     
+2:3::9583  Collect rare foliage               one~week     
+2:0::
+2:0::
+2:0::Lore for Mining~[129]
+2:0::---------------------
+2:0::Mining is the skill of sinking deep shafts into mountainous
+2:0::provinces for the purpose of extracting valuable elements.
+2:0::Most mining skills require a mine shaft to be constructed
+2:0::first with Build mine [9562].  Quarry building stone [9566]
+2:0::is an exception.  Building stones may be cut on the surface
+2:0::in mountain provinces.
+2:0::
+2:0::The likelihood of death because of cave-ins or poisonous gases
+2:0::seeping into the shafts tends to make mining dangerous work.
+2:0::
+2:0::The following skills may be studied directly once Mining is known:
+2:0::
+2:3::num   skill                              time to learn
+2:3::---   -----                              -------------
+2:3::9563  Mine iron                          one~week     
+2:3::9564  Mine gold                          one~week     
+2:0::
+2:0::Further skills may be found through research.
+2:0::
+2:3::9565  Mine mithril                       one~week     
+2:0::
+2:0::Lore for Magic~[160]
+2:0::--------------------
+2:0::No apprentice magician can rightfully don the robes of his order without
+2:0::some knowledge of Magic [160].  Magic contains many spells useful on
+2:0::their own, as well as in conjunction with spells from the other schools 
+2:0::of sorcery.
+2:0::
+2:0::The following skills may be studied directly once Magic is known:
+2:0::
+2:3::num   skill                              time to learn
+2:3::---   -----                              -------------
+2:3::9101  Meditate                           one~week     
+2:3::9105  View current aura level of others  two~weeks    
+2:3::9146  Heal                               one~week     
+2:0::
+2:0::Further skills may be found through research.
+2:0::
+2:3::9106  Speed casting of next spell        two~weeks    
+2:3::9123  Reveal abilities of another mage   two~weeks    
+2:3::9147  Modern magic script                two~weeks    1 NP req'd
+2:3::9169  Shroud abilities from scry         two~weeks    
+2:3::9170  Detect ability scry                two~weeks    1 NP req'd
+2:3::9173  Dispel ability shroud              two~weeks    
+2:3::9174  Advanced meditation                two~weeks    1 NP req'd
+2:3::9175  Hinder meditation                  two~weeks    
+2:3::9178  Save speeded cast                  two~weeks    
+2:0::
+2:0::Lore for Weather magic~[161]
+2:0::----------------------------
+2:0::<lore sheet not available>
+2:0::
+2:0::Skills within this category may be found through research.
+2:0::
+2:3::9148  Script of the Elf-wizards          two~weeks    1 NP req'd
+2:0::
+2:0::Lore for Scrying~[162]
+2:0::----------------------
+2:0::Scrying concerns the gathering of information by means of magical
+2:0::spells.  Simple spells may allow the mage to learn information
+2:0::about other characters nearby, or to view distant regions.
+2:0::
+2:0::Advanced study delves into spells wrought long ago in by the men of
+2:0::Areth-Pirn as tools to rule their land, including the erection of
+2:0::magical barriers to travel, as well as additional spells of far-seeing.
+2:0::
+2:0::The following skills may be studied directly once Scrying is known:
+2:0::
+2:3::num   skill                              time to learn
+2:3::---   -----                              -------------
+2:3::9141  Scry location                      two~weeks    
+2:0::
+2:0::Further skills may be found through research.
+2:0::
+2:3::9142  Shroud location from magical scry  one~week     
+2:3::9143  Dispel location shroud             two~weeks    
+2:3::9151  Ciphered writing of Areth-Pirn     two~weeks    1 NP req'd
+2:3::9160  Create magical barrier             two~weeks    1 NP req'd
+2:3::9161  Remove magical barrier             two~weeks    
+2:3::9167  Locate character                   two~weeks    
+2:3::9171  Detect location scry               two~weeks    1 NP req'd
+2:3::9172  Farcasting                         two~weeks    1 NP req'd
+2:3::9177  Save farcast state                 two~weeks    
+2:0::
+2:0::Lore for Gatecraft~[163]
+2:0::------------------------
+2:0::Long ago the Ancients, a race of wise men who ruled the land with
+2:0::the aid of powerful magic, constructed a network of teleportation
+2:0::gateways to connect distant cities.  As the reach of their magical
+2:0::portals grew, so grew the reach of their armies and knowledge.  At
+2:0::their height the rule of the Ancients extended to every corner of
+2:0::the known world, and beyond.
+2:0::
+2:0::With the passing of the Ancients, the system of gates fell into
+2:0::disuse and decay, and now retains only a hint of its former majesty.
+2:0::Gatecraft, once practiced by the most common among the Ancients, has
+2:0::since been forgotten by nearly all men.
+2:0::
+2:0::The school of Gatecraft retains the only knowledge of the use of
+2:0::these mystical portals.  Because knowledge of Gates can be a powerful
+2:0::tool or weapon, Gatecraft spells are jealously guarded even within
+2:0::the school.  Some aspects of Gatecraft, such as the secret of their
+2:0::construction, have been completely lost.
+2:0::
+2:0::The following skills may be studied directly once Gatecraft is known:
+2:0::
+2:3::num   skill                              time to learn
+2:3::---   -----                              -------------
+2:3::9115  Detect gates                       one~week     
+2:3::9116  Jump through gate                  one~week     
+2:0::
+2:0::Further skills may be found through research.
+2:0::
+2:3::9117  Seal gate                          one~week     
+2:3::9118  Unseal gate with key               one~week     
+2:3::9119  Notify if gate unsealed            one~week     
+2:3::9120  Forcefully unseal gate             two~weeks    
+2:3::9121  Reveal gate key                    two~weeks    
+2:3::9122  Notify of gate jumps               one~week     
+2:3::9152  Language of the Ancients           two~weeks    1 NP req'd
+2:3::9165  Reverse jump through gate          two~weeks    
+2:0::
+2:0::Lore for Artifact construction~[164]
+2:0::------------------------------------
+2:0::The domain of high level wizards, artifact construction concerns
+2:0::the creation and manipulation of items which may focus and store
+2:0::aura, contain spells, or have other magical properties.
+2:0::
+2:0::The following skills may be studied directly once Artifact construction is known:
+2:0::
+2:3::num   skill                              time to learn
+2:3::---   -----                              -------------
+2:3::9108  Reveal creator of artifact         one~week     
+2:3::9109  Reveal where artifact was created  one~week     
+2:3::9164  Destroy artifact                   one~week     
+2:0::
+2:0::Further skills may be found through research.
+2:0::
+2:3::9102  Forge auraculum                    three~weeks  
+2:3::9110  Cloak creator of artifact          one~week     
+2:3::9111  Cloak region of artifact creation  one~week     
+2:3::9113  Curse noncreator loyalty           two~weeks    
+2:3::9144  Dispel cloaking from artifact      two~weeks    
+2:3::9153  Arcane symbols                     two~weeks    1 NP req'd
+2:3::9176  Forge palantir                     two~weeks    
+2:0::
+2:0::Lore for Necromancy~[165]
+2:0::-------------------------
+2:0::<lore sheet not available>
+2:0::
+2:0::Skills within this category may be found through research.
+2:0::
+2:3::9154  Runes of Evil                      two~weeks    1 NP req'd
+2:0::
+2:0::Lore for Advanced sorcery~[166]
+2:0::-------------------------------
+2:0::<lore sheet not available>
+2:0::
+2:0::Lore for Construct catapult~[9541]
+2:0::----------------------------------
+2:0::<lore sheet not available>
+2:0::
+2:0::Skill:  Meditate~[9101]
+2:0::-----------------------
+2:0::Usage:  USE 9101
+2:0::
+2:0::Required aura:  none
+2:0::Required item:
+2:0::Time to cast:   seven days
+2:0::
+2:0::The magician enters a restful trance which regenerates body, mind
+2:0::and current aura level.  Current aura level will rise by one point.
+2:0::Meditation is limited to raising current aura to one point above
+2:0::maximum aura.
+2:0::
+2:0::Skill:  Forge auraculum~[9102]
+2:0::------------------------------
+2:0::Usage:  USE 9102 <aura-level> "Name"
+2:0::
+2:0::Required aura:   as specified by caster
+2:0::Required items:  100 gold, 5 mithril
+2:0::Time to cast:    fourteen days
+2:0::
+2:0::Forge a magical auraculum, giving it the specified name.
+2:0::
+2:0::   An auraculum is a magical artifact which concentrates and amplifies
+2:0::   a mage's power.  A permanent investment of maximum aura is made when
+2:0::   constructing the auraculum.  The artifact doubles the invested aura.
+2:0::   However, since a portion of the mage's pneuma has been bound in the
+2:0::   auraculum, it is important to safeguard it from being lost or stolen.
+2:0::
+2:0::In addition to depleting the caster's current aura level, the specified
+2:0::aura amount will be permanently removed from the magician's maximum aura
+2:0::rating.  The new object, while possessed by its maker, will augment the
+2:0::mage's maximum aura rating by twice the amount of aura invested in its
+2:0::creation.
+2:0::
+2:0::Creation of an auraculum also grants knowledge of the Advanced sorcery
+2:0::magical skill category.  Advanced sorcery may not be learned in any
+2:0::other way.
+2:0::
+2:0::Example:
+2:0::
+2:0::   A mage of current aura level 10, maximum aura 10 who issues
+2:0::   USE 9102 5 "Ring of power" will be reduced to current aura level 5,
+2:0::   maximum aura level 5.  However, the new artifact will add 10 points
+2:0::   to the maximum aura rating of its creator, but only while it is in
+2:0::   his possession.
+2:0::
+2:0::       Current aura:   10
+2:0::       Maximum aura:   10
+2:0::
+2:0::    1: > use 9102 5 "Ring of power"
+2:0::    1: Attempt to forge an auraculum.
+2:0::       ...
+2:0::   14: Created Ring of power [js80].
+2:0::   14: Learned Advanced sorcery [166].
+2:0::
+2:0::       Current aura:   5
+2:0::       Maximum aura:   15 (5+10)
+2:0:: 
+2:0::Characters other than the auraculum's creator do not receive an aura
+2:0::bonus from possession of the object.
+2:0::
+2:0::Since the mage has bound a portion of his aura into the artifact, its
+2:0::destruction would deal him an instant, fatal blow.  Thus, the creator
+2:0::of such an object should use all means to prevent it from being lost
+2:0::or stolen.  However, magical items of such power are hard to destroy.
+2:0::An auraculum may only be destroyed in the province in which it was
+2:0::created.
+2:0::
+2:0::This spell may only be used once.  A magician may only create one
+2:0::auraculum during his lifetime.
+2:0::
+2:0::The creator of the artifact may change its name later with the
+2:0::NAME order.  The object must be possessed in order to rename it.
+2:0::
+2:0::   > name js80 "Wooden staff"
+2:0::   Ring of power [js80] will now be known as Wooden staff [js80].
+2:0::
+2:0::Skill:  View current aura level of others~[9105]
+2:0::------------------------------------------------
+2:0::Usage:  USE 9105 [aura]
+2:0::
+2:0::Required aura:  one or more points, as given
+2:0::Required item:
+2:0::Time to cast:   seven days
+2:0::
+2:0::The specified aura will be invested to learn the current aura
+2:0::levels of other mages in the location.  The default amount of
+2:0::aura to use is one point.
+2:0::
+2:0::The current aura level of other mages present in the same location as
+2:0::the caster will be shown, unless they are shrouding their abilities.
+2:0::If a mage is employing an ability shroud, the aura invested in USE 9105
+2:0::must exceed the shroud's aura, or that mage's current aura level won't
+2:0::be shown.
+2:0::
+2:0::For instance, USE 9105 1 will show the current aura for mages that are
+2:0::not shrouding their abilities.  USE 9105 3 will show the current aura
+2:0::for all mages except those shrouding their abilities with three or more
+2:0::points of aura.
+2:0::
+2:0::Skill:  Speed casting of next spell~[9106]
+2:0::------------------------------------------
+2:0::Usage: USE 9106 <amount>
+2:0::
+2:0::Required aura:  amount as specified above
+2:0::Required item:
+2:0::Time to cast:   four days
+2:0::
+2:0::The mage trades aura for time.  The time necessary to cast
+2:0::the next spell will be reduced by the amount of aura invested
+2:0::in the cast of [9106].
+2:0::
+2:0::For example, a mage who issued USE 9106 5 would lose five current
+2:0::aura points.  Whatever spell the mage casts next will take five days
+2:0::less than it normally would.
+2:0::
+2:0::Uses of 9106 are additive.
+2:0::
+2:0::Skill:  Reveal creator of artifact~[9108]
+2:0::-----------------------------------------
+2:0::Usage: USE 9108 <artifact> [aura]
+2:0::
+2:0::Required aura:  one or more points of aura
+2:0::Required item:
+2:0::Time to cast:   seven days
+2:0::
+2:0::Reveal who forged a magical artifact.  The artifact in
+2:0::question must be possessed by the caster.
+2:0::
+2:0::The artifact may be shrouded against magical inspection.
+2:0::If so, a greater amount of aura must be specified with
+2:0::9108 than was used to apply the shroud.
+2:0::
+2:0::Skill:  Reveal where artifact was created~[9109]
+2:0::------------------------------------------------
+2:0::Usage:  USE 9109 <artifact> [aura]
+2:0::
+2:0::Required aura:  one or more points
+2:0::Required item:
+2:0::Time to cast:   seven days
+2:0::
+2:0::Reveal the location in which a magical magical artifact was forged.
+2:0::The artifact in question must be possessed by the caster.
+2:0::
+2:0::Some magical artifacts may only be destroyed in the location where
+2:0::they were constructed.
+2:0::
+2:0::The artifact may be shrouded against magical inspection.  If so,
+2:0::a greater amount of aura must be specified with 9109 than was
+2:0::used to apply the shroud.
+2:0::
+2:0::Skill:  Cloak creator of artifact~[9110]
+2:0::----------------------------------------
+2:0::Usage:  USE 9110 <artifact> [aura]
+2:0::
+2:0::Required aura:  one or more points
+2:0::Required item:
+2:0::Time to cast:   seven days
+2:0::
+2:0::Inhibit the ability of another mage to learn the identity of the
+2:0::creator of the specified magical artifact.  The artifact must be
+2:0::in the inventory of the caster.
+2:0::
+2:0::The more aura used, the more difficult it will be for another
+2:0::mage to overcome the magical cloaking.
+2:0::
+2:0::The default aura to use is one point.
+2:0::Multiple casts of 9110 on the same artifact are additive.
+2:0::
+2:0::Skill:  Cloak region of artifact creation~[9111]
+2:0::------------------------------------------------
+2:0::Usage: USE 9111 <artifact> [aura]
+2:0::
+2:0::Required aura:  one or more points
+2:0::Required item:
+2:0::Time to cast:   seven days
+2:0::
+2:0::Inhibit the ability of another mage to learn the region in which
+2:0::the specified magical artifact was created.  The artifact must
+2:0::be in the inventory of the caster.
+2:0::
+2:0::The more aura used, the more difficult it will be for another
+2:0::mage to overcome the magical cloaking.
+2:0::
+2:0::The default aura to use is one point.
+2:0::Multiple casts of 9111 on the same artifact are additive.
+2:0::
+2:0::Skill:  Curse noncreator loyalty~[9113]
+2:0::---------------------------------------
+2:0::Usage:  USE 9113 <artifact> [aura]
+2:0::
+2:0::Required aura:  one or more points, as given
+2:0::Required item:
+2:0::Time to cast:   fourteen days
+2:0::
+2:0::Curses a forged magical artifact such that possession by any
+2:0::character other than the creator will cause that character's
+2:0::loyalty to erode.  The amount of loyalty lost is proportional
+2:0::to the aura invested with 9113.
+2:0::
+2:0::For example, USE 9113 8192 10 would place a ten aura noncreator
+2:0::curse on artifact [8192].  Anyone except the artifact's creator
+2:0::would lose ten points of loyalty each turn that they held the
+2:0::object.
+2:0::
+2:0::The actual loss of loyalty will occur on a random day during
+2:0::the month.
+2:0::
+2:0::Multiple uses of 9113 on the same artifact are additive.
+2:0::
+2:0::Aura defaults to one.
+2:0::
+2:0::Skill:  Detect gates~[9115]
+2:0::---------------------------
+2:0::Usage:  USE 9115
+2:0::
+2:0::Required aura:  one point
+2:0::Required item:  none
+2:0::Time to cast:   seven days
+2:0::
+2:0::Identify any gates present in the current location.
+2:0::
+2:0::Skill:  Jump through gate~[9116]
+2:0::--------------------------------
+2:0::Usage:  USE 9116 <gate> [key]
+2:0::
+2:0::Required aura:  one point for each character
+2:0::Required item:  none
+2:0::Time to cast:   three days
+2:0::
+2:0::The caster will teleport through the specified gate.  The gate
+2:0::must be present in the current location.  If the gate is sealed
+2:0::with a key, the key must be supplied for the jump to succeed.
+2:0::
+2:0::One point of aura is required for each figure jumping through
+2:0::the gate.  For example, a magician stacked over a follower who
+2:0::is accompanied by two peasants would require four aura points
+2:0::to jump through a gate.
+2:0::
+2:0::Skill:  Seal gate~[9117]
+2:0::------------------------
+2:0::Usage:  USE 9117 <gate> <key>
+2:0::
+2:0::Required aura:  six points
+2:0::Required item:
+2:0::Time to cast:   seven days
+2:0::
+2:0::Seal the gate with the given key.  The gate must be present in
+2:0::the current location, and must not already be sealed.
+2:0::
+2:0::The key is a numeric password which will be required for further
+2:0::access to the gate for jumps or other manipulations.  Only those
+2:0::who supply the key number will be granted access.
+2:0::
+2:0::    For example, if Gate [8192] is sealed with USE 9117 8192 123
+2:0::    then the key "123" must be supplied as a parameter to the
+2:0::    jump spell, or the jump will fail.
+2:0::
+2:0::Skill:  Unseal gate with key~[9118]
+2:0::-----------------------------------
+2:0::Usage:  USE 9118 <gate> <key>
+2:0::
+2:0::Required aura:  three points
+2:0::Required item:
+2:0::Time to cast:   seven days.
+2:0::
+2:0::Remove the seal from a gate by supplying the key.  The key will
+2:0::no longer be required for jumps through the gate.
+2:0::
+2:0::    For example, if Gate [8192] were sealed with key "123",
+2:0::    the spell USE 9118 8192 123 would unseal the gate.
+2:0::    Jumps through the gate could proceed without supplying
+2:0::    the key.
+2:0::
+2:0::Skill:  Notify if gate unsealed~[9119]
+2:0::--------------------------------------
+2:0::Usage:  USE 9119 <gate> <key>
+2:0::
+2:0::Required aura:  five points
+2:0::Required item:
+2:0::Time to cast:   seven days
+2:0::
+2:0::Inform the sealer of the gate if the seal is broken, and of the
+2:0::identity of the mage who removes the seal.  The gate must be
+2:0::present in the current location to apply this spell.  However,
+2:0::notification will occur wherever the caster happens to be.
+2:0::
+2:0::Skill:  Forcefully unseal gate~[9120]
+2:0::-------------------------------------
+2:0::Usage:  USE 9120 <gate>
+2:0::
+2:0::Required aura:  eight points
+2:0::Required item:
+2:0::Time to cast:   seven days
+2:0::
+2:0::Forcefully remove a seal from a gate without specifying the key.
+2:0::The key will no longer be required to perform jumps through the gate.
+2:0::The gate must be present in the current location.
+2:0::
+2:0::Skill:  Reveal gate key~[9121]
+2:0::------------------------------
+2:0::Usage:  USE 9121 <gate>
+2:0::
+2:0::Required aura:  ten points
+2:0::Required item:
+2:0::Time to cast:   seven days
+2:0::
+2:0::Reveal the numeric key necessary to make use of a sealed gate.
+2:0::The gate must be present in the current location.
+2:0::
+2:0::Skill:  Notify of gate jumps~[9122]
+2:0::-----------------------------------
+2:0::Usage:  USE 9122 <gate>
+2:0::
+2:0::Required aura:  six points
+2:0::Required item:
+2:0::Time to cast:   seven days
+2:0::
+2:0::Notify the caster of the identity of any mages jumping through the
+2:0::specified gate.  The gate must be present in the current location
+2:0::to apply this spell.  However, the caster will be notified if the
+2:0::gate is used, wherever he may be at the time.
+2:0::
+2:0::Only one [9122] spell may be active on a gate at a time.  Casting
+2:0::this spell on a gate already notifying another mage of jumps will
+2:0::displace the previous mage's spell.
+2:0::
+2:0::Skill:  Reveal abilities of another mage~[9123]
+2:0::-----------------------------------------------
+2:0::Usage:  USE 9123 <target> <magical skill category> [aura]
+2:0::
+2:0::Required aura:  one or more points of aura, as given
+2:0::Required item:
+2:0::Time to cast:   seven days
+2:0::
+2:0::Used against another magician, this spell will attempt to
+2:0::reveal all spells known by the other mage within the given
+2:0::magical skill category.
+2:0::
+2:0::If the target is shrouding his abilities, the aura invested in
+2:0::USE 9123 must exceed the shroud's aura, or the spell will fail.
+2:0::For instance, USE 9123 4 (costing four aura points) is required 
+2:0::to overcome a three-aura ability shroud.
+2:0::
+2:0::Skill:  Scry location~[9141]
+2:0::----------------------------
+2:0::Spell:  Scry location [9141]
+2:0::
+2:0::Usage:  USE 9141 <location> [aura]
+2:0::
+2:0::Required aura:  one or more points, as given
+2:0::Required item:
+2:0::Time to cast:   seven days
+2:0::
+2:0::Grants the mage a vision of the specified place, no matter
+2:0::how far away he might be.
+2:0::
+2:0::If the target location is magically shrouded from scry attempts,
+2:0::sufficient aura must be used for 9141 to pierce the shroud.
+2:0::For example, a location shroud of three aura would require
+2:0::USE 9141 <region> 4 to overcome (costing four aura to cast).
+2:0::
+2:0::The default aura to use is one point.
+2:0::
+2:0::Skill:  Shroud location from magical scry~[9142]
+2:0::------------------------------------------------
+2:0::Usage:  USE 9142 [aura]
+2:0::
+2:0::Required aura:  one or more points, as given
+2:0::Required item:
+2:0::Time to cast:   three days
+2:0::
+2:0::Creates a magical shroud over the mage's current location.  The
+2:0::shroud hinders attempts by distant mages to view the location
+2:0::by magical scrying.
+2:0::
+2:0::The shroud is invested with magical aura.  A mage attempting to
+2:0::view the location from a distance with a scry spell must expend
+2:0::a greater amount of aura than the shroud possess to succeed.
+2:0::
+2:0::The shroud loses one point of aura at the end of each month.
+2:0::Successive uses of 9142 are additive; USE 9142 1 followed by
+2:0::USE 9142 3 will result in a location shroud with an aura of
+2:0::four points.
+2:0::
+2:0::The default aura to use is one point.
+2:0::
+2:0::Skill:  Dispel location shroud~[9143]
+2:0::-------------------------------------
+2:0::Usage:  USE 9143 <location>
+2:0::
+2:0::Required aura:  three points
+2:0::Required item:
+2:0::Time to cast:   three days
+2:0::
+2:0::Dispels any magical shroud inhibiting scrying of the specified
+2:0::location.
+2:0::
+2:0::Skill:  Dispel cloaking from artifact~[9144]
+2:0::--------------------------------------------
+2:0::Usage:  USE 9144 <artifact>
+2:0::
+2:0::Required aura:  eight points
+2:0::Required item:
+2:0::Time to cast:   ten days
+2:0::
+2:0::Remove any cloaking spells from the specified artifact.
+2:0::The artifact must the in the caster's inventory.
+2:0::
+2:0::Skill:  Heal~[9146]
+2:0::-------------------
+2:0::Usage:  USE 9146 <target> [aura]
+2:0::
+2:0::Required aura:  1-3 points, as given
+2:0::Required item:
+2:0::Time to cast:   seven days
+2:0::
+2:0::Attempt to cure the specified target of illness.  Between one
+2:0::and three points of aura may be invested in the attempt.  The
+2:0::default is one point.
+2:0::
+2:0::The more aura invested, the less the chance of failure:
+2:0::
+2:0::	aura	chance of failure
+2:0::	----	-----------------
+2:0::	 1	      30%
+2:0::	 2	      15%
+2:0::	 3	       5%
+2:0::
+2:0::No healing will take place if the spell fails.  If successful,
+2:0::the target will cured of sickness, and the target's health will
+2:0::begin to recover at the normal rate.
+2:0::
+2:0::Skill:  Modern magic script~[9147]
+2:0::----------------------------------
+2:0::Usage:  USE 9147 <spell> [flag]
+2:0::
+2:0::Required aura:  two points
+2:0::Required item:  blank scroll [84]
+2:0::Time to cast:   seven or more days
+2:0::
+2:0::Transcribe the given spell onto a blank scroll.  The blank scroll will
+2:0::be consumed, and a new unique scroll will be produced.  If flag is not
+2:0::specified, the new scroll will permit one use of the spell.  If flag
+2:0::is 1, the scroll will permit one character to learn the spell from the
+2:0::scroll.
+2:0::
+2:0::Example:
+2:0::
+2:0::    USE 9147 nnnn       # make a one-shot use scroll for spell nnnn
+2:0::    USE 9147 nnnn 1     # make a one-time study scroll for spell nnnn
+2:0::
+2:0::Only Magic [160] spells may be scribed with this skill.
+2:0::
+2:0::The spell must be known in order to be written.  If the spell is
+2:0::rated for experience, a level of "adept" or higher is required to
+2:0::record it.  The character will still know the spell after it has
+2:0::been scribed.
+2:0::
+2:0::This spell requires as much time to cast as the skill takes to learn.
+2:0::Writing a spell which requires two weeks of study to learn will take
+2:0::two weeks.
+2:0::
+2:0::Skill:  Script of the Elf-wizards~[9148]
+2:0::----------------------------------------
+2:0::Usage:  USE 9148 <spell> [flag]
+2:0::
+2:0::Required aura:  two points
+2:0::Required item:  blank scroll [84]
+2:0::Time to cast:   seven or more days
+2:0::
+2:0::Transcribe the given spell onto a blank scroll.  The blank scroll will
+2:0::be consumed, and a new unique scroll will be produced.  If flag is not
+2:0::specified, the new scroll will permit one use of the spell.  If flag
+2:0::is 1, the scroll will permit one character to learn the spell from the
+2:0::scroll.
+2:0::
+2:0::Example:
+2:0::
+2:0::    USE 9148 nnnn       # make a one-shot use scroll for spell nnnn
+2:0::    USE 9148 nnnn 1     # make a one-time study scroll for spell nnnn
+2:0::
+2:0::Only Weather magic [161] spells may be scribed with this skill.
+2:0::
+2:0::The spell must be known in order to be written.  If the spell is
+2:0::rated for experience, a level of "adept" or higher is required to
+2:0::record it.  The character will still know the spell after it has
+2:0::been scribed.
+2:0::
+2:0::This spell requires as much time to cast as the skill takes to learn.
+2:0::Writing a spell which requires two weeks of study to learn will take
+2:0::two weeks.
+2:0::
+2:0::Skill:  Ciphered writing of Areth-Pirn~[9151]
+2:0::---------------------------------------------
+2:0::Usage:  USE 9151 <spell> [flag]
+2:0::
+2:0::Required aura:  two points
+2:0::Required item:  blank scroll [84]
+2:0::Time to cast:   seven or more days
+2:0::
+2:0::Transcribe the given spell onto a blank scroll.  The blank scroll will
+2:0::be consumed, and a new unique scroll will be produced.  If flag is not
+2:0::specified, the new scroll will permit one use of the spell.  If flag
+2:0::is 1, the scroll will permit one character to learn the spell from the
+2:0::scroll.
+2:0::
+2:0::Example:
+2:0::
+2:0::    USE 9151 nnnn       # make a one-shot use scroll for spell nnnn
+2:0::    USE 9151 nnnn 1     # make a one-time study scroll for spell nnnn
+2:0::
+2:0::Only Scrying [162] spells may be scribed with this skill.
+2:0::
+2:0::The spell must be known in order to be written.  If the spell is
+2:0::rated for experience, a level of "adept" or higher is required to
+2:0::record it.  The character will still know the spell after it has
+2:0::been scribed.
+2:0::
+2:0::This spell requires as much time to cast as the skill takes to learn.
+2:0::Writing a spell which requires two weeks of study to learn will take
+2:0::two weeks.
+2:0::
+2:0::Skill:  Language of the Ancients~[9152]
+2:0::---------------------------------------
+2:0::Usage:  USE 9152 <spell> [flag]
+2:0::
+2:0::Required aura:  two points
+2:0::Required item:  blank scroll [84]
+2:0::Time to cast:   seven or more days
+2:0::
+2:0::The Ancients were a race of wise, powerful men who walked the lands
+2:0::long before the modern inhabitants had arrived.  Their language is
+2:0::heavy and descriptive, well suited to expressing their detailed and
+2:0::complex thoughts.
+2:0::
+2:0::Use of 9152 will transcribe the given spell onto a blank scroll.
+2:0::The blank scroll will be consumed, and a new unique scroll will be
+2:0::produced.  If flag is not specified, the new scroll will permit one
+2:0::use of the spell.  If flag is 1, the scroll will permit one characterx
+2:0::to learn the spell from the scroll.
+2:0::
+2:0::Example:
+2:0::
+2:0::    USE 9152 nnnn       # make a one-shot use scroll for spell nnnn
+2:0::    USE 9152 nnnn 1     # make a one-time study scroll for spell nnnn
+2:0::
+2:0::Only Gatecraft [163] spells may be scribed with this skill.
+2:0::
+2:0::The spell must be known in order to be written.  If the spell is
+2:0::rated for experience, a level of "adept" or higher is required to
+2:0::record it.  The character will still know the spell after it has
+2:0::been scribed.
+2:0::
+2:0::This spell requires as much time to cast as the skill takes to learn.
+2:0::Writing a spell which requires two weeks of study to learn will take
+2:0::two weeks.
+2:0::
+2:0::Skill:  Arcane symbols~[9153]
+2:0::-----------------------------
+2:0::Usage:  USE 9153 <spell> [flag]
+2:0::
+2:0::Required aura:  two points
+2:0::Required item:  blank scroll [84]
+2:0::Time to cast:   seven or more days
+2:0::
+2:0::Transcribe the given spell onto a blank scroll.  The blank scroll will
+2:0::be consumed, and a new unique scroll will be produced.  If flag is not
+2:0::specified, the new scroll will permit one use of the spell.  If flag
+2:0::is 1, the scroll will permit one character to learn the spell from the
+2:0::scroll.
+2:0::
+2:0::Example:
+2:0::
+2:0::    USE 9153 nnnn       # make a one-shot use scroll for spell nnnn
+2:0::    USE 9153 nnnn 1     # make a one-time study scroll for spell nnnn
+2:0::
+2:0::Only Artifact construction [164] spells may be scribed with this skill.
+2:0::
+2:0::The spell must be known in order to be written.  If the spell is
+2:0::rated for experience, a level of "adept" or higher is required to
+2:0::record it.  The character will still know the spell after it has
+2:0::been scribed.
+2:0::
+2:0::This spell requires as much time to cast as the skill takes to learn.
+2:0::Writing a spell which requires two weeks of study to learn will take
+2:0::two weeks.
+2:0::
+2:0::Skill:  Runes of Evil~[9154]
+2:0::----------------------------
+2:0::Usage:  USE 9154 <spell> [flag]
+2:0::
+2:0::Required aura:  two points
+2:0::Required item:  blank scroll [84]
+2:0::Time to cast:   seven or more days
+2:0::
+2:0::The most basic and powerful of the magical languages, Runes of Evil
+2:0::may represent vast power.  Descended from neither man or spirit,
+2:0::they represent the fundamental Commands which shape the world and
+2:0::its events.  They may represent concepts which men are incapable of
+2:0::speaking, or even thinking.
+2:0::
+2:0::Use of 9154 will transcribe the given spell onto a blank scroll.
+2:0::The blank scroll will be consumed, and a new unique scroll will be
+2:0::produced.  If flag is not specified, the new scroll will permit one
+2:0::use of the spell.  If flag is 1, the scroll will permit one character
+2:0::to learn the spell from the scroll.
+2:0::
+2:0::Example:
+2:0::
+2:0::    USE 9154 nnnn       # make a one-shot use scroll for spell nnnn
+2:0::    USE 9154 nnnn 1     # make a one-time study scroll for spell nnnn
+2:0::
+2:0::Only Necromancy [165] spells may be scribed with this skill.
+2:0::
+2:0::The spell must be known in order to be written.  If the spell is
+2:0::rated for experience, a level of "adept" or higher is required to
+2:0::record it.  The character will still know the spell after it has
+2:0::been scribed.
+2:0::
+2:0::This spell requires as much time to cast as the skill takes to learn.
+2:0::Writing a spell which requires two weeks of study to learn will take
+2:0::two weeks.
+2:0::
+2:0::Skill:  Create magical barrier~[9160]
+2:0::-------------------------------------
+2:0::Spell:  Create magical barrier [9160]
+2:0::
+2:0::Usage:  USE 9160 [aura]
+2:0::
+2:0::Required aura:  one to eight points
+2:0::Required item:
+2:0::Time to cast:   ten days
+2:0::
+2:0::Erects a magical barrier which prevents anyone from entering the
+2:0::location.  The barrier will lose one point of aura at the end of
+2:0::each turn, and will dissipate when it has no aura remaining.
+2:0::
+2:0::For example, USE 9160 1 will create a barrier over the location
+2:0::which lasts until the end of the turn.  USE 9160 2 will create
+2:0::a barrier which lasts until the end of the next turn.
+2:0::
+2:0::Multiple casts of 9160 are additive.
+2:0::
+2:0::A barrier which achieves eight points of aura becomes permanent.
+2:0::Permanent barriers do not decay at the end of each month.  They
+2:0::may only be removed by a magician.
+2:0::
+2:0::Aura defaults to one.
+2:0::
+2:0::Skill:  Remove magical barrier~[9161]
+2:0::-------------------------------------
+2:0::Spell:  Remove magical barrier [9161]
+2:0::
+2:0::Usage:  USE 9161 <direction> [aura]
+2:0::
+2:0::Required aura:  one to four points, as given
+2:0::Required item:
+2:0::Time to cast:   seven days
+2:0::
+2:0::Attempt to remove a magical barrier from the location in the
+2:0::given direction.  If direction "0" is given, a barrier over
+2:0::the current location will be removed.
+2:0::
+2:0::The chance that the barrier will be successfully removed is
+2:0::proportional to the aura invested in the attempt:
+2:0::
+2:0::	aura	chance of success
+2:0::	----	-----------------
+2:0::	 1             10%
+2:0::	 2             25%
+2:0::	 3	       50%
+2:0::	 4	       75%
+2:0::
+2:0::Skill:  Destroy artifact~[9164]
+2:0::-------------------------------
+2:0::Usage:  USE 9164 <artifact>
+2:0::
+2:0::Required aura:  two points
+2:0::Required item:  a magical artifact
+2:0::Time to cast:   seven days
+2:0::
+2:0::Attempt to destroy a magical artifact.  The artifact must be in the
+2:0::caster's possession.  Some artifacts can only be destroyed in the
+2:0::location in which they were created.
+2:0::
+2:0::Any spells contained in the artifact will be lost when it is destroyed.
+2:0::Any aura trapped in the artifact will be released into the caster's
+2:0::current aura rating.
+2:0::
+2:0::Skill:  Reverse jump through gate~[9165]
+2:0::----------------------------------------
+2:0::Usage:  USE 9165 <gate> [key]
+2:0::
+2:0::Required aura:  two points for each figure
+2:0::Required item:  none
+2:0::Time to cast:   three days
+2:0::
+2:0::Gates were long thought to be one way portals through space.
+2:0::Most mages believed that returning to the starting location
+2:0::required a second gate or a conventional journey.
+2:0::
+2:0::However, it is possible to jump back to a gate from the gate's
+2:0::destination.  Reversing the direction of teleportation is
+2:0::difficult, so the jump requires twice as much aura as a
+2:0::forward jump.
+2:0::
+2:0::As with a conventional jump, the mage must know the gate's
+2:0::entity number as well as the key, if necessary.
+2:0::
+2:0::Skill:  Locate character~[9167]
+2:0::-------------------------------
+2:0::Usage:  USE 9167 <character> [aura]
+2:0::
+2:0::Required aura:  one to three points, as given
+2:0::Required item:
+2:0::Time to cast:   ten days
+2:0::
+2:0::Attempt to locate the specified character.  If successful, the
+2:0::mage will learn the region in which the character is currently
+2:0::located.
+2:0::
+2:0::The more aura expended, the greater the chance that the character
+2:0::will be located.
+2:0::
+2:0::	aura	chance of success
+2:0::	----	-----------------
+2:0::	 1            50%
+2:0::	 2            75%
+2:0::	 3            90%
+2:0::
+2:0::Skill:  Shroud abilities from scry~[9169]
+2:0::-----------------------------------------
+2:0::Usage:  USE 9169 [aura]
+2:0::
+2:0::Required aura:  one or more points, as given
+2:0::Required item:
+2:0::Time to cast:   three days
+2:0::
+2:0::Attempt to prevent other mages from successfully scrying
+2:0::the caster to learn magical abilities.  Creates an ability
+2:0::shroud with the given amount of aura.  A greater amount
+2:0::of aura must be spent by another mage to pierce the shroud.
+2:0::
+2:0::The default amount of aura is one point.
+2:0::
+2:0::The magical shroud loses one point of aura at the end of each
+2:0::month.  Successive uses of 9169 are additive; USE 9169 1
+2:0::followed by USE 9169 3 will result in an ability shroud with
+2:0::an aura of four points.
+2:0::
+2:0::Skill:  Detect ability scry~[9170]
+2:0::----------------------------------
+2:0::Usage:  USE 9170
+2:0::
+2:0::Required aura:  one point
+2:0::Required item:  none
+2:0::Time to cast:   seven days
+2:0::
+2:0::Knowledge of 9170 will inform the mage of attempts made by other
+2:0::magicians to scry his abilities.  No USE is required in order for
+2:0::scry attempts to be detected.  The skill is automatically employed
+2:0::whenever the mage is the target of an ability scry spell.
+2:0::
+2:0::USE of the skill will cause the magician to practice scry detection.
+2:0::Practice should improve the experience rating with this skill over
+2:0::time, and cause the mage to become more adept at discovering scry
+2:0::attempts and identifying their source.
+2:0::
+2:0::Aura is only consumed by this spell when it is used for practice.
+2:0::No aura is depleted when a scry is detected.
+2:0::
+2:0::Skill:  Detect location scry~[9171]
+2:0::-----------------------------------
+2:0::Usage:  USE 9171
+2:0::
+2:0::Required aura:  one point
+2:0::Required item:  none
+2:0::Time to cast:   seven days
+2:0::
+2:0::Knowledge of 9171 will inform the mage of attempts made by other
+2:0::magicians to scry the mage's current location.  No USE is required
+2:0::in order for scry attempts to be detected.  The skill is used
+2:0::automatically whenever the mage's location is the target of an
+2:0::location scry spell.
+2:0::
+2:0::USE of the skill will cause the magician to practice scry detection.
+2:0::Practice should improve the experience rating with this skill over
+2:0::time, and cause the mage to become more adept at discovering scry
+2:0::attempts and identifying their source.
+2:0::
+2:0::Aura is only consumed by this spell when it is used for practice.
+2:0::No aura is depleted when a scry is detected.
+2:0::
+2:0::Skill:  Farcasting~[9172]
+2:0::-------------------------
+2:0::Usage:  USE 9172 <location>
+2:0::
+2:0::Required aura:  distance in provinces to <location>
+2:0::Required item:
+2:0::Time to cast:   seven days
+2:0::
+2:0::If successful, the location check for the next spell cast
+2:0::attempted will be made from the given location instead of
+2:0::the location the mage is in.
+2:0::
+2:0::The amount of aura consumed is equal to the distance in
+2:0::provinces from the mage's location to the target location.
+2:0::For instance, to project a cast into an adjoining province
+2:0::requires two aura.  To project a cast between any of the
+2:0::sublocations within a province requires one aura.
+2:0::
+2:0::The projected cast state will persist until the mage's next use
+2:0::of magic.  The mage may move before casting the next spell;
+2:0::movement will not alter the target location for spell projection.
+2:0::
+2:0::Unless the mage is projecting to the same location he is in,
+2:0::a magical shroud over the target location will cause this
+2:0::spell to fail.
+2:0::
+2:0::Skill:  Dispel ability shroud~[9173]
+2:0::------------------------------------
+2:0::Usage:  USE 9173 <target>
+2:0::
+2:0::Required aura:  three points
+2:0::Required item:
+2:0::Time to cast:   three days
+2:0::
+2:0::Dispels any magical shroud inhibiting scrying of the specified
+2:0::character's abilities.
+2:0::
+2:0::Skill:  Advanced meditation~[9174]
+2:0::----------------------------------
+2:0::Usage:  USE 9174
+2:0::
+2:0::Required aura:  none
+2:0::Required item:
+2:0::Time to cast:   seven days
+2:0::
+2:0::The mage is able to quickly enter a deep meditative state, even
+2:0::during aura disturbances or attacks from other magicians.
+2:0::
+2:0::Current aura level will rise by two points.  Current aura may rise
+2:0::above maximum aura by two points.
+2:0::
+2:0::Skill:  Hinder meditation~[9175]
+2:0::--------------------------------
+2:0::Usage:  USE 9175 <target> [aura]
+2:0::
+2:0::Required aura:  one to three points, as given
+2:0::Required item:
+2:0::Time to cast:   ten days
+2:0::
+2:0::Clouds the target's mind with disturbing images and incoherent
+2:0::thoughts.  The target mage will have difficulty achieving the
+2:0::proper mental state during his next attempt at meditation.
+2:0::
+2:0::The next meditate spell issued by the target may fail, resulting
+2:0::in the mage not acquiring a point of current aura. The more aura
+2:0::invested in 9175, the greater the chance the target mage will fail:
+2:0::
+2:0::	aura	chance of failure
+2:0::	----	-----------------
+2:0::	 1	      50%
+2:0::	 2	      75%
+2:0::	 3	      90%
+2:0::
+2:0::If the target does not meditate, the spell will lose one point
+2:0::of aura at the end of each month until it has dissipated.  Casts
+2:0::by multiple mages accumulate on the target, although the spell may
+2:0::not accumulate more than three points of aura.
+2:0::
+2:0::For example, if two mages each cast USE 9175 501 2, character [501]
+2:0::will have a 90% chance of failure in his next attempt to meditate.
+2:0::(One aura point has been wasted, since only three may accumulate on
+2:0::the target).  At the end of the month, the strength of the 9175
+2:0::spell against [501] will diminish to two points, and [501] will
+2:0::have a 50% chance of failure during his next meditation.
+2:0::
+2:0::A mage may cast multiple 9175 spells; they accumulate on the targets,
+2:0::not on the casting magician.
+2:0::
+2:0::9175 has no effect on non-magicians.
+2:0::
+2:0::The default amount of aura is one point.
+2:0::
+2:0::Skill:  Forge palantir~[9176]
+2:0::-----------------------------
+2:0::Usage:  USE 9176
+2:0::
+2:0::Required aura:   eight
+2:0::Required items:  one mithril [82]
+2:0::                 one gate crystal [83]
+2:0::Time to cast:    ten days
+2:0::
+2:0::A palantir, or stone of far-seeing, is a crystal orb used to
+2:0::view images from a great distance.  Once created, the palantir
+2:0::may be used to view a distant location:
+2:0::
+2:0::	use <palantir> <location>
+2:0::
+2:0::For example, if a USE 9176 creates Palantir [6289], then one may
+2:0::view City of Drassa [cx61] with the palantir by issuing the order:
+2:0::
+2:0::	use 6289 cx61
+2:0::
+2:0::Use of the palantir takes seven days.  Any character may use the
+2:0::palantir; no magical abilities are required.  However, a palantir
+2:0::may only be used once each turn.
+2:0::
+2:0::Skill:  Save farcast state~[9177]
+2:0::---------------------------------
+2:0::Usage:  USE 9177
+2:0::
+2:0::Required aura:   three
+2:0::Required item:
+2:0::Time to cast:    seven days
+2:0::
+2:0::The state where a mage's next cast will be projected to a different
+2:0::location may be saved with this spell.  A potion will be created
+2:0::which, upon use, will revive the projected cast state.
+2:0::
+2:0::For example, a mage establishes that his next spell cast will be based
+2:0::from Drassa [cx59].  He then issues USE 9177 to preserve this state.
+2:0::Magical potion [8764] is created.  He later issues USE 8764 to drink
+2:0::the potion.  His next spell will be based from Drassa.
+2:0::
+2:0::The mage will no longer have a projected cast state after use of this
+2:0::spell.
+2:0::
+2:0::Skill:  Save speeded cast~[9178]
+2:0::--------------------------------
+2:0::Usage:  USE 9178
+2:0::
+2:0::Required aura:   three
+2:0::Required item:
+2:0::Time to cast:    seven days
+2:0::
+2:0::The state where the mage's next cast will be speeded may be saved
+2:0::with this spell.  A potion will be created which, upon use, will
+2:0::revive the accelerated cast state.
+2:0::
+2:0::For example, a mage establishes that his next spell cast will be
+2:0::speeded by five days.  He then issues USE 9178 to preserve this state.
+2:0::Magical potion [8765] is created.  He later issues USE 8765 to drink
+2:0::the potion.  He will gain a five day speedup for his next cast.
+2:0::
+2:0::The mage will no longer have a speeded cast state after use of this
+2:0::spell.
+2:0::
+2:0::Skill:  Sailing~[9502]
+2:0::----------------------
+2:0::Usage:  USE 9502 <direction or location>
+2:0::Or:     SAIL <direction or location>
+2:0::
+2:0::Requires:  character must be ship's captain
+2:0::Time:      varies with route taken
+2:0::
+2:0::Pilot a ship in the given direction, or to the specified
+2:0::location.  If a location is specified, there must be a direct
+2:0::route to it from the current location of the ship.
+2:0::
+2:0::Compass points may be abbreviated:  N, S, E, W.
+2:0::
+2:0::The character issuing the Pilot ship order must occupy the
+2:0::first position inside the ship (the character must be the
+2:0::captain of the ship).
+2:0::
+2:0::The captain must have a crew to assist in the handling of the
+2:0::ship.  Galleys require fourteen sailors as oarsmen to row the ship.
+2:0::Roundships require at least eight sailors to man the ship's rigging.
+2:0::
+2:0::        ship            crew
+2:0::        ----            ----
+2:0::        galley          14 sailors
+2:0::        roundship       8 sailors
+2:0::
+2:0::If the required number of crew are not available, travel is still
+2:0::possible, but will take an extra day for each hand the crew is short.
+2:0::
+2:0::For example, a galley with only 10 men at the oars will take four
+2:0::extra days to travel across an ocean route.  A roundship with no
+2:0::sailors at all would take eight extra days to traverse a route.
+2:0::
+2:0::Galleys perform equally well regardless of wind conditions.
+2:0::Roundships may be becalmed and unable to travel.  In the presence
+2:0::of favorable wind they will travel across ocean routes in half
+2:0::the rated time.
+2:0::
+2:0::Overloaded ships do not sail well.  They may take longer than
+2:0::expected to travel across routes, and are almost certain to
+2:0::capsize and sink in a storm.  Captains should be careful not
+2:0::to leave port in a vessel carrying too much cargo.
+2:0::
+2:0::For convenience, one may use the SAIL order rather than "USE 9502".
+2:0::Knowledge of Pilot ship [9502] is still required, however.
+2:0::
+2:0::Skill:  Shipbuilding~[9503]
+2:0::---------------------------
+2:0::Usage:     BUILD galley "Name of ship"
+2:0::or         BUILD roundship "Name of ship"
+2:0::
+2:0::Requires:  at least three workers [11]
+2:0::	   50 wood [77] for a galley, 100 wood for a roundship
+2:0::
+2:0::Time:      250 worker-days for a galley, 500 for a roundship
+2:0::
+2:0::To begin construction of a ship, the shipbuilder should unstack from
+2:0::beneath other characters and issue one of the BUILD orders.  The lumber
+2:0::will immediately be deducted from the shipbuilder's inventory and put
+2:0::to use building the new ship.  The shipbuilder and his workers will be
+2:0::placed inside the new ship.
+2:0::
+2:0::As soon as the required number of worker-days has been invested in
+2:0::construction, the ship will be christened and declared seaworthy.
+2:0::
+2:0::To resume construction of a partially completed ship, first enter the
+2:0::ship, then issue the either "build galley" or "build roundship".
+2:0::
+2:0::Ships may only be built in locations with a passable route to an
+2:0::ocean, such as a port city.
+2:0::
+2:0::Skill:  Bribe noble~[9515]
+2:0::--------------------------
+2:0::Usage:   BRIBE <target> <gold>
+2:0::
+2:0::Time:   seven days
+2:0::
+2:0::Offer a character gold in an attempt to win their service.  The
+2:0::amount must be at least 250 gold or the receiving noble will
+2:0::not consider it a serious offer.
+2:0::
+2:0::Nobles with oathbound loyalty ignore bribes.  They may accept
+2:0::the gift, but they will not renounce loyalty to their lord.
+2:0::
+2:0::Nobles with contract loyalty will consider the bribe if it
+2:0::meets or exceeds their current loyalty rating.  For example,
+2:0::a noble of loyalty contract-750 would ignore any bribe of
+2:0::less than 750 gold.
+2:0::
+2:0::Nobles with fear loyalty will seriously consider any bribe of
+2:0::at least 250 gold.
+2:0::
+2:0::If the receiving noble considers the bribe, there is a 33%
+2:0::chance they will renounce loyalty to their current lord, and
+2:0::swear fealty to the bribing character.  There is also a chance
+2:0::that they will report the bribe or pocket it for themselves.
+2:0::In some cases they may even renounce loyalty to their lord,
+2:0::but not swear fealty to the briber, instead choosing to go off
+2:0::on their own.
+2:0::
+2:0::Characters who are successfully bribed will leave their stackmates
+2:0::and stack with the briber.  Their loyalty will be contract-250
+2:0::to the bribing character.
+2:0::
+2:0::Skill:  Catch wild horses~[9517]
+2:0::--------------------------------
+2:0::Usage:  CATCH  [number of horses]  [days]
+2:0::Time:   as given or necessary
+2:0::
+2:0::Attempt to catch any wild horses found roaming the plains.  Each day the
+2:0::noble will have a 10% chance of catching a wild horse, if any can be found.
+2:0::Up to three horses may be caught per month in a plains province.
+2:0::
+2:0::A unit must know the Catch wild horses [9517] subskill of Beastmastery [123]
+2:0::in order to catch horses.
+2:0::
+2:0::Examples:
+2:0::
+2:0::    catch        # catch as many horses as possible
+2:0::    catch 1      # stop after catching 1 wild horse
+2:0::    catch 0 10   # try to catch horses for 10 days
+2:0::    catch 1 10   # stop after catching 1 wild horse, or 10 days, whichever
+2:0::                 # comes first
+2:0::
+2:0::In all cases, horse-catching ceases when no more horses can be founding
+2:0::roaming the plains.
+2:0::
+2:0::Skill:  Determine inventory of character~[9519]
+2:0::-----------------------------------------------
+2:0::Usage:  USE 9519 <character>
+2:0::Time:   seven days
+2:0::
+2:0::Attempt to sneakily learn the contents of the specified
+2:0::character's inventory.  Attempts are not always successful.
+2:0::
+2:0::If caught while rummaging through the target's possessions,
+2:0::the spy may be harmed or captured.  There is a 10% chance
+2:0::that the spy will be caught for each use of this skill.
+2:0::
+2:0::The spy must be in the same region as the target.
+2:0::
+2:0::Skill:  Determine skills of character~[9520]
+2:0::--------------------------------------------
+2:0::Usage:  USE 9520 <character>
+2:0::Time:   seven days
+2:0::
+2:0::Attempt to sneakily learn what skills the specified
+2:0::character possesses by crafty observation and spying.
+2:0::
+2:0::Unsuccessful attempts may cause the spy to be discovered,
+2:0::harmed or captured.  There is a 10% chance that the spy
+2:0::will be discovered for each use of this skill.
+2:0::
+2:0::The spy must be in the same region as the target.
+2:0::
+2:0::Skill:  Determine character's lord~[9521]
+2:0::-----------------------------------------
+2:0::Usage:  USE 9521 <character>
+2:0::Time:   seven days
+2:0::
+2:0::Attempt to learn the identity of the lord to whom the
+2:0::specified character has sworn fealty.  In some cases this
+2:0::is easily determined by observation at a safe distance.
+2:0::In others, the spy may need to risk eavesdropping on or
+2:0::following the target.  Unfortunate spies may discovered,
+2:0::harmed or captured in their attempts.
+2:0::
+2:0::There is a 10% chance that the spy will be caught for
+2:0::each use of this skill.
+2:0::
+2:0::The spy must be in the same region as the target.
+2:0::
+2:0::Skill:  Determine vassals of a noble~[9522]
+2:0::-------------------------------------------
+2:0::Usage:  USE 9522 <character>
+2:0::Time:   seven days
+2:0::
+2:0::Learn the identity of all characters who have sworn fealty
+2:0::to the target.  This may required the spy to risk
+2:0::eavesdropping on or following the target.  In some rare
+2:0::cases the information will be widely known and thus easily
+2:0::obtained.  Unsuccessful spies may be discovered in their
+2:0::attempts.  Harm or capture is possible.
+2:0::
+2:0::There is a 10% chance that the spy will be discovered for
+2:0::each use of this skill.
+2:0::
+2:0::The spy and target must be in the same region.
+2:0::
+2:0::Skill:  Train wild horse to riding horse~[9529]
+2:0::-----------------------------------------------
+2:0::Usage:     USE 9529
+2:0::
+2:0::Requires:  one wild horse [51]
+2:0::Produces:  one riding horse [52]
+2:0::
+2:0::Time:      seven days
+2:0::
+2:0::Wild horses are first broken to saddle, then trained to respect
+2:0::and obey whatever riders they may serve.  Once broken, riding
+2:0::horses become too timid and docile to be of any use in battle.
+2:0::
+2:0::Skill:  Train wild horse to warmount~[9530]
+2:0::-------------------------------------------
+2:0::Usage:     USE 9530
+2:0::
+2:0::Requires:  one wild horse [51]
+2:0::Produces:  one warmount [53]
+2:0::
+2:0::Time:      fourteen days
+2:0::
+2:0::Unlike riding horses, war horses cannot be broken.  The war horse
+2:0::must be trained without destroying any of its spirit.  A warmount
+2:0::is also be taught much more than a simple riding animal, as it
+2:0::must know how to defend itself and its rider and to remain calm
+2:0::in the most frightening situations.
+2:0::
+2:0::Skill:  Construct battering ram~[9540]
+2:0::--------------------------------------
+2:0::Usage:  USE 9540
+2:0::
+2:0::Requires:  three lumber [77]
+2:0::           one iron [79]
+2:0::           three workers [11]
+2:0::
+2:0::Produces:  one battering ram [60]
+2:0::
+2:0::Time:      fourteen days
+2:0::
+2:0::The craftsman constructs a battering ram by selecting a large,
+2:0::heavy tree trunk, sharpening the end somewhat and plating it
+2:0::with iron, and then suspending it in a movable wooden frame
+2:0::such that it may be swung back and forth against walls or gates.
+2:0::
+2:0::The frame receives an iron plated roof to protect the operators
+2:0::from boiling oil or pitch, rocks, or other missile weapons hurled
+2:0::down upon them by the enemy.
+2:0::
+2:0::Skill:  Construct siege tower~[9542]
+2:0::------------------------------------
+2:0::Usage:  USE 9542
+2:0::
+2:0::Requires:  three lumber [77]
+2:0::           three leather [80]
+2:0::           three workers [11]
+2:0::
+2:0::Produces:  one seige tower [62]
+2:0::
+2:0::Time:      fourteen days
+2:0::
+2:0::The engineer directs three workers to build a wooden tower,
+2:0::covered with treated leather skins or iron plating to protect
+2:0::the tower from burning.  The tower contains several ladders
+2:0::and a platform from which soldiers may attack.
+2:0::
+2:0::In battle, the tower is wheeled up against an enemy's walls
+2:0::and used by attacking soldiers to match the height of the
+2:0::defenders.  The attackers may then climb from the tower onto
+2:0::the walls.
+2:0::
+2:0::Skill:  Extract venom from ratspider~[9549]
+2:0::-------------------------------------------
+2:0::Usage:  USE 9549
+2:0::
+2:0::Required:  one ratspider [81]
+2:0::Produces:  one ratspider venom [63]
+2:0::Time:      seven days
+2:0::
+2:0::The alchemist performs a delicate operation to extract the
+2:0::highly poisonous ratspider venom.
+2:0::
+2:0::The top of the ratspider's head is removed by inserting a sharp
+2:0::knife above the head joint and twisting.  Two glands, from which
+2:0::the ratspider venom is later extracted, are removed from behind
+2:0::the mandible.
+2:0::
+2:0::Risk is minimized by taking extreme care when handling the
+2:0::ratspider.  The ratspider is killed in the process. 
+2:0::
+2:0::Skill:  Make potion of slavery~[9550]
+2:0::-------------------------------------
+2:0::Usage:  USE 9550
+2:0::
+2:0::Required:  one ratspider venom [63]
+2:0::Time:      seven days
+2:0::
+2:0::The alchemist brews a potion which, when ingested by a character,
+2:0::causes that character to become a servant of the alchemist.
+2:0::The unfortunate noble will swear fealty to the alchemist and
+2:0::promise to do his bidding.
+2:0::
+2:0::The rare and highly poisonous ratspider venom is used in the
+2:0::preparation of this potion.  Upon completion, the new potion
+2:0::will be added to the alchemist's inventory.  The potion will,
+2:0::of course, be unlabeled.
+2:0::
+2:0::A character wishing to drink the potion should specify it
+2:0::to the USE order.  For instance, to drink potion [601], issue
+2:0::the order:  USE 601.
+2:0::
+2:0::Skill:  Brew healing potion~[9551]
+2:0::----------------------------------
+2:0::Usage:  USE 9551
+2:0::
+2:0::Required:  avinia leaf [65]
+2:0::Time:      seven days
+2:0::
+2:0::The alchemist brews a potion of healing.  Any character
+2:0::ingesting the potion will be immediately healed of any
+2:0::wounds or other maladies.
+2:0::
+2:0::Upon completion, the potion will be added to the alchemist's
+2:0::inventory.  The potion's label will not reveal its purpose.
+2:0::
+2:0::A character wishing to drink the potion should specify it
+2:0::to the USE order.  For instance, to drink potion [602], issue
+2:0::the order:  USE 602.
+2:0::
+2:0::Skill:  Brew potion of death~[9552]
+2:0::-----------------------------------
+2:0::Usage:  USE 9552
+2:0::
+2:0::Required:  lana bark [64]
+2:0::Time:      ten days
+2:0::
+2:0::The alchemist brews a potion which will cause instant death
+2:0::to any character which drinks it.
+2:0::
+2:0::Upon completion, the potion will be added to the alchemist's
+2:0::inventory.  The potion's label will not reveal its sinister
+2:0::purpose.
+2:0::
+2:0::A character wishing to drink the potion should specify it
+2:0::to the USE order.  For instance, to drink potion [603], issue
+2:0::the order:  USE 603.
+2:0::
+2:0::Skill:  Add ram to galley~[9554]
+2:0::--------------------------------
+2:0::Usage:  USE 9554
+2:0::
+2:0::Requires:  three workers [11]
+2:0::           3 lumber [77]
+2:0::           1 iron [79]
+2:0::
+2:0::Time:      10 days
+2:0::
+2:0::A galley fitted with a ram is a most effective ocean fighting
+2:0::vessel.  The oars permit the ship to be maneuvered in battle,
+2:0::regardless of wind conditions.  The ram allows a galley to crush
+2:0::the sides of enemy ships.
+2:0::
+2:0::To use this skill, the character must enter the galley and issue
+2:0::USE 9554.  The galley will be fitted with an iron-tipped ram.
+2:0::The character need not be in control of the ship in order to
+2:0::perform the modification.
+2:0::
+2:0::Rams may not be added to roundships or unfinished galleys.
+2:0::
+2:0::Skill:  Mine iron~[9563]
+2:0::------------------------
+2:0::Usage:  USE 9563
+2:0::
+2:0::Requires:  ten workers
+2:0::Time:      10 days
+2:0::
+2:0::Iron is widely used in the making of weapons and armor.  It
+2:0::is a required component of many of the weaponsmithing skill
+2:0::uses, and is also used for applying a metal tip to galley
+2:0::rams and battering rams.  An iron roof provides a protective
+2:0::cover for siege towers.
+2:0::
+2:0::The character must be in a mine shaft to USE 9563.  The mine's
+2:0::monthly yield of iron will be obtained.  Once mined, no further
+2:0::iron can be mined until the next month.
+2:0::
+2:0::Use of this skill will cause the mine shaft to become one-third
+2:0::of a level deeper.
+2:0::
+2:0::The quantity of iron obtained will vary with the depth of the
+2:0::shaft.  The largest deposits of iron are usually found in
+2:0::shallow mines.
+2:0::
+2:0::Skill:  Mine gold~[9564]
+2:0::------------------------
+2:0::Usage:  USE 9564
+2:0::
+2:0::Requires:  ten workers
+2:0::Time:      10 days
+2:0::
+2:0::Gold is widely accepted as a currency in Olympia.  Its
+2:0::scarcity lends gold a high value, but it is not so rare
+2:0::that it cannot be used in the everyday exchange of good.
+2:0::It has a high value, but weighs little, and thus is easy to
+2:0::carry.  Gold is also readily assayable to guarantee its value.
+2:0::
+2:0::The character must be in a mine shaft to USE 9564.  The mine's
+2:0::monthly yield of gold will be obtained.  Once mined, no further
+2:0::gold can be mined until the next month.
+2:0::
+2:0::Use of this skill will cause the mine shaft to become one-third
+2:0::of a level deeper.
+2:0::
+2:0::The quantity of gold obtained will vary with the depth of the
+2:0::shaft.
+2:0::
+2:0::Skill:  Mine mithril~[9565]
+2:0::---------------------------
+2:0::Usage:  USE 9565
+2:0::
+2:0::Requires:  ten workers
+2:0::Time:      10 days
+2:0::
+2:0::Mithril is a magical metal used in the by the ancient
+2:0::elf-lords to construct their bright, fearsome weapons.
+2:0::Today mithril is the component of some rare construction
+2:0::skills.
+2:0::
+2:0::The character must be in a mine shaft to USE 9565.  The mine's
+2:0::monthly yield of mithril will be obtained.  Once mined, no
+2:0::further mithril can be mined until the next month.
+2:0::
+2:0::Use of this skill will cause the mine shaft to become one-third
+2:0::of a level deeper.
+2:0::
+2:0::The quantity of mithril obtained will vary with the depth of the
+2:0::shaft.  Mithril is usually found only in very deep mines.  As
+2:0::the dangers of poison gasses or collapse of the mine shaft increase
+2:0::with depth, mithril mining tends to be risky.
+2:0::
+2:0::Skill:  Stone quarrying~[9566]
+2:0::------------------------------
+2:0::<lore sheet not available>
+2:0::
+2:0::Skill:  Harvest lumber~[9568]
+2:0::-----------------------------
+2:0::Usage:     WOOD [number] [days]
+2:0::Times:     as given or necessary
+2:0::Requires:  at least one worker [11]
+2:0::
+2:0::Workers enter the forest and select trees which are suitable for felling
+2:0::and sawing.  Lumber is used in the construction of ships, buildings and
+2:0::some weapons.  Timber is also used to support the roofs of mine shafts.
+2:0::
+2:0::Must be used in a forest province.  Forests generate 30 wood [77] each
+2:0::month.
+2:0::
+2:0::Examples:
+2:0::
+2:0::    wood         # obtain as much wood as possible
+2:0::    wood 25      # stop after getting 25 wood
+2:0::    wood 0 5     # cut timber for five days
+2:0::    wood 25 5    # stop after five days, or 25 wood, whichever
+2:0::                 # comes first
+2:0::
+2:0::In all cases, timber cutting will cease as soon as the forest's supply
+2:0::of wood for the month has been exhausted.
+2:0::
+2:0::WOOD is an alias for COLLECT 77.
+2:0::
+2:0::Skill:  Harvest yew~[9569]
+2:0::--------------------------
+2:0::Usage:     YEW [number] [days]
+2:0::Times:     as given or necessary
+2:0::Requires:  at least one worker [11]
+2:0::
+2:0::Workers enter a yew grove and select yew trees which are suitable for
+2:0::collection.  Yew is used in the making of longbows.
+2:0::
+2:0::Must be used in a yew grove.  Yew groves generate 5 yew [68] each month.
+2:0::
+2:0::Examples:
+2:0::
+2:0::    yew         # obtain as much yew as possible
+2:0::    yew 1       # stop after getting 1 wood
+2:0::    yew 0 4     # cut yew for four days
+2:0::
+2:0::In all cases, yew harvesting will cease as soon as the grove's supply
+2:0::of yew for the month has been exhausted.
+2:0::
+2:0::YEW is an alias for COLLECT 68.
+2:0::
+2:0::Skill:  Prepare for raid~[9571]
+2:0::-------------------------------
+2:0::Usage:  USE 9571 <target>
+2:0::Time:   five days
+2:0::
+2:0::This skill improves the chances that a stealth raid, such as
+2:0::a theft, kidnapping, or assasination, will succeed.  The target
+2:0::specified is closely studied and spied upon.  Information is
+2:0::gathered which is useful during a raid, such as defensive
+2:0::tactics of the target, daily patterns, and state of preparedness.
+2:0::
+2:0::This skill may only be used on one target at a time, and only
+2:0::once per month.
+2:0::
+2:0::The raid must be launched by the end of the month following the
+2:0::last use of [9571], or the benefits are lost.
+2:0::
+2:0::The character runs a 5% risk of being caught spying on the enemy
+2:0::for each use of [9571].  The first use improves the chances of
+2:0::a successful raid by 10%.  The second, by a further 8%.  The third,
+2:0::by another 6%.
+2:0::
+2:0::Further uses give no added benefit, although the state of readiness
+2:0::will be maintained.  For example, if a character spent three months
+2:0::using [9571] to prepare for a raid during the fourth month, but
+2:0::decided for some reason to postpone the raid one month, it would
+2:0::be wise to use [9571] again to maintain the 24% bonus.  Otherwise
+2:0::it would be lost.
+2:0::
+2:0::The target must be present to be spied upon.
+2:0::
+2:0::Skill:  Record skill on scroll~[9573]
+2:0::-------------------------------------
+2:0::Usage:  USE 9573 <skill>
+2:0::
+2:0::Requires:  blank scroll [84]
+2:0::Time:      seven or more days
+2:0::
+2:0::Record the given skill on a blank scroll.  The blank scroll will be
+2:0::consumed, and a new unique scroll will be produced.  The new scroll
+2:0::will allow one character to learn the skill.
+2:0::
+2:0::Example:
+2:0::
+2:0::    USE 9573 nnnn     # make a one-time study scroll for skill nnnn
+2:0::
+2:0::Magical skills may not be scribed with this skill.
+2:0::
+2:0::The skill must be known in order to be written.  If the skill is
+2:0::rated for experience, a level of "adept" or higher is required to
+2:0::record the skill.  The character will still know the skill after
+2:0::writing it.
+2:0::
+2:0::This skill requires as much time as the recorded skill takes to learn.
+2:0::Writing a skill which requires two weeks of study to learn will take
+2:0::two weeks.
+2:0::
+2:0::Skill:  Archery~[9579]
+2:0::----------------------
+2:0::<lore sheet not available>
+2:0::
+2:0::Skill:  Swordplay~[9580]
+2:0::------------------------
+2:0::<lore sheet not available>
+2:0::
+2:0::Skill:  Weaponsmithing~[9581]
+2:0::-----------------------------
+2:0::Usage:  MAKE  <item> <days>
+2:0::Time:   as given
+2:0::
+2:0::Weapons and armor are required for the training of some kinds of
+2:0::fighters.  Archers require longbows, for instance, elite guard
+2:0::require plate armor, etc.
+2:0::
+2:0::Weapons and armor are made with the MAKE command.  The following
+2:0::weapons and armor may be produced:
+2:0::
+2:0::    num   item           material
+2:0::    ---   ----           --------
+2:0::     72   longbow        yew [68]
+2:0::     73   plate armor    iron [79]
+2:0::     74   longsword      iron [79]
+2:0::     75   pike           wood [77]
+2:0::     85   crossbow       wood [77]
+2:0::
+2:0::One unit of the input material may turned into one of the desired
+2:0::items each day.  For example, MAKE 72 2 would spend two days turning
+2:0::two yew [68] into two longbows [72].
+2:0::
+2:0::See the MAKE command for further information.
+2:0::
+2:0::Skill:  Fishing~[9582]
+2:0::----------------------
+2:0::Usage:     FISH [number of fish] [days]
+2:0::Requires:  at least one sailor
+2:0::
+2:0::Unit must be on a ship on the ocean in order to fish.  Each sailor
+2:0::will produce one fish per day, as long as fish stocks in the ocean
+2:0::province last.  Ocean provinces generate 50 fish per month which
+2:0::may be obtained by fishing.
+2:0::
+2:0::Examples:
+2:0::
+2:0::    fish         # obtain as many fish as possible
+2:0::    fish 25      # stop after getting 25 fish
+2:0::    fish 0 5     # fish for five days
+2:0::    fish 25 5    # stop after five days, or 25 fish, whichever
+2:0::                 # comes first
+2:0::
+2:0::In all cases, fishing will cease as soon as the stocks in the ocean
+2:0::province have been exhausted.
+2:0::
+2:0::Skill:  Collect rare foliage~[9583]
+2:0::-----------------------------------
+2:0::Usage:  COLLECT <item> [number] [days]
+2:0::Times:  as given or necessary
+2:0::
+2:0::The noble will seek rare foliage to collect.  See the COLLECT order
+2:0::for details on the syntax of the arguments and an explanation of the
+2:0::columns in the following table.
+2:0::
+2:0::The followings kinds of rare foliage may be collected with this skill:
+2:0::
+2:0::   num  item         who      where            qty  skill  chance
+2:0::   ---  ----         ---      -----            ---  -----  ------
+2:0::    64  lana bark    noble    circle of trees    3   9583    50%
+2:0::    65  avinia leaf  noble    mallorn grove      2   9583    20%
+2:0::    66  spiny root   noble    bogs, pits         4   9583   100%
+2:0::    66  spiny root   noble    swamps             1   9583   100%
+2:0::
+2:0::Skill:  Collect rare elements~[9584]
+2:0::------------------------------------
+2:0::Usage:  COLLECT <item> [number] [days]
+2:0::Times:  as given or necessary
+2:0::
+2:0::The noble will seek rare elements to collect.  See the COLLECT order
+2:0::for details on the syntax of the arguments and an explanation of the
+2:0::columns in the following table.
+2:0::
+2:0::The followings kinds of rare elements may be collected with this skill:
+2:0::
+2:0::   num  item         who      where          qty  skill  chance
+2:0::   ---  ----         ---      -----          ---  -----  ------
+2:0::    67  farrenstone  noble    caves            2   9584   100%
+2:0::    71  pretus bones noble    sand pits        1   9584   100%
+2:0::
+1:0::#include 0
+1:0::
+1:0::#include 2
+1:0::Order template
+1:0::------------------------------------------------------------------------
+1:0::#include 5
+1:0::

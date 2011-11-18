@@ -1,0 +1,24 @@
+#Spell:  Curse noncreator loyalty [9113]
+#
+Usage:  USE @@@@ <artifact> [aura]
+
+Required aura:  one or more points, as given
+Required item:
+Time to cast:   fourteen days
+
+Curses a forged magical artifact such that possession by any
+character other than the creator will cause that character's
+loyalty to erode.  The amount of loyalty lost is proportional
+to the aura invested with @@@@.
+
+For example, USE @@@@ 8192 10 would place a ten aura noncreator
+curse on artifact [8192].  Anyone except the artifact's creator
+would lose ten points of loyalty each turn that they held the
+object.
+
+The actual loss of loyalty will occur on a random day during
+the month.
+
+Multiple uses of @@@@ on the same artifact are additive.
+
+Aura defaults to one.

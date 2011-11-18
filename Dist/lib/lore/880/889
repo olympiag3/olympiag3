@@ -1,0 +1,20 @@
+#Spell: Forge magical bow [9133]
+#
+Usage: USE @@@@ <aura> "Name of item"
+
+Required aura:  one or more points
+Required item:  one mallorn wood [70], 500 gold
+Time to cast:   seven days
+
+Create a magical bow.  The bow will grant its owner a missile
+bonus equal to 5 * the amount of aura invested in its creation.
+
+Up to 20 aura may be invested in a magical bow.
+
+Example:
+
+	use @@@@ 5 "Hand of Legolas"
+	> created Hand of Legolas [ha53].
+
+	Inventory:
+           1  Hand of Legolas [ha53]           0  +25 missile

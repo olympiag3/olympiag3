@@ -1,0 +1,14 @@
+#Spell: Reveal creator of magical artifact [9108]
+#
+Usage: USE @@@@ <artifact> [aura]
+
+Required aura:  one or more points of aura
+Required item:
+Time to cast:   seven days
+
+Reveal who forged a magical artifact.  The artifact in
+question must be possessed by the caster.
+
+The artifact may be shrouded against magical inspection.
+If so, a greater amount of aura must be specified with
+@@@@ than was used to apply the shroud.

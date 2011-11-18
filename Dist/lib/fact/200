@@ -1,0 +1,10 @@
+200 player pl_system
+na Gamemaster
+PL
+ pw crusty7
+CO
+ li save
+ ar 0 0 0 0 0 0 0 0
+ cs 2
+ pr 1
+

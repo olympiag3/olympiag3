@@ -1,0 +1,15 @@
+#Spell:  Unseal gate with key [9118]
+#
+Usage:  USE 9118 <gate> <key>
+
+Required aura:  three points
+Required item:
+Time to cast:   seven days.
+
+Remove the seal from a gate by supplying the key.  The key will
+no longer be required for jumps through the gate.
+
+    For example, if Gate [8192] were sealed with key "123",
+    the spell USE @@@@ 8192 123 would unseal the gate.
+    Jumps through the gate could proceed without supplying
+    the key.

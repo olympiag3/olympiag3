@@ -1,0 +1,23 @@
+Spell:  Create magical barrier [9160]
+
+Usage:  USE @@@@ [aura]
+
+Required aura:  one to eight points
+Required item:
+Time to cast:   ten days
+
+Erects a magical barrier which prevents anyone from entering the
+location.  The barrier will lose one point of aura at the end of
+each turn, and will dissipate when it has no aura remaining.
+
+For example, USE @@@@ 1 will create a barrier over the location
+which lasts until the end of the turn.  USE @@@@ 2 will create
+a barrier which lasts until the end of the next turn.
+
+Multiple casts of @@@@ are additive.
+
+A barrier which achieves eight points of aura becomes permanent.
+Permanent barriers do not decay at the end of each month.  They
+may only be removed by a magician.
+
+Aura defaults to one.

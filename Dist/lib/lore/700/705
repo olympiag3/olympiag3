@@ -1,0 +1,27 @@
+#Skill:  Harvest mallorn wood [9587]
+#
+Usage:    MALLORN [number] [days]
+Time:     as given or necessary
+
+Mallorn groves produce two units of mallorn wood [70] which may be
+harvested each month.
+
+Because of the careful selection required, and the small quantity of
+mallorn which becomes ready to cut each month, a noble works at this
+task alone.  No workers are needed for mallorn wood cutting.
+
+Each day spent using MALLORN gives a 20% chance of obtaining one
+unit of mallorn wood [70].
+
+Examples:
+
+    mallorn         # obtain as much mallorn wood as possible
+    mallorn 2       # stop after getting 2 mallorn wood
+    mallorn 0 5     # cut mallorn wood for five days
+    mallorn 2 5     # stop after five days, or 2 mallorn wood, whichever
+                    # comes first
+
+In all cases, mallorn cutting will cease as soon as the groves's supply
+for the month has been exhausted.
+
+MALLORN is an alias for COLLECT 70.

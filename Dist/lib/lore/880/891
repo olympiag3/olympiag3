@@ -1,0 +1,10 @@
+#Spell:  Dispel cloaking from artifact [9144]
+#
+Usage:  USE @@@@ <artifact>
+
+Required aura:  eight points
+Required item:
+Time to cast:   ten days
+
+Remove any cloaking spells from the specified artifact.
+The artifact must be in the caster's inventory.

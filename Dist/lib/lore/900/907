@@ -1,0 +1,12 @@
+#Skill:  Banish demon lord [9183]
+#
+Usage:  USE @@@@ <target>
+
+Required aura:  six points
+Time to cast:   seven days
+
+Return an demon lord to the Land of the Dead.  The demon lord
+unit must be present in the caster's location.
+
+Once banished, a summoner may again call the demon lord from
+his home graveyard.

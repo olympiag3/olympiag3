@@ -1,0 +1,10 @@
+#Spell:  Dispel ability shroud [9173]
+#
+Usage:  USE @@@@ <target>
+
+Required aura:  three points
+Required item:
+Time to cast:   three days
+
+Dispels any magical shroud inhibiting scrying of the specified
+character's abilities.
