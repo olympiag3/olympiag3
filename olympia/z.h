@@ -5,11 +5,6 @@
 
 #define		LEN		2048	/* generic string max length */
 
-#ifdef SYSV
-#define bzero(a,n)		memset(a, '\0', n)
-#define bcopy(a,b,n)		memcpy(b, a, n)
-#endif
-
 #define	abs(n)		((n) < 0 ? ((n) * -1) : (n))
 
 #define	isalpha(c)	(((c)>='a' && (c)<='z') || ((c)>='A' && (c)<='Z'))
@@ -24,11 +19,6 @@ extern char lower_array[];
 #endif
 
 #define	toupper(c)	(((c) >= 'a' && (c) <= 'z') ? ((c) - 'a' + 'A') : (c))
-
-#if 0
-#define	max(a,b)	((a) > (b) ? (a) : (b))
-#define	min(a,b)	((a) < (b) ? (a) : (b))
-#endif
 
 extern void *my_malloc(unsigned size);
 extern void *my_realloc(void *ptr, unsigned size);
@@ -79,3 +69,5 @@ extern int readfile(char *path);
 extern char *readlin();
 extern char *readlin_ew();
 extern char *eat_leading_trailing_whitespace(char *s);
+
+extern int int_comp(void * a, void * b);
