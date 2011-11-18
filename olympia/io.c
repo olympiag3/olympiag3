@@ -2751,7 +2751,7 @@ combat combatpassword
 			pw = "noyoudont";
 
 
-		p_player(combat_pl)->password = pw);
+		p_player(combat_pl)->password = pw;
 		fprintf(stderr, "\tcreated combat player %d\n", combat_pl);
 	}
 
