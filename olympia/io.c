@@ -1,7 +1,10 @@
 
 #include	<stdio.h>
+#include	<string.h>
 #include	<sys/types.h>
-#include	<dirent.h>
+#include	<libc/sys/stat.h>
+#include	<libc/dirent.h>
+#include	<libc/unistd.h>
 #include	"z.h"
 #include	"oly.h"
 
@@ -2127,6 +2130,11 @@ write_leftovers()
 	}
 }
 
+static void close_box(char *fnam) {
+	char *path;
+	path = sout("%s/%s", libdir, fnam);
+	closefile(path);
+}
 
 static void
 read_boxes(char *fnam)
@@ -2152,6 +2160,9 @@ read_boxes(char *fnam)
 			fprintf(stderr, "read_boxes: unexpected line %s\n",
 								line);
 	}
+
+	close_box(fnam);
+
 }
 
 
@@ -2161,6 +2172,7 @@ read_chars()
 	DIR *d;
 	struct dirent *e;
 	char *fnam;
+	char *last_e;
 
 	fnam = sout("%s/fact", libdir);
 	d = opendir(fnam);
@@ -2176,7 +2188,8 @@ read_chars()
 	{
 		if (*(e->d_name) >= '0' && *(e->d_name) <= '9')
 		{
-			read_boxes(sout("fact/%s", e->d_name));
+			last_e = sout("fact/%s", e->d_name);
+			read_boxes(last_e);
 		}
 	}
 
@@ -2318,6 +2331,7 @@ scan_chars()
 		if (*(e->d_name) >= '0' && *(e->d_name) <= '9')
 		{
 			scan_boxes(sout("fact/%s", e->d_name));
+			closefile(sout("fact/%s", e->d_name));
 		}
 	}
 
@@ -2378,8 +2392,12 @@ write_all_boxes()
 		if (bx[i] != NULL)
 			bx[i]->temp = 0;
 
-	system(sout("rm -rf %s/fact", libdir));
-	mkdir(sout("%s/fact", libdir), 0755);
+	if (win_flag) {
+		system(sout("del /s /Q /F %s\\fact\\*", libdir));
+	} else {
+		system(sout("rm -rf %s/fact", libdir));
+		mkdir(sout("%s/fact", libdir), 0755);
+	}
 
 	write_kind(T_loc, "loc");
 	write_kind(T_item, "item");
@@ -2643,6 +2661,7 @@ delete_deadchars()
 void
 load_db() 
 {
+	char *pw;
 
 	stage("load_db()");
 
@@ -2717,7 +2736,22 @@ load_db()
 
 		alloc_box(combat_pl, T_player, sub_pl_npc);
 		set_name(combat_pl, "Combat log");
-		p_player(combat_pl)->password = str_save("noyoudont");
+
+		/* To override the default password below, create/edit the file "PWD" which contains:
+
+fairy fairypassword
+combat combatpassword
+
+	   The string up to the first whitespace contains the keyword used to look up the password below
+	   The string after the whitespace contains the password to use instead of the default one
+		 */
+
+		pw = read_pw("combat");
+		if (pw == NULL)
+			pw = "noyoudont";
+
+
+		p_player(combat_pl)->password = pw);
 		fprintf(stderr, "\tcreated combat player %d\n", combat_pl);
 	}
 
@@ -2742,6 +2776,11 @@ cleanup_posts()
 	next_post;
 }
 
+void make_dir(char *dir) {
+	if (win_flag) {
+		mkdir(sout(dir));
+	}
+}
 
 void
 save_logdir()
@@ -2749,8 +2788,14 @@ save_logdir()
 	int ret;
 	char *s, *t;
 
-	system(sout("rm -rf %s/save/%d", libdir, sysclock.turn));
-	mkdir(sout("%s/save", libdir), 0755);
+	if (win_flag) {
+		printf("Deleting any existing save dirs (this might fail):\n");
+		system(sout("rd /s /q %s\\save\\%d", libdir, sysclock.turn));
+		mkdir(sout("%s\\save", libdir), 0755);
+	} else {
+		system(sout("rm -rf %s/save/%d", libdir, sysclock.turn));
+		mkdir(sout("%s/save", libdir), 0755);
+	}
 
 	s = sout("%s/log", libdir);
 	t = sout("%s/save/%d", libdir, sysclock.turn);
