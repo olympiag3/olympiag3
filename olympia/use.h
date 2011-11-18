@@ -8,6 +8,6 @@ extern void set_skill(int who, int skill, int know);
 extern int skill_school(int sk);
 extern void list_skills(int who, int num);
 
-extern int learn_skill(int who, int sk);
+extern void learn_skill(int who, int sk);
 extern char *exp_s(int level);
 extern int forget_skill(int who, int skill);
