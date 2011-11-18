@@ -1,8 +1,0 @@
-#Skill:  Determine character's lord [9521]
-#
-Usage:  USE @@@@ <character>
-Time:   seven days
-
-Reveals what player the specified character is sworn to, unless
-the target character is concealing its identity.  The spy must be
-in the same location as the target.
