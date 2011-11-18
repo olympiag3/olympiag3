@@ -819,10 +819,10 @@ struct entity_misc {
  *  In-process command structure
  */
 
-#define	DONE	0
-#define	LOAD	1
-#define	RUN	2
-#define	ERROR	3
+#define	STATE_DONE	0
+#define	STATE_LOAD	1
+#define	STATE_RUN	2
+#define	STATE_ERROR	3
 
 struct wait_arg {
 	int tag;
@@ -846,7 +846,7 @@ struct command {
 	char *parsed_line;	/* cut-up line, pointed to by parse */
 	char **parse;		/* ilist of parsed arguments */
 
-	schar state;		/* LOAD, RUN, ERROR, DONE */
+	schar state;		/* STATE_LOAD, STATE_RUN, STATE_ERROR, STATE_DONE */
 	schar status;		/* success or failure */
 	schar poll;		/* call finish routine each day? */
 	schar pri;		/* command priority or precedence */
@@ -1208,6 +1208,7 @@ extern char *month_names[];
 extern char *entab(int);
 extern int exit_opposite[];
 extern int immediate;
+extern int win_flag;
 extern int indent;
 extern int show_day;
 extern struct cmd_tbl_ent cmd_tbl[];
@@ -1245,9 +1246,9 @@ extern ilist new_players;		/* new players added this turn */
 
 /* default style is 0 (regular) */
 
-#define	TEXT	1
-#define	HTML	2
-#define	PREV	(-1)
+#define	STYLE_TEXT	1
+#define	STYLE_HTML	2
+#define	STYLE_PREV	(-1)
 
 extern void style(int n);
 
