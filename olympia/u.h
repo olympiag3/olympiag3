@@ -25,13 +25,9 @@ extern int ship_weight(int ship);
 
 extern void olytime_increment(olytime *p);
 extern void olytime_turn_change(olytime *p);
-extern int min(int a, int b);
-extern int max(int a, int b);
 
 extern int lookup(char *table[], char *s);
 extern char *cap(char *s);
-extern int mylog(int base, int num);
-extern int my_sqrt(int n);
 extern char *nice_num(int n);
 extern char *ordinal(int n);
 extern char *comma_num(int n);
@@ -100,3 +96,5 @@ extern int beast_capturable(int who);
 
 extern int greater_region(int who);
 extern int diff_region(int a, int b);
+
+extern void set_bit(sparse * kr, int i);
