@@ -2,6 +2,8 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sendmail", "sendmail\sendmail.csproj", "{5B31BCC0-5FBE-47B0-AF87-8C52C681671D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "entab", "entab\entab.csproj", "{A6D45F39-8883-4DA5-860F-5ED328A1D403}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,6 +14,10 @@ Global
 		{5B31BCC0-5FBE-47B0-AF87-8C52C681671D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5B31BCC0-5FBE-47B0-AF87-8C52C681671D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5B31BCC0-5FBE-47B0-AF87-8C52C681671D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A6D45F39-8883-4DA5-860F-5ED328A1D403}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6D45F39-8883-4DA5-860F-5ED328A1D403}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A6D45F39-8883-4DA5-860F-5ED328A1D403}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A6D45F39-8883-4DA5-860F-5ED328A1D403}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
