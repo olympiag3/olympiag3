@@ -1,0 +1,391 @@
+
+
+
+#if 0
+/*
+ *  A rough plan for a gate-making strategy
+ *
+ *  I do not promise to stick to this plan in the code below
+ *
+ *
+ *	10 links from provinces to islands, 10 from each island
+ *	back to another province
+ *
+ *	three rings of 10 islands each
+ *
+ *	ring the places-of-power/stonehenge things
+ *
+ *	the continental tour, a ring landing on every single continent
+ *		too easy?
+ *
+ *	strings of short, random length provinces
+ *
+ *	star fan-out from a nifty place
+ *		to every continent?
+ */
+
+make_gates()
+{
+
+	gate_link_islands(12);		/* disjoint */
+	gate_link_islands(6);		/* might cross */
+	gate_province_islands(30);
+	gate_land_ring(10);
+	gate_continental_tour();
+
+/*
+ *  Make five circles of stones.  Connect them together.  Create
+ *  a fan out set of gates such that each circle leads to about
+ *  1/5 of the continents.  Also connect the stone together.
+ */
+
+	{
+		int one, two, three, four, five;
+		int i;
+
+		clear_province_marks();
+		one = place_random_subloc(terr_stone_cir, 0, terr_plain);
+		two = place_random_subloc(terr_stone_cir, 0, terr_plain);
+		three = place_random_subloc(terr_stone_cir, 0, terr_plain);
+		four = place_random_subloc(terr_stone_cir, 0, terr_plain);
+		five = place_random_subloc(terr_stone_cir, 0, terr_plain);
+
+		gate_fan(one, two, three, four, five);
+
+/* 
+ *  Make some more stone circles, just for fun
+ */
+
+		for (i = 1; i <= 10; i++)
+			place_random_subloc(terr_stone_cir, 0, terr_plain);
+	}
+
+/*
+ *  Make 21 mallorn groves
+ *  Each grove has a 50% chance of being gate linked to the previous
+ *  grove.  Each gate has a 30% chance of being sealed.
+ */
+
+	{
+		int last = 0;
+		int cur;
+		int i;
+
+		clear_province_marks();
+		for (i = 1; i <= 21; i++)
+		{
+			cur = place_random_subloc(terr_grove, 1, terr_forest);
+			if (last > 0 && rnd(0,1) == 1)
+			    gate_subloc(cur, last, rnd(0,2)?0:rnd(111,333));
+
+			last = cur;
+		}
+	}
+
+/*
+ *  Make 21 more
+ */
+
+	{
+		int last = 0;
+		int cur;
+		int i;
+
+		for (i = 1; i <= 21; i++)
+		{
+			cur = place_random_subloc(terr_grove, 1, terr_forest);
+			if (last > 0 && rnd(0,1) == 1)
+			    gate_subloc(cur, last, rnd(0,2)?0:rnd(111,333));
+
+			last = cur;
+		}
+	}
+}
+
+
+struct tile **
+shift_tour_endpoints(l)
+struct tile **l;
+{
+	static struct tile **other = NULL;
+	int i;
+	struct tile *p;
+	struct tile *q;
+
+	for (i = 0; i < ilist_len(l); i++)
+	{
+		p = adjacent_tile_terr(l[i]->row, l[i]->col);
+
+		if (p == NULL)
+		{
+			p = l[i];
+		}
+
+		q = adjacent_tile_terr(p->row, p->col);
+		if (q == l[i])	/* doubled back, retry */
+		{
+			q = adjacent_tile_terr(p->row, p->col);
+		}
+
+		if (q == NULL || q->terrain == terr_ocean)
+		{
+			fprintf(stderr, "couldn't shift tour (%d,%d)\n",
+						l[i]->row, l[i]->col);
+			ilist_append((ilist *) &other, (int) l[i]);
+		} else
+			ilist_append((ilist *) &other, (int) q);
+	}
+
+	return other;
+}
+
+
+struct tile **
+collect_labeled_provinces()
+{
+	static struct tile **l = NULL;
+	int row, col;
+	int i;
+	int okay;
+
+	if (l)
+		return l;
+
+	for (row = 0; row < MAX_ROW; row++)
+	    for (col = 0; col < MAX_COL; col++)
+		if (map[row][col] && map[row][col]->terrain != terr_ocean)
+		{
+			okay = TRUE;
+
+			for (i = 0; i < ilist_len(l); i++)
+				if (l[i]->inside == map[row][col]->inside)
+				{
+					okay = FALSE;
+					break;
+				}
+
+			if (okay)
+				ilist_append((ilist *) &l, (int) map[row][col]);
+		}
+
+	return l;
+}
+
+
+gate_land_ring(rings)
+int rings;
+{
+	int i, j;
+	int r_first, c_first;
+	int r_next, c_next;
+	int r_n, c_n;
+	int num;
+
+	clear_province_marks();
+
+	for (j = 1; j <= rings; j++)
+	{
+		num = rnd(5, 12);
+		random_province(&r_first, &c_first, 0);
+
+		r_n = r_first;
+		c_n = c_first;
+
+		for (i = 1; i < num; i++)
+		{
+			random_province(&r_next, &c_next, 0);
+
+			gate_counter++;
+			ilist_append(&map[r_n][c_n]->gates_num, gate_counter);
+			ilist_append(&map[r_n][c_n]->gates_dest,
+						map[r_next][c_next]->region);
+			ilist_append(&map[r_n][c_n]->gates_key, 0);
+
+			r_n = r_next;
+			c_n = c_next;
+		}
+
+		gate_counter++;
+		ilist_append(&map[r_n][c_n]->gates_num, gate_counter);
+		ilist_append(&map[r_n][c_n]->gates_dest,
+					map[r_first][c_first]->region);
+		ilist_append(&map[r_n][c_n]->gates_key, 0);
+	}
+}
+
+
+gate_link_islands(rings)
+int rings;
+{
+	int i, j;
+	int first, next, n;
+	int num;
+
+	clear_subloc_marks();
+
+	for (j = 1; j <= rings; j++)
+	{
+		num = rnd(6, 12);
+
+		first = random_island();
+		n = first;
+
+		for (i = 1; i < num; i++)
+		{
+			gate_counter++;
+
+			next = random_island();
+			ilist_append(&subloc[n]->gates_num, gate_counter);
+			ilist_append(&subloc[n]->gates_dest,
+						subloc[next]->region);
+			ilist_append(&subloc[n]->gates_key, 0);
+
+			n = next;
+		}
+
+		gate_counter++;
+		ilist_append(&subloc[n]->gates_num, gate_counter);
+		ilist_append(&subloc[n]->gates_dest, subloc[first]->region);
+		ilist_append(&subloc[n]->gates_key, 0);
+	}
+}
+
+
+gate_province_islands(times)
+int times;
+{
+	int i, j;
+	int isle;
+	int r1, c1, r2, c2;
+
+	clear_province_marks();
+	clear_subloc_marks();
+
+	for (j = 1; j <= times; j++)
+	{
+		random_province(&r1, &c1, 0);
+		isle = random_island();
+		random_province(&r2, &c2, 0);
+
+		gate_counter++;
+		ilist_append(&map[r1][c1]->gates_num, gate_counter);
+		ilist_append(&map[r1][c1]->gates_dest, subloc[isle]->region);
+		ilist_append(&map[r1][c1]->gates_key, 0);
+
+		gate_counter++;
+		ilist_append(&subloc[isle]->gates_num, gate_counter);
+		ilist_append(&subloc[isle]->gates_dest, map[r2][c2]->region);
+		ilist_append(&subloc[isle]->gates_key, 0);
+	}
+}
+
+
+gate_continental_tour()
+{
+	int i;
+	struct tile **l;
+	struct tile **m;
+
+	l = collect_labeled_provinces();
+	m = shift_tour_endpoints(l);
+
+	assert(ilist_len(l) == ilist_len(m));
+
+	fprintf(stderr, "\nContinental gate tour:\n");
+
+	for (i = 0; i < ilist_len(l)-1; i++)
+	{
+		fprintf(stderr, "\t(%2d,%2d) -> (%2d,%2d)\n",
+			l[i]->row, l[i]->col, m[i+1]->row, m[i+1]->col);
+		gate_counter++;
+		ilist_append(&map[l[i]->row][l[i]->col]->gates_num,
+							gate_counter);
+		ilist_append(&map[l[i]->row][l[i]->col]->gates_dest,
+				map[m[i+1]->row][m[i+1]->col]->region);
+		ilist_append(&map[l[i]->row][l[i]->col]->gates_key, 0);
+	}
+
+	fprintf(stderr, "\t(%2d,%2d) -> (%2d,%2d)\n\n",
+		l[i]->row, l[i]->col, m[0]->row, m[0]->col);
+
+	gate_counter++;
+	ilist_append(&map[l[i]->row][l[i]->col]->gates_num, gate_counter);
+	ilist_append(&map[l[i]->row][l[i]->col]->gates_dest,
+			map[m[0]->row][m[0]->col]->region);
+	ilist_append(&map[l[i]->row][l[i]->col]->gates_key, rnd(111,333));
+}
+
+
+gate_subloc(a, b, key)
+int a;
+int b;
+int key;
+{
+
+	gate_counter++;
+	ilist_append(&subloc[a]->gates_num, gate_counter);
+	ilist_append(&subloc[a]->gates_dest, subloc[b]->region);
+	ilist_append(&subloc[a]->gates_key, key);
+}
+
+
+gate_fan_sup(where, start, end, l)
+int where;
+int start;
+int end;
+struct tile **l;
+{
+	int i;
+
+	for (i = start; i <= end; i++)
+	{
+		gate_counter++;
+		ilist_append(&subloc[where]->gates_num, gate_counter);
+		ilist_append(&subloc[where]->gates_dest, l[i]->region);
+		ilist_append(&subloc[where]->gates_key, 0);
+	}
+}
+
+
+gate_fan(one, two, three, four, five)
+int one;
+int two;
+int three;
+int four;
+int five;
+{
+	int i;
+	struct tile **l;
+	int n, part;
+
+	assert(one != two);
+	assert(two != three);
+	assert(three != four);
+	assert(four != five);
+
+	gate_subloc(one, two, rnd(111, 333));
+	gate_subloc(two, three, rnd(111, 333));
+	gate_subloc(three, four, rnd(111, 333));
+	gate_subloc(four, five, rnd(111, 333));
+	gate_subloc(five, one, rnd(111, 333));
+
+	gate_subloc(five, three, 0);
+	gate_subloc(three, one, 0);
+
+	l = collect_labeled_provinces();
+
+	n = ilist_len(l);
+
+	fprintf(stderr, "gate_fan: collect_labeled_provinces = %d\n", n);
+
+	part = n / 5;
+
+	gate_fan_sup(one, 0, part-1, l);
+	gate_fan_sup(two, part, part*2-1, l);
+	gate_fan_sup(three, part*2, part*3-1, l);
+	gate_fan_sup(four, part*3, part*4-1, l);
+	gate_fan_sup(five, part*4, n-1, l);
+}
+
+#endif
+
