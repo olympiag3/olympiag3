@@ -483,7 +483,7 @@ d_locate_char(struct command *c)
 	int aura = c->b;
 	int chance;
 
-	if ((kind(target) != T_char) || (subkind(target) != sub_dead_body))
+	if ((kind(target) != T_char) || (subkind(target) == sub_dead_body))
 	{
 		wout(c->who, "%s is not a character.", box_code(target));
 		return FALSE;
