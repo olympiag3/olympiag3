@@ -155,8 +155,6 @@ d_resurrect(struct command *c)
 {
 	int body = c->a;
 	int chance = 50;
-	int nps;
-	int gold;
 
 	if (!valid_box(body) || has_item(c->who, body) < 1)
 	{
@@ -178,17 +176,6 @@ d_resurrect(struct command *c)
 		return FALSE;
 	}
 
-	nps = char_np_total(body);
-
-	gold = 1000 * nps;
-
-	if (can_pay(c->who, gold))
-	{
-		wout(c->who, "Don't have the required %s for an offering.", 
-			gold_s(gold));
-		return FALSE;
-	}
-
 	if (char_pray(c->who))
 	{
 		p_magic(c->who)->pray = 0;
@@ -200,9 +187,6 @@ d_resurrect(struct command *c)
 		wout(c->who, "Resurrection failed.");
 		return FALSE;
 	}
-
-	charge(c->who, gold);
-	wout(c->who, "Paid %s as an offering.", gold_s(gold));
 
 	if (rp_misc(body))
 		wout(c->who, "Brought %s back to life!",
