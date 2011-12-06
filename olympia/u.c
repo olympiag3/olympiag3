@@ -2409,6 +2409,9 @@ bark_dogs(int where)
 	int bark = 0;
 	int n, i;
 
+   vector_char_here(where);
+   vector_add(where);
+
 	loop_here(where, who)
 	{
 		if (kind(who) != T_char)
@@ -2426,7 +2429,7 @@ bark_dogs(int where)
 		wout(VECT, "The hound is barking.");
 	else if (bark == 1)
 		wout(VECT, "A hound is barking.");
-	else
+	else if (bark > 1)
 		wout(VECT, "The hounds are barking.");
 }
 
