@@ -1,0 +1,181 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{048F641D-0D11-40F7-B851-E614C657C73C}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>olygui</RootNamespace>
+    <AssemblyName>OlympiaGUI</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <StartupObject>olygui.Program</StartupObject>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.85.1.271, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="cZip.cs" />
+    <Compile Include="GameSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GameSettings.Designer.cs">
+      <DependentUpon>GameSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MailSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MailSettings.Designer.cs">
+      <DependentUpon>MailSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MIME\Attachment.cs" />
+    <Compile Include="MIME\Common.cs" />
+    <Compile Include="MIME\DecodeQP.cs" />
+    <Compile Include="MIME\Exceptions.cs" />
+    <Compile Include="MIME\Message.cs" />
+    <Compile Include="MIME\MIMETypes.cs" />
+    <Compile Include="MIME\QuotedCoding.cs" />
+    <Compile Include="MIME\TNEFAttachment.cs" />
+    <Compile Include="MIME\TNEFParser.cs" />
+    <Compile Include="MIME\Utility.cs" />
+    <Compile Include="Olympia.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Olympia.Designer.cs">
+      <DependentUpon>Olympia.cs</DependentUpon>
+    </Compile>
+    <Compile Include="POP3\Common.cs" />
+    <Compile Include="POP3\Exceptions.cs" />
+    <Compile Include="POP3\MyMD5.cs" />
+    <Compile Include="POP3\POPClient.cs" />
+    <Compile Include="POP3\Utility.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="GameSettings.resx">
+      <DependentUpon>GameSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MailSettings.resx">
+      <DependentUpon>MailSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Olympia.resx">
+      <DependentUpon>Olympia.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RepOrders.resx">
+      <DependentUpon>RepOrders.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubmitOrders.resx">
+      <DependentUpon>SubmitOrders.cs</DependentUpon>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="app.config" />
+    <None Include="lib_orig.zip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="sendmail.ini">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="RepOrders.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RepOrders.Designer.cs">
+      <DependentUpon>RepOrders.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Settings.cs" />
+    <Compile Include="StartingCity.cs" />
+    <Compile Include="SubmitOrders.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SubmitOrders.Designer.cs">
+      <DependentUpon>SubmitOrders.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="getmail.ini">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="mapgen.zip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <Content Include="entab.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="g2rep.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="htpasswd.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Olympia2.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sendmail.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\mapgui\mapgui.csproj">
+      <Project>{16E31422-DA66-4B5A-ACB5-59850599EEAD}</Project>
+      <Name>mapgui</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
