@@ -60,7 +60,7 @@ clear_all_trades(int who)
 	}
 	next_trade;
 
-	ilist_clear((ilist *) &bx[who]->trades);
+	plist_clear((plist *) &bx[who]->trades);
 }
 
 
@@ -85,7 +85,7 @@ seller_list(int where, int except)
 	struct trade *t;
 	int count = 0;
 
-	ilist_clear((ilist *) &l);
+	plist_clear((plist *) &l);
 
 	loop_char_here(where, i)
 	{
@@ -100,20 +100,20 @@ seller_list(int where, int except)
 			if (t->kind == SELL)
 			{
 				t->sort = count++;
-				ilist_append((ilist *) &l, (int) t);
+				plist_append((plist *) &l, t);
 			}
 		}
 		next_trade;
 	}
 	next_char_here;
 
-	if (ilist_len(l) > 0)
-		qsort(l, (unsigned) ilist_len(l), sizeof(int), seller_comp);
+	if (plist_len(l) > 0)
+		qsort(l, (unsigned) plist_len(l), sizeof(*l), seller_comp);
 
 	loop_trade(where, t)
 	{
 		if (t->kind == SELL)
-			ilist_append((ilist *) &l, (int) t);
+			plist_append((plist *) &l, t);
 	}
 	next_trade;
 
@@ -128,7 +128,7 @@ buyer_list(int where, int except)
 	int i;
 	struct trade *t;
 
-	ilist_clear((ilist *) &l);
+	plist_clear((plist *) &l);
 
 	loop_char_here(where, i)
 	{
@@ -141,7 +141,7 @@ buyer_list(int where, int except)
 		loop_trade(i, t)
 		{
 			if (t->kind == BUY)
-				ilist_append((ilist *) &l, (int) t);
+				plist_append((plist *) &l, t);
 		}
 		next_trade;
 	}
@@ -150,7 +150,7 @@ buyer_list(int where, int except)
 	loop_trade(where, t)
 	{
 		if (t->kind == BUY)
-			ilist_append((ilist *) &l, (int) t);
+			plist_append((plist *) &l, t);
 	}
 	next_trade;
 
@@ -330,7 +330,7 @@ scan_trades(struct trade *t, struct trade **l)
 {
 	int i;
 
-	for (i = 0; i < ilist_len(l) && t->qty > 0; i++)
+	for (i = 0; i < plist_len(l) && t->qty > 0; i++)
 	{
 		if (l[i]->item != t->item)
 			continue;
@@ -404,10 +404,10 @@ match_all_trades()
 		sellers = seller_list(where, 0);
 		buyers = buyer_list(where, 0);
 
-		if (ilist_len(buyers) <= 0 || ilist_len(sellers) <= 0)
+		if (plist_len(buyers) <= 0 || plist_len(sellers) <= 0)
 			continue;
 
-		for (i = 0; i < ilist_len(buyers); i++)
+		for (i = 0; i < plist_len(buyers); i++)
 			scan_trades(buyers[i], sellers);
 	}
 	next_loc;
@@ -548,7 +548,7 @@ new_trade(int who, int kind, int item)
 		ret->kind = kind;
 		ret->item = item;
 
-		ilist_append((ilist *) &bx[who]->trades, (int) ret);
+		plist_append((plist *) &bx[who]->trades, ret);
 	}
 
 	return ret;
@@ -706,7 +706,7 @@ list_market_items(int who, struct trade **l, int first)
 	int i;
 	int qty;
 
-	for (i = 0; i < ilist_len(l); i++)
+	for (i = 0; i < plist_len(l); i++)
 	{
 		if (l[i]->cloak >= 2)
 			continue;
@@ -778,14 +778,14 @@ market_report(int who, int where)
 
 	l = buyer_list(where, 0);
 
-	if (ilist_len(l) > 0)
+	if (plist_len(l) > 0)
 	{
 		first = list_market_items(who, l, first);
 	}
 
 	l = seller_list(where, 0);
 
-	if (ilist_len(l) > 0)
+	if (plist_len(l) > 0)
 	{
 		first = list_market_items(who, l, first);
 	}
@@ -934,7 +934,7 @@ expire_trades(int where)
 	struct trade *t;
 	int i;
 
-	for (i = 0; i < ilist_len(bx[where]->trades); i++)
+	for (i = 0; i < plist_len(bx[where]->trades); i++)
 	{
 		t = bx[where]->trades[i];
 
@@ -945,7 +945,7 @@ expire_trades(int where)
 			t->expire--;
 
 		if (is_tradegood(t->item) && t->expire <= 0) {
-			ilist_delete((ilist *) &bx[where]->trades, i);
+			plist_delete((plist *) &bx[where]->trades, i);
 			i--;
 		}
 	}

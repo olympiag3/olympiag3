@@ -65,6 +65,27 @@ extern ilist ilist_copy(ilist l);
 extern void ilist_scramble(ilist l);
 extern void ilist_insert(ilist *l, int pos, int n);
 
+/*
+ *  'plist' reallocing array definitions
+ *  (because a pointer doesn't necessarily fit in an int!)
+ */
+
+typedef void **plist;
+
+#define plist_len(a)		(((int *)(a)) == NULL ? 0 : ((int *)(a))[-2])
+
+extern void plist_append(plist *l, void *p);
+extern void plist_prepend(plist *l, void *p);
+extern void plist_delete(plist *l, int i);
+extern void plist_clear(plist *l);
+extern void plist_reclaim(plist *l);
+extern int plist_lookup(plist l, void *p);
+extern void plist_rem_value(plist *l, void *p);
+extern void plist_rem_value_uniq(plist *l, void *p);
+extern plist plist_copy(plist l);
+extern void plist_scramble(plist l);
+extern void plist_insert(plist *l, int pos, void *p);
+
 extern int readfile(char *path);
 extern char *readlin();
 extern char *readlin_ew();

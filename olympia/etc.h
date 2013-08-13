@@ -15,3 +15,4 @@ extern int unit_maint_cost(int who);				/* day.c */
 extern char *wield_s(int who);					/* combat.c */
 extern int can_see_weather_here(int who, int where);		/* storm.c */
 extern void queue_lore(int who, int num, int anyway);		/* lore.c */
+extern char *read_pw(char *type);				/* pw.c */

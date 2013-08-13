@@ -1,9 +1,15 @@
 
 #include	<stdio.h>
 #include	<sys/types.h>
+#ifdef _WIN32
 #include	<libc/sys/stat.h>
 #include	<libc/dirent.h>
 #include	<libc/unistd.h>
+#else
+#include	<sys/stat.h>
+#include	<dirent.h>
+#include	<unistd.h>
+#endif
 #include	"z.h"
 #include	"oly.h"
 
@@ -21,14 +27,14 @@ p_order_head(int pl, int who)
 
 	p = p_player(pl);
 
-	for (i = 0; i < ilist_len(p->orders); i++)
+	for (i = 0; i < plist_len(p->orders); i++)
 		if (p->orders[i]->unit == who)
 			return p->orders[i];
 
 	new = my_malloc(sizeof(*new));
 	new->unit = who;
 
-	ilist_append((ilist *) &p->orders, (int) new);
+	plist_append((plist *) &p->orders, new);
 
 	return new;
 }
@@ -45,7 +51,7 @@ rp_order_head(int pl, int who)
 	if (p == NULL)
 		return NULL;
 
-	for (i = 0; i < ilist_len(p->orders); i++)
+	for (i = 0; i < plist_len(p->orders); i++)
 		if (p->orders[i]->unit == who)
 			return p->orders[i];
 
@@ -60,7 +66,7 @@ top_order(int pl, int who)
 
 	p = rp_order_head(pl, who);
 
-	if (p && ilist_len(p->l) > 0)
+	if (p && plist_len(p->l) > 0)
 		return p->l[0];
 	
 	return NULL;
@@ -122,12 +128,12 @@ pop_order(int pl, int who)
 	p = rp_order_head(pl, who);
 
 	assert(p != NULL);
-	assert(ilist_len(p->l) > 0);
+	assert(plist_len(p->l) > 0);
 
 #if 1
 	my_free(p->l[0]);
 #endif
-	ilist_delete((ilist *) &p->l, 0);
+	plist_delete((plist *) &p->l, 0);
 }
 
 
@@ -155,10 +161,10 @@ queue_order(int pl, int who, char *s)
 
 	p = p_order_head(pl, who);
 
-	if (ilist_len(p->l) >= 250)
+	if (plist_len(p->l) >= 250)
 		return;
 
-	ilist_append((ilist *) &p->l, (int) str_save(s));
+	plist_append((plist *) &p->l, str_save(s));
 }
 
 
@@ -168,7 +174,7 @@ prepend_order(int pl, int who, char *s)
 	struct order_list *p;
 
 	p = p_order_head(pl, who);
-	ilist_prepend((ilist *) &p->l, (int) str_save(s));
+	plist_prepend((plist *) &p->l, str_save(s));
 }
 
 
@@ -214,13 +220,13 @@ save_player_orders(int pl)
 	if (p == NULL)
 		return;
 
-	for (i = 0; i < ilist_len(p->orders); i++)
+	for (i = 0; i < plist_len(p->orders); i++)
 	{
 		if (!valid_box(p->orders[i]->unit) ||
 		    kind(p->orders[i]->unit) == T_deadchar)
 			continue;
 
-		for (j = 0; j < ilist_len(p->orders[i]->l); j++)
+		for (j = 0; j < plist_len(p->orders[i]->l); j++)
 		{
 			if (fp == NULL)
 			{
@@ -397,9 +403,9 @@ orders_template_sup(int who, int num, int pl)
 
 	l = rp_order_head(pl, num);
 
-	if (l != NULL && ilist_len(l->l) > 0)
+	if (l != NULL && plist_len(l->l) > 0)
 	{
-		for (i = 0; i < ilist_len(l->l); i++)
+		for (i = 0; i < plist_len(l->l); i++)
 		{
 			out(who, "%s", l->l[i]);
 		}
@@ -424,7 +430,7 @@ orders_other(int who, int pl)
 	if (p == NULL)
 		return;
 
-	for (i = 0; i < ilist_len(p->orders); i++)
+	for (i = 0; i < plist_len(p->orders); i++)
 	{
 		if (pl == p->orders[i]->unit ||
 		    !valid_box(p->orders[i]->unit) ||

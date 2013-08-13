@@ -363,7 +363,7 @@ correct_use_item(struct command *c)
 
 	p = rp_item_magic(item);
 
-	if (p == NULL || ilist_len(p->may_use) < 1)
+	if (p == NULL || plist_len(p->may_use) < 1)
 		return item;
 
 	c->a = p->may_use[0];
@@ -385,14 +385,14 @@ meets_requirements(int who, int skill)
 	l = p->req;
 
 	i = 0;
-	while (i < ilist_len(l))
+	while (i < plist_len(l))
 	{
 		while (has_item(who, l[i]->item) < l[i]->qty &&
 		       l[i]->consume == REQ_OR)
 		{
 			i++;
 
-			if (i >= ilist_len(l))
+			if (i >= plist_len(l))
 			{
 				fprintf(stderr, "skill = %d\n", skill);
 				assert(FALSE);
@@ -410,7 +410,7 @@ meets_requirements(int who, int skill)
 			return FALSE;
 		}
 
-		while (l[i]->consume == REQ_OR && i < ilist_len(l))
+		while (l[i]->consume == REQ_OR && i < plist_len(l))
 			i++;
 		i++;
 	}
@@ -435,14 +435,14 @@ consume_requirements(int who, int skill)
 	l = p->req;
 
 	i = 0;
-	while (i < ilist_len(l))
+	while (i < plist_len(l))
 	{
 		while (has_item(who, l[i]->item) < l[i]->qty &&
 		       l[i]->consume == REQ_OR)
 		{
 			i++;
 
-			if (i >= ilist_len(l))
+			if (i >= plist_len(l))
 			{
 				fprintf(stderr, "req list ends with REQ_OR, "
 						"skill = %d\n", skill);
@@ -457,7 +457,7 @@ consume_requirements(int who, int skill)
 		item = l[i]->item;
 		qty = l[i]->qty;
 
-		while (l[i]->consume == REQ_OR && i < ilist_len(l))
+		while (l[i]->consume == REQ_OR && i < plist_len(l))
 			i++;
 
 		if (l[i]->consume == REQ_YES)
@@ -974,7 +974,7 @@ rp_skill_ent(int who, int skill)
 	if (p == NULL)
 		return NULL;
 
-	for (i = 0; i < ilist_len(p->skills); i++)
+	for (i = 0; i < plist_len(p->skills); i++)
 		if (p->skills[i]->skill == skill)
 			return p->skills[i];
 
@@ -991,14 +991,14 @@ p_skill_ent(int who, int skill)
 
 	p = p_char(who);
 
-	for (i = 0; i < ilist_len(p->skills); i++)
+	for (i = 0; i < plist_len(p->skills); i++)
 		if (p->skills[i]->skill == skill)
 			return p->skills[i];
 
 	new = my_malloc(sizeof(*new));
 	new->skill = skill;
 
-	ilist_append((ilist *) &p->skills, (int) new);
+	plist_append((plist *) &p->skills, new);
 
 	return new;
 }
@@ -1020,7 +1020,7 @@ forget_skill(int who, int skill)
 	if (t == NULL)
 		return FALSE;
 
-	ilist_rem_value((ilist *) &p->skills, (int) t);
+	plist_rem_value((plist *) &p->skills, t);
 
 	if (magic_skill(skill))
 	{
@@ -1239,13 +1239,13 @@ list_skills(int who, int num)
 	if (rp_char(num) == NULL)
 		goto list_skills_end;
 
-	if (ilist_len(rp_char(num)->skills) < 1)
+	if (plist_len(rp_char(num)->skills) < 1)
 		goto list_skills_end;
 
-	l = (struct skill_ent **) ilist_copy((ilist) rp_char(num)->skills);
-	qsort(l, ilist_len(l), sizeof(int), rep_skill_comp);
+	l = (struct skill_ent **) plist_copy((plist) rp_char(num)->skills);
+	qsort(l, plist_len(l), sizeof(*l), rep_skill_comp);
 
-	for (i = 0; i < ilist_len(l); i++)
+	for (i = 0; i < plist_len(l); i++)
 	{
 		if (l[i]->know != SKILL_know)
 			continue;
@@ -1274,7 +1274,7 @@ list_skills(int who, int num)
 		}
 	}
 
-	ilist_reclaim((ilist *) &l);
+	plist_reclaim((plist *) &l);
 
 list_skills_end:
 
@@ -1324,13 +1324,13 @@ list_partial_skills(int who, int num)
 	if (rp_char(num) == NULL)
 		return;
 
-	if (ilist_len(rp_char(num)->skills) < 1)
+	if (plist_len(rp_char(num)->skills) < 1)
 		return;
 
-	l = (struct skill_ent **) ilist_copy((ilist) rp_char(num)->skills);
-	qsort(l, ilist_len(l), sizeof(int), flat_skill_comp);
+	l = (struct skill_ent **) plist_copy((plist) rp_char(num)->skills);
+	qsort(l, plist_len(l), sizeof(*l), flat_skill_comp);
 
-	for (i = 0; i < ilist_len(l); i++)
+	for (i = 0; i < plist_len(l); i++)
 	{
 		if (l[i]->know == SKILL_know)
 			continue;
@@ -1353,7 +1353,7 @@ list_partial_skills(int who, int num)
 		indent -= 3;
 	}
 
-	ilist_reclaim((ilist *) &l);
+	plist_reclaim((plist *) &l);
 }
 
 

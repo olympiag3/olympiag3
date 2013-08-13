@@ -276,11 +276,10 @@ void load_seed(char *fnam)
 {
 	FILE *fd;
 
-	if (fopen_s(&fd, fnam, "rb") == 0) {
-		if (fd >= 0) {
-			fread(digest, 1, 16, fd);
-			fclose(fd);
-		}
+	fd = fopen(fnam, "rb");
+	if (fd) {
+		fread(digest, 1, 16, fd);
+		fclose(fd);
 	} else
 		printf("%s could not be opened.\n", fnam);
 }

@@ -2,9 +2,15 @@
 #include	<stdio.h>
 #include	<string.h>
 #include	<sys/types.h>
+#ifdef _WIN32
 #include	<libc/sys/stat.h>
 #include	<libc/dirent.h>
 #include	<libc/unistd.h>
+#else
+#include	<sys/stat.h>
+#include	<dirent.h>
+#include	<unistd.h>
+#endif
 #include	"z.h"
 #include	"oly.h"
 
@@ -340,7 +346,7 @@ admit_scan(char *s, int box_num, struct entity_player *pp)
 		return;
 	}
 
-	ilist_append((ilist *) &(pp->admits), (int) p);
+	plist_append((plist *) &(pp->admits), p);
 }
 
 
@@ -458,7 +464,7 @@ skill_list_print(FILE *fp, char *header, struct skill_ent **l)
 	int i;
 	int count = 0;
 
-	for (i = 0; i < ilist_len(l); i++)
+	for (i = 0; i < plist_len(l); i++)
 		if (valid_box(l[i]->skill))
 		{
 			count++;
@@ -501,7 +507,7 @@ skill_list_scan(char *s, struct skill_ent ***l, int box_num)
 		new->experience = experience;
 
 		if (valid_box(new->skill))
-			ilist_append((ilist *) l, (int) new);
+			plist_append((plist *) l, new);
 		else
 		{
 			fprintf(stderr, "skill_list_scan(%d): bad skill %d\n",
@@ -524,7 +530,7 @@ item_list_print(FILE *fp, char *header, struct item_ent **l)
 	int i;
 	int count = 0;
 
-	for (i = 0; i < ilist_len(l); i++)
+	for (i = 0; i < plist_len(l); i++)
 		if (valid_box(l[i]->item) && l[i]->qty > 0)
 		{
 			count++;
@@ -555,7 +561,7 @@ item_list_scan(char *s, struct item_ent ***l, int box_num)
 		sscanf(s, "%d %d", &new->item, &new->qty);
 
 		if (valid_box(new->item))
-			ilist_append((ilist *) l, (int) new);
+			plist_append((plist *) l, new);
 		else
 		{
 			fprintf(stderr, "item_list_scan(%d): bad item %d\n",
@@ -578,7 +584,7 @@ trade_list_print(FILE *fp, char *header, struct trade **l)
 	int i;
 	int count = 0;
 
-	for (i = 0; i < ilist_len(l); i++)
+	for (i = 0; i < plist_len(l); i++)
 		if (valid_box(l[i]->item))
 		{
 /*
@@ -634,7 +640,7 @@ trade_list_scan(char *s, struct trade ***l, int box_num)
 		new->who = box_num;
 
 		if (valid_box(new->item))
-			ilist_append((ilist *) l, (int) new);
+			plist_append((plist *) l, new);
 		else
 		{
 			fprintf(stderr, "trade_list_scan(%d): bad item %d\n",
@@ -657,7 +663,7 @@ req_list_print(FILE *fp, char *header, struct req_ent **l)
 	int i;
 	int count = 0;
 
-	for (i = 0; i < ilist_len(l); i++)
+	for (i = 0; i < plist_len(l); i++)
 		if (valid_box(l[i]->item))
 		{
 			count++;
@@ -691,7 +697,7 @@ req_list_scan(char *s, struct req_ent ***l, int box_num)
 		new->consume = consume;
 
 		if (valid_box(new->item))
-			ilist_append((ilist *) l, (int) new);
+			plist_append((plist *) l, new);
 		else
 		{
 			fprintf(stderr, "req_list_scan(%d): bad item %d\n",
@@ -2778,7 +2784,7 @@ cleanup_posts()
 
 void make_dir(char *dir) {
 	if (win_flag) {
-		mkdir(sout(dir));
+		mkdir(sout(dir), 0755);
 	}
 }
 

@@ -504,7 +504,7 @@ sub_item(int who, int item, int qty)
 	assert(valid_box(item));
 	assert(qty >= 0);
 
-	for (i = 0; i < ilist_len(bx[who]->items); i++)
+	for (i = 0; i < plist_len(bx[who]->items); i++)
 		if (bx[who]->items[i]->item == item)
 	{
 			if (bx[who]->items[i]->qty < qty)
@@ -888,7 +888,7 @@ sink_ship(int ship)
 	p = rp_subloc(ship);
 	if (p)
 	{
-		for (i = 0; i < ilist_len(p->bound_storms); i++)
+		for (i = 0; i < plist_len(p->bound_storms); i++)
 		{
 			storm = p->bound_storms[i];
 			if (kind(storm) == T_storm)
@@ -1661,7 +1661,7 @@ has_item(int who, int item)
 #endif
 	assert(valid_box(item));
 
-	for (i = 0; i < ilist_len(bx[who]->items); i++)
+	for (i = 0; i < plist_len(bx[who]->items); i++)
 		if (bx[who]->items[i]->item == item)
 			return bx[who]->items[i]->qty;
 
@@ -1691,7 +1691,7 @@ add_item(int who, int item, int qty)
 		}
 	}
 
-	for (i = 0; i < ilist_len(bx[who]->items); i++)
+	for (i = 0; i < plist_len(bx[who]->items); i++)
 		if (bx[who]->items[i]->item == item)
 		{
 			old = bx[who]->items[i]->qty;
@@ -1706,7 +1706,7 @@ add_item(int who, int item, int qty)
 	new->item = item;
 	new->qty = qty;
 
-	ilist_append((ilist *) &bx[who]->items, (int) new);
+	plist_append((plist *) &bx[who]->items, new);
 
 	investigate_possible_trade(who, item, 0);
 }
@@ -2241,7 +2241,11 @@ entab(int pl)
 	if (player_notab(pl))
 		return "";
 
+#ifdef _WIN32
 	return "entab | ";
+#else
+	return "unexpand -t4 - | ";
+#endif
 }
 
 

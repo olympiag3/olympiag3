@@ -30,7 +30,7 @@ parse_line(char **l, char *s)
 	char *p;
 	char *prev;
 
-	ilist_clear((ilist *) &l);
+	plist_clear((plist *) &l);
 
 	while (*s)
 	{
@@ -81,7 +81,7 @@ parse_line(char **l, char *s)
 			p--;
 		}
 
-		ilist_append((ilist *) &l, (int) prev);	    /* note cast! */
+		plist_append((plist *) &l, prev);	    /* note cast! */
 	}
 
 	return l;
@@ -228,7 +228,7 @@ oly_parse_cmd(struct command *c, char *s)
 
 	c->parse = parse_line(c->parse, c->parsed_line);
 
-	if (ilist_len(c->parse) > 0)
+	if (plist_len(c->parse) > 0)
 	{
 		int i;
 
@@ -268,7 +268,7 @@ oly_parse(struct command *c, char *s)
 	if (!oly_parse_cmd(c, s))
 		return FALSE;
 
-	switch (min(ilist_len(c->parse), 9))
+	switch (min(plist_len(c->parse), 9))
 	{
 	case 9: c->h = parse_arg(c->who, c->parse[8]);
 	case 8: c->g = parse_arg(c->who, c->parse[7]);
@@ -288,7 +288,7 @@ void
 cmd_shift(struct command *c)
 {
 
-	if (ilist_len(c->parse) > 1)
+	if (plist_len(c->parse) > 1)
 	{
 /*
  *  Deleted argument need not be freed, since it's just a
@@ -296,7 +296,7 @@ cmd_shift(struct command *c)
  *  itself.
  */
 
-		ilist_delete((ilist *) &c->parse, 1);
+		plist_delete((plist *) &c->parse, 1);
 	}
 
 	c->a = c->b;
@@ -443,10 +443,10 @@ sort_load_queue(ilist l)
 {
 	int i;
 
-	for (i = 0; i < ilist_len(l); i++)
+	for (i = 0; i < plist_len(l); i++)
 		bx[l[i]]->temp = exec_precedence(l[i]);
 
-	qsort(l, ilist_len(l), sizeof(int), exec_comp);
+	qsort(l, plist_len(l), sizeof(*l), exec_comp);
 }
 
 
@@ -473,7 +473,7 @@ sort_run_queue(ilist l)
 		bx[l[i]]->temp = pri * 1000000 + exec_precedence(l[i]);
 	}
 
-	qsort(l, ilist_len(l), sizeof(int), exec_comp);
+	qsort(l, ilist_len(l), sizeof(*l), exec_comp);
 }
 
 
@@ -750,7 +750,7 @@ min_pri_ready()
 
 	for (pri = 0; pri < MAX_PRI; pri++)
 	{
-		for (i = 0; i < ilist_len(load_q[pri]); i++)
+		for (i = 0; i < plist_len(load_q[pri]); i++)
 		{
 			c = rp_command(load_q[pri][i]);
 

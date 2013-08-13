@@ -1,9 +1,13 @@
 
 
 #include	<stdio.h>
-#include <string.h>
-#include <libc/unistd.h>
-#include <libc/dirent.h>
+#include	<string.h>
+// #include <libc/unistd.h>
+#ifdef _WIN32
+#include	<libc/dirent.h>
+#else
+#include	<dirent.h>
+#endif
 #include	<sys/types.h>
 #include	"z.h"
 #include	"oly.h"

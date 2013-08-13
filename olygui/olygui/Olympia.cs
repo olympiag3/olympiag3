@@ -606,7 +606,7 @@ namespace olygui {
             int bturn = GetTurn();
             Logn("Running turn:");
             Logn(" -- working, please wait --");
-            Log(RunProcess(curdir + "\\Olympia2.exe", "-w -r -M -S"));
+            Log(RunProcess(curdir + "\\Olympia2.exe", "-w -r -M -h -S"));
             Logn(" -- done --");
             int aturn = GetTurn();
             if (aturn != bturn) {

@@ -2,7 +2,11 @@
 #include	<stdio.h>
 #include	<string.h>
 #include	<stdlib.h>
+#ifdef _WIN32
 #include	<libc/unistd.h>
+#else
+#include	<unistd.h>
+#endif
 #include	"z.h"
 
 
@@ -74,7 +78,7 @@ void *my_realloc(void *ptr, unsigned size)
 	assert(*((int *) (p + *(int *) p)) == 0xBABEFACE);
 
 	size += sizeof(int)-1;		/* integer alignment */
-	size &= ~3;
+	size -= size % sizeof(int);
 
 	size += sizeof(int)*2;
 
@@ -840,6 +844,201 @@ ilist_scramble(ilist l)
 	int tmp;
 	int r;
 	int len = ilist_len(l) - 1;
+
+	for (i = 0; i < len; i++)
+	{
+		r = rnd(i, len);
+		if (r != i)
+		{
+			tmp = l[i];
+			l[i] = l[r];
+			l[r] = tmp;
+		}
+	}
+}
+
+/*
+ *	Same as the above, but to store pointers instead of ints
+ */
+
+void
+plist_append(plist *l, void *n)
+{
+	int *base;
+
+	if (*l == NULL)
+	{
+		base = my_malloc(sizeof(**l) * ILIST_ALLOC);
+		base[1] = ILIST_ALLOC;
+
+		*l = &base[2];
+	}
+	else
+	{
+		base = *l;
+		base -= 2;
+		assert(&base[2] == *l);
+
+		if (base[0] + 2 >= base[1])
+		{
+			base[1] += ILIST_ALLOC;
+			base = my_realloc(base, base[1] * sizeof(**l));
+			*l = &base[2];
+		}
+	}
+
+	(*l)[base[0]] = n;
+	base[0]++;
+}
+
+
+void
+plist_prepend(plist *l, void *n)
+{
+	int *base;
+	int i;
+
+	if (*l == NULL)
+	{
+		base = my_malloc(sizeof(**l) * ILIST_ALLOC);
+		base[1] = ILIST_ALLOC;
+
+		*l = &base[2];
+	}
+	else
+	{
+		base = *l;
+		base -= 2;
+		assert(&base[2] == *l);
+
+		if (base[0] + 2 >= base[1])
+		{
+			base[1] += ILIST_ALLOC;
+			base = my_realloc(base, base[1] * sizeof(**l));
+			*l = &base[2];
+		}
+	}
+
+	base[0]++;
+	for (i = base[0]-1; i > 0; i--)
+		(*l)[i] = (*l)[i-1];
+	(*l)[0] = n;
+}
+
+
+void
+plist_delete(plist *l, int i)
+{
+	int *base;
+	int j;
+
+	assert(i >= 0 && i < plist_len(*l));		/* bounds check */
+	base = *l;
+	base -= 2;
+
+	for (j = i; j < base[0] - 1; j++)
+		(*l)[j] = (*l)[j+1];
+
+	base[0]--;
+}
+
+
+void
+plist_clear(plist *l)
+{
+	int *base;
+
+	if (*l != NULL)
+	{
+		base = *l;
+		base -= 2;
+		base[0] = 0;
+	}
+}
+
+
+void
+plist_reclaim(plist *l)
+{
+	int *base;
+
+	if (*l != NULL)
+	{
+		base = *l;
+		base -= 2;
+		my_free(base);
+	}
+	*l = NULL;
+}
+
+
+int
+plist_lookup(plist l, void *n)
+{
+	int i;
+
+	if (l == NULL)
+		return -1;
+
+	for (i = 0; i < plist_len(l); i++)
+		if (l[i] == n)
+			return i;
+
+	return -1;
+}
+
+
+void
+plist_rem_value(plist *l, void *n)
+{
+	int i;
+
+	for (i = plist_len(*l) - 1; i >= 0; i--)
+		if ((*l)[i] == n)
+			plist_delete(l, i);
+}
+
+
+void
+plist_rem_value_uniq(plist *l, void *n)
+{
+	int i;
+
+	for (i = plist_len(*l) - 1; i >= 0; i--)
+		if ((*l)[i] == n)
+		{
+			plist_delete(l, i);
+			break;
+		}
+}
+
+
+plist
+plist_copy(plist l)
+{
+	int *base;
+	int *copy_base;
+
+	if (l == NULL)
+		return NULL;
+
+	base = l;
+	base -= 2;
+	assert(&base[2] == l);
+
+	copy_base = my_malloc(base[1] * sizeof(*l));
+	memcpy(copy_base, base, base[0] * sizeof(*l) + 2 * sizeof(int));
+
+	return &copy_base[2];
+}
+
+void
+plist_scramble(plist l)
+{
+	int i;
+	void *tmp;
+	int r;
+	int len = plist_len(l) - 1;
 
 	for (i = 0; i < len; i++)
 	{

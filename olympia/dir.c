@@ -460,7 +460,7 @@ add_province_exit(int who, int where, int dest, int dir, struct exit_view ***l)
 		v->magic_barrier = TRUE;
 	}
 
-	ilist_append((ilist *) l, (int) v);
+	plist_append((plist *) l, v);
 }
 
 
@@ -510,7 +510,7 @@ extra_routes(int who, int where, struct exit_view ***l)
 			    subkind(dest) == sub_ocean)
 				v->water = TRUE;
 
-			ilist_append((ilist *) l, (int) v);
+			plist_append((plist *) l, v);
 		}
 	}
 	next_here;
@@ -677,10 +677,10 @@ exits_from_loc(int who, int where)
 	static struct exit_view **l = NULL;
 	int i;
 
-	for (i = 0; i < ilist_len(l); i++)
+	for (i = 0; i < plist_len(l); i++)
 		my_free(l[i]);
 
-	ilist_clear((ilist *) &l);
+	plist_clear((plist *) &l);
 
 	switch (loc_depth(where))
 	{
@@ -721,7 +721,7 @@ exits_from_loc_nsew(int who, int where)
 	if (loc_depth(where) != LOC_province)
 		return NULL;
 
-	for (i = 0; i < ilist_len(l); i++)
+	for (i = 0; i < plist_len(l); i++)
 		my_free(l[i]);
 
 	ilist_clear((ilist *) &l);
@@ -745,15 +745,15 @@ exits_from_loc_nsew_select(int who, int where, int land, int rand)
 	ilist_clear((ilist *) &ret);
 	l = exits_from_loc_nsew(who, where);
 
-	for (i = 0; i < ilist_len(l); i++)
+	for (i = 0; i < plist_len(l); i++)
 	{
 		if (((land&LAND) && !l[i]->water) ||
 		    ((land&WATER) && l[i]->water))
-			ilist_append((ilist *) &ret, (int) l[i]);
+			plist_append((plist *) &ret, l[i]);
 	}
 
 	if (rand)
-		ilist_scramble((ilist) ret);
+		plist_scramble((plist) ret);
 
 	return ret;
 }
@@ -776,7 +776,7 @@ has_ocean_access(int where)
 
 	l = exits_from_loc(0, where);
 
-	for (i = 0; i < ilist_len(l); i++)
+	for (i = 0; i < plist_len(l); i++)
 		if (l[i]->water)
 		{
 			if (l[i]->impassable)
@@ -941,12 +941,12 @@ list_exits(int who, int where)
 
 	sprintf(first, "Routes leaving %s: ", just_name(where));
 
-	for (i = 0; i < ilist_len(l); i++)
+	for (i = 0; i < plist_len(l); i++)
 		if (l[i]->road == 0 &&
 		   (l[i]->direction != DIR_IN || see_all(who) == 2))
 			list_exits_sup(who, where, l[i], first);
 
-	for (i = 0; i < ilist_len(l); i++)
+	for (i = 0; i < plist_len(l); i++)
 		if (l[i]->road)
 			list_road_sup(who, where, l[i], first);
 
@@ -1003,7 +1003,7 @@ list_sailable_routes(int who, int ship)
 
 	sprintf(first, "Ocean routes:");
 
-	for (i = 0; i < ilist_len(l); i++)
+	for (i = 0; i < plist_len(l); i++)
 		if (l[i]->direction > 0 &&
 		   (l[i]->direction != DIR_IN || see_all(who) == 2) &&
 		    l[i]->water)
@@ -1011,7 +1011,7 @@ list_sailable_routes(int who, int ship)
 			list_exits_sup(who, outer_loc, l[i], first);
 		}
 
-	for (i = 0; i < ilist_len(l); i++)
+	for (i = 0; i < plist_len(l); i++)
 		if (l[i]->road && l[i]->water)
 		{
 			list_road_sup(who, outer_loc, l[i], first);
@@ -1034,7 +1034,7 @@ count_hidden_exits(struct exit_view **l)
 	int sum = 0;
 	int i;
 
-	for (i = 0; i < ilist_len(l); i++)
+	for (i = 0; i < plist_len(l); i++)
 		if (l[i]->hidden)
 			sum++;
 
@@ -1047,7 +1047,7 @@ hidden_count_to_index(int which, struct exit_view **l)
 {
 	int i;
 
-	for (i = 0; i < ilist_len(l); i++)
+	for (i = 0; i < plist_len(l); i++)
 	{
 		if (l[i]->hidden)
 			which--;
@@ -1072,7 +1072,7 @@ find_hidden_exit(int who, struct exit_view **l, int which)
 		where = subloc(where);
 
 	assert(valid_box(who));
-	assert(which < ilist_len(l));
+	assert(which < plist_len(l));
 	assert(l[which]->hidden);
 
 	if (l[which]->road)

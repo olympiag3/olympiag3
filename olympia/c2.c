@@ -150,7 +150,7 @@ text_list_free(char **l)
 {
 	int i;
 
-	for (i = 0; i < ilist_len(l); i++)
+	for (i = 0; i < plist_len(l); i++)
 		my_free(l[i]);
 }
 
@@ -161,7 +161,7 @@ line_length_check(char **l)
 	int i;
 	int len = 0;
 
-	for (i = 0; i < ilist_len(l); i++)
+	for (i = 0; i < plist_len(l); i++)
 		len = max(len, strlen(l[i]));
 
 	return len;
@@ -196,7 +196,7 @@ parse_text_list(struct command *c)
 			if (i_strcmp(t, "end") == 0)
 				done = TRUE;
 			else
-				ilist_append((ilist *) &l, (int) str_save(order));
+				plist_append((plist *) &l, str_save(order));
 			pop_order(pl, c->who);
 		}
 	}
@@ -213,7 +213,7 @@ parse_text_list(struct command *c)
 				return NULL;
 			}
 
-			ilist_append((ilist *) &l, (int) str_save(order));
+			plist_append((plist *) &l, str_save(order));
 			pop_order(pl, c->who);
 
 			lines--;
@@ -295,12 +295,12 @@ v_message(struct command *c)
 	indent += 3;
 	first = TRUE;
 
-	for (i = 0; i < ilist_len(l); i++)
+	for (i = 0; i < plist_len(l); i++)
 	{
 		wout(targ, "%s%s%s",
 				first ? "\"" : "",
 				l[i],
-				i+1 == ilist_len(l) ? "\"" : "");
+				i+1 == plist_len(l) ? "\"" : "");
 
 		if (first)
 		{
@@ -468,7 +468,7 @@ v_rumor(struct command *c)
 		return FALSE;
 	}
 
-	for (i = 0; i < ilist_len(l); i++)
+	for (i = 0; i < plist_len(l); i++)
 	{
 		if (strncmp(l[i], "=-=-", 4) == 0)
 			fprintf(rumor_fp, "> %s\n", l[i]);
@@ -510,7 +510,7 @@ v_press(struct command *c)
 		return FALSE;
 	}
 
-	for (i = 0; i < ilist_len(l); i++)
+	for (i = 0; i < plist_len(l); i++)
 	{
 		if (strncmp(l[i], "=-=-", 4) == 0)
 			fprintf(press_fp, "> %s\n", l[i]);

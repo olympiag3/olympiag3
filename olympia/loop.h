@@ -290,7 +290,7 @@
   struct item_ent ll_copy; \
   struct item_ent **ll_l = NULL; \
     assert(valid_box(who)); \
-    ll_l = (struct item_ent **) ilist_copy((ilist) bx[who]->items); \
+    ll_l = (struct item_ent **) plist_copy((plist) bx[who]->items); \
 	for (ll_i = 0; ll_i < ilist_len(ll_l); ll_i++) \
 	    if (valid_box(ll_l[ll_i]->item) && ll_l[ll_i]->qty > 0) { \
 		    ll_copy = *ll_l[ll_i]; \
@@ -306,7 +306,7 @@
   struct skill_ent **ll_l = NULL; \
     assert(valid_box(who)); \
     if (rp_char(who)) \
-       ll_l = (struct skill_ent **) ilist_copy((ilist) rp_char(who)->skills); \
+       ll_l = (struct skill_ent **) plist_copy((plist) rp_char(who)->skills); \
        for (ll_i = 0; ll_i < ilist_len(ll_l); ll_i++) { \
 	     e = ll_l[ll_i];
 
@@ -321,7 +321,7 @@
   struct skill_ent **ll_l = NULL; \
     assert(valid_box(who)); \
     if (rp_char(who)) \
-       ll_l = (struct skill_ent **) ilist_copy((ilist) rp_char(who)->skills); \
+       ll_l = (struct skill_ent **) plist_copy((plist) rp_char(who)->skills); \
        for (ll_i = 0; ll_i < ilist_len(ll_l); ll_i++) \
           if (ll_l[ll_i]->know == SKILL_know) { \
 		e = ll_l[ll_i];
@@ -335,7 +335,7 @@
   int ll_check = 19; \
   struct trade **ll_l = NULL; \
     assert(valid_box(who)); \
-    ll_l = (struct trade **) ilist_copy((ilist) bx[who]->trades); \
+    ll_l = (struct trade **) plist_copy((plist) bx[who]->trades); \
 	for (ll_i = 0; ll_i < ilist_len(ll_l); ll_i++) \
 	    if (valid_box(ll_l[ll_i]->item) && ll_l[ll_i]->qty > 0) { \
 		    e = ll_l[ll_i];

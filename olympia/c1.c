@@ -411,7 +411,7 @@ v_accept(struct command *c)
 	new->from_who = from_who;
 	new->qty = qty;
 
-	ilist_append((ilist *) &p->accept, (int) new);
+	plist_append((plist *) &p->accept, new);
 
 	return TRUE;
 }
@@ -427,7 +427,7 @@ will_accept_sup(int who, int item, int from, int qty)
 
 	if (p)
 	{
-		for (i = 0; i < ilist_len(p->accept); i++)
+		for (i = 0; i < plist_len(p->accept); i++)
 		{
 			int item_match = (p->accept[i]->item == item ||
 					  p->accept[i]->item == 0);
@@ -1132,7 +1132,7 @@ v_flag(struct command *c)
 	new->who = c->who;
 	new->flag = str_save(flag);
 
-	ilist_append((ilist *) &flags, (int) new);
+	plist_append((plist *) &flags, new);
 
 	return TRUE;
 }
@@ -1174,13 +1174,13 @@ clear_wait_parse(struct command *c)
 {
 	int i;
 
-	for (i = 0; i < ilist_len(c->wait_parse); i++)
+	for (i = 0; i < plist_len(c->wait_parse); i++)
 	{
 		my_free(c->wait_parse[i]);
 		c->wait_parse[i] = NULL;
 	}
 
-	ilist_clear((ilist *) &c->wait_parse);
+	plist_clear((plist *) &c->wait_parse);
 }
 
 
@@ -1192,7 +1192,7 @@ parse_wait_args(struct command *c)
 	char *tag_s;
 	struct wait_arg *new;
 
-	assert(ilist_len(c->wait_parse) == 0);
+	assert(plist_len(c->wait_parse) == 0);
 
 	i = 1;
 	while (i <= numargs(c))
@@ -1213,7 +1213,7 @@ parse_wait_args(struct command *c)
 			return sout("Unknown condition '%s'.", tag_s);
 
 		new = my_malloc(sizeof(*new));
-		ilist_append((ilist *) &c->wait_parse, (int) new);
+		plist_append((plist *) &c->wait_parse, new);
 
 		new->tag = tag;
 		new->a1 = 0;
@@ -1298,15 +1298,15 @@ check_wait_conditions(struct command *c)
 	if (is_ship_either(where_ship))
 		where_ship = subloc(where_ship);
 
-	if (ilist_len(c->wait_parse) < 1)
+	if (plist_len(c->wait_parse) < 1)
 	{
 		if (ret = parse_wait_args(c))
 			return ret;
 
-		assert(ilist_len(c->wait_parse) > 0);
+		assert(plist_len(c->wait_parse) > 0);
 	}
 
-	for (i = 0; i < ilist_len(c->wait_parse); i++)
+	for (i = 0; i < plist_len(c->wait_parse); i++)
 	{
 		p = c->wait_parse[i];
 

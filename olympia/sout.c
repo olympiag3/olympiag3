@@ -3,7 +3,11 @@
 #include	<stdarg.h>
 #include	<string.h>
 #include	<limits.h>
+#ifdef _WIN32
 #include	<libc/sys/stat.h>
+#else
+#include	<sys/stat.h>
+#endif
 #include	"z.h"
 #include	"oly.h"
 
@@ -124,7 +128,7 @@ open_fp(struct fp_ent *p, int player)
 
 	p->player = player;
 
-	sprintf(fnam, "%s/LOG/%d", libdir, player);
+	sprintf(fnam, "%s/log/%d", libdir, player);
 
 	p->fp =	fopen(fnam, "a+");
 	if (p->fp == NULL)
@@ -193,7 +197,7 @@ grab_fp(int player)
 void
 open_logfile_nondestruct()
 {
-	mkdir(sout("%s/LOG", libdir), 0755);
+	mkdir(sout("%s/log", libdir), 0755);
 }
 
 
@@ -205,11 +209,11 @@ open_logfile()
 		return;
 
 	if (win_flag) {
-		system(sout("rd /s /q %s\\LOG", libdir));
-		mkdir(sout("%s\\LOG", libdir), 0755);
+		system(sout("rd /s /q %s\\log", libdir));
+		mkdir(sout("%s\\log", libdir), 0755);
 	} else {
-		system(sout("rm -rf %s/LOG", libdir));
-		mkdir(sout("%s/LOG", libdir), 0755);
+		system(sout("rm -rf %s/log", libdir));
+		mkdir(sout("%s/log", libdir), 0755);
 	}
 }
 

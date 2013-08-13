@@ -1,7 +1,12 @@
 #include	<stdlib.h>
 #include	<stdio.h>
+#ifdef _WIN32
 #include	<libc/sys/stat.h>
 #include	<libc/unistd.h>
+#else
+#include	<sys/stat.h>
+#include	<unistd.h>
+#endif
 #include	"z.h"
 #include	"oly.h"
 
@@ -330,11 +335,15 @@ send_rep(int pl, int turn)
 		}
 
 		if (win_flag)
+		{
 			fnam = sout("tmp/zrep.%d", pl);
+			ret = system(sout("gzcat %s > %s", zfnam, fnam));
+		}
 		else
+		{
 			fnam = sout("/tmp/zrep.%d", pl);
-
-		ret = system(sout("gzcat %s > %s", zfnam, fnam));
+			ret = system(sout("zcat %s > %s", zfnam, fnam));
+		}
 
 		if (ret)
 		{
@@ -357,7 +366,7 @@ send_rep(int pl, int turn)
 		if (player_notab(pl)) {
 			cmd = sout("g2rep %s >> %s", fnam, report);
 		} else {
-			cmd = sout("g2rep %s | entab >> %s", fnam, report);
+			cmd = sout("g2rep %s | unexpand -t4 - >> %s", fnam, report);
 		}
 	}
 
@@ -378,7 +387,7 @@ send_rep(int pl, int turn)
 		if (win_flag) {
 			cmd = sout("sendmail %s", report);
 		} else {
-			cmd = sout("sendmail -t -odq < %s", report);
+			cmd = sout("sendmail -t < %s", report);
 		}
 	} else {
 		cmd = sout("mailsplit -s %d -l %d -c 'sendmail -t -odq' < %s",
@@ -571,6 +580,37 @@ setup_html_all(void)
 	copy_public_turns();
 }
 
+void
+extract_startlocs()
+{
+	int city;
+	int sequence = 0;
+	char *fnam;
+	FILE *fp = NULL;
+
+	fnam = sout("%s/startloc", libdir);
+	fp = fopen(fnam, "w");
+	if (fp)
+	{
+		loop_city(city)
+		{
+			if (safe_haven(city))
+			{
+				fprintf(fp, "%d %d %s\n",
+					sequence++,
+					city,
+					display_name(city)
+				);
+			}
+		}
+		next_city;
+
+		fclose(fp);
+	}
+	else
+		fprintf(stderr, "Can't write %s!\n", fnam);
+}
+
 int
 main(int argc, char **argv)
 {
@@ -580,17 +620,19 @@ main(int argc, char **argv)
 	int c;
 	int run_flag = FALSE;
 	int add_flag = FALSE;
+	int eat_fast = FALSE;
 	int eat_flag = FALSE;
 	int mail_now = FALSE;
 	int acct_flag = FALSE;
 	int html_flag = FALSE;
+	int startloc_flag = FALSE;
 
 	printf("\tsizeof(struct box) = %d\n", sizeof (struct box));
 	setbuf(stderr, NULL);
 
 	call_init_routines();
 
-	while ((c = getopt(argc, argv, "waefirl:pR?StMTAh")) != EOF) {
+	while ((c = getopt(argc, argv, "waeEfirl:pR?sStMTAh")) != EOF) {
 		switch (c) {
 	case 'w':
 			win_flag = TRUE;
@@ -612,6 +654,13 @@ main(int argc, char **argv)
 
 		case 'e':
 			eat_flag = TRUE;
+			eat_fast = FALSE;
+			immediate = FALSE;
+			break;
+
+		case 'E':
+			eat_flag = TRUE;
+			eat_fast = TRUE;
 			immediate = FALSE;
 			break;
 
@@ -635,6 +684,10 @@ main(int argc, char **argv)
 		case 'R':									/* test random number generator */
 			test_random();
 			return 0;
+
+		case 's':
+			startloc_flag = TRUE;
+			break;
 
 		case 'S':									/* save database when done */
 			save_flag = TRUE;
@@ -663,27 +716,34 @@ main(int argc, char **argv)
 
 	if (errflag) {
 		fprintf(stderr, "usage: oly [options]\n");
-		fprintf(stderr, "	-w				Windows mode\n");
-		fprintf(stderr, "	-a				Add new players mode\n");
-		fprintf(stderr, "	-e				Eat orders from libdir/spool\n");
-		fprintf(stderr, "	-f				Don't buffer files for debugging\n");
-		fprintf(stderr, "	-i				Immediate mode\n");
+		fprintf(stderr, "	-w		Windows mode\n");
+		fprintf(stderr, "	-a		Add new players mode\n");
+		fprintf(stderr, "	-e		Eat orders from libdir/spool\n");
+		fprintf(stderr, "	-E		Eat orders from libdir/spool and terminate\n");
+		fprintf(stderr, "	-f		Don't buffer files for debugging\n");
+		fprintf(stderr, "	-i		Immediate mode\n");
 		fprintf(stderr, "	-l dir		Specify libdir, default ./lib\n");
-		fprintf(stderr, "	-p				Don't make data files pretty\n");
-		fprintf(stderr, "	-r				Run a turn\n");
-		fprintf(stderr, "	-R				Test the random number generator\n");
-		fprintf(stderr, "	-S				Save the database at completion\n");
-		fprintf(stderr, "	-t				Test ilist code\n");
-		fprintf(stderr, "	-T				Print timing info\n");
-		fprintf(stderr, "	-M				Mail reports\n");
-		fprintf(stderr, "	-A				Charge player accounts\n");
+		fprintf(stderr, "	-p		Don't make data files pretty\n");
+		fprintf(stderr, "	-r		Run a turn\n");
+		fprintf(stderr, "	-R		Test the random number generator\n");
+		fprintf(stderr, "	-s		Extract safe havens as start city list\n");
+		fprintf(stderr, "	-S		Save the database at completion\n");
+		fprintf(stderr, "	-t		Test ilist code\n");
+		fprintf(stderr, "	-T		Print timing info\n");
+		fprintf(stderr, "	-M		Mail reports\n");
+		fprintf(stderr, "	-A		Charge player accounts\n");
 		return 1;
 	}
 
 	load_db();
 
 	if (eat_flag) {
-		eat_loop();
+		eat_loop(eat_fast);
+		return 0;
+	}
+
+	if (startloc_flag) {
+		extract_startlocs();
 		return 0;
 	}
 
@@ -750,7 +810,7 @@ main(int argc, char **argv)
 	if (mail_now)
 		mail_reports();
 
-	if (mail_now || html_flag)
+	if (html_flag)
 		setup_html_all();
 
 	times_masthead();

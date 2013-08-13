@@ -1,10 +1,16 @@
 
 #include	<stdio.h>
 #include	<sys/types.h>
-#include	<libc/dirent.h>
 #include	<string.h>
+#ifdef _WIN32
+#include	<libc/dirent.h>
 #include	<libc/unistd.h>
 #include	<libc/sys/stat.h>
+#else
+#include	<dirent.h>
+#include	<unistd.h>
+#include	<sys/stat.h>
+#endif
 #include	"z.h"
 #include	"oly.h"
 
@@ -1204,12 +1210,12 @@ write_remind_list()
 
 
 static int
-read_spool()
+read_spool(int fast)
 {
 	DIR *d;
 	struct dirent *e;
 	char fnam[LEN];
-	int ret = TRUE;
+	int ret = !fast;
 	int did_one = FALSE;
 
 	sprintf(fnam, "%s/spool", libdir);
@@ -1235,7 +1241,8 @@ read_spool()
 			sprintf(fnam, "%s/spool/%s", libdir, e->d_name);
 			eat(fnam);
 			unlink(fnam);
-			sleep(5);
+			if (!fast)
+				sleep(5);
 
 			did_one = TRUE;
 		}
@@ -1251,7 +1258,7 @@ read_spool()
 
 
 void
-eat_loop()
+eat_loop(int fast)
 {
 
 	setbuf(stdout, NULL);
@@ -1261,7 +1268,7 @@ eat_loop()
 
 	write_remind_list();
 
-	while (read_spool())
+	while (read_spool(fast))
 	{
 		sleep(10);
 	}

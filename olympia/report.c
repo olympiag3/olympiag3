@@ -276,10 +276,10 @@ show_char_inventory(int who, int num)
 	int count = 0;
 	int total_weight = 0;
 
-	if (ilist_len(bx[num]->items) > 0)
+	if (plist_len(bx[num]->items) > 0)
 	{
 		qsort(bx[num]->items, ilist_len(bx[num]->items),
-					sizeof(int), inv_item_comp);
+					sizeof(*bx[num]->items), inv_item_comp);
 	}
 
 	loop_inv(num, e)
@@ -713,10 +713,10 @@ show_unclaimed(int who, int num)
 	struct item_ent *e;
 	int weight;
 
-	if (ilist_len(bx[num]->items) > 0)
+	if (plist_len(bx[num]->items) > 0)
 	{
 		qsort(bx[num]->items, ilist_len(bx[num]->items),
-					sizeof(int), inv_item_comp);
+					sizeof(*bx[num]->items), inv_item_comp);
 	}
 
 	loop_inv(num, e)
