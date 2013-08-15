@@ -108,6 +108,11 @@ add_new_player(int pl, char *faction, char *character, char *start_city,
   	int t = sysclock.turn;
 	struct entity_char *cp;
 	struct entity_player *pp;
+	char password[10];
+	int i;
+	const char *symbols =	"abcdefghijklmnopqrstuvwxyz"
+				"ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+				"1234567890";
 
 	who = new_ent(T_char, 0);
 
@@ -122,6 +127,13 @@ add_new_player(int pl, char *faction, char *character, char *start_city,
 
 	pp->full_name = full_name;
 	pp->email = email;
+
+	// by sbaillie:
+	// give new players a randomly generated password by default
+	for (i = 0; i < 8; i++)
+		password[i] = symbols[rnd(1, strlen(symbols)) - 1];
+	password[i] = '\0';
+	pp->password = str_save(password);
 
   	// by Cappinator: 
     // Changed starting faction noble points
