@@ -387,7 +387,7 @@ send_rep(int pl, int turn)
 		if (win_flag) {
 			cmd = sout("sendmail %s", report);
 		} else {
-			cmd = sout("sendmail -t < %s", report);
+			cmd = sout("sendmail -t -f %s < %s", from_host, report);
 		}
 	} else {
 		cmd = sout("mailsplit -s %d -l %d -c 'sendmail -t -odq' < %s",

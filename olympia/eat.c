@@ -928,11 +928,11 @@ do_eat_command(struct command *c, FILE *fp)
 				if (i_strcmp(t, "end") == 0)
 					break;
 
-				ilist_append((ilist *) &l, (int) str_save(s));
+				plist_append((plist *) &l, str_save(s));
 			}
 			else
 			{
-				ilist_append((ilist *) &l, (int) str_save(s));
+				plist_append((plist *) &l, str_save(s));
 
 				if (--count <= 0)
 					break;
@@ -1019,7 +1019,7 @@ eat_banner()
 	}
 
 	out(eat_pl, "Subject: Acknowledge");
-	out(eat_pl, "X-Loop: orders.g3.olympia@gmail.com");
+	out(eat_pl, "X-Loop: %s", from_host);
 	out(eat_pl, "");
 	out(eat_pl, "     - Olympia order scanner -");
 	out(eat_pl, "");
@@ -1144,8 +1144,8 @@ eat(char *fnam)
 			ret = system(sout("sendmail conf\\%d", eat_pl));
 			system(sout("del conf\\%d", eat_pl));
 		} else {
-		ret = system(sout("g2rep %s/log/%d | %ssendmail -t",
-				libdir, eat_pl, entab(eat_pl)));
+		ret = system(sout("g2rep %s/log/%d | %ssendmail -t -f %s",
+				libdir, eat_pl, entab(eat_pl), from_host));
 		}
 
 
@@ -1157,8 +1157,8 @@ eat(char *fnam)
 			fprintf(stderr, "error: couldn't mail ack to %s\n",
 					who_to);
 			fprintf(stderr, "command was: %s\n",
-				sout("g2rep %s/log/%d | %ssendmail -t",
-					libdir, eat_pl, entab(eat_pl)));
+				sout("g2rep %s/log/%d | %ssendmail -t -f %s",
+					libdir, eat_pl, entab(eat_pl), from_host));
 		}
 	}
 
