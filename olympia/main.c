@@ -318,7 +318,7 @@ send_rep(int pl, int turn)
 		fprintf(fp, "Reply-To: %s\n", reply_host);
 	fprintf(fp, "To: %s (%s)\n", p->email,
 			p->full_name ? p->full_name : "???");
-	fprintf(fp, "Subject: Turn %d report\n", turn);
+	fprintf(fp, "Subject: %s - Turn %d report\n", game_title, turn);
 	fprintf(fp, "\n");
 	fclose(fp);
 

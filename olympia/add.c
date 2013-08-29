@@ -317,7 +317,7 @@ new_player_banners()
 			"align=middle width=100 height=100 alt=\"\">");
 
 		html(pl, "<h1>");
-		wout(pl, "Olympia G3 turn %d", sysclock.turn);
+		wout(pl, "%s turn %d", game_title, sysclock.turn);
 		wout(pl, "Initial Position Report for %s.", box_name(pl));
 		html(pl, "</h1>");
 
@@ -337,7 +337,7 @@ new_player_banners()
 		out(pl, "");
 #endif
 
-		wout(pl, "Welcome to Olympia G3!");
+		wout(pl, "Welcome to %s!", game_title);
 		wout(pl, "");
 		wout(pl, "This is an initial position report for your new "
 					"faction.");

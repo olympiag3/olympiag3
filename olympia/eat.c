@@ -997,7 +997,7 @@ eat_banner()
 
 	if (already_seen)
 	{
-		to = "nobody@pbm.com";
+		to = gm_address;
 		full_name = " (Error Watcher)";
 
 		if (cc_addr)

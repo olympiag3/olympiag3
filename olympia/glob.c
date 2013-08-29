@@ -6,6 +6,9 @@
 
 char *from_host = "g3@olympia.v-labs.be";
 char *reply_host = "g3@olympia.v-labs.be";
+char *gm_address = "c@dvdc.be";
+char *game_title = "Olympia G3";
+char *game_url = "http://olympia.v-labs.be/g3";
 
 struct box **bx;		/* all possible entities */
 int box_head[T_MAX];		/* heads of x_next_kind chain */

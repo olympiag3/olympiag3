@@ -1215,6 +1215,9 @@ extern struct cmd_tbl_ent cmd_tbl[];
 extern int evening;			/* are we in the evening phase? */
 extern char *from_host;
 extern char *reply_host;
+extern char *gm_address;
+extern char *game_title;
+extern char *game_url;
 extern ilist new_players;		/* new players added this turn */
 
 

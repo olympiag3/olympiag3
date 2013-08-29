@@ -408,20 +408,20 @@ times_masthead()
 	}
 	next_player;
 
-	sprintf(turn_s, "turn %d %d players", sysclock.turn, nplayers);
-	sprintf(issue_s, "issue g3-%d", sysclock.turn);
+	sprintf(turn_s, "turn %d, %d player%s", sysclock.turn, nplayers, nplayers == 1 ? "" : "s");
+	sprintf(issue_s, "%s year %d", month_names[oly_month(sysclock)], oly_year(sysclock));
 
-	fprintf(fp, "From: g3@olympia.v-labs.be(Olympia g3)\n");
-	fprintf(fp, "Subject: Times g3-%d\n", sysclock.turn);
-	fprintf(fp, "To: g3@olympia.v-labs.be\n");
-//	fprintf(fp, "Bcc: totimes-g2\n\n");
+	fprintf(fp, "From: %s\n", from_host);
+	fprintf(fp, "Subject: %s - The Olympia Times - Issue %d\n", game_title, sysclock.turn);
+	fprintf(fp, "\n");
+
 	fprintf(fp, "   +----------------------------------------------------------------------+\n");
-	fprintf(fp, "   | The Olympia Times                                  %17s |\n", issue_s);
+	fprintf(fp, "   | The Olympia Times %50s |\n", issue_s);
 	fprintf(fp, "   | %-68s |\n", date);
 	fprintf(fp, "   |                                                                      |\n");
-	fprintf(fp, "   | %s !game_email! |\n", turn_s);
+	fprintf(fp, "   | %s %*s |\n", turn_s, 67 - strlen(turn_s), from_host);
 	fprintf(fp, "   +----------------------------------------------------------------------+\n\n");
-	fprintf(fp, "               Questions, comments, to play:  http://olympia.v-labs.be/g3\n\n");
+	fprintf(fp, "     Questions, comments, to play: %s\n\n", game_url);
 	fprintf(fp, "                             Olympia PBEM\n\n");
 	fprintf(fp, "                                *  *  *\n\n");
 	fprintf(fp, "                                *  *  *\n\n");

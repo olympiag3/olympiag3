@@ -2526,6 +2526,18 @@ load_system()
 		{
 			reply_host = str_save(&s[11]);
 		}
+		else if (strncmp(s, "gm_address=", 11) == 0)
+		{
+			gm_address = str_save(&s[11]);
+		}
+		else if (strncmp(s, "game_title=", 11) == 0)
+		{
+			game_title = str_save(&s[11]);
+		}
+		else if (strncmp(s, "game_url=", 9) == 0)
+		{
+			game_url = str_save(&s[9]);
+		}
 		else if (strncmp(s, "indep_player=", 13) == 0)
 		{
 			indep_player = atoi(&s[13]);
@@ -2626,6 +2638,9 @@ save_system()
 	fprintf(fp, "skill_player=%d\n", skill_player);
 	fprintf(fp, "from_host=%s\n", from_host);
 	fprintf(fp, "reply_host=%s\n", reply_host);
+	fprintf(fp, "gm_address=%s\n", gm_address);
+	fprintf(fp, "game_title=%s\n", game_title);
+	fprintf(fp, "game_url=%s\n", game_url);
 	fprintf(fp, "post=%d\n", post_has_been_run);
 	fprintf(fp, "init=%d\n", seed_has_been_run);
 	fprintf(fp, "fr=%d\n", faery_region);

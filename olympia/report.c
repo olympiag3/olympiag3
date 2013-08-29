@@ -1641,7 +1641,7 @@ player_banner()
 			"align=middle width=100 height=100 alt=\"\">");
 
 		html(pl, "<h1>");
-		wout(pl, "Olympia G3 turn %d", sysclock.turn);
+		wout(pl, "%s turn %d", game_title, sysclock.turn);
 		wout(pl, "Report for %s.", box_name(pl));
 		html(pl, "</h1>");
 
