@@ -2538,6 +2538,22 @@ load_system()
 		{
 			game_url = str_save(&s[9]);
 		}
+		else if (strncmp(s, "rules_url=", 10) == 0)
+		{
+			rules_url = str_save(&s[10]);
+		}
+		else if (strncmp(s, "times_url=", 10) == 0)
+		{
+			times_url = str_save(&s[10]);
+		}
+		else if (strncmp(s, "htpasswd_loc=", 13) == 0)
+		{
+			htpasswd_loc = str_save(&s[13]);
+		}
+		else if (strncmp(s, "garrison_pay=", 13) == 0)
+		{
+			garrison_pay = atoi(&s[13]);
+		}
 		else if (strncmp(s, "indep_player=", 13) == 0)
 		{
 			indep_player = atoi(&s[13]);
@@ -2641,6 +2657,10 @@ save_system()
 	fprintf(fp, "gm_address=%s\n", gm_address);
 	fprintf(fp, "game_title=%s\n", game_title);
 	fprintf(fp, "game_url=%s\n", game_url);
+	fprintf(fp, "rules_url=%s\n", rules_url);
+	fprintf(fp, "times_url=%s\n", times_url);
+	fprintf(fp, "htpasswd_loc=%s\n", htpasswd_loc);
+	fprintf(fp, "garrison_pay=%d\n", garrison_pay);
 	fprintf(fp, "post=%d\n", post_has_been_run);
 	fprintf(fp, "init=%d\n", seed_has_been_run);
 	fprintf(fp, "fr=%d\n", faery_region);

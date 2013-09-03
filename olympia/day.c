@@ -337,6 +337,7 @@ default_garrison_pay()
 {
 	int who;
 	int parent;
+	extern int gold_garrison;
 
 	loop_char(who)
 	{
@@ -348,9 +349,13 @@ default_garrison_pay()
 		if (parent == 0 || !default_garrison(parent))
 			continue;
 
-		gen_item(who, item_gold, 4);
+		gen_item(who, item_gold, garrison_pay);
+		if (!is_npc(who))
+			gold_garrison += garrison_pay;
 
-		wout(who, "Received %s from %s.", gold_s(4), box_name(parent));
+		wout(who, "Received %s from %s.",
+			gold_s(garrison_pay),
+			box_name(parent));
 	}
 	next_char;
 }

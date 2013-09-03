@@ -456,7 +456,7 @@ void setup_html_dir(int pl)
 		return;
 	}
 
-	fprintf(fp, "AuthUserFile /u/oly/g2/lib/ht-passwords\n");
+	fprintf(fp, "AuthUserFile %s\n", htpasswd_loc);
 	fprintf(fp, "AuthGroupFile /dev/null\n");
 	fprintf(fp, "AuthName ByPassword\n");
 	fprintf(fp, "AuthType Basic\n");
@@ -509,9 +509,18 @@ random randompassword
 			system(buf);
 		}
 	} else {
-		sprintf(buf, "/usr/local/bin/htpass /u/oly/g2/lib/ht-passwords %s \"%s\"",
-					box_code_less(pl), pw);
-		system(buf);
+		sprintf(buf, "htpasswd -b %s %s \"%s\"",
+			htpasswd_loc,
+			box_code_less(pl),
+			pw);
+		ret = system(buf);
+		if (ret) {
+			sprintf(buf, "htpasswd -c -b %s %s \"%s\"",
+				htpasswd_loc,
+				box_code_less(pl),
+				pw);
+			system(buf);
+		}
 	}
 
 }

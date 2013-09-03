@@ -1218,6 +1218,10 @@ extern char *reply_host;
 extern char *gm_address;
 extern char *game_title;
 extern char *game_url;
+extern char *rules_url;
+extern char *times_url;
+extern char *htpasswd_loc;
+extern int garrison_pay;
 extern ilist new_players;		/* new players added this turn */
 
 

@@ -432,6 +432,7 @@ garrison_gold()
 	int base, remain, spent, has_before, has_now;
 	int i;
 	int castle, owner;
+	extern int gold_provinces;
 
 	clear_temps(T_loc);
 
@@ -513,6 +514,7 @@ garrison_gold()
 					gold_s(bx[i]->temp));
 
 		gen_item(owner, item_gold, bx[i]->temp);
+		gold_provinces += bx[i]->temp;
 	}
 	next_loc;
 }

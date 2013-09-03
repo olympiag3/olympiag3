@@ -1726,8 +1726,10 @@ report_account_sup(int pl)
 	style(0);
 
 	html(pl, "<hr><center><font size=+1>");
-	html(pl, "<a href=\"http://oly.v-labs.be/g3/node/11\">Rules</a>   "
-	"<a href=\"http://oly.v-labs.be/g3/node/409\"><i>The Olympia Times</i></a>   ");
+	html(pl, "<a href=\"%s\">Rules</a>   "
+		"<a href=\"%s\"><i>The Olympia Times</i></a>",
+		rules_url,
+		times_url);
 	html(pl, "</font></center>");
 
 	out(pl, "");

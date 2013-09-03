@@ -11,6 +11,7 @@ int gold_pot_basket = 0;
 int gold_trade = 0;
 int gold_inn = 0;
 int gold_taxes = 0;
+int gold_provinces = 0;
 int gold_times = 0;
 int gold_combat = 0;
 int gold_combat_indep = 0;
@@ -19,6 +20,7 @@ int gold_temple = 0;
 int gold_pillage = 0;
 int gold_ferry = 0;
 int gold_opium = 0;
+int gold_garrison = 0;
 
 
 static int
@@ -315,7 +317,8 @@ gm_show_gold(int pl)
 	int sum;
 
 	sum = gold_common_magic + gold_lead_to_gold + gold_pot_basket +
-		gold_trade + gold_opium + gold_inn + gold_taxes + gold_times +
+		gold_trade + gold_opium + gold_inn + gold_taxes + 
+		gold_provinces + gold_garrison + gold_times +
 		gold_combat_indep + gold_petty_thief +
 		gold_temple + gold_pillage + gold_ferry;
 
@@ -335,12 +338,14 @@ gm_show_gold(int pl)
 		out(pl, "Trade to cities:      %10s %3d%%", comma_num(gold_trade), gold_trade * 100 / sum);
 		out(pl, "Inn income:           %10s %3d%%", comma_num(gold_inn), gold_inn * 100 / sum);
 		out(pl, "Taxes:                %10s %3d%%", comma_num(gold_taxes), gold_taxes * 100 / sum);
+		out(pl, "Provinces:            %10s %3d%%", comma_num(gold_provinces), gold_provinces * 100 / sum);
 		out(pl, "Times press:          %10s %3d%%", comma_num(gold_times), gold_times * 100 / sum);
 		out(pl, "Combat with indeps:   %10s %3d%%", comma_num(gold_combat_indep), gold_combat_indep * 100 / sum);
 		out(pl, "Petty thievery:       %10s %3d%%", comma_num(gold_petty_thief), gold_petty_thief * 100 / sum);
 		out(pl, "Temple income:        %10s %3d%%", comma_num(gold_temple), gold_temple * 100 / sum);
 		out(pl, "Pillaging:            %10s %3d%%", comma_num(gold_pillage), gold_pillage * 100 / sum);
 		out(pl, "Ferry boarding:       %10s %3d%%", comma_num(gold_ferry), gold_ferry * 100 / sum);
+		out(pl, "Garrison Pay:         %10s %3d%%", comma_num(gold_garrison), gold_garrison * 100 / sum);
 		out(pl, "                      %10s %4s", "", "----");
 		out(pl, "Total:                %10s", comma_num(sum));
 
