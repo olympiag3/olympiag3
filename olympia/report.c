@@ -1637,8 +1637,16 @@ player_banner()
 
 		html(pl, "<center>");
 
-		html(pl, "<img src=\"head.gif\""
-			"align=middle width=100 height=100 alt=\"\">");
+		if (win_flag)
+		{
+			html(pl, "<img src=\"head.gif\" "
+				"align=middle width=100 height=100 alt=\"\">");
+		}
+		else
+		{
+			html(pl, "<img src=\"../head.gif\" "
+				"align=middle width=100 height=100 alt=\"\">");
+		}
 
 		html(pl, "<h1>");
 		wout(pl, "%s turn %d", game_title, sysclock.turn);

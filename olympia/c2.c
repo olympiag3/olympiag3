@@ -409,7 +409,7 @@ times_masthead()
 	next_player;
 
 	sprintf(turn_s, "turn %d, %d player%s", sysclock.turn, nplayers, nplayers == 1 ? "" : "s");
-	sprintf(issue_s, "%s year %d", month_names[oly_month(sysclock)], oly_year(sysclock));
+	sprintf(issue_s, "%s year %d", month_names[oly_month(sysclock)], oly_year(sysclock) + 1);
 
 	fprintf(fp, "From: %s\n", from_host);
 	fprintf(fp, "Subject: %s - The Olympia Times - Issue %d\n", game_title, sysclock.turn);
