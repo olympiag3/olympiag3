@@ -562,10 +562,10 @@ copy_public_turns()
 			printf(cmd);
 			system(cmd);
 		} else {
-			sprintf(fnam, "%s/html/%s", libdir, box_code_less(pl));
-			sprintf(cmd, "sed -e '/Account summary/,/Balance/d' -e 's/^begin %s.*$/begin %s/' %/index.html > %s.html",
-					box_code_less(pl), box_code_less(pl),
-					fnam, fnam);
+			sprintf(fnam, "%s/html/%s/index.html", libdir, box_code_less(pl));
+			sprintf(fnam2, "public/%d.%s", sysclock.turn, box_code_less(pl));
+			sprintf(cmd, "sed -e '/<name=\"Order template\">/,$d' < %s > %s",
+					fnam, fnam2);
 			system(cmd);
 		}
 	}
