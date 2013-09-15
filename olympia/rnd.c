@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <fcntl.h>
 #include "z.h"
+#include <stdint.h>
 
 /*
  *  Random number generator built on top of MD5
@@ -32,7 +33,8 @@
  * will fill a supplied 16-byte array with the digest.
  */
 
-typedef unsigned long word32;
+typedef uint32_t word32;
+// typedef unsigned long word32;
 typedef unsigned char byte;
 
 struct xMD5Context {
@@ -57,8 +59,8 @@ byteSwap(word32 *buf, unsigned words)
 	byte *p = (byte *)buf;
 
 	do {
-		*buf++ = (word32)((unsigned)p[3] << 8 | p[2]) << 16 |
-			((unsigned)p[1] << 8 | p[0]);
+		*buf++ = (word32)((word32)p[3] << 8 | p[2]) << 16 |
+			((word32)p[1] << 8 | p[0]);
 		p += 4;
 	} while (--words);
 }
@@ -270,7 +272,7 @@ void MD5(void *dest, void *orig, int len)
 /*****************************************************************/
 
 
-static unsigned long digest[4];
+static word32 digest[4];
 
 void load_seed(char *fnam)
 {
@@ -278,7 +280,7 @@ void load_seed(char *fnam)
 
 	fd = fopen(fnam, "rb");
 	if (fd) {
-		fread(digest, 1, 16, fd);
+		fread(digest, 1, sizeof(digest), fd);
 		fclose(fd);
 	} else
 		printf("%s could not be opened.\n", fnam);
@@ -291,7 +293,7 @@ void save_seed(char *fnam)
 	fd = fopen(fnam, "wb+");
 	if (fd >= 0)
 	{
-		fwrite(digest, 1, 16, fd);
+		fwrite(digest, 1, sizeof(digest), fd);
 		fclose(fd);
 	}
 }
@@ -316,12 +318,12 @@ int rnd(int low, int high)
 
 int md5_int(int a, int b, int c, int d)
 {
-	unsigned long buf[4];
+	word32 buf[4];
 
-	buf[0] = (unsigned long) a;
-	buf[1] = (unsigned long) b;
-	buf[2] = (unsigned long) c;
-	buf[3] = (unsigned long) d;
+	buf[0] = (word32) a;
+	buf[1] = (word32) b;
+	buf[2] = (word32) c;
+	buf[3] = (word32) d;
 
 	MD5(buf, buf, sizeof(buf));
 
