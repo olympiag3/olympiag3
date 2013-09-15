@@ -1167,7 +1167,6 @@ new_tradegood(int where)
 	assert(subkind(where) == sub_city);
 
 	l = tradegoods_for_sale(where);
-	ilist_reclaim(&l);
 
 	do {
 		t = &tradegoods[rnd(0, sizeof(tradegoods) /
@@ -1181,6 +1180,8 @@ new_tradegood(int where)
 				already = 1;
 	}
 	while (already);
+
+	ilist_reclaim(&l);
 
 	new = new_ent(T_item, sub_tradegood);
 
