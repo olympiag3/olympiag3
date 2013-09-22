@@ -423,13 +423,6 @@ build_materials_check(struct command *c, struct build_ent *bi)
 		return FALSE;
 	}
 
-/*
- *  Materials deduct
- */
-
-	if (bi->req_item > 0)
-		consume_item(c->who, bi->req_item, bi->req_qty);
-
 	return TRUE;
 }
 
@@ -612,16 +605,12 @@ daily_build(struct command *c, struct build_ent *bi)
  *  Materials check
  */
 
-	// by Cappinator:
-	// TODO: Fix bug: if 2/5 or more of the effort is given
-	// in one day, only 1/5 of the materials is deducted.
-
 	if (bi->req_item > 0)
 	{
 	    int fifth = (p->effort_given + effort_given) * 5 /
 						p->effort_required;
 
-	    while (fifth < 5 && p->build_materials < fifth)
+	    while (p->build_materials < 5 && p->build_materials <= fifth)
 	    {
 		if (!consume_item(c->who, bi->req_item, bi->req_qty))
 		{
@@ -630,6 +619,9 @@ daily_build(struct command *c, struct build_ent *bi)
 				box_name_qty(bi->req_item, bi->req_qty));
 			return FALSE;
 		}
+		wout(c->who, "Used %s in construction of %s.",
+			box_name_qty(bi->req_item, bi->req_qty),
+			box_name(inside));
 
 		p->build_materials++;
 	    }
@@ -648,6 +640,12 @@ daily_build(struct command *c, struct build_ent *bi)
 	create_new_building(c, bi, inside);
 
 	wout(c->who, "%s is finished!", box_name(inside));
+	show_to_garrison = TRUE;
+	wout(subloc(c->who), "%s completed construction of %s in %s.",
+					box_name(c->who),
+					box_name_kind(inside),
+					box_name(loc(inside)));
+	show_to_garrison = FALSE;
 
 	c->wait = 0;
 	return TRUE;
@@ -995,6 +993,7 @@ i_repair(struct command *c)
 	int where = subloc(c->who);
 
 	vector_char_here(where);
+	vector_add(where);
 
 	if (c->e && c->f)
 		wout(VECT, "%s repaired %s damage and %s defense for %s.",
@@ -1213,14 +1212,13 @@ d_improve(struct command *c)
 
 	if (p->effort_given == 0)
 	{
-		vector_clear();
-		vector_add(c->who);
+		vector_char_here(where);
 		vector_add(where);
 
 		p->castle_lev++;
 		p->defense += 5;
 
-		out(where, "%s is now at improvement level %s, defense %d",
+		out(VECT, "%s is now at improvement level %s, defense %d",
 					box_name(where),
 					nice_num(castle_level(where)),
 					p->defense);
