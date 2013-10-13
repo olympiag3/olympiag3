@@ -201,7 +201,7 @@ v_jump_gate(struct command *c)
 	}
 
 	determine_stack_weights(c->who, &w);
-	cost = w.total_weight / 250;
+	cost = w.total_weight / 50;
 
 	if (!charge_aura(c->who, cost))
 		return FALSE;
@@ -247,7 +247,7 @@ v_reverse_jump(struct command *c)
 	}
 
 	determine_stack_weights(c->who, &w);
-	cost = w.total_weight / 250 * 2;
+	cost = w.total_weight / 50 * 2;
 
 	if (!charge_aura(c->who, cost))
 		return FALSE;
