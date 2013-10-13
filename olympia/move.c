@@ -331,7 +331,7 @@ move_exit_land(struct command *c, struct exit_view *v, int show)
 
 		assert(nobles > 0);
 
-		extra = men / (nobles * 10);
+		extra = men / (nobles * army_slow_factor);
 
 		if (extra > v->distance * 2)
 			extra = v->distance * 2;
@@ -400,7 +400,7 @@ move_exit_fly(struct command *c, struct exit_view *v, int show)
 
 		assert(nobles > 0);
 
-		extra = men / (nobles * 10);
+		extra = men / (nobles * army_slow_factor);
 
 		if (extra > v->distance * 2)
 			extra = v->distance * 2;

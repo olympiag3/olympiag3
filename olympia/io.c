@@ -2554,6 +2554,10 @@ load_system()
 		{
 			garrison_pay = atoi(&s[13]);
 		}
+		else if (strncmp(s, "army_slow_factor=", 17) == 0)
+		{
+			army_slow_factor = atoi(&s[17]);
+		}
 		else if (strncmp(s, "indep_player=", 13) == 0)
 		{
 			indep_player = atoi(&s[13]);
@@ -2661,6 +2665,7 @@ save_system()
 	fprintf(fp, "times_url=%s\n", times_url);
 	fprintf(fp, "htpasswd_loc=%s\n", htpasswd_loc);
 	fprintf(fp, "garrison_pay=%d\n", garrison_pay);
+	fprintf(fp, "army_slow_factor=%d\n", army_slow_factor);
 	fprintf(fp, "post=%d\n", post_has_been_run);
 	fprintf(fp, "init=%d\n", seed_has_been_run);
 	fprintf(fp, "fr=%d\n", faery_region);

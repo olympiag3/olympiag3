@@ -1222,6 +1222,7 @@ extern char *rules_url;
 extern char *times_url;
 extern char *htpasswd_loc;
 extern int garrison_pay;
+extern int army_slow_factor;
 extern ilist new_players;		/* new players added this turn */
 
 

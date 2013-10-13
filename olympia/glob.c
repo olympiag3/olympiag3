@@ -13,6 +13,7 @@ char *rules_url = "http://oly.v-labs.be/g3/node/11";
 char *times_url = "http://oly.v-labs.be/g3/node/409";
 char *htpasswd_loc = "/u/oly/g2/lib/ht-passwords";
 int garrison_pay = 4;
+int army_slow_factor = 10;
 
 struct box **bx;		/* all possible entities */
 int box_head[T_MAX];		/* heads of x_next_kind chain */
