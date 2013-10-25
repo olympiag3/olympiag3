@@ -1,85 +1,113 @@
 
 #include	<stdio.h>
+#include	<string.h>
+#include	<stdlib.h>
+#ifdef _WIN32
+#include	<libc/unistd.h>
+#else
+#include	<unistd.h>
+#endif
 #include	"z.h"
 
+
+
+
+int malloc_size = 0;
+int realloc_size = 0;
 
 
 /*
  *  malloc safety checks:
  *
- *	Space for two extra ints is is allocated beyond what the client
- *	asks for.  The size of the malloc'd region is stored at the
- *	beginning, and a magic number is placed at the end.  realloc's
- *	and free's check the integrity of these markers.  This protects
- *	against overruns, makes sure that non-malloc'd memory isn't freed,
- *	and that memory isn't freed twice.
+ *      Space for three extra ints is is allocated beyond what the client
+ *      asks for.  The size of the malloc'd region is stored at the
+ *      beginning, followed by a magic number (0xDEADBEEF), then a magic
+ *	number is placed at the end of the region (0xBABEFACE).  realloc's
+ *      and free's check the integrity of these markers.  This protects
+ *      against overruns, makes sure that non-malloc'd memory isn't freed,
+ *      and that memory isn't freed twice.
+ *
+ *	-------------------------------------
+ *	0-3	malloced size + 2*sizeof(int)
+ *	4-7	0xDEADBEEF
+ *	...	client memory
+ *	n	0xBABEFACE
+ *	-------------------------------------
+ *
+ *  Any assertion failures in this file indicate that the caller
+ *  to the respective function has done something bad, either by
+ *  overrunning a region returned from malloc/realloc, or by calling
+ *  free with a pointer that wasn't obtained from malloc or free.
  */
 
-void *
-my_malloc(unsigned size)
+void *my_malloc(unsigned size)
 {
 	char *p;
-	extern char *malloc();
 
-	size += sizeof(int);
-
+	size += sizeof(int)*2;
 	p = malloc(size + sizeof(int));
 
 	if (p == NULL)
 	{
 		fprintf(stderr, "my_malloc: out of memory (can't malloc "
 				"%d bytes)\n", size);
+		assert(0);
 		exit(1);
 	}
 
-	bzero(p, size);
+	memset(p, '\0', size);
 
 	*((int *) p) = size;
-	*((int *) (p + size)) = 0xABCF;
+	*((int *) (p+sizeof(int))) = 0xDEADBEEF;
+	*((int *) (p + size)) = 0xBABEFACE;
 
-	return p + sizeof(int);
+	return p + sizeof(int)*2;
 }
 
 
-void *
-my_realloc(void *ptr, unsigned size)
+void *my_realloc(void *ptr, unsigned size)
 {
 	char *p = ptr;
-	extern char *realloc();
-	extern char *malloc();
-
+  
 	if (p == NULL)
 		return my_malloc(size);
 
-	size += sizeof(int);
-	p -= sizeof(int);
+	p -= sizeof(int)*2;
 
-	assert(*((int *) (p + *(int *) p)) == 0xABCF);
+	assert(*((int *) (p+sizeof(int))) == 0xDEADBEEF);
+	assert(*((int *) (p + *(int *) p)) == 0xBABEFACE);
+
+	size += sizeof(int)-1;		/* integer alignment */
+	size -= size % sizeof(int);
+
+	size += sizeof(int)*2;
 
 	p = realloc(p, size + sizeof(int));
 
 	*((int *)p) = size;
-	*((int *) (p + size)) = 0xABCF;
+	*((int *) (p+sizeof(int))) = 0xDEADBEEF;
+	*((int *) (p + size)) = 0xBABEFACE;
 
 	if (p == NULL)
 	{
 		fprintf(stderr, "my_realloc: out of memory (can't realloc "
 				"%d bytes)\n", size);
+		assert(0);
 		exit(1);
 	}
 
-	return p + sizeof(int);
+	return p + sizeof(int)*2;
 }
 
 
-void
-my_free(void *ptr)
+void my_free(void *ptr)
 {
 	char *p = ptr;
+  
+	p -= sizeof(int)*2;
 
-	p -= sizeof(int);
-
-	assert(*((int *) (p + *(int *) p)) == 0xABCF);
+	assert(*((int *) (p+sizeof(int))) == 0xDEADBEEF);
+	assert(*((int *) (p + *(int *) p)) == 0xBABEFACE);
 	*((int *) (p + *(int *) p)) = 0;
 	*((int *) p) = 0;
 
@@ -127,14 +155,14 @@ char *s;
  *  strips newline off end of line
  */
 
-#define	GETLIN_ALLOC	255
+#define	GETLIN_ALLOC	4096
 
 char *
 getlin(FILE *fp)
 {
 	static char *buf = NULL;
 	static unsigned int size = 0;
-	int len;
+	unsigned int len;
 	int c;
 
 	len = 0;
@@ -160,8 +188,34 @@ getlin(FILE *fp)
 		return NULL;
 
 	buf[len] = '\0';
+#if 1
+	if (len >= 1023)
+		buf[1023] = '\0';
+#endif
 
 	return buf;
+}
+
+
+char *
+eat_leading_trailing_whitespace(char *s)
+{
+	char *t;
+
+	while (*s && iswhite(*s))
+		s++;			/* eat leading whitespace */
+
+	for (t = s; *t; t++)
+		;
+
+	t--;
+	while (t >= s && iswhite(*t))
+	{				/* eat trailing whitespace */
+		*t = '\0';
+		t--;
+	}
+
+	return s;
 }
 
 
@@ -204,12 +258,16 @@ static int line_fd = -1;
 static char *point;
 
 
+void
+closefile(char *path) {
+	if (line_fd >= 0)
+		close(line_fd);
+}
+
 int
 readfile(char *path)
 {
 
-	if (line_fd >= 0)
-		close(line_fd);
 
 	line_fd = open(path, 0);
 
@@ -232,7 +290,7 @@ readlin()
 {
 	static char *buf = NULL;
 	static unsigned int size = 0;
-	int len;
+	unsigned int len;
 	int c;
 
 	len = 0;
@@ -261,6 +319,9 @@ readlin()
 		if (c == '\n')
 		{
 			buf[len] = '\0';
+			if (len >= LEN) {
+				buf[LEN-1] = '\0';
+			}
 			return buf;
 		}
 
@@ -271,6 +332,9 @@ readlin()
 		return NULL;
 
 	buf[len] = '\0';
+	if (len >= LEN) {
+		buf[LEN-1] = '\0';
+	}
 
 	return buf;
 }
@@ -390,7 +454,7 @@ fuzzy_transpose(char *one, char *two, int l1, int l2)
 		buf[i] = buf[i+1];
 		buf[i+1] = tmp;
 
-		if (strcmp(one, buf) == 0)
+		if (i_strcmp(one, buf) == 0)
 			return TRUE;
 
 		tmp = buf[i];
@@ -413,7 +477,7 @@ fuzzy_one_less(char *one, char *two, int l1, int l2)
 
 	for (j = 0, i = 0; j < l2; i++, j++)
 	{
-		if (one[i] != two[j])
+		if (tolower(one[i]) != tolower(two[j]))
 		{
 			if (count++)
 				return FALSE;
@@ -436,7 +500,7 @@ fuzzy_one_extra(char *one, char *two, int l1, int l2)
 
 	for (j = 0, i = 0; i < l1; i++, j++)
 	{
-		if (one[i] != two[j])
+		if (tolower(one[i]) != tolower(two[j]))
 		{
 			if (count++)
 				return FALSE;
@@ -458,7 +522,7 @@ fuzzy_one_bad(char *one, char *two, int l1, int l2)
 		return FALSE;
 
 	for (i = 0; i < l2; i++)
-		if (one[i] != two[i] && count++)
+		if (tolower(one[i]) != tolower(two[i]) && count++)
 			return FALSE;
 
 	return TRUE;
@@ -474,7 +538,7 @@ fuzzy_strcmp(char *one, char *two)
 	if (l2 >= 4 && fuzzy_transpose(one, two, l1, l2))
 		return TRUE;
 
-	if (l2 >= 4 && fuzzy_one_less(one, two, l1, l2))
+	if (l2 >= 5 && fuzzy_one_less(one, two, l1, l2))
 		return TRUE;
 
 	if (l2 >= 5 && fuzzy_one_extra(one, two, l1, l2))
@@ -487,7 +551,46 @@ fuzzy_strcmp(char *one, char *two)
 }
 
 
-#define		ILIST_ALLOC	6	/* doubles with each realloc */
+void
+test_random()
+{
+	int i;
+
+	if (isatty(1))
+	    for (i = 0; i < 10; i++)
+		printf("%3d  %3d  %3d  %3d  %3d  %3d  %3d  %3d  %3d  %3d\n",
+			rnd(1, 10), rnd(1, 10), rnd(1, 10), rnd(1, 10),
+			rnd(1, 10), rnd(1, 10), rnd(1, 10), rnd(1, 10),
+			rnd(1, 10), rnd(1, 10));
+	else
+	    for (i = 0; i < 100; i++)
+		printf("%d\n", rnd(1, 10));
+
+	for (i = -10; i >= -16; i--)
+		printf("rnd(%d, %d) == %d\n", i, -3, rnd(i, -3));
+
+	for (i = 0; i < 100; i++)
+		printf("%d\n", rnd(1000,9999));
+
+	{
+		ilist l = NULL;
+		int i;
+
+		for (i = 1; i <= 10; i++)
+			ilist_append(&l, i);
+
+		ilist_scramble(l);
+
+		printf("Scramble:\n");
+
+		for (i = 0; i < ilist_len(l); i++)
+			printf("%d\n", l[i]);
+	}
+}
+
+
+
+#define		ILIST_ALLOC	4
 
 
 /*
@@ -517,7 +620,7 @@ ilist_append(ilist *l, int n)
 
 		if (base[0] + 2 >= base[1])
 		{
-			base[1] *= 2;
+			base[1] += ILIST_ALLOC;
 			base = my_realloc(base, base[1] * sizeof(*base));
 			*l = &base[2];
 		}
@@ -548,7 +651,7 @@ ilist_prepend(ilist *l, int n)
 
 		if (base[0] + 2 >= base[1])
 		{
-			base[1] *= 2;
+			base[1] += ILIST_ALLOC;
 			base = my_realloc(base, base[1] * sizeof(*base));
 			*l = &base[2];
 		}
@@ -585,7 +688,7 @@ ilist_insert(ilist *l, int pos, int n)
 
 		if (base[0] + 2 >= base[1])
 		{
-			base[1] *= 2;
+			base[1] += ILIST_ALLOC;
 			base = my_realloc(base, base[1] * sizeof(*base));
 			*l = &base[2];
 		}
@@ -702,7 +805,7 @@ ilist_copy(ilist l)
 	assert(&base[2] == l);
 
 	copy_base = my_malloc(base[1] * sizeof(*base));
-	bcopy(base, copy_base, (base[0] + 2) * sizeof(*base));
+	memcpy(copy_base, base, (base[0] + 2) * sizeof(*base));
 
 	return &copy_base[2];
 }
@@ -724,24 +827,228 @@ ilist_copy(ilist l)
 #endif
 
 
+/* 
+ *  Knuth, The Art of Computer Programming, Vol. 2 (Addison Wesley).
+ *  Essentially, to shuffle A[1]...A[N]:
+ *  1) put I = 1;
+ *  2) generate a random number R in the range I..N;
+ *  3) if R is not I, swap A[R] and A[I];
+ *  4) I <- I+1;
+ *  5) if I is less than N go to step 2
+ */
+
 void
 ilist_scramble(ilist l)
 {
 	int i;
 	int tmp;
-	int one, two;
-	int len;
+	int r;
+	int len = ilist_len(l) - 1;
 
-	len = ilist_len(l);
-
-	for (i = 0; i < len * 2; i++)
+	for (i = 0; i < len; i++)
 	{
-		one = rnd(0, len-1);
-		two = rnd(0, len-1);
+		r = rnd(i, len);
+		if (r != i)
+		{
+			tmp = l[i];
+			l[i] = l[r];
+			l[r] = tmp;
+		}
+	}
+}
 
-		tmp = l[one];
-		l[one] = l[two];
-		l[two] = tmp;
+/*
+ *	Same as the above, but to store pointers instead of ints
+ */
+
+void
+plist_append(plist *l, void *n)
+{
+	int *base;
+
+	if (*l == NULL)
+	{
+		base = my_malloc(sizeof(**l) * ILIST_ALLOC);
+		base[1] = ILIST_ALLOC;
+
+		*l = &base[2];
+	}
+	else
+	{
+		base = *l;
+		base -= 2;
+		assert(&base[2] == *l);
+
+		if (base[0] + 2 >= base[1])
+		{
+			base[1] += ILIST_ALLOC;
+			base = my_realloc(base, base[1] * sizeof(**l));
+			*l = &base[2];
+		}
+	}
+
+	(*l)[base[0]] = n;
+	base[0]++;
+}
+
+
+void
+plist_prepend(plist *l, void *n)
+{
+	int *base;
+	int i;
+
+	if (*l == NULL)
+	{
+		base = my_malloc(sizeof(**l) * ILIST_ALLOC);
+		base[1] = ILIST_ALLOC;
+
+		*l = &base[2];
+	}
+	else
+	{
+		base = *l;
+		base -= 2;
+		assert(&base[2] == *l);
+
+		if (base[0] + 2 >= base[1])
+		{
+			base[1] += ILIST_ALLOC;
+			base = my_realloc(base, base[1] * sizeof(**l));
+			*l = &base[2];
+		}
+	}
+
+	base[0]++;
+	for (i = base[0]-1; i > 0; i--)
+		(*l)[i] = (*l)[i-1];
+	(*l)[0] = n;
+}
+
+
+void
+plist_delete(plist *l, int i)
+{
+	int *base;
+	int j;
+
+	assert(i >= 0 && i < plist_len(*l));		/* bounds check */
+	base = *l;
+	base -= 2;
+
+	for (j = i; j < base[0] - 1; j++)
+		(*l)[j] = (*l)[j+1];
+
+	base[0]--;
+}
+
+
+void
+plist_clear(plist *l)
+{
+	int *base;
+
+	if (*l != NULL)
+	{
+		base = *l;
+		base -= 2;
+		base[0] = 0;
+	}
+}
+
+
+void
+plist_reclaim(plist *l)
+{
+	int *base;
+
+	if (*l != NULL)
+	{
+		base = *l;
+		base -= 2;
+		my_free(base);
+	}
+	*l = NULL;
+}
+
+
+int
+plist_lookup(plist l, void *n)
+{
+	int i;
+
+	if (l == NULL)
+		return -1;
+
+	for (i = 0; i < plist_len(l); i++)
+		if (l[i] == n)
+			return i;
+
+	return -1;
+}
+
+
+void
+plist_rem_value(plist *l, void *n)
+{
+	int i;
+
+	for (i = plist_len(*l) - 1; i >= 0; i--)
+		if ((*l)[i] == n)
+			plist_delete(l, i);
+}
+
+
+void
+plist_rem_value_uniq(plist *l, void *n)
+{
+	int i;
+
+	for (i = plist_len(*l) - 1; i >= 0; i--)
+		if ((*l)[i] == n)
+		{
+			plist_delete(l, i);
+			break;
+		}
+}
+
+
+plist
+plist_copy(plist l)
+{
+	int *base;
+	int *copy_base;
+
+	if (l == NULL)
+		return NULL;
+
+	base = l;
+	base -= 2;
+	assert(&base[2] == l);
+
+	copy_base = my_malloc(base[1] * sizeof(*l));
+	memcpy(copy_base, base, base[0] * sizeof(*l) + 2 * sizeof(int));
+
+	return &copy_base[2];
+}
+
+void
+plist_scramble(plist l)
+{
+	int i;
+	void *tmp;
+	int r;
+	int len = plist_len(l) - 1;
+
+	for (i = 0; i < len; i++)
+	{
+		r = rnd(i, len);
+		if (r != i)
+		{
+			tmp = l[i];
+			l[i] = l[r];
+			l[r] = tmp;
+		}
 	}
 }
 
@@ -754,7 +1061,7 @@ ilist_test()
 	ilist y;
 
 	setbuf(stdout, NULL);
-	bzero(&x, sizeof(x));
+	memset(&x, '\0', sizeof (x));
 
 	printf("len = %d\n", ilist_len(x));
 

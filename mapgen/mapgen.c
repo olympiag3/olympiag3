@@ -183,7 +183,7 @@ struct tile {
 #define	MAX_INSIDE	200		/* max continents/regions */
 
 char *inside_names[MAX_INSIDE];
-struct tile **inside_list[MAX_INSIDE];	/* ilist of provinces in each region */
+struct tile **inside_list[MAX_INSIDE];	/* plist of provinces in each region */
 int inside_gates_to[MAX_INSIDE];	/* for info gathering only */
 int inside_gates_from[MAX_INSIDE];	/* for info gathering only */
 int inside_num_cities[MAX_INSIDE];	/* for info gathering only */
@@ -208,7 +208,9 @@ char *fetch_inside_name();
 struct tile *subloc[MAX_SUBLOC];
 int top_subloc = 0;
 
-
+void random_province(int *row, int *col, int terr);
+void set_province_clumps();
+void set_regions();
 
 FILE *loc_fp;
 FILE *gate_fp;
@@ -703,7 +705,7 @@ char *name;
 	r->hidden = hidden;
 	r->name = name;
 
-	ilist_append((ilist *) &from->roads, (int) r);
+	plist_append((plist *) &from->roads, r);
 }
 
 
@@ -790,7 +792,7 @@ int n;
 	int i;
 	int count = 0;
 
-	for (i = 0; i < ilist_len(inside_list[n]); i++)
+	for (i = 0; i < plist_len(inside_list[n]); i++)
 	{
 		count++;
 
@@ -957,7 +959,7 @@ int n;
 	int i;
 	int count = 0;
 
-	for (i = 0; i < ilist_len(subloc[n]->roads); i++)
+	for (i = 0; i < plist_len(subloc[n]->roads); i++)
 	{
 		count++;
 		if (count == 1)
@@ -1456,8 +1458,8 @@ bridge_map_holes()
 	int row, col;
 	int n;
 
-	for (row = 0; row < MAX_ROW; row++)
-	    for (col = 0; col < MAX_COL; col++)
+	for (row = 0; row < max_row; row++)
+	    for (col = 0; col < max_col; col++)
 		if (map[row][col] == NULL)
 			if ((n = bridge_map_hole_sup(row, col)))
 				fprintf(stderr,
@@ -1683,7 +1685,7 @@ int i;
 
 	sprintf(coord, "(%d,%d)", p->row, p->col);
 	sprintf(gates, "%d/%d", inside_gates_from[i], inside_gates_to[i]);
-	sprintf(nprovs, "%d", ilist_len(inside_list[i]));
+	sprintf(nprovs, "%d", plist_len(inside_list[i]));
 	sprintf(ncities, "%d", inside_num_cities[i]);
 
 	fprintf(stderr, "%-25s  %8s  %6s  %7s  %s\n",
@@ -1764,7 +1766,7 @@ fprintf(stderr, "    assuming 'forest'\n");
 		}
 }
 
-
+void
 set_regions()
 {
 	FILE *fp;
@@ -1858,8 +1860,8 @@ set_regions()
 	    for (col = 0; col < MAX_COL; col++)
 		if (map[row][col] && map[row][col]->inside)
 		{
-		    ilist_append((ilist *) &inside_list[map[row][col]->inside],
-					(int) map[row][col]);
+		    plist_append((plist *) &inside_list[map[row][col]->inside],
+					map[row][col]);
 		}
 }
 
@@ -1939,6 +1941,7 @@ int ins;
  *  Name groups of provinces
  */
 
+void
 set_province_clumps()
 {
 	FILE *fp;
@@ -2065,7 +2068,7 @@ int col;
 	int i;
 	int count = 0;
 
-	for (i = 0; i < ilist_len(map[row][col]->roads); i++)
+	for (i = 0; i < plist_len(map[row][col]->roads); i++)
 	{
 		count++;
 		if (count == 1)
@@ -2270,7 +2273,7 @@ dump_roads()
 	for (row = 0; row < MAX_ROW; row++)
 	    for (col = 0; col < MAX_COL; col++)
 		if (map[row][col])
-		    for (j = 0; j < ilist_len(map[row][col]->roads); j++)
+		    for (j = 0; j < plist_len(map[row][col]->roads); j++)
 		    {
 			fprintf(road_fp, "%d road 0\n",
 					map[row][col]->roads[j]->ent_num);
@@ -2289,7 +2292,7 @@ dump_roads()
 		    }
 
 	for (i = 1; i <= top_subloc; i++)
-		for (j = 0; j < ilist_len(subloc[i]->roads); j++)
+		for (j = 0; j < plist_len(subloc[i]->roads); j++)
 		{
 			fprintf(road_fp, "%d road 0\n",
 					subloc[i]->roads[j]->ent_num);
@@ -2356,7 +2359,7 @@ random_tile_from_each_region()
 	static struct tile **l = NULL;
 	int i, j;
 
-	ilist_clear((ilist *) &l);
+	plist_clear((ilist *) &l);
 
 	for (i = 1; i <= inside_top; i++)
 	{
@@ -2366,12 +2369,12 @@ random_tile_from_each_region()
 		if (strcmp(inside_names[i], "Impassable Mountains") == 0)
 			continue;
 
-		j = rnd(0, ilist_len(inside_list[i])-1);
+		j = rnd(0, plist_len(inside_list[i])-1);
 
-		ilist_append((ilist *) &l, (int) inside_list[i][j]);
+		plist_append((plist *) &l, inside_list[i][j]);
 	}
 
-	ilist_scramble((ilist) l);
+	plist_scramble((plist) l);
 
 	return l;
 }
@@ -2386,9 +2389,9 @@ struct tile **l;
 	struct tile *p;
 	struct tile *q;
 
-	ilist_clear((ilist *) &other);
+	plist_clear((plist *) &other);
 
-	for (i = 0; i < ilist_len(l); i++)
+	for (i = 0; i < plist_len(l); i++)
 	{
 		p = adjacent_tile_terr(l[i]->row, l[i]->col);
 
@@ -2407,9 +2410,9 @@ struct tile **l;
 		{
 			fprintf(stderr, "couldn't shift tour (%d,%d)\n",
 						l[i]->row, l[i]->col);
-			ilist_append((ilist *) &other, (int) l[i]);
+			plist_append((plist *) &other, l[i]);
 		} else
-			ilist_append((ilist *) &other, (int) q);
+			plist_append((plist *) &other, q);
 	}
 
 	return other;
@@ -2543,11 +2546,11 @@ gate_continental_tour()
 	l = random_tile_from_each_region();
 	m = shift_tour_endpoints(l);
 
-	assert(ilist_len(l) == ilist_len(m));
+	assert(plist_len(l) == plist_len(m));
 
 	fprintf(stderr, "\nContinental gate tour:\n");
 
-	for (i = 0; i < ilist_len(l)-1; i++)
+	for (i = 0; i < plist_len(l)-1; i++)
 	{
 		fprintf(stderr, "\t(%2d,%2d) -> (%2d,%2d)\n",
 			l[i]->row, l[i]->col, m[i+1]->row, m[i+1]->col);
@@ -2634,7 +2637,7 @@ struct tile *avoid2;
 
 	do
 	{
-		i = rnd(0, ilist_len(l)-1);
+		i = rnd(0, plist_len(l)-1);
 	}
 	while (l[i] == avoid1 || l[i] == avoid2);
 
@@ -2659,21 +2662,21 @@ gate_stone_circles()
 	int row, col;
 
 	l = random_tile_from_each_region();
-	ilist_clear((ilist *) &circs);
+	plist_clear((plist *) &circs);
 
 	fprintf(stderr, "\nRing of stones:\n");
 
-	for (i = 0; i < ilist_len(l); i++)
+	for (i = 0; i < plist_len(l); i++)
 	{
 		n = create_a_subloc(l[i]->row, l[i]->col, 1, terr_stone_cir);
-		ilist_append((ilist *) &circs, (int) subloc[n]);
+		plist_append((plist *) &circs, subloc[n]);
 
 		fprintf(stderr, "	(%2d,%2d) in %s\n",
 				l[i]->row, l[i]->col,
 				inside_names[l[i]->inside]);
 	}
 
-	for (i = 0; i < ilist_len(circs); i++)
+	for (i = 0; i < plist_len(circs); i++)
 	{
 		first = choose_random_stone_circle(circs, circs[i], NULL);
 		second = choose_random_stone_circle(circs, circs[i], first);
@@ -2685,7 +2688,7 @@ gate_stone_circles()
 	clear_province_marks();
 	mark_bad_locs();
 
-	for (i = 0; i < ilist_len(circs); i++)
+	for (i = 0; i < plist_len(circs); i++)
 	{
 		for (j = 1; j <= 5; j++)
 		{
@@ -2725,7 +2728,7 @@ mark_bad_locs()
 	for (i = 1; i <= inside_top; i++)
 		if (strcmp(inside_names[i], "Impassable Mountains") == 0)
 		{
-			for (j = 0; j < ilist_len(inside_list[i]); j++)
+			for (j = 0; j < plist_len(inside_list[i]); j++)
 				inside_list[i][j]->mark = 1;
 		}
 }
@@ -2737,6 +2740,7 @@ mark_bad_locs()
  *  (Except for the lost city and the city of the ancients)
  */
 
+void
 not_random_province(row, col)		/* oh, hack upon hack ... */
 int *row;
 int *col;
@@ -2782,7 +2786,7 @@ int hidden;
 	return create_a_subloc(row, col, hidden, kind);
 }
 
-
+void
 random_province(row, col, terr)
 int *row;
 int *col;
@@ -3066,7 +3070,7 @@ struct {
 	{0,0,0,0}
 };
 
-
+void
 make_appropriate_subloc(row, col)
 int row;
 int col;
@@ -3149,18 +3153,18 @@ make_graveyards()
 		if (p->terrain == terr_ocean)
 			continue;
 
-		n = ilist_len(inside_list[i]);
+		n = plist_len(inside_list[i]);
 
 		if (n < 10)
 			continue;
 
-		l = (struct tile **) ilist_copy((ilist) inside_list[i]);
-		ilist_scramble((ilist) l);
+		l = (struct tile **) plist_copy((plist) inside_list[i]);
+		plist_scramble((plist) l);
 
 		for (j = 0; j < n/10; j++)
 			create_a_graveyard(l[j]->row, l[j]->col);
 
-		ilist_reclaim((ilist *) &l);
+		plist_reclaim((plist *) &l);
 	}
 }
 
