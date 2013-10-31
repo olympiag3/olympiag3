@@ -396,8 +396,6 @@ v_second_make(struct command *c, int number, struct make *t)
 int
 d_second_make(struct command *c, struct make *t)
 {
-	int number = c->c;
-
 	if (t->inp1 && has_item(c->who, t->inp1) < 1)
 	{
 		wout(c->who, "Don't have %s.", box_name_qty(t->inp1, 2));
@@ -430,7 +428,9 @@ d_second_make(struct command *c, struct make *t)
 
 	c->d++;
 
-	if (c->d < c->c)
+	if ((t->inp1 == 0 || has_item(c->who, t->inp1) > 0) &&
+	    (t->inp2 == 0 || has_item(c->who, t->inp2) > 0) &&
+	    !(c->c > 0 && c->d >= c->c))
 		c->wait = t->days;
 
 	if (t->req_skill)
