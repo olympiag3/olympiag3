@@ -559,8 +559,7 @@ allowed_garrisons(int level)
 static int
 nprovs_to_rank(int n)
 {
-
-	if (n == 0)	return 0;
+	if (n < 1)	return 0;
 	if (n <= 5)	return RANK_lord;
 	if (n <= 12)	return RANK_knight;
 	if (n <= 24)	return RANK_baron;
@@ -650,18 +649,40 @@ find_kings()
  */
 
 static int
+lower_noble_rank(int rank)
+{
+	switch (rank)
+	{
+	default:
+	case 0:
+	case RANK_lord:		return 0;
+	case RANK_knight:	return RANK_lord;
+	case RANK_baron:	return RANK_knight;
+	case RANK_count:	return RANK_baron;
+	case RANK_earl:		return RANK_count;
+	case RANK_marquess:	return RANK_earl;
+	case RANK_duke:		return RANK_marquess;
+	case RANK_king:		return RANK_duke;
+	}
+
+  return 0;
+}
+
+static int
 det_noble_rank_sup(int who)
 {
 	int own_rank;
 	int pledged_to;
 
-	own_rank = nprovs_to_rank(bx[who]->temp);
+	own_rank = char_rank(who);
 	pledged_to = char_pledge(who);
 
 	if (pledged_to == 0)
 		return own_rank;
 
-	return min(own_rank, det_noble_rank_sup(pledged_to));
+	p_char(who)->rank = min(own_rank, lower_noble_rank(det_noble_rank_sup(pledged_to)));
+
+	return char_rank(who);
 }
 
 
@@ -671,6 +692,7 @@ determine_noble_ranks()
 	int garr;
 	int owner;
 	int who;
+	int pledged_to;
 
 	stage("determine_noble_ranks()");
 
@@ -688,17 +710,20 @@ determine_noble_ranks()
 
 	loop_char(who)
 	{
-		if (char_rank(who))
-			rp_char(who)->rank = 0;
+		p_char(who)->rank = nprovs_to_rank(bx[who]->temp);
+	}
+	next_char;
 
-		if (bx[who]->temp == 0)
+	find_kings();
+
+	loop_char(who)
+	{
+		if (!char_rank(who))
 			continue;
 
 		p_char(who)->rank = det_noble_rank_sup(who);
 	}
 	next_char;
-
-	find_kings();
 }
 
 
