@@ -201,7 +201,7 @@ v_jump_gate(struct command *c)
 	}
 
 	determine_stack_weights(c->who, &w);
-	cost = w.total_weight / 50;
+	cost = (w.total_weight + 249) / 250;
 
 	if (!charge_aura(c->who, cost))
 		return FALSE;
@@ -247,7 +247,7 @@ v_reverse_jump(struct command *c)
 	}
 
 	determine_stack_weights(c->who, &w);
-	cost = w.total_weight / 50 * 2;
+	cost = (w.total_weight + 249) / 250 * 2;
 
 	if (!charge_aura(c->who, cost))
 		return FALSE;
@@ -606,7 +606,7 @@ v_teleport(struct command *c)
 	}
 
 	determine_stack_weights(c->who, &w);
-	cost = w.total_weight / 50;
+	cost = (w.total_weight + 249) / 250;
 
 	if (has_item(c->who, item_gate_crystal) < 1)
 	{
