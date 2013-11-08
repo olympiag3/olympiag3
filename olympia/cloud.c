@@ -63,7 +63,7 @@ int cloud_region = 0;
 void
 create_cloudlands()
 {
-	int r, c;
+	int r, c, clear, base;
 	int map[SZ+1][SZ+1];
 	int n;
 	int i;
@@ -83,11 +83,36 @@ create_cloudlands()
  *  Fill map[row,col] with locations.
  */
 
+	clear = 0;
+	for (base = 0; base < 400 - SZ; base += 20)
+	{
+		n = 10000 + base * 100;
+		if (bx[n] == NULL)
+		{
+			clear = 1;
+			for (r = 0; clear && r <= SZ; r++)
+				for (c = 0; clear && c <= SZ; c++)
+				{
+					n = 10000 + (base + r) * 100 + c;
+					if (bx[n] != NULL)
+						clear = 0;
+				}
+			break;
+		}
+	}
 	for (r = 0; r <= SZ; r++)
 	{
 		for (c = 0; c <= SZ; c++)
 		{
-			n = new_ent(T_loc, sub_cloud);
+			if (clear)
+			{
+				n = 10000 + (base + r) * 100 + c;
+				alloc_box(n, T_loc, sub_cloud);
+			}
+			else
+			{
+				n = new_ent(T_loc, sub_cloud);
+			}
 			map[r][c] = n;
 			set_name(n, "Cloud");
 			set_where(n, cloud_region);

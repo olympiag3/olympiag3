@@ -1,5 +1,6 @@
 
 #include	<stdio.h>
+#include	<math.h>
 #include	"z.h"
 #include	"oly.h"
 
@@ -9,7 +10,7 @@ int hades_pit = 0;		/* Pit of Hades */
 int hades_player = 0;
 
 
-#define	SZ	75		/* SZ x SZ is size of Hades */
+#define	SZ	100		/* SZ x SZ is the maximum size of Hades */
 
 
 /*
@@ -20,13 +21,17 @@ int hades_player = 0;
 void
 create_hades()
 {
-	int r, c;
-	int map[SZ+1][SZ+1];
+	int r, c, sz, space;
+	int map[SZ][SZ];
 	int n;
 	int i;
 	int north, east, south, west;
 	struct entity_loc *p;
+	struct entity_subloc *s;
 	char *pw;
+	ilist graveyards = NULL;
+	int base, clear;
+	int city, pit;
 
 /*
  *  Create region wrapper for Hades
@@ -62,48 +67,102 @@ combat combatpassword
 	p_player(hades_player)->password = pw;
 
 /*
+ * Work out how big Hades should be.
+ * It will be sized dynamically so that there is approximately one
+ * graveyard per 8 Hades provinces, so we need to find out how many
+ * graveyards there are...
+ */
+
+	loop_loc(i)
+	{
+		if (subkind(i) == sub_graveyard)
+		{
+			ilist_append(&graveyards, i);
+			set_known(hades_player, i);
+		}
+	}
+	next_loc;
+
+	sz = (int) ceil(sqrt(ilist_len(graveyards) * 8));
+	if (sz > SZ)
+		sz = SZ;
+	fprintf(stderr, "Hades is %dx%d (%d graveyards).\n", sz, sz, ilist_len(graveyards));
+
+/*
  *  Fill map[row,col] with locations.
  */
 
-	for (r = 0; r <= SZ; r++)
+	// see if there's a contiguous block of provinces so that Hades
+	// map coords can follow the same pattern as the surface
+	clear = 0;
+	for (base = 0; base < 400 - sz; base += 20)
 	{
-		for (c = 0; c <= SZ; c++)
+		n = 10000 + base * 100;
+		if (bx[n] == NULL)
 		{
-			n = new_ent(T_loc, sub_under);
-
-			map[r][c] = n;
-			set_name(n, "Hades");
-			set_where(n, hades_region);
-			p_loc(n)->hidden = TRUE;
-
-			set_known(hades_player, n);
+			clear = 1;
+			for (r = 0; clear && r < sz; r++)
+				for (c = 0; clear && c < sz; c++)
+				{
+					n = 10000 + (base + r) * 100 + c;
+					if (bx[n] != NULL)
+						clear = 0;
+				}
+			break;
 		}
 	}
+	for (r = 0; r < sz; r++)
+		for (c = 0; c < sz; c++)
+		{
+			if (clear)
+			{
+				n = 10000 + (base + r) * 100 + c;
+				alloc_box(n, T_loc, sub_under);
+			}
+			else
+			{
+				n = new_ent(T_loc, sub_under);
+			}
+
+			map[r][c] = n;
+		}
 
 /*
- *  Set the NSEW exit routes for every map location
+ *  Set the NESW exit routes for every map location
  */
 
-	for (r = 0; r <= SZ; r++)
+	for (r = 0; r < sz; r++)
 	{
-		for (c = 0; c <= SZ; c++)
+		for (c = 0; c < sz; c++)
 		{
-			p = p_loc(map[r][c]);
+			n = map[r][c];
+			bx[n]->temp = 0;
+			p = p_loc(n);
+
+			set_name(n, "Hades");
+			set_where(n, hades_region);
+			// 50% of Hades regions are hidden
+			if (rnd(0, 1))
+			{
+				p_loc(n)->hidden = TRUE;
+
+				set_known(hades_player, n);
+			}
 
 			if (r == 0)
 				north = 0;
 			else
 				north = map[r-1][c];
 
-			if (r == SZ)
-				south = 0;
-			else
+			if (r < sz - 1)
 				south = map[r+1][c];
-
-			if (c == SZ)
-				east = 0;
 			else
+				south = 0;
+
+			if (c < sz - 1)
 				east = map[r][c+1];
+			else
+				east = 0;
 
 			if (c == 0)
 				west = 0;
@@ -117,80 +176,88 @@ combat combatpassword
 		}
 	}
 
+	space = sz * sz;
+
 /*
  *  Place a city in the center of the map, with the Pit of Hades inside
  *  the city.
  */
 
-	{
-		int city;
-		int pit;
-		struct entity_subloc *p;
+	n = map[sz/2][sz/2];
+	city = new_ent(T_loc, sub_city);
+	set_where(city, n);
+	set_name(city, "City of the Dead");
+	set_known(hades_player, city);
+	bx[n]->temp = 1;
+	space--;
+	
+	seed_city(city);
 
-		city = new_ent(T_loc, sub_city);
-		set_where(city, map[SZ/2][SZ/2]);
-		set_name(city, "City of the Dead");
-		set_known(hades_player, city);
+	// s = p_subloc(city);
+	// ilist_append(&s->teaches, sk_necromancy);
 
-		p = p_subloc(city);
-		ilist_append(&p->teaches, sk_necromancy);
+	pit = new_ent(T_loc, sub_hades_pit);
+	set_where(pit, city);
+	set_name(pit, "Pit of Hades");
+	set_known(hades_player, pit);
 
-		pit = new_ent(T_loc, sub_hades_pit);
-		set_where(pit, city);
-		set_name(pit, "Pit of Hades");
-		set_known(hades_player, pit);
+	hades_pit = pit;
 
-		hades_pit = pit;
-	}
+/*
+ *  Put other cities in Hades, as it was too boring
+ */
 
+	for (r = 0; r < sz; r++)
+		for (c = 0; c < sz; c++)
+		{
+			if (rnd(0, 60))
+				continue;
+			n = map[r][c];
+			if (bx[n]->temp)
+				continue;
+			city = new_ent(T_loc, sub_city);
+			set_where(city, n);
+			set_name(city, "Necropolis");
+			set_known(hades_player, city);
+			bx[n]->temp = 1;
+			space--;
+			
+			seed_city(city);
+		}
 /*
  *
  *  Dual-link every graveyard from the world into one of the
  *  Hades locations except the center one containing the pit.
  */
 
+	ilist_scramble(graveyards);
+
+	assert(space > ilist_len(graveyards));
+
+	i = 0;
+	while (i < ilist_len(graveyards))
 	{
-		ilist l = NULL;
-		struct entity_subloc *p;
+		r = rnd(1, sz) - 1;
+		c = rnd(1, sz) - 1;
 
-		loop_loc(i)
-		{
-			if (subkind(i) == sub_graveyard)
-			{
-				ilist_append(&l, i);
-				set_known(hades_player, i);
-			}
-		}
-		next_loc;
+		if (bx[map[r][c]]->temp)
+			continue;
 
-		ilist_scramble(l);
+		bx[map[r][c]]->temp = 1;
+		space--;
 
-		i = 0;
-		while (i < ilist_len(l))
-		{
-			for (r = 0; r <= SZ && i < ilist_len(l); r++)
-			    for (c = 0; c <= SZ && i < ilist_len(l); c++)
-			    {
-				if (r == SZ/2 && c == SZ/2)
-				    continue;
+		s = p_subloc(graveyards[i]);
+		ilist_append(&s->link_to, map[r][c]);
+		s->link_when = -1;
+		s->link_open = -1;
 
-				if (rnd(1,100) > 5)	/* hack */
-					continue;
+		s = p_subloc(map[r][c]);
+		ilist_append(&s->link_from, graveyards[i]);
 
-				p = p_subloc(l[i]);
-				ilist_append(&p->link_to, map[r][c]);
-				p->link_when = -1;
-				p->link_open = -1;
-
-				p = p_subloc(map[r][c]);
-				ilist_append(&p->link_from, l[i]);
-
-				i++;
-			    }
-		}
-
-		ilist_reclaim(&l);
+		i++;
 	}
+
+	ilist_reclaim(&graveyards);
 
 	printf("hades loc is %s\n", box_name(map[1][1]));
 }

@@ -1,5 +1,6 @@
 
 #include	<stdio.h>
+#include	<math.h>
 #include	"z.h"
 #include	"oly.h"
 
@@ -8,22 +9,20 @@ int faery_region = 0;
 int faery_player = 0;
 
 
-#define	SZ_row	6		/* 6 rows tall */
-#define	SZ_col	937		/* 1000 columns wide */
-
-#define	NCITIES	100		/* num cities to make in Faery */
+#define	SZ	100		/* SZ x SZ is the maximum size of faery */
 
 
 void
 create_faery()
 {
-	int r, c;
-	int map[SZ_row+1][SZ_col+1];
+	int r, c, hills, total, sz, space, base, clear;
+	int map[SZ][SZ];
 	int n;
 	int i;
 	int north, east, south, west;
 	struct entity_loc *p;
-	int sk;
+	struct loc_info *li;
+	int sk, new;
 	char *pw;
 
 
@@ -37,54 +36,116 @@ create_faery()
 	fprintf(stderr, "INIT: creating %s\n", box_name(faery_region));
 
 /*
- *  Fill map[row,col] with locations.
- *  Capped on the two ends with ocean
- *  top and bottom edges wrap
+ * Size Faery dynamically to fit the number of faery hills we want
  */
 
-	for (r = 0; r <= SZ_row; r++)
+	total = 0;
+	loop_loc(i)
 	{
-		for (c = 0; c <= SZ_col; c++)
+		if (loc_depth(i) != LOC_region || i == faery_region)
+			continue;
+
+		li = rp_loc_info(i);
+
+		if (li == NULL || ilist_len(li->here_list) < 1)
+			continue;
+
+		hills = ilist_len(li->here_list) / 50;
+		if (hills < 1)
+			hills = 1;
+
+		total += hills;
+	}
+	next_loc;
+
+	sz = (int) ceil(sqrt(total * 16)) + 2;
+	if (sz > SZ)
+		sz = SZ;
+	
+	fprintf(stderr, "Faery is %dx%d (max %d hills)\n", sz, sz, total);
+
+/*
+ *  Fill map[row,col] with locations.
+ *  Capped on all edges with ocean
+ */
+
+	// see if there's a contiguous block of provinces so that Faery
+	// map coords can follow the same pattern as the surface
+	clear = 0;
+	for (base = 0; base < 400 - sz; base += 20)
+	{
+		n = 10000 + base * 100;
+		if (bx[n] == NULL)
 		{
-			if (c == 0 || c == SZ_col)
+			clear = 1;
+			for (r = 0; clear && r < sz; r++)
+				for (c = 0; clear && c < sz; c++)
+				{
+					n = 10000 + (base + r) * 100 + c;
+					if (bx[n] != NULL)
+						clear = 0;
+				}
+			break;
+		}
+	}
+	for (r = 0; r < sz; r++)
+		for (c = 0; c < sz; c++)
+		{
+			if (c == 0 || c == sz - 1 || r == 0 || r == sz - 1)
 				sk = sub_ocean;
 			else
 				sk = sub_forest;
+			if (clear)
+			{
+				n = 10000 + (base + r) * 100 + c;
+				alloc_box(n, T_loc, sk);
+			}
+			else
+			{
+				n = new_ent(T_loc, sk);
+			}
 
-			n = new_ent(T_loc, sk);
 			map[r][c] = n;
 			set_where(n, faery_region);
 		}
-	}
 
 /*
  *  Set the NSEW exit routes for every map location
  */
 
-	for (r = 0; r <= SZ_row; r++)
-	{
-		for (c = 0; c <= SZ_col; c++)
+	for (r = 0; r < sz; r++)
+		for (c = 0; c < sz; c++)
 		{
 			p = p_loc(map[r][c]);
 
-			n = (r == 0 ? SZ_row : r-1);
-			north = map[n][c];
+			if (r == 0)
+				north = 0;
+			else
+				north = map[r-1][c];
 
-			n = (r == SZ_row ? 0 : r+1);
-			south = map[n][c];
+			if (r < sz - 1)
+				south = map[r+1][c];
+			else
+				south = 0;
 
-			n = (c == SZ_col ? 0 : c+1);
-			east = map[r][n];
+			if (c < sz - 1)
+				east = map[r][c+1];
+			else
+				east = 0;
 
-			n = (c == 0 ? SZ_col : c-1);
-			west = map[r][n];
+			if (c == 0)
+				west = 0;
+			else
+				west = map[r][c-1];
 
 			ilist_append(&p->prov_dest, north);
 			ilist_append(&p->prov_dest, east);
 			ilist_append(&p->prov_dest, south);
 			ilist_append(&p->prov_dest, west);
 		}
-	}
+
+	clear_temps(T_loc);
+	space = sz * sz;
 
 /*
  *  Make a ring of stones
@@ -119,6 +180,8 @@ create_faery()
 
 		ring = new_ent(T_loc, sub_stone_cir);
 		set_where(ring, randloc);
+		bx[randloc]->temp = 1;
+		space--;
 
 		gate = new_ent(T_gate, 0);
 		set_where(gate, ring);
@@ -154,25 +217,43 @@ create_faery()
 			continue;
 		}
 
-		randloc = li->here_list[rnd(0, ilist_len(li->here_list)-1)];
-
-		if (subkind(randloc) == sub_ocean)
+		if (subkind(li->here_list[0]) == sub_ocean)
 			continue;
 
-		r = rnd(0,SZ_row-1);
-		c = rnd(1,SZ_col-2);
+		hills = ilist_len(li->here_list) / 50;
+		if (hills < 1)
+			hills = 1;
 
-		n = new_ent(T_loc, sub_faery_hill);
-		set_where(n, map[r][c]);
+		while (space > 0 && hills > 0)
+		{
+			hills--;
+			/* 50% chance of a hill for each 50 provinces
+			 * in a region, but at least one
+			 */
+			if (hills && rnd(0,1))
+				continue;
+			do
+			{
+				randloc = li->here_list[rnd(0, ilist_len(li->here_list)-1)];
+				r = rnd(1, sz - 2);
+				c = rnd(1, sz - 2);
+			}
+			while (bx[randloc]->temp || bx[map[r][c]]->temp);
 
-		sl = p_subloc(n);
-		ilist_append(&sl->link_to, randloc);
-		sl->link_when = rnd(0, NUM_MONTHS-1);
+			n = new_ent(T_loc, sub_faery_hill);
+			set_where(n, map[r][c]);
 
-		sl = p_subloc(randloc);
-		ilist_append(&sl->link_from, n);
+			sl = p_subloc(n);
+			ilist_append(&sl->link_to, randloc);
+			sl->link_when = rnd(0, NUM_MONTHS-1);
 
-		bx[map[r][c]]->temp = 1;
+			sl = p_subloc(randloc);
+			ilist_append(&sl->link_from, n);
+
+			bx[map[r][c]]->temp = 1;
+			bx[randloc]->temp = 1;
+			space--;
+		}
 	}
 	next_loc;
 
@@ -181,33 +262,34 @@ create_faery()
  *  rare items.
  */
 
-	{
-		ilist l = NULL;
-		int i;
-		int new;
-
-		for (r = 1; r < SZ_row; r++)
-		    for (c = 1; c < SZ_col; c++)
-		    {
-			if (bx[map[r][c]]->temp == 0)
-				ilist_append(&l, map[r][c]);
-		    }
-
-		if (ilist_len(l) < NCITIES)
-			fprintf(stderr, "\twarning: space for Faery cities "
-					"only %d\n", ilist_len(l));
-
-		ilist_scramble(l);
-
-		for (i = 0; i < ilist_len(l) && i < NCITIES; i++)
+	new = 0;
+	for (r = 2; space > 0 && r < sz - 2; r++)
+		for (c = 2; space > 0 && c < sz - 2; c++)
 		{
+			if (bx[map[r][c]]->temp)
+				continue;
+			if (rnd(0, 30))
+				continue;
 			new = new_ent(T_loc, sub_city);
-			set_where(new, l[i]);
+			set_where(new, map[r][c]);
 			set_name(new, "Faery city");
 			seed_city(new);
+			bx[map[r][c]]->temp = 1;
+			space--;
 		}
-
-		ilist_reclaim(&l);
+	
+	while (!new && space > 0)
+	{
+		r = rnd(2, sz - 3);
+		c = rnd(2, sz - 3);
+		if (bx[map[r][c]]->temp)
+			continue;
+		new = new_ent(T_loc, sub_city);
+		set_where(new, map[r][c]);
+		set_name(new, "Faery city");
+		seed_city(new);
+		bx[map[r][c]]->temp = 1;
+		space--;
 	}
 
 /*

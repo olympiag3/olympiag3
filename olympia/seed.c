@@ -239,40 +239,40 @@ compute_dist_gate()
 
 	do
 	{
-	    set_one = FALSE;
+		set_one = FALSE;
 
-	    loop_province(where)
-	    {
-		if (province_gate_here(where) || bx[where]->temp != m)
-		    continue;
-
-		l = exits_from_loc_nsew(0, where);
-
-		for (i = 0; i < ilist_len(l); i++)
+		loop_province(where)
 		{
-		    dest = l[i]->destination;
+			if (province_gate_here(where) || bx[where]->temp != m)
+				continue;
 
-		    if (loc_depth(dest) != LOC_province)
-			continue;
+			l = exits_from_loc_nsew(0, where);
 
-		    if (!province_gate_here(dest) && bx[dest]->temp == 0)
-		    {
-			bx[dest]->temp = m + 1;
-			set_one = TRUE;
-		    }
+			for (i = 0; i < ilist_len(l); i++)
+			{
+				dest = l[i]->destination;
+
+				if (loc_depth(dest) != LOC_province)
+					continue;
+
+				if (!province_gate_here(dest) && bx[dest]->temp == 0)
+				{
+					bx[dest]->temp = m + 1;
+					set_one = TRUE;
+				}
+			}
 		}
-	    }
-	    next_province;
+		next_province;
 
-	    m++;
+		m++;
 	}
 	while (set_one);
 
 	loop_province(where)
 	{
 		if (!province_gate_here(where) &&
-		    bx[where]->temp < 1 &&
-		    greater_region(where) == 0)
+			bx[where]->temp < 1 &&
+			greater_region(where) == 0)
 			fprintf(stderr, "2: error on %d reg=%d\n",
 				where, region(where));
 	}
@@ -310,70 +310,84 @@ seed_city_skill(int where)
 {
 	int terr = subkind(province(where));
 	struct entity_subloc *p;
+	int common, magic;
 
 	p = p_subloc(where);
 
 	ilist_clear(&p->teaches);
 
 /*
- *  Skills taught everywhere (in the normal world)
+ *  Skills taught everywhere
  */
 
-	if (greater_region(where) == 0)
+	ilist_append(&p->teaches, sk_combat);
+	ilist_append(&p->teaches, sk_construction);
+
+/*
+ *  Skills based on location
+ */
+
+	if (safe_haven(where))
 	{
-		ilist_append(&p->teaches, sk_combat);
-		ilist_append(&p->teaches, sk_construction);
-		ilist_append(&p->teaches, sk_stealth);
-		ilist_append(&p->teaches, sk_basic);
-
-		if (safe_haven(where)) {
-			ilist_append(&p->teaches, sk_gate);
-			ilist_append(&p->teaches, sk_trade);
-		}
-
-		if (is_port_city(where))
-			ilist_append(&p->teaches, sk_shipcraft);
-
-		switch (terr)
-		{
-		case sub_plain: ilist_append(&p->teaches, sk_beast); break;
-		case sub_mountain: ilist_append(&p->teaches, sk_mining); break;
-		case sub_forest: ilist_append(&p->teaches, sk_forestry); break;
-		}
-
-		if (!safe_haven(where))
-		{
-			if (rnd(1,2) == 1)
-				ilist_append(&p->teaches, sk_persuasion);
-			else
-				ilist_append(&p->teaches, sk_trade);
-
-			switch (rnd(1,5))
-			{
-			case 1: ilist_append(&p->teaches, sk_alchemy); break;
-			case 2: ilist_append(&p->teaches, sk_weather); break;
-			case 3: ilist_append(&p->teaches, sk_scry); break;
-			case 4: ilist_append(&p->teaches, sk_artifact); break;
-			case 5: ilist_append(&p->teaches, sk_necromancy); break;
-			}
-		}
+		common = 1;
+		magic = 1;
 	}
-	else if (in_faery(where))
+	else
 	{
-		ilist_append(&p->teaches, sk_scry);
+		common = rnd(1, 4);
+		magic = rnd(1, 8);
+	}
+
+	if (in_faery(where))
+	{
+		common = rnd(2, 4);
+		magic = 2;
 	}
 	else if (in_clouds(where))
 	{
-		ilist_append(&p->teaches, sk_weather);
+		magic = 3;
 	}
 	else if (in_hades(where))
 	{
-		ilist_append(&p->teaches, sk_necromancy);
-		ilist_append(&p->teaches, sk_artifact);
+		common = 4;
+		magic = 4;
+		if (!rnd(0, 2))
+			ilist_append(&p->teaches, sk_artifact);
+	}
+
+	switch (common)
+	{
+		case 1: ilist_append(&p->teaches, sk_trade); break;
+		case 2: ilist_append(&p->teaches, sk_stealth); break;
+		case 3: ilist_append(&p->teaches, sk_persuasion); break;
+		default: break;
+	}
+	switch (magic)
+	{
+		case 1: ilist_append(&p->teaches, sk_gate); break;
+		case 2: ilist_append(&p->teaches, sk_scry); break;
+		case 3: ilist_append(&p->teaches, sk_weather); break;
+		case 4: ilist_append(&p->teaches, sk_necromancy); break;
+		case 5: ilist_append(&p->teaches, sk_artifact); break;
+		case 6: ilist_append(&p->teaches, sk_basic); break;
+		case 7: ilist_append(&p->teaches, sk_alchemy); break;
+		default: break;
+	}
+	if (magic < 6)
+		ilist_append(&p->teaches, sk_basic);
+
+	if (is_port_city(where))
+		ilist_append(&p->teaches, sk_shipcraft);
+
+	switch (terr)
+	{
+		case sub_plain: ilist_append(&p->teaches, sk_beast); break;
+		case sub_mountain: ilist_append(&p->teaches, sk_mining); break;
+		case sub_forest: ilist_append(&p->teaches, sk_forestry); break;
 	}
 
 	if (ilist_len(p->teaches) > 0)
-	    qsort(p->teaches, ilist_len(p->teaches), sizeof(int), int_comp);
+		qsort(p->teaches, ilist_len(p->teaches), sizeof(int), int_comp);
 }
 
 
@@ -395,31 +409,38 @@ seed_city_trade(int where)
 
 	if (in_clouds(where))
 	{
+		add_city_trade(where, CONSUME, item_basket, 30, 4, 0);
+		add_city_trade(where, PRODUCE, item_pegasus, 1, 1000, 0);
+
+		loc_trade_sup(where, TRUE);
 		return;
 	}
 
+	if (rnd(1,2) == 1)
+		add_city_trade(where, CONSUME, item_pot, 17, 7, 0);
+	else
+		add_city_trade(where, CONSUME, item_basket, 30, 4, 0);
+
 	if (in_faery(where))		/* seed Faery city trade */
 	{
-	    add_city_trade(where, PRODUCE, item_pegasus, 1, 1000, 0);
+		if (rnd(1,2) == 1)
+			add_city_trade(where, PRODUCE, item_lana_bark, 3, 50, 0);
+		else
+			add_city_trade(where, PRODUCE, item_avinia_leaf, 10, 35, 0);
 
-	    if (rnd(1,2) == 1)
-	 	add_city_trade(where, PRODUCE, item_lana_bark, 3, 50, 0);
-	    else
-	 	add_city_trade(where, PRODUCE, item_avinia_leaf, 10, 35, 0);
-
-	    if (rnd(1,2) == 1)
-		add_city_trade(where, PRODUCE, item_yew, 5, 100, 0);
-	    else
-	 	add_city_trade(where, PRODUCE, item_mallorn_wood, 5, 200, 0);
+		if (rnd(1,2) == 1)
+			add_city_trade(where, PRODUCE, item_yew, 5, 100, 0);
+		else
+			add_city_trade(where, PRODUCE, item_mallorn_wood, 5, 200, 0);
 
 
-	    add_city_trade(where, CONSUME, item_mithril, 10, 500, 0);
+		add_city_trade(where, CONSUME, item_mithril, 10, 500, 0);
 
-	    if (rnd(1,2) == 1)
-		add_city_trade(where, CONSUME, item_gate_crystal, 2, 1000, 0);
+		if (rnd(1,2) == 1)
+			add_city_trade(where, CONSUME, item_gate_crystal, 2, 1000, 0);
 
-	    loc_trade_sup(where, TRUE);
-	    return;
+		loc_trade_sup(where, TRUE);
+		return;
 	}
 
 	if (is_port_city(where))
@@ -427,11 +448,6 @@ seed_city_trade(int where)
 		add_city_trade(where, CONSUME, item_fish, 100, 2, 0);
 		add_city_trade(where, PRODUCE, item_glue, 10, 50, 0);
 	}
-
-	if (rnd(1,2) == 1)
-		add_city_trade(where, CONSUME, item_pot, 17, 7, 0);
-	else
-		add_city_trade(where, CONSUME, item_basket, 30, 4, 0);
 
 	if (prov_kind == sub_plain)
 	{
@@ -535,7 +551,7 @@ seed_taxes()
 	loop_loc(where)
 	{
 		if (loc_depth(where) != LOC_province &&
-		    subkind(where) != sub_city)
+			subkind(where) != sub_city)
 			continue;
 
 		if (subkind(where) == sub_ocean)

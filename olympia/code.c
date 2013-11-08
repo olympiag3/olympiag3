@@ -14,7 +14,7 @@
  *  9000-9999          1000	skills
  *
  *  10,000-19,999    10,000	provinces		(CCNN: AA00-DV99)
- *  20,000-49,999    20,000	more provinces		(CCNN: DW00-ZZ99)
+ *  20,000-49,999    30,000	more provinces		(CCNN: DW00-ZZ99)
  *  50,000-56,759      6760	player entities		(CCN)
  *  56,760-58,759      2000	lucky locs		(CNN)
  *  58,760-58,999	240	regions			(NNNNN)

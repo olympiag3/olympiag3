@@ -13,7 +13,7 @@ int under_region = 0;
 static void
 create_subworld()
 {
-	int r, c;
+	int r, c, clear, base;
 	int map[SUB_SZ+1][SUB_SZ+1];
 	int n;
 	int north, east, south, west;
@@ -32,11 +32,35 @@ create_subworld()
  *  Fill map[row,col] with locations.
  */
 
-	for (r = 0; r <= SUB_SZ; r++)
+	clear = 0;
+	for (base = 0; base < 400 - SUB_SZ - 1; base += 20)
 	{
+		n = 10000 + base * 100;
+		if (bx[n] == NULL)
+		{
+			clear = 1;
+			for (r = 0; clear && r <= SUB_SZ; r++)
+				for (c = 0; clear && c <= SUB_SZ; c++)
+				{
+					n = 10000 + (base + r) * 100 + c;
+					if (bx[n] != NULL)
+						clear = 0;
+				}
+			break;
+		}
+	}
+	for (r = 0; r <= SUB_SZ; r++)
 		for (c = 0; c <= SUB_SZ; c++)
 		{
-			n = new_ent(T_loc, sub_forest);
+			if (clear)
+			{
+				n = 10000 + (base + r) * 100 + c;
+				alloc_box(n, T_loc, sub_forest);
+			}
+			else
+			{
+				n = new_ent(T_loc, sub_forest);
+			}
 			set_name(n, "Subworld");
 
 			map[r][c] = n;
@@ -59,7 +83,6 @@ create_subworld()
 				set_where(new, map[r][c]);
 			}
 		}
-	}
 
 /*
  *  Set the NSEW exit routes for every map location
@@ -105,7 +128,7 @@ int
 random_subworld_loc()
 {
 	ilist l = NULL;
-	int i;
+	int i, s, has_city;
 	int ret;
 
 	loop_loc(i)
@@ -113,6 +136,17 @@ random_subworld_loc()
 		if (region(i) != under_region)
 			continue;
 		if (subkind(i) != sub_forest)
+			continue;
+
+		has_city = 0;
+		loop_here(i, s)
+		{
+			if (kind(s) == T_loc && subkind(s) == sub_city)
+				has_city = 1;
+		}
+		next_here;
+		
+		if (has_city)
 			continue;
 
 		ilist_append(&l, i);
@@ -317,7 +351,9 @@ create_tunnel_set(int city, int subworld_link)
 	int count;
 	int nlevels;
 	int ret = 0;
-	int clev1, clev2;
+	int clev1, clev2, clev3;
+	int square;
+	char name_buffer[100];
 
 	tun_total_locs = 0;
 
@@ -333,10 +369,12 @@ create_tunnel_set(int city, int subworld_link)
  *  Create first loc
  */
 
+	l = 1;
+
 	r = rnd(1, SZ);
 	c = rnd(1, SZ);
 	n = new_tunnel();
-	map[r][c][0] = n;
+	map[r][c][l] = n;
 
 /*
  *  Link this loc to a hidden sewer in the city
@@ -364,13 +402,18 @@ create_tunnel_set(int city, int subworld_link)
 	if (safe_haven(city) || subworld_link)
 		nlevels = 11;
 	else
+	{
 		nlevels = rnd(2,5);
-	l = 0;
+		// Make 50% of non-safe-haven sewers extra deep
+		if (rnd(0, 1))
+			nlevels += rnd(1,6);
+	}
 
 	clev1 = rnd(1,6);
 	do {
 		clev2 = rnd(1,6);
 	} while (clev1 == clev2);
+	clev3 = rnd(7, 10);
 
 	do {
 		do {
@@ -397,33 +440,66 @@ create_tunnel_set(int city, int subworld_link)
 		while (level_size > 0 && count++ < 500)
 			level_size -= fill_out_level(map, l);
 
-		if (l == clev1 || l == clev2)
+		if (l == clev1 || l == clev2 || l == clev3)
 			add_chamber(map, l);
 	}
 	while (l < nlevels);
 
+/*
 	if (l == 5 && rnd(1,2) == 1)
 	{
 		int hades;
-		int square;
 
 		hades = random_hades_loc();
 		square = filled_locs(map, l, 0);
 
-		p_loc(square)->hidden = TRUE;	/* hide view from Hades */
+		p_loc(square)->hidden = TRUE;
 		p_loc(square)->prov_dest[DIR_DOWN-1] = hades;
 		fill_dir_exits(hades);
 		p_loc(hades)->prov_dest[DIR_UP-1] = square;
 		printf("(hades from sewer at %s)\n",
 			box_code_less(square));
 	}
+*/
 
-	if (safe_haven(city))
+	/*
+	 * No longer just safe havens - any sewer that goes to 11
+	 * can now connect to the underworld
+	 */
+	if (l > 10)
 	{
+#if 0
 		ret = filled_locs(map, l, DIR_W);
 
 		subworld_city = new_ent(T_loc, sub_city);
 		set_where(subworld_city, random_subworld_loc());
+#else
+		/*
+		 * What was that about?  22 levels down and up again?
+		 * Get real.
+		 * Just link to the underworld via a vertical sewer.
+		 */
+		square = filled_locs(map, l, 0);
+
+		subworld_city = new_ent(T_loc, sub_city);
+		set_where(subworld_city, random_subworld_loc());
+		sprintf(name_buffer, "Under%s", display_name(city));
+		name_buffer[5] = tolower(name_buffer[5]);
+		set_name(subworld_city, name_buffer);
+
+		sewer = new_ent(T_loc, sub_sewer);
+		p_loc(sewer)->hidden = TRUE;
+		set_where(sewer, subworld_city);
+
+		fill_dir_exits(sewer);
+
+		p_loc(sewer)->prov_dest[DIR_UP-1] = square;
+		p_loc(square)->prov_dest[DIR_DOWN-1] = sewer;
+
+		seed_city(subworld_city);
+		printf("Sewers from %s reach subworld city %s\n",
+				box_name(city), box_name(subworld_city));
+#endif
 	}
 
 	if (subworld_link)

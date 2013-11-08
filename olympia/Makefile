@@ -13,7 +13,7 @@ OBJECTS = $(patsubst %.o,obj/%.o,$(GAME_OBJECTS))
 all: olympia
 
 olympia: objdir $(OBJECTS)
-	$(CC) $(CFLAGS) -o olympia $(OBJECTS)
+	$(CC) $(CFLAGS) -lm -o olympia $(OBJECTS)
 
 clean:
 	rm -f $(OBJECTS)
