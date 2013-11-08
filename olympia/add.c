@@ -97,6 +97,69 @@ static int get_city_id(char *start_city) {
 static int
 pick_starting_city(char *start_city)
 {
+	int city, empty, garrison, here, prov;
+	ilist garrisoned = NULL, ungarrisoned = NULL;
+
+	if (!strcasecmp(start_city, "empty"))
+	{
+		loop_city(city)
+		{
+			if (safe_haven(city) || greater_region(city) != 0)
+				continue;
+
+			empty = 1;
+			garrison = 0;
+			loop_all_here(city, here)
+			{
+				if (kind(here) == T_char)
+				{
+					if (default_garrison(here))
+						garrison = 1;
+					else
+						empty = 0;
+				}
+			}
+			next_all_here;
+
+			prov = province(city);
+			loop_all_here(prov, here)
+			{
+				if (kind(here) == T_char)
+				{
+					if (!is_npc(here) ||
+						default_garrison(here))
+						empty = 0;
+				}
+			}
+			next_all_here;
+
+			if (empty)
+			{
+				fprintf(stderr, "psc: %s is %sgarrisoned.\n",
+					box_name(city),
+					garrison ? "" : "un");
+				if (garrison)
+					ilist_append(&garrisoned, city);
+				else
+					ilist_append(&ungarrisoned, city);
+			}
+		}
+		next_city;
+
+		if (ilist_len(garrisoned) > 0)
+		{
+			ilist_scramble(garrisoned);
+			return garrisoned[0];
+		}
+		else if (ilist_len(ungarrisoned) > 0)
+		{
+			ilist_scramble(ungarrisoned);
+			return ungarrisoned[0];
+		}
+
+		fprintf(stderr, "No empty cities found for new player!\n");
+	}
+
 	return get_city_id(start_city);
 }
 
