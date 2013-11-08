@@ -392,6 +392,8 @@ typedef		signed char	schar;
 #define		PROG_bandit		1	/* wilderness spice */
 #define		PROG_subloc_monster	2
 #define		PROG_npc_token		3
+#define		PROG_faery_bandit	4
+#define		PROG_hades_bandit	5
 
 #define		use_death_potion	1
 #define		use_heal_potion		2

@@ -175,7 +175,7 @@ create_hades_bandit(int where)
 							LOY_npc, 0, name);
 
 	p_char(new)->break_point = 0;
-	rp_char(new)->npc_prog = PROG_bandit;
+	rp_char(new)->npc_prog = PROG_hades_bandit;
 
 	if (new < 0)
 		return -1;
@@ -214,7 +214,7 @@ create_faery_bandit(int where)
 							LOY_npc, 0, name);
 
 	p_char(new)->break_point = 0;
-	rp_char(new)->npc_prog = PROG_bandit;
+	rp_char(new)->npc_prog = PROG_faery_bandit;
 
 	if (new < 0)
 		return -1;
@@ -239,7 +239,8 @@ hades_attack_check(int who, int where)
 
 	if (is_npc(who) ||
 	    kind(who) != T_char ||
-	    char_really_hidden(who))
+	    char_really_hidden(who) ||
+	    (has_skill(who, sk_transcend_death) && char_alone(who)))
 		return;
 
 	new = create_hades_bandit(where);
@@ -267,7 +268,8 @@ faery_attack_check(int who, int where)
 
 	if (is_npc(who) ||
 	    kind(who) != T_char ||
-	    char_really_hidden(who))
+	    char_really_hidden(who) ||
+	    stack_has_use_key(who, use_faery_stone))
 		return;
 
 	new = create_faery_bandit(where);
@@ -286,11 +288,12 @@ faery_attack_check(int who, int where)
 
 
 static void
-auto_bandit(int who)
+auto_bandit(int who, int prog)
 {
 	int where = subloc(who);
 	int i;
 	int victim = 0;
+	ilist targets = NULL;
 
 	loop_here(who, i)
 	{
@@ -300,15 +303,30 @@ auto_bandit(int who)
 
 	loop_here(where, i)
 	{
-		if (kind(i) == T_char &&
-		    !is_npc(i) &&
-		    !char_really_hidden(i))
-		{
-			victim = i;
-			break;
-		}
+		if (kind(i) != T_char ||
+			is_npc(i) ||
+			char_really_hidden(i))
+			continue;
+
+		if (prog == PROG_faery_bandit && 
+			stack_has_use_key(i, use_faery_stone))
+			continue;
+
+		if (prog == PROG_hades_bandit && 
+			has_skill(i, sk_transcend_death) &&
+			char_alone(i))
+			continue;
+
+		ilist_append(targets, i);
 	}
 	next_here;
+
+	if (ilist_len(targets) > 0)
+	{
+		ilist_scramble(targets);
+		victim = targets[0];
+		ilist_reclaim(&targets);
+	}
 
 	if (victim)
 		queue(who, "attack %s", box_code_less(victim));
@@ -549,7 +567,9 @@ queue_npc_orders()
 			break;
 
 		case PROG_bandit:
-			auto_bandit(who);
+		case PROG_hades_bandit:
+		case PROG_faery_bandit:
+			auto_bandit(who, npc_program(who));
 			break;
 
 		case PROG_subloc_monster:
