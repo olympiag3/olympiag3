@@ -107,6 +107,10 @@ pick_starting_city(char *start_city)
 			if (safe_haven(city) || greater_region(city) != 0)
 				continue;
 
+			prov = province(city);
+			if (garrison_here(prov))
+				continue;
+
 			empty = 1;
 			garrison = 0;
 			loop_all_here(city, here)
@@ -121,23 +125,15 @@ pick_starting_city(char *start_city)
 			}
 			next_all_here;
 
-			prov = province(city);
-			loop_all_here(prov, here)
+			loop_char_here(prov, here)
 			{
-				if (kind(here) == T_char)
-				{
-					if (!is_npc(here) ||
-						default_garrison(here))
-						empty = 0;
-				}
+				if (kind(here) == T_char && !is_npc(here))
+					empty = 0;
 			}
-			next_all_here;
+			next_char_here;
 
 			if (empty)
 			{
-				fprintf(stderr, "psc: %s is %sgarrisoned.\n",
-					box_name(city),
-					garrison ? "" : "un");
 				if (garrison)
 					ilist_append(&garrisoned, city);
 				else
@@ -167,7 +163,7 @@ static int
 add_new_player(int pl, char *faction, char *character, char *start_city,
 			char *full_name, char *email)
 {
-	int who;
+	int who, city, garrison;
   	int t = sysclock.turn;
 	struct entity_char *cp;
 	struct entity_player *pp;
@@ -215,8 +211,14 @@ add_new_player(int pl, char *faction, char *character, char *start_city,
 	cp->attack = 80;
 	cp->defense = 80;
 
-	set_where(who, pick_starting_city(start_city));
+	city = pick_starting_city(start_city);
+	set_where(who, city);
+	garrison = garrison_here(city);
 	promote(who, 0);
+	// If there is a garrison in the city then they need to still
+	// be at the top of the list, newcomer advantage notwithstanding.
+	if (garrison)
+		promote(garrison, 0);
 	set_lord(who, pl, LOY_oath, 2);
 
 	gen_item(who, item_peasant, 25);
