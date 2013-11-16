@@ -37,7 +37,7 @@ v_bird_spy(struct command *c)
 		int i;
 		int okay = FALSE;
 
-		l = exits_from_loc(c->who, where);
+		l = exits_from_loc(c->who, province(c->who));
 
 		for (i = 0; i < ilist_len(l); i++)
 			if (l[i]->destination == targ)
