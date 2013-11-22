@@ -349,6 +349,9 @@ default_garrison_pay()
 		if (parent == 0 || !default_garrison(parent))
 			continue;
 
+		if (default_garrison(who))
+			continue;
+
 		gen_item(who, item_gold, garrison_pay);
 		if (!is_npc(who))
 			gold_garrison += garrison_pay;
@@ -810,7 +813,6 @@ pillage_decay()
 }
 
 
-#if 0
 static void
 auto_drop()
 {
@@ -821,29 +823,28 @@ auto_drop()
 	{
 		p = p_player(pl);
 
-		if (sysclock.turn - p->last_order_turn >= 4)
+		if (sysclock.turn - p->last_order_turn >= auto_quit_turns)
 		{
-		    char *s = "";
-		    char *email = "";
+			char *s = "";
+			char *email = "";
 
-		    if (rp_player(pl))
-		    {
-			if (rp_player(pl)->email && *rp_player(pl)->email)
-				email = rp_player(pl)->email;
+			if (rp_player(pl))
+			{
+				if (rp_player(pl)->email && *rp_player(pl)->email)
+					email = rp_player(pl)->email;
 
-			if (rp_player(pl)->full_name &&
-			    *rp_player(pl)->full_name)
-				s = rp_player(pl)->full_name;
-		    }
+				if (rp_player(pl)->full_name &&
+					*rp_player(pl)->full_name)
+					s = rp_player(pl)->full_name;
+			}
 
-		    queue(pl, "quit");
-		    log_write(LOG_SPECIAL, "Queued drop for %s", box_name(pl));
-		    log_write(LOG_SPECIAL, "    %s <%s>", s, email);
+			queue(pl, "quit");
+			log_write(LOG_SPECIAL, "Queued drop for %s", box_name(pl));
+			log_write(LOG_SPECIAL, "    %s <%s>", s, email);
 		}
 	}
 	next_pl_regular;
 }
-#endif
 
 
 static int
@@ -1782,9 +1783,8 @@ post_month()
 	storm_move();
 	collapsed_mine_decay();
 	post_production();
-#if 0
-	auto_drop();
-#endif
+	if (auto_quit_turns > 0)
+		auto_drop();
 	link_decay();
 	quest_decay();
 	check_token_units();

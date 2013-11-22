@@ -350,7 +350,8 @@ static void
 orders_template_sup(int who, int num, int pl)
 {
 	struct order_list *l;
-	int i;
+	struct entity_player *p;
+	int i, turns;
 	int some = FALSE;
 	char *time_left;
 	char *nam = "";
@@ -369,36 +370,52 @@ orders_template_sup(int who, int num, int pl)
 
 	if (pl == player(num))
 	{
-	    struct command *c = rp_command(num);
+		struct command *c = rp_command(num);
 
-	    if ((loyal_kind(num) == LOY_contract && loyal_rate(num) < 50) ||
-	        (loyal_kind(num) == LOY_fear && loyal_rate(num) < 2))
-	    {
-		out(who, "#");
-		out(who, "# %s has loyalty %s and will renounce",
-				box_code_less(num), loyal_s(num));
-		out(who, "# loyalty at the end of this turn.");
-		out(who, "#");
-	    }
-
-	    if (c && (c->state == STATE_RUN || c->state == STATE_LOAD))
-	    {
-		if (c->state == STATE_RUN)
+		if (kind(num) == T_player && auto_quit_turns > 0)
 		{
-			if (c->wait < 0)
-			    time_left = " (still~executing)";
-			else
-			    time_left = sout(" (executing for %s more day%s)",
-					nice_num(c->wait),	
-					add_s(c->wait));
+			p = p_player(num);
+			turns = sysclock.turn - p->last_order_turn;
+			if (turns >= (auto_quit_turns / 2))
+			{
+				out(who, "#");
+				out(who, "# You have not sent in orders for %d turn%s.",
+						turns, add_s(turns));
+				out(who, "# If you do not submit orders for %d turn%s,",
+						auto_quit_turns, add_s(auto_quit_turns));
+				out(who, "# your faction will be removed from the game.");
+				out(who, "#");
+			}
+		}
 
-			out(who, "# > %s%s", c->line, time_left);
-		}
-		else	/* command has loaded, but not started yet */
+		if ((loyal_kind(num) == LOY_contract && loyal_rate(num) < 50) ||
+			(loyal_kind(num) == LOY_fear && loyal_rate(num) < 2))
 		{
-			out(who, "%s", c->line);
+			out(who, "#");
+			out(who, "# %s has loyalty %s and will renounce",
+					box_code_less(num), loyal_s(num));
+			out(who, "# loyalty at the end of this turn.");
+			out(who, "#");
 		}
-	    }
+
+		if (c && (c->state == STATE_RUN || c->state == STATE_LOAD))
+		{
+			if (c->state == STATE_RUN)
+			{
+				if (c->wait < 0)
+					time_left = " (still~executing)";
+				else
+					time_left = sout(" (executing for %s more day%s)",
+						nice_num(c->wait),	
+						add_s(c->wait));
+
+				out(who, "# > %s%s", c->line, time_left);
+			}
+			else	/* command has loaded, but not started yet */
+			{
+				out(who, "%s", c->line);
+			}
+		}
 	}
 
 	l = rp_order_head(pl, num);

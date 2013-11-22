@@ -2554,6 +2554,10 @@ load_system()
 		{
 			garrison_pay = atoi(&s[13]);
 		}
+		else if (strncmp(s, "auto_quit=", 10) == 0)
+		{
+			auto_quit_turns = atoi(&s[10]);
+		}
 		else if (strncmp(s, "army_slow_factor=", 17) == 0)
 		{
 			army_slow_factor = atoi(&s[17]);
@@ -2665,6 +2669,8 @@ save_system()
 	fprintf(fp, "times_url=%s\n", times_url);
 	fprintf(fp, "htpasswd_loc=%s\n", htpasswd_loc);
 	fprintf(fp, "garrison_pay=%d\n", garrison_pay);
+	if (auto_quit_turns > 0)
+		fprintf(fp, "auto_quit=%d\n", auto_quit_turns);
 	fprintf(fp, "army_slow_factor=%d\n", army_slow_factor);
 	fprintf(fp, "post=%d\n", post_has_been_run);
 	fprintf(fp, "init=%d\n", seed_has_been_run);
