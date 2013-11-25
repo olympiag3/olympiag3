@@ -33,6 +33,22 @@ typedef struct
 	int x, y;
 } location;
 
+typedef struct
+{
+	char symbol;
+	int min, max;
+	int target_prob, prob;
+} terrain;
+
+terrain terrains[] =
+{
+	{ 'p', 12, 30, 30, 0 },
+	{ 'f',  6, 14, 30, 0 },
+	{ 'm',  6, 10, 20, 0 },
+	{ 'd', 15, 30, 10, 0 },
+	{ 's',  1,  3, 10, 0 }
+};
+
 void make_shelf(
 	char map[][MAX_MAP],
 	int y,
@@ -89,14 +105,35 @@ void extend_distance(
 	return;
 }
 
+int gcd(int a, int b)
+{
+	int temp;
+
+	while (b)
+	{
+		temp = b;
+		b = a % b;
+		a = temp;
+	}
+
+	return a;
+}
+
+int lcm(int a, int b)
+{
+	return a * b / gcd(a, b);
+}
+
 int main(int argc, char *argv[])
 {
 	char map[MAX_MAP][MAX_MAP];
 	char working[MAX_MAP][MAX_MAP];
 	char distance[MAX_MAP][MAX_MAP];
+	int ids[MAX_MAP][MAX_MAP];
 	char buffer[LINE_MAX];
 	location *island;
 	int opt, x_size, y_size, x, y, max, count, d, island_size, i;
+	int GCD, LCM, o, terr, temp, size, cluster_end, id;
 	int target_size = 0;
 	int border = 2;
 	int shelf = 3;
@@ -145,6 +182,7 @@ int main(int argc, char *argv[])
 	/* Only count ,. ' chars as available */
 	for (y = 0; y < y_size; y++)
 		for (x = 0; x < x_size; x++)
+		{
 			switch (map[y][x])
 			{
 				case ',':
@@ -154,13 +192,15 @@ int main(int argc, char *argv[])
 					working[y][x] = '~';
 					break;
 				default:
-					working[y][x] = 'o';
+					working[y][x] = 'p';
 					break;
 			}
+			ids[y][x] = 0;
+		}
 	/* exclude any square within shelf of a land square */
 	for (y = 0; y < y_size; y++)
 		for (x = 0; x < x_size; x++)
-			if (working[y][x] == 'o')
+			if (working[y][x] == 'p')
 				make_shelf(working, y, x, y_size, x_size, shelf);
 	/* exclude border squares around each edge */
 	for (y = 0; y < y_size; y++)
@@ -234,6 +274,7 @@ int main(int argc, char *argv[])
 					island_size = 1;
 					working[y][x] = 'o';
 					map[y][x] = 'o';
+					ids[y][x] = 0;
 				}
 			}
 	while (island_size < target_size)
@@ -288,7 +329,115 @@ int main(int argc, char *argv[])
 		}
 		working[island[island_size].y][island[island_size].x] = 'o';
 		map[island[island_size].y][island[island_size].x] = 'o';
+		ids[island[island_size].y][island[island_size].x] = island_size;
 		island_size++;
+	}
+
+	/* Calculate terrain ratios */
+	/* Use GCD and LCM to render these down to integer ratios */
+	for (i = 0; i < sizeof(terrains) / sizeof(terrains[0]); i++)
+	{
+		terrains[i].prob = terrains[i].min + terrains[i].max;
+		GCD = gcd(terrains[i].target_prob, terrains[i].prob);
+		terrains[i].target_prob /= GCD;
+		terrains[i].prob /= GCD;
+	}
+	for (i = 0, LCM = 1; i < sizeof(terrains) / sizeof(terrains[0]); i++)
+		LCM = lcm(LCM, terrains[i].prob);
+	for (i = 0, count = 0; i < sizeof(terrains) / sizeof(terrains[0]); i++)
+	{
+		terrains[i].target_prob *= LCM / terrains[i].prob;
+		count += terrains[i].target_prob;
+	}
+
+	o = island_size;
+	size = 0;
+	while (o > 0)
+	{
+		/* pick a random square on the island */
+		cluster_end = o;
+		o--;
+		d = rnd(0, o);
+		/* Move that square to the end of the list */
+		temp = island[d].x;
+		island[d].x = island[o].x;
+		island[o].x = temp;
+		temp = island[d].y;
+		island[d].y = island[o].y;
+		island[o].y = temp;
+		ids[island[o].y][island[o].x] = o;
+		ids[island[d].y][island[d].x] = d;
+		if (size < 1)
+		{
+			/* Pick a random terrain type */
+			d = rnd(1, count);
+			for (terr = 0; d > terrains[terr].target_prob; terr++)
+				d -= terrains[terr].target_prob;
+			/* Determine how big this cluster should be */
+			size = rnd(terrains[terr].min, terrains[terr].max);
+		}
+		/* set the first square to this terrain type */
+		map[island[o].y][island[o].x] = terrains[terr].symbol;
+		working[island[o].y][island[o].x] = terrains[terr].symbol;
+		size--;
+		if (size > o)
+			size = o;
+		while (size > 0)
+		{
+			for (i = o, opt = 0; i < cluster_end; i++)
+			{
+				if (island[i].y > 0 && working[island[i].y - 1][island[i].x] == 'o')
+					opt++;
+				if (island[i].y < y_size - 1 && working[island[i].y + 1][island[i].x] == 'o')
+					opt++;
+				if (island[i].x > 0 && working[island[i].y][island[i].x - 1] == 'o')
+					opt++;
+				if (island[i].x < x_size - 1 && working[island[i].y][island[i].x + 1] == 'o')
+					opt++;
+			}
+			if (opt < 1)
+				break;
+			d = rnd(0, opt - 1);
+			for (i = o; i < cluster_end; i++)
+			{
+				if (island[i].y > 0 && working[island[i].y - 1][island[i].x] == 'o')
+					if (!d--)
+					{
+						id = ids[island[i].y - 1][island[i].x];
+						break;
+					}
+				if (island[i].y < y_size - 1 && working[island[i].y + 1][island[i].x] == 'o')
+					if (!d--)
+					{
+						id = ids[island[i].y + 1][island[i].x];
+						break;
+					}
+				if (island[i].x > 0 && working[island[i].y][island[i].x - 1] == 'o')
+					if (!d--)
+					{
+						id = ids[island[i].y][island[i].x - 1];
+						break;
+					}
+				if (island[i].x < x_size - 1 && working[island[i].y][island[i].x + 1] == 'o')
+					if (!d--)
+					{
+						id = ids[island[i].y][island[i].x + 1];
+						break;
+					}
+			}
+			o--;
+			size--;
+			temp = island[id].x;
+			island[id].x = island[o].x;
+			island[o].x = temp;
+			temp = island[id].y;
+			island[id].y = island[o].y;
+			island[o].y = temp;
+			map[island[o].y][island[o].x] = terrains[terr].symbol;
+			working[island[o].y][island[o].x] = terrains[terr].symbol;
+			ids[island[o].y][island[o].x] = o;
+			ids[island[id].y][island[id].x] = id;
+		}
 	}
 
 	save_seed();
