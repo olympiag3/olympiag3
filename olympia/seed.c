@@ -439,6 +439,9 @@ seed_city_trade(int where)
 		if (rnd(1,2) == 1)
 			add_city_trade(where, CONSUME, item_gate_crystal, 2, 1000, 0);
 
+		if (rnd(1,2) == 1)
+			add_city_trade(where, PRODUCE, item_pegasus, 1, 1000, 0);
+
 		loc_trade_sup(where, TRUE);
 		return;
 	}
