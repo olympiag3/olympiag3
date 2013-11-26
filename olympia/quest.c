@@ -159,16 +159,16 @@ make_teach_book(int who, int questor)
 		if (!q)
 			continue;
 
-		for (i = 0; i < ilist_len(q->research); i++)
-		{
-			if (has_skill(questor, q->research[i]))
-				continue;
+		if (has_skill(questor, sk))
+			for (i = 0; i < ilist_len(q->research); i++)
+			{
+				if (has_skill(questor, q->research[i]))
+					continue;
 
-			if (has_skill(questor, sk))
 				ilist_append(&candidate, q->research[i]);
-			else
-				ilist_append(&candidate2, q->research[i]);
-		}
+			}
+		else if (sk != sk_adv_sorcery)
+			ilist_append(&candidate2, sk);
 	}
 	next_skill;
 
