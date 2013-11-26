@@ -1189,6 +1189,7 @@ extern int garr_pl;			/* garrison player */
 extern int combat_pl;			/* combat log */
 extern int garrison_magic;
 extern int show_to_garrison;
+extern int mount_olympus;
 
 #define	in_faery(n)		(region(n) == faery_region)
 #define	in_hades(n)		(region(n) == hades_region)
@@ -1266,7 +1267,4 @@ extern void style(int n);
 #define		RELIC_THRONE		401
 #define		RELIC_CROWN		402
 #define		RELIC_BTA_SKULL		403
-
-
-#define		MAP_MT_OLY		15350
 

@@ -2630,6 +2630,10 @@ load_system()
 		{
 			combat_pl = atoi(&s[3]);
 		}
+		else if (strncmp(s, "mo=", 3) == 0)
+		{
+			mount_olympus = atoi(&s[3]);
+		}
 		else
 			fprintf(stderr, "load_system: unrecognized "
 							"line: %s\n", s);
@@ -2686,6 +2690,8 @@ save_system()
 	fprintf(fp, "np=%d\n", npc_pl);
 	fprintf(fp, "cr=%d\n", cloud_region);
 	fprintf(fp, "cp=%d\n", combat_pl);
+	if (mount_olympus > 0)
+		fprintf(fp, "mo=%d\n", mount_olympus);
 
 	fclose(fp);
 }

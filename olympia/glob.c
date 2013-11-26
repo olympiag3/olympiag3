@@ -32,6 +32,7 @@ int combat_pl = 0;		/* Combat log */
 int show_day = FALSE;
 int post_has_been_run = FALSE;
 int garrison_magic = 999;
+int mount_olympus = 0;
 
 
 int v_look(struct command *c), v_stack(struct command *c),

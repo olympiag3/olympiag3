@@ -225,20 +225,19 @@ create_cloudlands()
 
 	{
 		int i;
-		int olympus = 0;
 		struct entity_loc *p;
 
 		loop_mountain(i)
 		{
 			if (strcmp(name(i), "Mt. Olympus") == 0)
 			{
-				olympus = i;
+				mount_olympus = i;
 				break;
 			}
 		}
 		next_mountain;
 
-		if (olympus == 0)
+		if (mount_olympus == 0)
 		{
 			fprintf(stderr,
 				"ERROR: Can't find mountain 'Mt. Olympus'\n");
@@ -248,9 +247,9 @@ create_cloudlands()
 		p = p_loc(map[2][1]);
 		while (ilist_len(p->prov_dest) < DIR_DOWN)
 			ilist_append(&p->prov_dest, 0);
-		p->prov_dest[DIR_DOWN-1] = olympus;
+		p->prov_dest[DIR_DOWN-1] = mount_olympus;
 
-		p = p_loc(olympus);
+		p = p_loc(mount_olympus);
 		while (ilist_len(p->prov_dest) < DIR_UP)
 			ilist_append(&p->prov_dest, 0);
 		p->prov_dest[DIR_UP-1] = map[2][1];

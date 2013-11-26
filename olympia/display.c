@@ -392,7 +392,7 @@ emperor()
 	if (subkind(where) != sub_castle)
 		return 0;
 
-	if (province(where) != MAP_MT_OLY)	/* Mt. Olympus */
+	if (province(where) != mount_olympus)	/* Mt. Olympus */
 		return 0;
 
 	return who;
