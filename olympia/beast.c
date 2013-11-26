@@ -108,6 +108,7 @@ breed_time(int item)
 
 	switch (item)
 	{
+	case item_centaur:	return 14;
 	case item_nazgul:	return 14;
 	case item_harpie:	return 14;
 	case item_lion:		return 14;
