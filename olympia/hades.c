@@ -220,6 +220,7 @@ combat combatpassword
 			set_name(city, "Necropolis");
 			set_known(hades_player, city);
 			bx[n]->temp = 1;
+			bx[n]->x_loc->hidden = rnd(0, 1);
 			space--;
 			
 			seed_city(city);
@@ -239,6 +240,9 @@ combat combatpassword
 	{
 		r = rnd(1, sz) - 1;
 		c = rnd(1, sz) - 1;
+
+		if (!bx[map[r][c]]->x_loc->hidden && !bx[graveyards[i]]->x_loc->hidden)
+			continue;
 
 		if (bx[map[r][c]]->temp)
 			continue;
