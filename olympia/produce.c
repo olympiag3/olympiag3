@@ -336,7 +336,7 @@ harv_tbl[] = {
     },
     {
 	item_corpse, 0, 0,
-	0,
+	sk_raise_corpses,
 	0,
 	0,
 	"raised",
