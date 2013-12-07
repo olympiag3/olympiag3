@@ -1826,6 +1826,7 @@ v_research(struct command *c)
 		wout(c->who, "Research by 6th black circle level mages "
 		"and above must be done in provinces with a civilization "
 		"level of 1 or less.");
+		return FALSE;
 	}
 
 	if (research_notknown(c->who, sk) == 0)
