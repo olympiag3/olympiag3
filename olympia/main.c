@@ -468,6 +468,7 @@ void setup_html_dir(int pl)
 	fclose(fp);
 }
 
+void
 set_html_pass(pl)
 int pl;
 {
