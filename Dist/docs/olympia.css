@@ -1,0 +1,16 @@
+li > .details
+{
+	display: none;
+}
+
+li:target > .details
+{
+	display: block;
+}
+
+.details > pre b
+{
+	font-family: "Times New Roman";
+	font-size: medium;
+}
+

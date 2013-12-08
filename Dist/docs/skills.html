@@ -1,0 +1,4426 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+"http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
+<HTML lang=en xml:lang="en" 
+xmlns="http://www.w3.org/1999/xhtml"><HEAD><TITLE>Skills</TITLE>
+<head>
+<title>Olympia Skills</title>
+<META content="text/html; charset=utf-8" http-equiv=Content-Type>
+<LINK rel=stylesheet type=text/css href="olympia.css">
+</head>
+<BODY>
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script type="text/javascript">
+function toggleVisibility()
+{
+	$(this).parent().find("> div.details").toggle("fast");
+	$(this).parent().find("> ul").toggle("fast");
+	return false;
+}
+
+$(document).ready(function()
+{
+	$("li > a").click(toggleVisibility);
+	$("li > ul").hide();
+	$(window.location.hash).parent().parent().find("> div.details").show();
+	$(window.location.hash).parent().parent().find("> ul").show();
+});
+</script>
+<H1 class=book-heading>Skills</H1>
+<ul>
+
+<li id="s600">
+<a href="#s600">Shipcraft [600]</a>
+<div class="details">
+<PRE>Shipcraft [600]  three weeks
+-----------------------------
+All skills concerning ocean travel fall under this category.
+Shipcraft encompasses the building and repair of ships,
+training of sailors, and navigation at sea.
+
+The following skills may be studied directly once Shipcraft is known:
+
+   num    skill                              time to learn
+   ---    -----                              -------------
+   601    Sailing                            two weeks
+   602    Shipbuilding                       two weeks
+   603    Fishing                            two weeks
+
+</PRE>
+</div>
+<ul>
+
+<li id="s601">
+<a href="#s601">Sailing [601]</a>
+<div class="details">
+<PRE>Sailing [601] two weeks
+-----------------------
+Usage:  USE 601 &lt;direction or location&gt;
+Or:     SAIL &lt;direction or location&gt;
+
+Requires:  character must be ship's captain
+Time:      varies with route taken
+
+Pilot a ship in the given direction, or to the specified
+location.  If a location is specified, there must be a direct
+route to it from the current location of the ship.
+
+Compass points may be abbreviated:  N, S, E, W.
+
+The character issuing the Pilot ship order must occupy the
+first position inside the ship (the character must be the
+captain of the ship).
+
+The captain must have a crew to assist in the handling of the
+ship.  Galleys require fourteen sailors as oarsmen to row the ship.
+Roundships require at least eight sailors to man the ship's rigging.
+
+        ship            crew
+        ----            ----
+        galley          14 sailors
+        roundship       8 sailors
+
+If the required number of crew are not available, travel is still
+possible, but will take an extra day for each hand the crew is short.
+
+For example, a galley with only 10 men at the oars will take four
+extra days to travel across an ocean route.  A roundship with no
+sailors at all would take eight extra days to traverse a route.
+
+Galleys perform equally well regardless of wind conditions.
+Roundships may be becalmed and unable to travel.  In the presence
+of favorable wind they will travel across ocean routes in half
+the rated time.
+
+Overloaded ships do not sail well.  They may take longer than
+expected to travel across routes, and are almost certain to
+capsize and sink in a storm.  Captains should be careful not
+to leave port in a vessel carrying too much cargo.
+
+For convenience, one may use the SAIL order rather than "USE 601".
+Knowledge of Pilot ship [601] is still required, however.
+
+</PRE>
+</div>
+</li>
+
+<li id="s602">
+<a href="#s602">Shipbuilding [602]</a>
+<div class="details">
+<PRE>Shipbuilding [602] two weeks
+---------------------------
+Usage:     BUILD galley "Name of ship"
+or         BUILD roundship "Name of ship"
+
+Requires:  at least three workers [11]
+	   50 wood [77] for a galley, 100 wood for a roundship
+
+Time:      250 worker-days for a galley, 500 for a roundship
+
+To begin construction of a ship, the shipbuilder should unstack from
+beneath other characters and issue one of the BUILD orders.  One-fifth
+of the lumber is required to start construction.  The rest is deducted
+as progress on the ship is made (the second fifth at 20% completion,
+the third fifth at 40% completion, etc.)
+
+The shipbuilder and his workers will be placed inside the new ship.
+
+As soon as the required number of worker-days has been invested in
+construction, the ship will be christened and declared seaworthy.
+
+To resume construction of a partially completed ship, first enter the
+ship, then issue the either "build galley" or "build roundship".
+
+Ships may only be built in a port city.
+
+</PRE>
+</div>
+</li>
+
+<li id="s603">
+<a href="#s603">Fishing [603]</a>
+<div class="details">
+<PRE>Fishing [603] two weeks
+-----------------------
+Usage:     FISH [number of fish] [days]
+Requires:  at least one sailor
+
+Unit must be on a ship on the ocean in order to fish.  Each day
+spent fishing there is a 50% chance that the ship will come across
+a school of fish.  If fish are found, each sailor will produce one
+fish that day.  Provinces generate 50 fish per month which may be
+obtained by fishing.
+
+Examples:
+
+    fish         # obtain as many fish as possible
+    fish 25      # stop after getting 25 fish
+    fish 0 5     # fish for five days
+    fish 25 5    # stop after five days, or 25 fish, whichever
+                 # comes first
+
+In all cases, fishing will cease as soon as the stocks in the ocean
+province have been exhausted.
+
+</PRE>
+</div>
+</li>
+
+</ul>
+
+</li>
+
+<li id="s610">
+<a href="#s610">Combat [610]</a>
+<div class="details">
+<PRE>Combat [610] three weeks
+-----------------------------
+The student of combat learns the training of soldiers and how
+to lead them well in battle.  With study and experience, the
+battle lord will find strategies to be used in difficult combat
+situations.
+
+The following skills may be studied directly once Combat is known:
+
+   num    skill                              time to learn
+   ---    -----                              -------------
+   611    Survive fatal wound                four weeks
+   612    Fight to the death                 four weeks
+   613    Construct catapult                 two weeks
+   614    Defense                            two weeks
+   615    Archery                            three weeks
+   616    Swordplay                          two weeks
+   617    Weaponsmithing                     two weeks
+</PRE>
+</div>
+<ul>
+
+<li id="s611">
+<a href="#s611">Survive Fatal Wound [611]</a>
+<div class="details">
+<PRE>Survive fatal wound [611] four weeks
+-----------------------------------
+Usage:   implicit
+
+Knowledge of 611 confers the ability for a noble to survive
+a wound which would be normally be fatal.  If the noble's
+health reaches zero, either through combat or by other harm,
+instead of dying the noble will be restored to full health.
+
+Once the skill has been used, it is forgotten.  To survive
+a second fatal would, the noble would have to study 
+four weeks to learn 611 again.
+
+</PRE>
+</div>
+</li>
+
+<li id="s612">
+<a href="#s612">Fight to the death [612]</a>
+<div class="details">
+<PRE>Fight to the death [612] four weeks
+-----------------------------------
+Usage:   USE 612 &lt;0|1&gt;
+Time:    0 days
+
+Normally a side will break when its offensive plus defensive total
+falls by 50% or more.  Knowledge of 612 allows a leader to override
+this default break point and set it to 100% instead.
+
+    Break at 50% losses:   USE 612 1  (default)
+    Fight to the death:    USE 612 0
+
+During combat, only the stack leader's setting for 612 is checked.
+612 works both for attacking and defending stacks.
+
+Note that prisoners may still be taken from a side fighting to the
+death, as wounded nobles may be too weak to resist being taken
+captive.
+
+</PRE>
+</div>
+</li>
+
+<li id="s613">
+<a href="#s613">Construct catapult [613]</a>
+<div class="details">
+<PRE>Construct catapult [613]  two weeks
+----------------------------------
+Usage:  USE 613
+
+Requires:  three wood [77]
+           three workers [11]
+
+Produces:  one catapult [61]
+
+Time:      fourteen days
+
+The engineer directs the construction of a wheeled wooden frame
+containing a mechanism to supply stress to the end of a long
+wooden pole.  The pole contains a basket which may be loaded
+with stones or other missiles to be hurled against the enemy's
+walls, or over them.  A winch to lower the pole and a release
+mechanism finish the siege engine.
+
+Catapults are sometimes loaded with the bodies of the enemy's
+dead and hurled over their walls, to dishearten the besieged and
+spread disease amongst them.
+</PRE>
+</div>
+</li>
+
+<li id="s614">
+<a href="#s614">Defense [614]</a>
+<div class="details">
+<PRE>Defense [614] two weeks
+------------------------
+Usage:  USE 614
+
+Time:   seven days
+
+The noble will spend time and effort practicing skills and
+techniques of personal and combat defense.  Each use of 614
+raises the noble's defense rating by 3-5 points if his starting
+level is less than 100, and 1-3 points thereafter.  5% of the
+time the noble will have an exceptionally good study period and
+will gain 10 points.
+</PRE>
+</div>
+</li>
+
+<li id="s615">
+<a href="#s615">Archery [615]</a>
+<div class="details">
+<PRE>Archery [615] three weeks
+------------------------
+Usage:  USE 615
+Time:   seven days
+
+Learning 615 gives the noble a +50 missile attack rating.
+
+Each seven-day use raises the noble's missile rating by
+3-5 points if his starting level is less than 100, and 1-3
+points thereafter.  5% of the time the noble will have an
+exceptionally good study period and will gain 10 points.
+
+Knowledge of Archery also allows the noble to train archers and
+elite archers, via the TRAIN order.
+</PRE>
+</div>
+</li>
+
+<li id="s616">
+<a href="#s616">Swordplay [616]</a>
+<div class="details">
+<PRE>Swordplay [616] two weeks
+-------------------------
+Usage:  USE 616
+Time:   seven days
+
+Use of 616 will cause the noble to spend time and effort practicing
+swordplay, for use in personal combat.  Each seven-day use of 616
+raises the noble's attack rating by 3-5 points if his starting
+level is less than 100, and 1-3 points thereafter.  5% of the time
+the noble will have an exceptionally good study period and will
+gain 10 points.
+
+Knowledge of Swordplay also allows the noble to train swordsmen,
+knights, elite guards, and pirates, via the TRAIN order.
+
+</PRE>
+</div>
+</li>
+
+<li id="s617">
+<a href="#s617">Weaponsmithing [617]</a>
+<div class="details">
+<PRE>Weaponsmithing 
+[617]  two weeks
+-------------------------------
+Usage:  MAKE  &lt;ITEM&gt; &lt;DAYS&gt;
+Time:   as given
+
+Weapons and armor are required for the training of some kinds of
+fighters.  Archers require longbows, for instance, elite guard
+require plate armor, etc.
+
+Weapons and armor are made with the MAKE command.  The following
+weapons and armor may be produced:
+
+    num   item           material
+    ---   ----           --------
+     72   longbow        yew [68]
+     73   plate armor    iron [79]
+     74   longsword      iron [79]
+     75   pike           wood [77]
+     85   crossbow       wood [77]
+
+One unit of the input material may turned into one of the desired
+items each day.  For example, MAKE 72 2 would spend two days turning
+two yew [68] into two longbows [72].
+
+See the MAKE command for further information.
+
+</PRE>
+</div>
+</li>
+
+</ul>
+
+</li>
+
+<li id="s630">
+<a href="#s630">Stealth [630]</a>
+<div class="details">
+<PRE>Stealth [630]     four weeks
+-----------------------------
+Stealth includes the arts of theft, spying, assassination,
+kidnapping, and other covert activities.  Most stealth
+skills will not make use of soldiers or other followers,
+instead relying on the sneakiness of a lone character.
+
+The following skills may be studied directly once Stealth is known:
+
+   num    skill                              time to learn
+   ---    -----                              -------------
+   631    Petty thievery                     two weeks
+   632    Determine inventory of character   two weeks
+   633    Determine skills of character      two weeks
+   634    Determine character's lord         two weeks
+   635    Conceal faction                    four weeks
+
+Further skills may be found through research.
+
+   636    Learn of richest nearby noble      two weeks
+   637    Torture prisoner                   three weeks
+   639    Sneak into structure               three weeks
+   641    Conceal self                       four weeks
+
+</PRE>
+</div>
+<ul>
+
+<li id="s631">
+<a href="#s631">Petty thievery [631]</a>
+<div class="details">
+<PRE>Petty thievery [631] two weeks
+------------------------------
+Usage:  USE 631
+Time:   seven days
+
+The skill of the common burglar, 631 allows a thief to work a
+city for gold.  The thief may pick pockets, steal from merchants
+in the market, enter homes in search of loot, or deceive townsfolk
+into parting with their gold with confidence games.
+
+631 may only be used in a city, where there are many opportunities
+for the petty thief.  Since reports of thievery tend to make the
+city residents tense and alert, 631 may only be used once per month
+in each city.
+
+A thief will earn between 50 and 150 gold for each successful use of
+631.  There is a 5% chance that instead of obtaining gold, the thief
+will be caught and beaten, and receive a 5-15 point health loss.
+
+The amount of gold the thief obtains from the city is deducted from
+the city's tax base for the month.
+
+Cities which have recently been pillaged offer no opportunities for
+petty thievery, as the residents have already been stripped of their
+valuables, and are wary of strangers.
+
+</PRE>
+</div>
+</li>
+
+<li id="s632">
+<a href="#s632">Determine inventory of character [632]</a>
+<div class="details">
+<PRE>Determine inventory of character [632] two weeks
+------------------------------------------------
+Usage:  USE 632 &lt;character&gt;
+Time:   seven days
+
+Sneakily learn the contents of the specified character's inventory.
+The spy must be in the same location as the target.
+
+</PRE>
+</div>
+</li>
+
+<li id="s633">
+<a href="#s633">Determine skills of character [633]</a>
+<div class="details">
+<PRE>Determine skills of character [633] two weeks
+---------------------------------------------
+Usage:  USE 633 &lt;character&gt;
+Time:   seven days
+
+Sneakily learn what skills the specified character possesses by
+crafty observation and spying.
+
+The spy must be in the same location as the target.
+
+</PRE>
+</div>
+</li>
+
+<li id="s634">
+<a href="#s634">Determine character's lord [634]</a>
+<div class="details">
+<PRE>Determine character's lord [634] two weeks
+----------------------------------------------
+Usage:  USE 634 &lt;character&gt;
+Time:   seven days
+
+Reveals what player the specified character is sworn to, unless
+the target character is concealing its identity.  The spy must be
+in the same location as the target.
+
+</PRE>
+</div>
+</li>
+
+<li id="s635">
+<a href="#s635">Conceal faction [635]</a>
+<div class="details">
+<PRE>Conceal faction [635] four weeks
+-------------------------------
+Usage:  automatic when necessary
+
+Knowledge of 635 causes a character to keep its faction affiliation
+secret.  Other units attempting to learn the what player the unit
+belongs with the skill Determine character's lord [9521] will fail.
+
+Permissions set for the player of a character concealing its faction
+affiliation will not include the character.  For example, suppose
+unit [5499] is concealing the fact that it belongs to player [613].
+Permissions declared for player [613] (such as ADMIT, DEFEND, etc.)
+will not include the sneaky unit [5499], since [5499] will not admit
+to an affiliation with [613].
+
+Furthermore, such units will not DEFEND units from their own faction
+by default, since this might reveal their identity.
+
+</PRE>
+</div>
+</li>
+
+<li id="s636">
+<a href="#s636">Learn of richest nearby noble [636]</a>
+<div class="details">
+<PRE>Learn of richest nearby noble [636] two weeks
+---------------------------------------------
+Usage:  USE 636
+Time:   seven days
+
+Must be used in an inn.  The character will chat with the local
+patrons of the inn, inquiring as to the recent comings and goings
+of other nearby characters, paying special attention to clues
+which would indicate the presence of wealthy units.
+
+Use of 636 will reveal the identity of the richest noble within
+three provinces of the inn.  Any character with less than 500
+gold is not considered wealthy, and is ignored by 636.
+
+</PRE>
+</div>
+</li>
+
+<li id="s637">
+<a href="#s637">Torture prisoner [637]</a>
+<div class="details">
+<PRE>Torture prisoner [637] three weeks
+---------------------------------
+Usage:  TORTURE &lt;prisoner&gt;
+Time:   seven days
+
+Torture is the practice of inflicting pain on a captive prisoner in
+order to extract information against the victim's will.
+
+Torture will attempt to learn what faction the prisoner belongs to.
+Each torture attempt inflicts a 50 point health loss on the prisoner.
+
+The chance of success depends on the prisoner's loyalty:
+
+	loyalty		chance
+	-------		------
+	oath-2		  0%
+	oath-1		 10%
+	contract	 50%
+	fear		100%
+
+</PRE>
+</div>
+</li>
+
+<li id="s639">
+<a href="#s639">Sneak into structure [639]</a>
+<div class="details">
+<PRE>Sneak into structure [639] three weeks
+-------------------------------------
+Usage:  SNEAK &lt;building or ship&gt;
+Time:   three days
+
+The character will sneak into the specified building or ship.
+Once inside, other occupants of the structure will see the
+character in their location reports, unless the unit employs
+additional methods of concealment.  Occupants will not see the
+character enter, however.
+
+To exit the structure by the same means, use SNEAK with no
+arguments.
+
+The unit must be alone in order to sneak into and out of buildings
+or ships.  It may not be stacked with any other characters, or
+possess any followers, such as peasants, soldiers, workers, etc.
+
+</PRE>
+</div>
+</li>
+
+<li id="s641">
+<a href="#s641">Conceal Self [641]</a>
+<div class="details">
+<PRE>Conceal self [641] four weeks
+-----------------------------
+Usage:  USE 641 &gt;flag&lt;
+Time:   three days
+
+This skill allows a character to conceal itself from view.
+When activiated, other characters will not see the unit in their
+location reports, and will not see the unit come and go.
+
+The unit must be alone in order to conceal itself.  It may not be
+stacked with any other characters, or possess any followers, such
+as peasants, soldiers, workers, etc.  It may also not be the first
+character inside a sublocation, building or ship.  The owners of
+these small locations are always visible.
+
+Hiding takes three days to accomplish.  However, turning off
+concealment takes zero time.
+
+Use of the skill will set whether or not the unit is trying to
+hide from view:
+
+	use 641 1	# Hide from view, takes three days
+	use 641 0	# Don't conceal self from view, zero days
+
+Note that attempts to gain entrance to buildings or ships with
+the MOVE order will subject to the unit to the ADMIT system.
+A failure to gain entrance with MOVE will give the unit away to
+the structure's owner.
+
+</PRE>
+</div>
+</li>
+
+</ul>
+
+</li>
+
+<li id="s650">
+<a href="#s650">Beastmastery [650]</a>
+<div class="details">
+<PRE>Beastmastery [650] four weeks 1 NP
+----------------------------------
+Beastmastery spans the capture, training and breeding of
+all manner of animals, both wild and domestic.  Common
+Beastmastery skills are used to capture and train horses
+for travel or combat.  Higher level skills within this
+category concern the care and use of stranger beasts.
+
+The following skills may be studied directly once Beastmastery is known:
+
+   num    skill                              time to learn
+   ---    -----                              -------------
+   651    Bird spy                           three weeks
+   652    Capture beasts in battle           four weeks
+   653    Use beasts in battle               four weeks
+   654    Breed beasts                       four weeks
+   655    Catch wild horses                  two weeks
+   656    Train wild horse to riding horse   two weeks
+
+Further skills may be found through research.
+
+   657    Train wild horse to warmount       three weeks
+   658    Summon wild men                    three weeks
+   659    Persuade wild men to remain        three weeks
+   661    Breed hound                        three weeks
+
+</PRE>
+</div>
+<ul>
+
+<li id="s651">
+<a href="#s651">Bird spy [651]</a>
+<div class="details">
+<PRE>Bird spy [651] three weeks
+--------------------------
+Usage:  USE 651 &lt;DIRECTION&gt; or &lt;destination&gt;
+Time:   three days
+
+The beastmaster employs the use of a bird to fly into an nearby
+location and return with a report.  A direction may be given, as
+with the MOVE order, or a destination may be specified.  The
+destination may be any sublocation in the same province, or
+any neighboring location.
+
+For example, a bird could fly from inside a castle in a province to
+spy on a tower in a city in the same province.  The bird could spy
+on a neighboring province, but not enter sublocations in the
+neighboring province.
+
+</PRE>
+</div>
+</li>
+
+<li id="s652">
+<a href="#s652">Capture beasts in battle [652]</a>
+<div class="details">
+<PRE>Capture beasts in battle [652] four weeks
+-----------------------------------------
+Usage:  automatic when needed
+
+Wild animals will ordinarily fight to the death.  Nobles who enter
+combat with these creatures must either kill them, or be killed
+themselves.
+
+Beastmasters with knowledge of 652, however, can capture rather
+than kill these wild animals.  The skilled beastmaster will lure
+the animal into a trap, or carefully engage it until the beast
+becomes exhausted.  If a group of many beasts is attacked, most
+beasts will die during battle, leaving a few (or sometimes none)
+for the beastmaster to capture.
+
+652 is used automatically whenever the character attacks (or is
+attacked by) one of the following wild beasts:
+
+    nazgul [55]
+    centaur [271]
+    minotaur [272]
+    giant spider [278]
+    rat [279]
+    lion [280]
+    giant bird [281]
+    giant lizard [282]
+    chimera [284]
+    harpie [285]
+    dragon [286]
+    gorgon [288]
+    wolf [289]
+
+To capture wild beasts, the noble should ATTACK them.  A regular
+combat will occur, and the noble's stack may suffer casualties.
+652 does not change the progress of battle, or the outcome if
+the noble loses.
+
+If the noble is victorious, however, instead of the wild beasts
+being destroyed, their unit wrapper will be disbanded, and the
+beast items will be added to the noble's inventory.
+
+The beastmaster need not be the stack leader for 652 to work.
+However, the stack leader will always receive the booty.
+
+For example:  suppose Osswid is stacked over Feasel, and Feasel
+knows 652, but Osswid doesn't.  Beasts will be captured in
+battle, but they will go into Osswid's inventory, not Feasel's.
+
+</PRE>
+</div>
+</li>
+
+<li id="s653">
+<a href="#s653">Use beasts in battle [653]</a>
+<div class="details">
+<PRE>Use beasts in battle [653] four weeks
+-------------------------------------
+Usage:  automatic when needed
+
+This skill grants the beastmaster the ability to control animals
+in battle.  Any wild animals in the possession of the beastmaster
+will be treated as additional fighters.
+
+For example, a character with 10 soldiers [12] and one lion [280]
+who did not know 653 would only use the soldiers in battle.
+However, a beastmaster with knowledge of 653 would also employ
+the lion in combat.
+
+Only the beasts directly possessed by the beastmaster will aid
+combat.  Animals owned by units which do not possess knowledge
+of 653 will not be used in battle.
+
+The following animals may be used in combat:
+
+    nazgul [55]          (80,80,0)
+    centaur [271]        (30,30,0)
+    minotaur [272]       (30,5,0)
+    giant spider [278]   (150,100,0)
+    rat [279]            (3,3,0)
+    lion [280]           (100,100,0)
+    giant bird [281]     (200,150,0)
+    giant lizard [282]   (45,45,0)
+    chimera [284]        (130,130,0)
+    harpie [285]         (80,120,0)
+    dragon [286]         (500,500,250)
+    gorgon [288]         (10,20,0)
+    wolf [289]           (5,5,0)
+    hound [295]          (1,1,0)
+
+</PRE>
+</div>
+</li>
+
+<li id="s654">
+<a href="#s654">Breed beasts [654]</a>
+<div class="details">
+<PRE>Breed beasts [654] four weeks
+-----------------------------
+Usage:  BREED &lt;ITEM&gt; &lt;ITEM&gt;
+Time:   varies
+
+Attempt to breed two animals together to produce an offspring.
+Not all animals produce successful offspring.  Occasionally,
+cross-breeding different beasts will produce strange results.
+
+For example:
+
+	To breed two wild horses together:
+
+		BREED 51 51
+
+	To attempt a cross-breed of a horse and an ox:
+
+		BREED 51 76
+
+Because some animals are often unpredictable and violent, there
+is a 20% chance that one of the breeding parents will be killed
+in the attempt.
+
+The time necessary for the BREED command to function is
+dependent on the type of animal produced:
+ 
+     beast                   days
+     -----                   ----
+     dragon [286]             45
+     giant bird [281]         28
+     giant spider [278]       21
+     chimera [284]            21
+     nazgul [55]              14
+     lion [280]               14
+     harpie [285]             14
+     all other beasts          7
+
+Wild horses [51], riding horses [52] and warmounts [53] may be used
+interchangably with BREED.
+
+
+Possible cross-breeds are:
+
+     Beast 1         Beast 2         Offspring
+     ==============  ==============  ============
+     peasant         ox              minotaur
+     peasant         wild horse      centaur
+     lion            giant lizard    chimera
+     peasant         lion            harpie
+     giant lizard    giant bird      dragon
+     wild horse      giant bird      pegasus
+     peasant         giant lizard    gorgon
+     rat             giant spider    ratspider
+     winged horse    dragon          nazgul
+
+</PRE>
+</div>
+</li>
+
+<li id="s655">
+<a href="#s655">Catch wild horses [655]</a>
+<div class="details">
+<PRE>Catch wild 
+horses [655] two weeks
+---------------------------------
+Usage:  CATCH  [number of horses]  [days]
+Time:   as given or necessary
+
+Attempt to catch any wild horses found roaming the plains or pastures.
+Each day the noble will have a 50% chance of catching a wild horse,
+if any can be found.  Up to five horses may be caught per month in a
+plains province or a pasture.
+
+A unit must know the Catch wild horses [655] subskill of
+Beastmastery [650] in order to catch horses.
+
+Examples:
+
+    catch        # catch as many horses as possible
+    catch 1      # stop after catching 1 wild horse
+    catch 0 10   # try to catch horses for 10 days
+    catch 1 10   # stop after catching 1 wild horse, or 10 days, 
+whichever
+                 # comes first
+
+In all cases, horse-catching ceases when no more horses can be found
+roaming in the location.
+
+</PRE>
+</div>
+</li>
+
+<li id="s656">
+<a href="#s656">Train wild horse to riding horse [656]</a>
+<div class="details">
+<PRE>Train wild horse to riding horse [656] two weeks
+------------------------------------------------
+Usage:     MAKE 52
+
+Requires:  one wild horse [51]
+Produces:  one riding horse [52]
+
+Time:      three days
+
+Wild horses are first broken to saddle, then trained to respect
+and obey whatever riders they may serve.  Once broken, riding
+horses become too timid and docile to be of any use in battle.
+
+</PRE>
+</div>
+</li>
+
+<li id="s657">
+<a href="#s657">Train wild horse to warmount [657]</a>
+<div class="details">
+<PRE>Train wild horse to warmount [657]
+----------------------------------
+Usage:     MAKE 53
+
+Requires:  one wild horse [51]
+Produces:  one warmount [53]
+
+Time:      seven days
+
+Unlike riding horses, war horses must not be broken.  The war horse
+should be trained without destroying any of its spirit.  A warmount
+is also be taught much more than a simple riding animal, as it
+must know how to defend itself and its rider and to remain calm
+in the most frightening situations.
+
+</PRE>
+</div>
+</li>
+
+<li id="s658">
+<a href="#s658">Summon wild men [658]</a>
+<div class="details">
+<PRE>Summon wild men [658] three weeks
+---------------------------------
+Usage:  USE 658
+        MAKE 98 1
+Time:   one day
+
+Wild men, or savages, inhabit remote parts of the world.  Savages
+communicate by beating their drums to indicate calls-to-arms,
+battle challenges, or victory celebrations.
+
+Use of 658 will attempt to summon wild men with drumbeats, and
+persuade them to stack with the noble.  Savages will remain with
+the noble for 3 months, during which time they will participate
+in any battles the noble fights.
+
+To summon wild men, the noble must first use the MAKE 98 1 order
+to produce a drum [98].  A drum requires 1 mallorn wood [70] to
+produce.  MAKE 98 1 requires knowledge of 658.
+
+The drum may be used to summon wild men with the USE 658 order.
+The noble should be in a remote province, preferably surrounded by
+areas uninhabited by other characters.  The noble should allow time
+for the savage men to hear and follow the drumbeats.  Any wild men
+summoned to the province will stack with the noble.
+
+For example:
+
+	make 98 1	# make a drum
+	use 658	        # use the drum to summon the savages
+	wait time 15	# give savages time to arrive and
+			# stack with us
+
+The number of savage units in the world is limited.  If all of the
+available savages have already been summoned, none will come when
+the drum is used.
+
+</PRE>
+</div>
+</li>
+
+<li id="s659">
+<a href="#s659">Persuade wild men to remain [659]</a>
+<div class="details">
+<PRE>Persuade wild men to remain [659] three weeks
+---------------------------------------------
+Usage:  USE 659 &lt;SAVAGE&gt;
+Time:   seven days
+
+Usage of 659 will induce a group of wild men to remain stacked with
+the noble that summoned them.  An application of 659 will add two
+months to the duration the wild men will stay with the noble, to a
+maximum of four months.
+
+The savage unit to be persuaded to remain must be specified as an
+argument to USE 659.
+
+</PRE>
+</div>
+</li>
+
+<li id="s661">
+<a href="#s661">Breed hound [661]</a>
+<div class="details">
+<PRE>Breed hound [661] three weeks
+-----------------------------
+Usage:  USE 661
+Time:   28 days
+
+Breed and train for service one hound [295].
+
+There is a 50% chance that a given hound will bark
+if any stealth characters enter the same location as
+the character containing the hound.  Hounds also have
+a 50% chance of barking once per month (on a random day)
+if any stealth characters are present in the current
+location.
+
+Hounds halve the chance that prisoners will escape from the
+stack, and will bark each time an escape attempt is foiled.
+
+</PRE>
+</div>
+</li>
+
+</ul>
+
+</li>
+
+<li id="s670">
+<a href="#s670">Persuasion [670]</a>
+<div class="details">
+<PRE>Persuasion [670]     four weeks
+------------------------------
+The skill of smooth-tongued oratators, Persuasion involves
+the manipulation of others through eloquent verbal dialog.
+From subverting a noble's loyalty to rousing peasant mobs
+with firey speeches, Persuasion can a powerful tool or
+weapon.
+
+The following skills may be studied directly once Persuasion is known:
+
+   num    skill                              time to learn
+   ---    -----                              -------------
+   671    Bribe noble                        two weeks
+   672    Persuade oathbound noble           three weeks
+   673    Raise peasant mob                  two weeks
+   674    Rally peasant mob                  three weeks
+
+Further skills may be found through research.
+
+   675    Incite mob violence                three weeks
+   676    Train angry peasants               two weeks
+
+</PRE>
+</div>
+<ul>
+
+<li id="s671">
+<a href="#s671">Bribe noble [671]</a>
+<div class="details">
+<PRE>Bribe noble [671] two weeks
+--------------------------- 
+Usage:   BRIBE &lt;TARGET&gt; &lt;GOLD&gt; [flag]
+Time:    seven days
+
+Offer a character gold in an attempt to win their service.  The
+amount must be at least 250 gold, or the receiving noble will not
+consider it a serious offer.
+
+Nobles with oathbound loyalty ignore bribes.  They may accept the
+gift, but they will not renounce loyalty to their lord.
+
+Nobles with contract loyalty will consider the bribe if it meets
+or exceeds their current loyalty rating.  For example, a noble of
+loyalty contract-750 would ignore any bribe of less than 750 gold.
+
+Nobles with fear loyalty, or nobles not sworn to any lord, will
+seriously consider any bribe of at least 250 gold.
+
+If the receiving noble considers the bribe, there is a 33% chance
+they will renounce loyalty to their current lord, and swear fealty
+to the bribing character.  There is also a chance that they will
+report the bribe or pocket it for themselves.  In some cases they
+may even renounce loyalty to their lord, but not swear fealty to
+the briber, instead choosing to go off on their own.
+
+Characters who are successfully bribed will have loyalty contract-250
+to the bribing character.  If flag is 1, and the bribe attempt is
+successful, the bribed character will stack with the briber.
+
+Bribes will be refused by characters who have already switched
+lords during the month because of bribery.  For example, suppose
+Osswid successfully bribes Feasel, and Feasel swears loyalty to
+Osswid.  Later that turn, if Procrustes attempts to bribe Feasel,
+Feasel will refuse to accept the bribe.
+
+The bribing character will lose the number of NPs which have
+been invested in the bribed character if the bribe is successful.
+The previous owner of a bribed noble will have the invested NPs
+returned.
+
+Examples:
+
+    bribe 5499 750	# Offer [5499] 750 gold to switch factions.
+			# If successful, [5499] will not stack with the
+			# briber.
+
+    bribe 3409 300 1	# Offer [3409] 300 gold to switch factions.
+			# If successful, [3409] will stack with the briber.
+</PRE>
+</div>
+</li>
+
+<li id="s672">
+<a href="#s672">Persuade oathbound noble [672]</a>
+<div class="details">
+<PRE>Persuade oathbound noble [672] three weeks
+------------------------------------------
+Usage:   USE 672 &lt;TARGET&gt; [flag]
+Time:    seven days
+
+Attempt to persuade an oathbound noble to defect.  There is
+only a chance of success when used on oath-1 nobles.  Oath-2
+nobles will not leave their lord under any circumstances.
+
+672 costs 25 gold per use, to pay for gifts, fine meals, handsome
+clothing, and other props useful in the persuasion attempt.
+
+Each seven day use yields a 2% chance of success.
+
+If flag is 1, and the persuasion attempt is successful, the target
+character will stack with the persuading character.
+
+In order to assume control over a new noble, the persuader
+must pay the number of NPs which have been invested in the
+desired character.  The previous owner will receive these
+NPs when ownership of the character is lost.
+
+</PRE>
+</div>
+</li>
+
+<li id="s673">
+<a href="#s673">Raise peasant mob [673]</a>
+<div class="details">
+<PRE>Raise peasant mob [673] two weeks
+---------------------------------
+
+Usage:  RAISE
+Time:   seven days
+
+The noble gives an impassioned speech, rousing peasants and causing
+them to gather into a crowd.  New peasant crowds will set their GUARD
+flag to protect their homes from pillaging.
+
+Peasant mobs may be formed in provinces and cities.  Only one crowd
+may be raised per location.  Only when the raised mob is later killed,
+or if the peasants return to their homes, may another mob be raised
+there.
+
+</PRE>
+</div>
+</li>
+
+<li id="s674">
+<a href="#s674">Rally peasant mob [674]</a>
+<div class="details">
+<PRE>Rally peasant mob [674] three weeks
+-----------------------------------
+Usage:  RALLY &lt;MOB&gt;
+Time:   seven days
+
+Deliver a fiery speech to an existing crowd of peasants, causing them
+to stack with the noble.  They will remain with the noble for three
+months.  The mob must be specified as an argument to RALLY.
+
+Use of 674 on a mob already stacked with the noble will renew the
+peasants' enthusiasm, and add an additional three months to the time
+they will remain stacked, to a maximum of five months.
+
+Mobs stacked with the noble may not be given any orders, but will
+participate in any combat the noble encounters.
+
+</PRE>
+</div>
+</li>
+
+<li id="s675">
+<a href="#s675">Incite mob violence [675]</a>
+<div class="details">
+<PRE>Incite mob violence [675] three weeks
+-------------------------------------
+
+Usage:  INCITE &lt;MOB&gt; &lt;TARGET&gt;
+Time:   seven days
+
+Speak out against the target in such as a way as to inspire
+public hatred and ire.  The target will be made to seem a
+malicious influence responsibile for all of the common man's
+troubles.
+
+An existing crowd of peasants must be specified as the first
+argument, and the target of their violence as the second.
+The mob may not already be stacked under another noble who
+has rallied it.
+
+There is a 50% chance that the mob will be roused to attack
+the target.
+
+There is also a 33% chance that patrons in any local inns will
+learn that the noble is trying to incite a mob to violence
+against the target.
+
+</PRE>
+</div>
+</li>
+
+<li id="s676">
+<a href="#s676">Train angry peasants [676]</a>
+<div class="details">
+<PRE>Train angry peasants [676] two weeks
+------------------------------------
+
+Usage:  TRAIN 23 [days]
+        TRAIN 10 [days]
+Time:   as given
+
+The noble employs persuasive means to rouse mild-tempered peasants
+into a state of anger.  Angry peasants fight with twice the attack
+value of regular peasants.  However, in their excited state they
+are untrainable to any other kind of man.
+
+Examples:
+
+	train 23	# train all peasants to angry peasants
+	train 23 5	# train five peasants into angry peasants
+	train 10	# calm all angry peasants back into peasants
+
+Angry peasants require a monthly maintenance cost of 2 gold each.
+
+</PRE>
+</div>
+</li>
+
+</ul>
+
+</li>
+
+<li id="s680">
+<a href="#s680">Construction [680]</a>
+<div class="details">
+<PRE>Construction [680] three weeks
+-----------------------------
+The domain of engineers, builders and architects, Construction
+concerns the erection of inns, castles, city walls, and other
+fortifications.
+
+The following skills may be studied directly once Construction is known:
+
+   num    skill                              time to learn
+   ---    -----                              -------------
+   681    Construct siege tower              two weeks
+   682    Stone quarrying                    two weeks
+
+</PRE>
+</div>
+<ul>
+
+<li id="s681">
+<a href="#s681">Construct siege tower [681]</a>
+<div class="details">
+<PRE>Construct siege tower [681]
+---------------------------
+Usage:  USE 681
+
+Requires:  three wood [77]
+           three leather [80]
+           three workers [11]
+
+Produces:  one seige tower [62]
+
+Time:      fourteen days
+
+The engineer directs three workers to build a wooden tower,
+covered with treated leather skins or iron plating to protect
+the tower from burning.  The tower contains several ladders
+and a platform from which soldiers may attack.
+
+In battle, the tower is wheeled up against an enemy's walls
+and used by attacking soldiers to match the height of the
+defenders.  The attackers may then climb from the tower onto
+the walls.
+
+</PRE>
+</div>
+</li>
+
+<li id="s682">
+<a href="#s682">Stone quarrying [682]</a>
+<div class="details">
+<PRE>Stone quarrying [682] two weeks
+--------------------------------
+Usage:     QUARRY [number of stones] [days]
+Requires:  at least one worker
+
+Building stone is used in the construction of temples, castles and
+towers.  Up to 50 stone may be removed from mountain provinces or
+rocky hills each month, or up to ten stone from desert provinces.
+
+Each worker will cut and prepare one building stone [78] per day.
+
+Examples:
+
+    quarry         # cut as much building stone as possible
+    quarry 25      # stop after cutting 25 stone
+    quarry 0 5     # quarry stone for five days
+    quarry 25 5    # stop after five days, or 25 stone, whichever
+                   # comes first
+
+In all cases, quarrying will cease as soon as the supply of ready stone
+in the province has been exhausted.
+
+</PRE>
+</div>
+</li>
+
+</ul>
+
+</li>
+
+<li id="s690">
+<a href="#s690">Alchemy [690]</a>
+<div class="details">
+<PRE>Alchemy [690]     four weeks
+---------------------------
+Called petty magician, druggist, and sometimes fool, the
+alchemist seeks to brew useful potions from elements and
+rare extracts.  A method to transmute matter into gold is
+eagerly sought, but remains unknown.
+
+The following skills may be studied directly once Alchemy is known:
+
+   num    skill                              time to learn
+   ---    -----                              -------------
+   691    Extract venom from ratspider       three weeks
+   692    Make potion of slavery             three weeks
+   693    Brew healing potion                three weeks
+
+Further skills may be found through research.
+
+   694    Brew potion of death               three weeks
+   695    Record skill on scroll             three weeks
+   696    Collect rare elements              two weeks
+   697    Turn lead into gold                four weeks
+
+</PRE>
+</div>
+<ul>
+
+<li id="s691">
+<a href="#s691">Extract venom from ratspider [691]</a>
+<div class="details">
+<PRE>Extract venom from ratspider [691] three weeks
+----------------------------------------------
+Usage:  USE 691
+
+Required:  one ratspider [81]
+Produces:  one ratspider venom [63]
+Time:      seven days
+
+The alchemist performs a delicate operation to extract the
+highly poisonous ratspider venom.
+
+The top of the ratspider's head is removed by inserting a sharp
+knife above the head joint and twisting.  Two glands, from which
+the ratspider venom is later extracted, are removed from behind
+the mandible.
+
+Risk is minimized by taking extreme care when handling the
+ratspider.  The ratspider is killed in the process. 
+
+</PRE>
+</div>
+</li>
+
+<li id="s692">
+<a href="#s692">Make potion of slavery [692]</a>
+<div class="details">
+<PRE>Make potion of slavery [692]  three weeks
+-----------------------------------------
+Usage:  USE 692
+
+Required:  one ratspider venom [63]
+Time:      seven days
+
+The alchemist brews a potion which, when ingested by a character,
+causes that character to become a servant of the alchemist.
+The unfortunate noble will swear fealty to the alchemist and
+promise to do his bidding.
+
+Use of the potion is dangerous:  there is a 33% chance that
+the noble who drinks it will die.
+
+The rare and highly poisonous ratspider venom is used in the
+preparation of this potion.  Upon completion, the new potion
+will be added to the alchemist's inventory.  The potion will,
+of course, be unlabeled.
+
+A character wishing to drink the potion should specify it
+to the USE order.  For instance, to drink potion [601], issue
+the order:  USE 601.
+
+The creator of a potion must have the necessary NPs to assume
+control of the character who drinks the slavery potion.  The
+previous owner of the unfortunate character will have their NPs
+returned.
+
+</PRE>
+</div>
+</li>
+
+<li id="s693">
+<a href="#s693">Brew healing potion [693]</a>
+<div class="details">
+<PRE>Brew healing 
+potion [693]  three weeks
+--------------------------------------
+Usage:  USE 693
+
+Required:  avinia leaf [65]
+Time:      seven days
+
+The alchemist brews a potion of healing.  Any character
+ingesting the potion will be cured of any illness and
+begin to recover.  The character may also receive a
+random increase in their health rating.
+
+Upon completion, the potion will be added to the alchemist's
+inventory.  The potion's label will not reveal its purpose.
+
+A character wishing to drink the potion should specify it
+to the USE order.  For instance, to drink potion [602], issue
+the order:  USE 602.
+
+</PRE>
+</div>
+</li>
+
+<li id="s694">
+<a href="#s694">Brew potion of death [694]</a>
+<div class="details">
+<PRE>Brew potion of death [694]
+--------------------------
+Usage:  USE 694
+
+Required:  lana bark [64]
+Time:      ten days
+
+The alchemist brews a potion which will cause instant death
+to any character which drinks it.
+
+Upon completion, the potion will be added to the alchemist's
+inventory.  The potion's label will not reveal its sinister
+purpose.
+
+A character wishing to drink the potion should specify it
+to the USE order.  For instance, to drink potion [603], issue
+the order:  USE 603.
+
+</PRE>
+</div>
+</li>
+
+<li id="s695">
+<a href="#s695">Record skill on scroll [695]</a>
+<div class="details">
+<PRE>Record 
+skill on scroll [695]
+----------------------------
+Usage:  USE 695 &lt;SKILL&gt;
+
+Requires:  blank scroll [84]
+Time:      seven or more days
+
+Record the given skill on a blank scroll.  The blank scroll will be
+consumed, and a new unique scroll will be produced.  The new scroll
+will allow another character to learn the skill.
+
+Example:
+
+    USE 695 nnnn     # make a study scroll for skill nnnn
+
+Magical skills may not be scribed with this skill.
+
+The skill must be known in order to be written.  The character will
+still know the skill after writing it.
+
+This skill requires as much time as the recorded skill takes to learn.
+Writing a skill which requires two weeks of study to learn will take
+two weeks.
+
+</PRE>
+</div>
+</li>
+
+<li id="s696">
+<a href="#s696">Collect rare elements [696]</a>
+<div class="details">
+<PRE>Collect rare elements [696]
+---------------------------
+Usage:  COLLECT &lt;ITEM&gt; [number] [days]
+Time:   as given or necessary
+
+The noble will seek rare elements to collect.  See the COLLECT order
+for details on the syntax of the arguments and an explanation of the
+columns in the following table.
+
+The followings kinds of rare elements may be collected with this skill:
+
+   num  item         who      where          qty  skill  chance
+   ---  ----         ---      -----          ---  -----  ------
+    67  farrenstone  noble    caves            2   9584   100%
+    71  pretus bones noble    sand pits        1   9584   100%
+
+</PRE>
+</div>
+</li>
+
+<li id="s697">
+<a href="#s697">Turn lead into gold [697]</a>
+<div class="details">
+<PRE>Turn lead into gold [697]
+-------------------------
+Usage:     USE 697 [amount]
+Time:      one week
+Requires:  one farrenstone [67]
+
+Using obscure chemical processes, the Alchemist may turn lead
+into gold.  One unit of farrenstone is required as a catalyst
+for the conversion.
+
+Up to 20 units of lead may be converted with each use of 697.
+Amount defaults to 20 or all of the lead in the Alchemist's
+inventory, whichever is less.  Each unit of lead yields 10 gold
+after conversion.
+
+</PRE>
+</div>
+</li>
+
+</ul>
+
+</li>
+
+<li id="s700">
+<a href="#s700">Forestry [700]</a>
+<div class="details">
+<PRE>Forestry [700]   three weeks
+----------------------------
+Forestry is skill at managing forests and harvesting their
+products, such as timber, yew, and rare foliage.
+
+The following skills may be studied directly once Forestry is known:
+
+   num    skill                              time to learn
+   ---    -----                              -------------
+   701    Construct battering ram            two weeks
+   702    Harvest lumber                     two weeks
+   703    Harvest yew                        two weeks
+   704    Collect rare foliage               two weeks
+   705    Harvest mallorn wood               two weeks
+
+Further skills may be found through research.
+
+   706    Harvest opium                      two weeks
+   707    Improve opium production           two weeks
+
+</PRE>
+</div>
+<ul>
+
+<li id="s701">
+<a href="#s701">Construct battering ram [701]</a>
+<div class="details">
+<PRE>Construct battering ram [701] two weeks
+---------------------------------------
+Usage:  USE 701
+
+Requires:  three wood [77]
+           one iron [79]
+           three workers [11]
+
+Produces:  one battering ram [60]
+
+Time:      fourteen days
+
+The craftsman constructs a battering ram by selecting a large,
+heavy tree trunk, sharpening the end somewhat and plating it
+with iron, and then suspending it in a movable wooden frame
+such that it may be swung back and forth against walls or gates.
+
+The frame receives an iron plated roof to protect the operators
+from boiling oil or pitch, rocks, or other missile weapons hurled
+down upon them by the enemy.
+
+</PRE>
+</div>
+</li>
+
+<li id="s702">
+<a href="#s702">Harvest lumber [702]</a>
+<div class="details">
+<PRE>Harvest lumber [702] two weeks
+------------------------------
+Usage:     WOOD [number] [days]
+Time:      as given or necessary
+Requires:  at least one worker [11]
+
+Workers enter the forest and select trees which are suitable for felling
+and sawing.  Lumber is used in the construction of ships, buildings and
+some weapons.  Timber is also used to support the roofs of mine shafts.
+
+Must be used in a forest province.  Forests generate 30 wood [77] each
+month.
+
+Examples:
+
+    wood         # obtain as much wood as possible
+    wood 25      # stop after getting 25 wood
+    wood 0 5     # cut timber for five days
+    wood 25 5    # stop after five days, or 25 wood, whichever
+                 # comes first
+
+In all cases, timber cutting will cease as soon as the forest's supply
+of wood for the month has been exhausted.
+
+WOOD is an alias for COLLECT 77.
+
+</PRE>
+</div>
+</li>
+
+<li id="s703">
+<a href="#s703">Harvest yew [703]</a>
+<div class="details">
+<PRE>Harvest yew [703] two weeks
+---------------------------
+Usage:     YEW [number] [days]
+Times:     as given or necessary
+Requires:  at least one worker [11]
+
+Workers enter a yew grove and select yew trees which are suitable for
+collection.  Yew is used in the making of longbows.
+
+Must be used in a yew grove.  Yew groves generate 5 yew [68] each month.
+
+Examples:
+
+    yew         # obtain as much yew as possible
+    yew 1       # stop after getting 1 yew
+    yew 0 4     # cut yew for four days
+
+In all cases, yew harvesting will cease as soon as the grove's supply
+of yew for the month has been exhausted.
+
+YEW is an alias for COLLECT 68.
+
+</PRE>
+</div>
+</li>
+
+<li id="s704">
+<a href="#s704">Collect rare foliage [704]</a>
+<div class="details">
+<PRE>Collect rare foliage [704] two weeks
+------------------------------------
+Usage:  COLLECT &lt;item&gt; [number] [days]
+Time:   as given or necessary
+
+The noble will seek rare foliage to collect.  See the COLLECT order
+for details on the syntax of the arguments and an explanation of the
+columns in the following table.
+
+The followings kinds of rare foliage may be collected with this skill:
+
+   num  item         who      where            qty  skill  chance
+   ---  ----         ---      -----            ---  -----  ------
+    64  lana bark    noble    circle of trees    3   704     50%
+    65  avinia leaf  noble    mallorn grove      2   704     20%
+    66  spiny root   noble    bogs, pits         4   704     25%
+    66  spiny root   noble    swamps             1   704     25%
+
+</PRE>
+</div>
+</li>
+
+<li id="s705">
+<a href="#s705">Harvest mallorn wood [705]</a>
+<div class="details">
+<PRE>Harvest mallorn wood [705] two weeks
+------------------------------------
+Usage:    MALLORN [number] [days]
+Time:     as given or necessary
+
+Mallorn groves produce two units of mallorn wood [70] which may be
+harvested each month.
+
+Because of the careful selection required, and the small quantity of
+mallorn which becomes ready to cut each month, a noble works at this
+task alone.  No workers are needed for mallorn wood cutting.
+
+Each day spent using MALLORN gives a 20% chance of obtaining one
+unit of mallorn wood [70].
+
+Examples:
+
+    mallorn         # obtain as much mallorn wood as possible
+    mallorn 2       # stop after getting 2 mallorn wood
+    mallorn 0 5     # cut mallorn wood for five days
+    mallorn 2 5     # stop after five days, or 2 mallorn wood, whichever
+                    # comes first
+
+In all cases, mallorn cutting will cease as soon as the groves's supply
+for the month has been exhausted.
+
+MALLORN is an alias for COLLECT 70.
+
+</PRE>
+</div>
+</li>
+
+<li id="s706">
+<a href="#s706">Harvest opium [706]</a>
+<div class="details">
+<PRE>Harvest opium [706] two weeks
+-----------------------------
+Usage:    OPIUM [number] [days]
+Time:     as given or necessary
+
+Poppy fields produce 25 harvestable opium [93] each month.
+A noble using the OPIUM command will collect one unit of opium
+each day.
+
+Examples:
+
+    opium          # obtain as much opium as possible
+    opium 25       # stop after getting 25 opium
+    opium 0 5      # harvest opium for five days
+    opium 25 5     # stop after five days, or 25 opium, whichever
+                   # comes first
+
+In all cases, opium harvesting will cease as soon as the field's supply
+for the month has been exhausted.
+
+OPIUM is an alias for COLLECT 93.
+
+</PRE>
+</div>
+</li>
+
+<li id="s707">
+<a href="#s707">Improve opium production [707]</a>
+<div class="details">
+<PRE>Improve opium production [707] two weeks
+----------------------------------------
+Usage:    USE 707
+Time:     seven days
+
+Use of 707 causes the noble to pay special attention to the
+development of a poppy field.  Through appropriate fertilization
+and agressive weed and pest control, the opium production of the
+poppy field will be doubled in the following month, from 25 to 50
+units of opium.
+
+</PRE>
+</div>
+</li>
+
+</ul>
+
+</li>
+
+<li id="s720">
+<a href="#s720">Mining [720]</a>
+<div class="details">
+<PRE>Mining [720]   three weeks
+--------------------------
+Mining is the skill of sinking deep shafts into mountainous
+provinces for the purpose of extracting valuable elements.
+Mining skills require a mine shaft to be constructed first
+with the BUILD MINE order.
+
+The likelihood of death because of cave-ins or poisonous gases
+seeping into the shafts tends to make mining dangerous work.
+
+The following skills may be studied directly once Mining is known:
+
+   num    skill                              time to learn
+   ---    -----                              -------------
+   721    Mine iron                          two weeks
+   722    Mine gold                          two weeks
+
+Further skills may be found through research.
+
+   723    Mine mithril                       two weeks
+
+</PRE>
+</div>
+<ul>
+
+<li id="s721">
+<a href="#s721">Mine iron [721]</a>
+<div class="details">
+<PRE>Mine iron [721]  two weeks
+--------------------------
+Usage:  USE 721
+
+Requires:  ten workers
+Time:      7 days
+
+Iron is widely used in the making of weapons and armor.  It
+is a required component of many of the weaponsmithing skill
+uses, and is also used for applying a metal tip to galley
+rams and battering rams.  An iron roof provides a protective
+cover for siege towers.
+
+The character must be in a mine shaft to USE 721.  The mine's
+monthly yield of iron will be obtained.  Once mined, no further
+iron can be mined until the next month.
+
+Use of this skill will cause the mine shaft to become one-third
+of a level deeper.
+
+The quantity of iron obtained will vary with the depth of the
+shaft.  The largest deposits of iron are usually found in
+shallow mines.
+
+</PRE>
+</div>
+</li>
+
+<li id="s722">
+<a href="#s722">Mine gold [722]</a>
+<div class="details">
+<PRE>Mine gold [722] two weeks
+-------------------------
+Usage:  USE 722
+
+Requires:  ten workers
+Time:      7 days
+
+Gold is widely accepted as a currency in Olympia.  Its
+scarcity lends gold a high value, but it is not so rare
+that it cannot be used in the everyday exchange of goods.
+It has a high value, but weighs little, and thus is easy to
+carry.  Gold is also readily assayable to guarantee its value.
+
+The character must be in a mine shaft to USE 722.  The mine's
+monthly yield of gold will be obtained.  Once mined, no further
+gold can be mined until the next month.
+
+Use of this skill will cause the mine shaft to become one-third
+of a level deeper.
+
+The quantity of gold obtained will vary with the depth of the
+shaft.
+
+</PRE>
+</div>
+</li>
+
+<li id="s723">
+<a href="#s723">Mine mithril [723]</a>
+<div class="details">
+<PRE>Mine mithril [723] two weeks
+----------------------------
+Usage:  USE 723
+
+Requires:  ten workers
+Time:      7 days
+
+Mithril is a magical metal used in the by the ancient
+elf-lords to construct their bright, fearsome weapons.
+Today mithril is the component of some rare construction
+skills.
+
+The character must be in a mine shaft to USE 723.  The mine's
+monthly yield of mithril will be obtained.  Once mined, no
+further mithril can be mined until the next month.
+
+Use of this skill will cause the mine shaft to become one-third
+of a level deeper.
+
+The quantity of mithril obtained will vary with the depth of the
+shaft.  Mithril is usually found only in very deep mines.  As
+the dangers of poison gasses or collapse of the mine shaft increase
+with depth, mithril mining tends to be risky.
+
+</PRE>
+</div>
+</li>
+
+</ul>
+
+</li>
+
+<li id="s730">
+<a href="#s730">Trade [730]</a>
+<div class="details">
+<PRE>Trade [730]   three weeks
+-------------------------
+Trade provides the skills necessary to discover and
+develop markets in rare tradegoods. 
+
+The following skills may be studied directly once Trade is known:
+
+   num    skill                              time to learn
+   ---    -----                              -------------
+   731    Conceal identity of trader         two weeks
+   732    Find tradegood for sale            two weeks
+   733    Find market for tradegood          two weeks
+
+</PRE>
+</div>
+<ul>
+
+<li id="s731">
+<a href="#s731">Conceal identity of trader [731]</a>
+<div class="details">
+<PRE>Conceal identity of trader [731] two weeks
+------------------------------------------
+Usage:  BUY  &lt;ITEM&gt; &lt;QTY&gt; &lt;PRICE&gt; &lt;HAVE-LEFT&gt; 1
+        SELL &lt;ITEM&gt; &lt;QTY&gt; &lt;PRICE&gt; &lt;HAVE-LEFT&gt; 1
+
+This skill allows a trader to conceal his identity when
+dealing with a market.  By working through middlemen and
+employing shady contacts, the trader will not reveal his
+identity to the other party to his transaction, or to the
+market at large.
+
+To use this skill, the trader should supply a "1" flag as
+the fifth argument to the BUY or SELL command.  Note that
+The first four arguments must be specified; use "0" for
+have-left if it is to be left as the default.
+
+For example, to conceal one's identity when selling 10
+pots for 2 gold each, issue the order:
+
+	sell 95 10 2 0 1
+
+If the conceal trade flag is supplied, but the character
+does not know 731, the BUY or SELL order will fail.
+
+</PRE>
+</div>
+</li>
+
+<li id="s732">
+<a href="#s732">Find tradegood for sale [732]</a>
+<div class="details">
+<PRE>Find tradegood for sale [732] two weeks
+---------------------------------------
+Usage:  USE 732
+Time:   21 days
+
+Use of 732 searches for a seller of a new rare
+tradegood in the city market.  At the completion of use,
+a new tradegood will be created and offered for sale by
+the city.
+
+Up to two tradegoods may be sold by each market.
+Use of 732 will fail if there are already two rare
+tradegoods for sale in the city.
+
+The tradegood will remain for sale in the city for
+24-36 months following its addition to the trade list.
+At the end of this period it will be removed and no
+longer offered for sale (lowering the count of tradegoods
+sold in the city by 1).
+
+732 must be used in a city in part of the regular world
+(not Hades, Faery, the Cloudlands, or Subworld.)
+
+Markets for rare tradegoods created with 732 may be
+found via the skill Find market for tradegood [733].
+
+</PRE>
+</div>
+</li>
+
+<li id="s733">
+<a href="#s733">Find market for tradegood [733]</a>
+<div class="details">
+<PRE>Find market for tradegood [733] two weeks
+---------------------------------------
+Usage:  USE 733 &lt;tradegood&gt;
+Time:   14 days
+
+Use of 733 will attempt to find a buyer for a rare
+tradegood in the local city market.  The trader must
+possess at least one of the tradegood that a buyer
+is being sought for.
+
+Markets to purchase rare tradegoods must be at least
+8 provinces away from the market selling the rare
+tradegood.  A city will purchase at most two rare
+tradegoods.  For a given tradegood, there is a 50%
+chance that a city will purchase it.
+
+If successful, the city market will begin buying the
+rare tradegood.  A trader can hope to earn 2000-3000
+gold in profit if a full quantity of the tradegood
+is transported between the originating and consuming
+cities and sold.
+
+When the tradegood ceases to be sold in the originating
+city, the purchasing city will also remove the item from
+its purchase list, thus making room for another tradegood
+to be bought.
+
+733 must be used in a city in part of the regular world
+(not Hades, Faery, the Cloudlands, or Subworld.)
+
+</PRE>
+</div>
+</li>
+
+</ul>
+
+</li>
+
+<li id="s750">
+<a href="#s750">Religion [750]</a>
+<div class="details">
+<PRE>Religion [750] five weeks 1 NP
+------------------------------
+The study of religion labels a character as a priest.  Priests may
+learn to receive visions of far-away places, characters, or items.
+Some priests are said to possess miraculous powers, including the
+ability to bring dead nobles back to life.
+
+Religion may only be researched in temples.
+
+The following skills may be studied directly once Religion is known:
+
+   num    skill                              time to learn
+   ---    -----                              -------------
+   751    Receive vision                     four weeks
+
+Further skills may be found through research.
+
+   752    Resurrect dead noble               four weeks
+   753    Preparatory ritual                 three weeks
+   754    Lay to rest                        four weeks
+   755    Remove blessing from soldiers      four weeks
+   756    Immunity from Vision               four weeks
+
+</PRE>
+</div>
+<ul>
+
+<li id="s751">
+<a href="#s751">Receive vision [751]</a>
+<div class="details">
+<PRE>Receive vision [751]
+--------------------
+Usage:  USE 751 &lt;id&gt;
+Time:   ten days
+
+Receive a vision of a character, place or unique item.  A
+character may only see a vision for a particular target once.
+
+Visions will fail if the target is in a different world than
+the priest, i.e. if the priest is in the normal world, but
+the target is in Faery or Hades.
+
+Each attempt to receive a vision has a 50% chance of success.
+
+</PRE>
+</div>
+</li>
+
+<li id="s752">
+<a href="#s752">Resurrect dead noble [752]</a>
+<div class="details">
+<PRE>Resurrect dead noble [752] four weeks
+-------------------------------------
+Usage:  USE 752 &lt;id&gt;
+Time:   ten days
+
+Resurrect dead noble [752] must be performed by a priest
+in a temple.  The priest must be holding the body of the
+dead noble.  There is a 50% chance of success for each
+attempt.
+
+If successful, the character will be restored to full
+health in the priest's location, and be under the
+command of the original owner.
+
+The defense rating of the resurrected noble will be
+lowered by 25 points.  If the noble would have a new
+defense rating lower than 1, resurrection is not
+possible.
+
+</PRE>
+</div>
+</li>
+
+<li id="s753">
+<a href="#s753">Preparatory ritual [753]</a>
+<div class="details">
+<PRE>Preparatory ritual [753] three weeks
+------------------------------------
+Usage:  USE 753
+Time:   three days
+
+The priest completes a holy ritual which assures future religious
+acts of success.  Many skills within the Religion category have a
+50% chance of failure; completing 753 before use of these skills
+removes the possibility of their failure.
+
+</PRE>
+</div>
+</li>
+
+<li id="s754">
+<a href="#s754">Lay to rest [754]</a>
+<div class="details">
+<PRE>Lay to rest [754] four weeks
+----------------------------
+Usage:  USE 754 &lt;DEAD noble&gt;
+Time:   ten days
+
+Use of 754 will commend a dead noble's body to its final resting
+place.  The priest must possess the body of the deceased, and
+perform 754 in a graveyard.  Upon completion, the dead body will
+be consumed, and the NPs invested in the deceased character will
+be returned to the original owner.
+
+</PRE>
+</div>
+</li>
+
+<li id="s755">
+<a href="#s755">Remove blessing from soldiers [755]</a>
+<div class="details">
+<PRE>Remove blessing from soldiers [755] four weeks
+----------------------------------------------
+Usage:  USE 755 &lt;TARGET&gt;
+Time:   ten days
+
+Remove the blessing from all of the target's blessed soldiers.
+Any blessed soldiers possessed by the target will be converted
+back to regular soldiers.
+
+If a target is not specified, the target will default to the priest.
+The target must be present in the priest's location.
+
+This prayer has a 50% chance of success.
+
+</PRE>
+</div>
+</li>
+
+<li id="s756">
+<a href="#s756">Immunity from Vision [756]</a>
+<div class="details">
+<PRE>Immunity from Vision [756] four weeks
+-------------------------------------
+Usage:  USE 756 [target]
+Time:   ten days
+
+Immunity from Vision allows a character to prevent scrys
+from the Receive Vision [751] skill, and when they
+succeed, to detect the identity of the visioning priest.
+
+Each use of [756] increases the vision defense count
+of the target character by one point.  If a target is
+not specified, [756] works on the priest himself.
+
+A vision attempt by a priest will fail if the count is 1
+or higher, and decrease the count by one.  If the count
+is zero, a vision by another priest against the
+character will succeed.
+
+Characters with Immunity from Vision [756] will be
+notified of vision attempts against them, and will
+learn the identity of the visioning priest.
+
+Vision defense point are only deceased in response to
+a vision attempt from another priest.  The current
+vision defense level will be listed in the character's
+turn report.
+
+</PRE>
+</div>
+</li>
+
+</ul>
+
+</li>
+
+<li id="s800">
+<a href="#s800">Magic [800]</a>
+<div class="details">
+<PRE>Magic [800] four weeks 1 NP
+---------------------------
+No apprentice magician can rightfully don the robes of his order without
+some knowledge of Magic [800].  Magic contains many spells useful on
+their own, as well as in conjunction with spells from the other schools 
+of sorcery.
+
+The following skills may be studied directly once Magic is known:
+
+   num    skill                              time to learn
+   ---    -----                              -------------
+   801    Meditate                           two weeks
+   802    Perform common tasks for gold      two weeks
+   803    Appear common                      two weeks
+   804    View current aura level of others  three weeks
+   805    Reveal abilities of another mage   two weeks
+
+Further skills may be found through research.
+
+   806    Tap health for aura                three weeks
+   807    Heal                               three weeks
+   808    Modern magic script                three weeks
+   809    Shroud abilities from scry         three weeks
+   811    Detect ability scry                three weeks
+   812    Dispel ability shroud              three weeks
+   813    Advanced meditation                three weeks
+   814    Hinder meditation                  three weeks
+
+</PRE>
+</div>
+<ul>
+
+<li id="s801">
+<a href="#s801">Meditate [801]</a>
+<div class="details">
+<PRE>Meditate [801] two weeks
+------------------------
+Usage:  USE 801
+
+Required aura:  none
+Time to cast:   seven days
+
+The magician enters a restful trance which regenerates body, mind
+and current aura level.  Current aura level will rise by one point
+or 5% of the mage's maximum aura level, whichever is higher.
+
+Meditation is limited to raising current aura to one point above
+maximum aura.
+
+</PRE>
+</div>
+</li>
+
+<li id="s802">
+<a href="#s802">Perform common tasks for gold [802]</a>
+<div class="details">
+<PRE>Perform common tasks for gold [802] two weeks
+---------------------------------------------
+Usage:  USE 802 [days]
+
+Required aura:  none
+Time to cast:   as given
+
+Even powerful magicians sometimes require gold to further their plans.
+This skill allows the magician to perform trivial or common tasks for
+the local population of a city or province to earn gold.
+
+Examples of common tasks are curing runny noses, concocting love
+potions, dowsing for water, or performing conjuring tricks.
+
+This skill earns 10 gold per day for the mage, while work at common
+tasks is available.  Cities and provinces support 5 days of work at
+common tasks for each point of civilization level.  For example, a
+civ-2 city will allow a mage to work for 10 days at common tasks,
+earning 100 gold.
+
+If multiple mages work the same location, they compete for the
+available work.  Two mages who each began using 802 on the first
+day of the month in a civ-2 province would each work for five days,
+and each would earn 50 gold.  See the COLLECT order for more details
+regarding competition for resources.
+
+</PRE>
+</div>
+</li>
+
+<li id="s803">
+<a href="#s803">Appear common [803]</a>
+<div class="details">
+<PRE>Appear common [803] two weeks
+-----------------------------
+Usage:  USE 803 [aura]
+
+Required aura:  as given
+Time to cast:   one day
+
+The caster expends aura to conceal the fact that he is a magician.
+Nobles who possess magical powers are identified to others in the turn
+reports with a tag:
+
+        max aura        tag
+        --------        ---
+          6-10          conjurer
+         11-15          mage
+         16-20          wizard
+         21-30          sorcerer
+          30+             ??
+
+Use of 803 allows the tag to be suppressed for a number of turns
+equal to the amount of aura invested in the cast.
+
+Uses of 803 are addititive.  A mage with 4 turns of concealment
+remaining who ordered "use 803 3" would have a total of seven turns
+of concealment.
+
+</PRE>
+</div>
+</li>
+
+<li id="s804">
+<a href="#s804">View current aura level of others [804]</a>
+<div class="details">
+<PRE>View current aura level of others [804] three weeks
+---------------------------------------------------
+Usage:  USE 804 [aura]
+
+Required aura:  one or more points, as given
+Required item:
+Time to cast:   seven days
+
+The specified aura will be invested to learn the current aura
+levels of other mages in the location.  The default amount of
+aura to use is one point.
+
+The current aura level of other mages present in the same location as
+the caster will be shown, unless they are shrouding their abilities.
+If a mage is employing an ability shroud, the aura invested in USE 804
+must exceed the shroud's aura, or that mage's current aura level won't
+be shown.
+
+For instance, USE 804 1 will show the current aura for mages that are
+not shrouding their abilities.  USE 804 3 will show the current aura
+for all mages except those shrouding their abilities with three or more
+points of aura.
+
+</PRE>
+</div>
+</li>
+
+<li id="s805">
+<a href="#s805">Reveal abilities of another mage [805]</a>
+<div class="details">
+<PRE>Reveal abilities of another mage [805] two weeks
+------------------------------------------------
+Usage:  USE 805 &lt;target&gt; &lt;magical skill category&gt; [aura]
+
+Required aura:  one or more points of aura, as given
+Required item:
+Time to cast:   seven days
+
+Used against another magician, this spell will attempt to
+reveal all spells known by the other mage within the given
+magical skill category.
+
+If the target is shrouding his abilities, the aura invested in
+USE 805 must exceed the shroud's aura, or the spell will fail.
+For instance, USE 805 4 (costing four aura points) is required 
+to overcome a three-aura ability shroud.
+
+</PRE>
+</div>
+</li>
+
+<li id="s806">
+<a href="#s806">Tap health for aura [806]</a>
+<div class="details">
+<PRE>Tap health for aura [806] three weeks
+-------------------------------------
+Usage:  USE 806 &lt;amount of aura&gt;
+
+Required aura:  none
+Time to cast:   seven days
+
+The mage will dip into his own health to generate current aura.
+The health loss received is equal to five times the amount of
+aura generated.
+
+For example, USE 806 10 would generate 10 points of current aura,
+and cause the mage to receive a 50 point wound.
+
+Use of this spell is dangerous, as any wound runs the risk of
+infection, and death could result.  See the section on Health
+in the rules for more information about wounds and healing.
+
+</PRE>
+</div>
+</li>
+
+<li id="s807">
+<a href="#s807">Heal [807]</a>
+<div class="details">
+<PRE>Heal [807] three weeks
+----------------------
+Usage:  USE 807 &lt;target&gt; &lt;aura&gt;
+
+Required aura:  1-3 points, as given
+Required item:
+Time to cast:   seven days
+
+Attempt to cure the specified target of illness.  Between one
+and three points of aura may be invested in the attempt.  The
+default is one point.
+
+The more aura invested, the less the chance of failure:
+
+	aura	chance of failure
+	----	-----------------
+	 1	      30%
+	 2	      15%
+	 3	       5%
+
+No healing will take place if the spell fails.  If successful,
+the target will cured of sickness, and the target's health will
+begin to recover at the normal rate.  The target must be in the
+same location as the caster.
+
+</PRE>
+</div>
+</li>
+
+<li id="s808">
+<a href="#s808">Modern magic script [808]</a>
+<div class="details">
+<PRE>Modern magic script [808]  three weeks
+-------------------------------------
+Usage:  USE 808 &lt;spell&gt;
+
+Required aura:  two points
+Required item:  blank scroll [84]
+Time to cast:   seven or more days
+
+Transcribe the given spell onto a blank scroll.  The blank scroll will
+be consumed, and a new unique scroll will be produced.  The scroll will
+permit one character to learn the spell from the scroll.
+
+Example:
+
+    USE 808 nnnn       # make a one-time study scroll for spell nnnn
+
+Only Magic [800] spells may be scribed with this skill.
+
+The spell must be known by the character in order to be written.
+The character will still know the spell after it has been scribed.
+
+This spell requires as much time to cast as the skill takes to learn.
+It takes two weeks to write a spell which requires two weeks of study
+to learn.
+
+</PRE>
+</div>
+</li>
+
+<li id="s809">
+<a href="#s809">Shroud abilities from scry [809]</a>
+<div class="details">
+<PRE>Shroud abilities from scry [809]  three weeks
+--------------------------------------------
+Usage:  USE 809 [aura]
+
+Required aura:  one or more points, as given
+Required item:
+Time to cast:   three days
+
+Attempt to prevent other mages from successfully scrying
+the caster to learn magical abilities.  Creates an ability
+shroud with the given amount of aura.  A greater amount
+of aura must be spent by another mage to pierce the shroud.
+
+The default amount of aura is one point.
+
+The magical shroud loses one point of aura at the end of each
+month.  Successive uses of 809 are additive; USE 809 1
+followed by USE 809 3 will result in an ability shroud with
+an aura of four points.
+
+</PRE>
+</div>
+</li>
+
+<li id="s811">
+<a href="#s811">Detect ability scry [811]</a>
+<div class="details">
+<PRE>Detect ability scry [811]  three weeks
+-------------------------------------
+Usage:  USE 811
+
+Required aura:  one point
+Required item:  none
+Time to cast:   seven days
+
+Knowledge of 811 will inform the mage of attempts made by other
+magicians to scry his abilities.  No USE is required in order for
+scry attempts to be detected.  The skill is automatically employed
+whenever the mage is the target of an ability scry spell.
+
+USE of the skill will cause the magician to practice scry detection.
+Practice should improve the experience rating with this skill over
+time, and cause the mage to become more adept at discovering scry
+attempts and identifying their source.
+
+Aura is only consumed by this spell when it is used for practice.
+No aura is depleted when a scry is detected.
+
+</PRE>
+</div>
+</li>
+
+<li id="s812">
+<a href="#s812">Dispel ability shroud [812]</a>
+<div class="details">
+<PRE>Dispel ability shroud [812]  three weeks
+---------------------------------------
+Usage:  USE 812 &lt;target&gt;
+
+Required aura:  three points
+Required item:
+Time to cast:   three days
+
+Dispels any magical shroud inhibiting scrying of the specified
+character's abilities.
+
+</PRE>
+</div>
+</li>
+
+<li id="s813">
+<a href="#s813">Advanced meditation [813]</a>
+<div class="details">
+<PRE>Advanced meditation [813]  three weeks
+--------------------------------------
+Usage:  USE 813
+
+Required aura:  none
+Time to cast:   seven days
+
+The mage is able to quickly enter a deep meditative state.
+Current aura level will rise by two points or 10% of the mage's
+maximum aura level, whichever is higher.  Current aura may rise
+above maximum aura by two points with Advanced Meditation.
+
+</PRE>
+</div>
+</li>
+
+<li id="s814">
+<a href="#s814">Hinder meditation [814]</a>
+<div class="details">
+<PRE>Hinder meditation [814]  three weeks
+------------------------------------
+Usage:  USE 814 &lt;target&gt; [aura]
+
+Required aura:  one to three points, as given
+Time to cast:   ten days
+
+Clouds the target's mind with disturbing images and incoherent
+thoughts.  The target mage will have difficulty achieving the
+proper mental state during his next attempt at meditation.
+
+The next meditate spell issued by the target may fail, resulting
+in the mage not acquiring a point of current aura. The more aura
+invested in 814, the greater the chance the target mage will fail:
+
+	aura	chance of failure
+	----	-----------------
+	 1	      10%
+	 2	      25%
+	 3	      50%
+	 4	      75%
+	 5	      90%
+
+Hinder meditation [814] directed against mages using Advanced
+Meditiation [9174] will cause them to only gain half of the
+normal aura obtained.
+
+If the target does not meditate, the spell will lose one point
+of aura at the end of each month until it has dissipated.  Casts
+by multiple mages accumulate on the target, although the spell may
+not accumulate more than five points of aura.
+
+For example, if two mages each cast USE 814 501 3, character [501]
+will have a 90% chance of failure in his next attempt to meditate.
+(One aura point has been wasted, since only five may accumulate on
+the target).  At the end of the month, the strength of the 814
+spell against [501] will diminish to two points, and [501] will
+have a 50% chance of failure during his next meditation.
+
+A mage may cast multiple 814 spells; they accumulate on the targets,
+not on the casting magician.
+
+814 has no effect on non-magicians.
+
+The default amount of aura is one point.
+
+</PRE>
+</div>
+</li>
+
+</ul>
+
+</li>
+
+<li id="s820">
+<a href="#s820">Weather Magic [820]</a>
+<div class="details">
+<PRE>Weather magic [820] five weeks 1 NP
+-----------------------------------
+Weather spells concern the summoning and control of storms.
+Mild weather may have an effect on battle and ocean navigation.
+Fierce storms are capable of great damage.
+
+The following skills may be studied directly once Weather magic is 
+known:
+
+   num    skill                              time to learn
+   ---    -----                              -------------
+   821    Fierce wind                        three weeks
+   822    Bind storm to ship                 three weeks
+   823    Scribe weather symbols             three weeks
+   824    Summon rain                        three weeks
+
+Further skills may be found through research.
+
+   825    Summon wind                        three weeks
+   826    Summon fog                         three weeks
+   827    Direct storm                       three weeks
+   828    Dissipate storm                    three weeks
+   829    Renew storm strength               three weeks
+   831    Lightning bolt                     four weeks
+   832    Seize control of storm             three weeks
+   833    Fog of death                       three weeks
+
+</PRE>
+</div>
+<ul>
+
+<li id="s821">
+<a href="#s821">Fierce wind [821]</a>
+<div class="details">
+<PRE>Fierce wind [821]
+-----------------
+Usage:  USE 821 &lt;storm&gt; &lt;target&gt; [aura]
+
+Required aura:  none
+Time to cast:   seven days
+
+Use a wind storm to damage a building or a ship.  The target will
+be buffeted with fierce winds, causing an amount of damage to the
+target equal to the amount of the wind storm's aura spent in the
+attack.
+
+For example, "USE 821 &lt;storm&gt; ce90 5" would cause &lt;storm&gt; to 
+spend
+five of its remaining aura points against target [ce90], causing
+five points of damage.
+
+If aura is not specified, the storm will expend all of its remaining
+energy in the attack.  The mage does not need to be in the same
+location as the storm.
+
+</PRE>
+</div>
+</li>
+
+<li id="s822">
+<a href="#s822">Bind storm to ship [822]</a>
+<div class="details">
+<PRE>Bind storm to ship [822]
+------------------------
+Usage:  BIND &lt;storm&gt;
+
+Required aura:  three or more points
+Time to cast:   seven days
+
+Bind an existing storm to a ship.  The caster must be the owner of
+the storm (having summoned it himself, or siezed control of it),
+and must be on the ship the storm is to be bound to.
+
+Subsequent movement of the ship will cause the storm to follow.
+This can be especially useful if a wind storm is bound to a
+roundship, as the roundship will enjoy faster travel while the
+aura of the wind storm lasts.
+
+</PRE>
+</div>
+</li>
+
+<li id="s823">
+<a href="#s823">Scribe weather symbols [823]</a>
+<div class="details">
+<PRE>Scribe weather symbols [823]
+----------------------------
+Usage:  USE 823 &lt;spell&gt;
+
+Required aura:  two points
+Required item:  blank scroll [84]
+Time to cast:   seven or more days
+
+Transcribe the given spell onto a blank scroll.  The blank scroll will
+be consumed, and a new unique scroll will be produced.  The scroll will
+permit one character to learn the spell from the scroll.
+
+Example:
+
+    USE 823 nnnn       # make a one-time study scroll for spell nnnn
+
+Only Weather magic [820] spells may be scribed with this skill.
+
+The spell must be known by the character in order to be written.
+The character will still know the spell after it has been scribed.
+
+This spell requires as much time to cast as the skill takes to learn.
+It takes two weeks to write a spell which requires two weeks of study
+to learn.
+
+</PRE>
+</div>
+</li>
+
+<li id="s824">
+<a href="#s824">Summon rain [824]</a>
+<div class="details">
+<PRE>Summon rain [824]
+-----------------
+Usage:  USE 824 &lt;aura&gt; ["Name of storm"]
+
+Required aura:  three or more points
+Time to cast:   seven days
+
+Summon a rain weather entity.  Rain storms may be summoned from
+forest or ocean provinces.  Once a location has produced a rain
+storm, another rain storm may not be summoned from that place
+until the first storm has dissipated.
+
+The storm will have a strength of twice the amount of aura invested
+in its summoning.  Storms lose one point of strength at the end of
+each month.  When a storm's strength reaches zero, it dissipates.
+
+While the storm exists, the summoner will get a location report
+for the storm's province.
+
+</PRE>
+</div>
+</li>
+
+<li id="s825">
+<a href="#s825">Summon wind [825]</a>
+<div class="details">
+<PRE>Summon wind [825]
+-----------------
+Usage:  USE 825 &lt;aura&gt; ["Name of storm"]
+
+Required aura:  three or more points
+Time to cast:   seven days
+
+Summon a wind weather entity.  Wind may be summoned from plains,
+ocean, mountain or desert provinces.  Once a location has produced
+a wind entity, another wind may not be summoned from that place
+until the first has dissipated.
+
+The wind entity will have a strength of twice the amount of aura
+invested in its summoning.  Wind loses one point of strength at
+the end of each month.  When a wind entity's strength reaches zero,
+it dissipates.
+
+While the wind exists, the summoner will get a location report
+the province that it is in.
+
+</PRE>
+</div>
+</li>
+
+<li id="s826">
+<a href="#s826">Summon fog [826]</a>
+<div class="details">
+<PRE>Summon fog [826]
+----------------
+Usage:  USE 826 &lt;aura&gt; ["Name of storm"]
+
+Required aura:  three or more points
+Time to cast:   seven days
+
+Summon a fog.  Fog may be summoned from forest, swamp and ocean
+provinces.  Once a location has produced a fog, another fog may
+not be summoned from that place until the first has dissipated.
+
+The fog will have a strength of twice the amount of aura invested
+in its summoning.  Storms lose one point of strength at the end of
+each month.  When a fog's strength reaches zero, it dissipates.
+
+While the fog exists, the summoner will get a location report for
+the province that it is in.
+
+Character sightings will not appear in foggy province's location
+report.  Characters in sublocations of the province will still
+be seen, however.  Consequently, automatic HOSTILE attacks do not
+function in provinces when fog is present.
+
+Also, all sublocations of a foggy province are treated as if they
+are hidden.  Thus, if a sublocation is already known to a character,
+the character will continue to see the sublocation.  However,
+locations which have not been visited by a character will have to
+be found with EXPLORE before they can be entered (or until the
+fog passes.)
+
+</PRE>
+</div>
+</li>
+
+<li id="s827">
+<a href="#s827">Direct storm [827]</a>
+<div class="details">
+<PRE>Direct storm [827]
+------------------
+Usage:  USE 827 &lt;storm&gt; &lt;direction or destination&gt;
+
+Required aura:  none
+Time to cast:   one day
+
+Direct an existing storm which the caster has previously summoned
+to move to an adjacent province at the end of the month.  Storms
+only move once per month, and may only exist at the province level
+(they may not move into sublocations or buildings.)
+
+The caster need not be in the same location as the storm in order
+to direct it.
+
+At the end of the month, the storm will move to its new province,
+and the mage will receive a report for the storm's new location.
+
+</PRE>
+</div>
+</li>
+
+<li id="s828">
+<a href="#s828">Dissipate [828]</a>
+<div class="details">
+<PRE>Dissipate storm [828]
+---------------------
+Usage:  USE 828 &lt;storm&gt;
+
+Required aura:  none
+Time to cast:   seven days
+
+Dissipate an existing storm.  The storm must be owned by the mage,
+and be in the same province as the caster.  One-quarter of the
+remaining strength of the storm will be added to the mage's current
+aura rating.
+
+</PRE>
+</div>
+</li>
+
+<li id="s829">
+<a href="#s829">Renew storm strength [829]</a>
+<div class="details">
+<PRE>Renew storm strength [829]
+--------------------------
+Usage:  USE 829 &lt;storm&gt; &lt;aura&gt;
+
+Required aura:  as given
+Time to cast:   three days
+
+Invest aura in an existing storm.  The storm must be in the same
+province as the caster.  Each point of the mage's aura used will
+add two points of aura to the storm's strength.
+
+</PRE>
+</div>
+</li>
+
+<li id="s831">
+<a href="#s831">Lightning bolt [831]</a>
+<div class="details">
+<PRE>Lightning bolt [831]
+--------------------
+Usage:  USE 831 &lt;storm&gt; &lt;target&gt; [aura]
+
+Required aura:  none
+Time to cast:   seven days
+
+Use a rain storm to deliver a lightning bolt against a target in the
+province.  Aura is the amount of storm strength to deliver in the
+blast.  If aura is not specified, the storm will expend all of its
+remaining engery in the bolt.  The mage does not need to be in the
+same location as the storm.
+
+The lightning bolt may be delivered against any building or character
+directly in the storm's province.  It will do an amount of damage
+equal to the strength of the bolt.
+
+</PRE>
+</div>
+</li>
+
+<li id="s832">
+<a href="#s832">Seize control of storm [832]</a>
+<div class="details">
+<PRE>Seize control of storm [832]
+----------------------------
+Usage:  USE 832 &lt;storm&gt;
+
+Required aura:  five points
+Time to cast:   seven days
+
+Seize control of a storm from another mage.  The storm must be in
+the caster's province.
+
+</PRE>
+</div>
+</li>
+
+<li id="s833">
+<a href="#s833">Fog of death [833]</a>
+<div class="details">
+<PRE>Fog of death [833]
+------------------
+Usage:  USE 833 &lt;storm&gt; &lt;target&gt; [aura]
+
+Required aura:  none
+Time to cast:   seven days
+
+Use a fog to kill an enemy target's men.  Only peasants, soldiers,
+crossbowmen, workers and sailors are vulnerable to death by fog.
+Two of the target's men are killed for each point of the storm's
+aura used.  If aura is not given, all of the remaining strength of
+the storm will be used.
+
+The caster does not need to be in the same location as the fog to
+cast this spell.
+
+</PRE>
+</div>
+</li>
+
+</ul>
+
+</li>
+
+<li id="s840">
+<a href="#s840">Scrying [840]</a>
+<div class="details">
+<PRE>Scrying [840] five weeks 1 NP
+--------------------------------
+Scrying concerns the gathering of information by means of magical
+spells.  Simple spells may allow the mage to learn information
+about other characters nearby, or to view distant regions.
+
+Advanced study delves into spells wrought long ago in by the men of
+Areth-Pirn as tools to rule their land, including the erection of
+magical barriers to travel, as well as additional spells of far-seeing.
+
+The following skills may be studied directly once Scrying is known:
+
+   num    skill                              time to learn
+   ---    -----                              -------------
+   841    Scry location                      three weeks
+
+Further skills may be found through research.
+
+   842    Shroud location from magical scry  two weeks
+   843    Dispel location shroud             three weeks
+   844    Ciphered writing of Areth-Pirn     three weeks
+   845    Create magical barrier             three weeks
+   846    Remove magical barrier             three weeks
+   847    Locate character                   three weeks
+   848    Detect location scry               three weeks
+   849    Farcasting                         three weeks
+   851    Save farcast state                 three weeks
+   852    Banish undead                      three weeks
+
+</PRE>
+</div>
+<ul>
+
+<li id="s841">
+<a href="#s841">Scry location [841]</a>
+<div class="details">
+<PRE>Scry location [841]
+-------------------
+Usage:  USE 841 &lt;location&gt; [aura]
+
+Required aura:  one or more points, as given
+Required item:
+Time to cast:   seven days
+
+Grants the mage a vision of the specified place, no matter
+how far away he might be.
+
+If the target location is magically shrouded from scry attempts,
+sufficient aura must be used for 841 to pierce the shroud.
+For example, a location shroud of three aura would require
+USE 841 &lt;location&gt; 4 to overcome (costing four aura to cast).
+
+It is not possible to scry a netherworld location (a location in
+Hades or Faery) from the real world, or vice-versa.
+
+The default aura to use is one point.
+
+</PRE>
+</div>
+</li>
+
+<li id="s842">
+<a href="#s842">Shroud location from magical scry [842]</a>
+<div class="details">
+<PRE>Shroud location from magical scry [842]
+---------------------------------------
+Usage:  USE 842 [aura]
+
+Required aura:  one or more points, as given
+Required item:
+Time to cast:   three days
+
+Creates a magical shroud over the mage's current province.  The
+shroud hinders attempts by distant mages to view the location by
+magical scrying.
+
+The shroud is invested with twice the aura used in its creation.
+A mage attempting to view the location from a distance with a
+scry spell must expend a greater amount of aura than the shroud
+possesses to succeed.
+
+The shroud loses one point of aura at the end of each month.
+Successive uses of 842 are additive.  For example, USE 842 1
+followed by USE 842 3 will result in a location shroud with an
+aura of eight points.
+
+The default aura to use is one point.
+
+</PRE>
+</div>
+</li>
+
+<li id="s843">
+<a href="#s843">Dispel location shroud [843]</a>
+<div class="details">
+<PRE>Dispel location shroud [843]
+----------------------------
+Usage:  USE 843 &lt;location&gt;
+
+Required aura:  three points
+Required item:
+Time to cast:   three days
+
+Dispels any magical shroud inhibiting scrying of the specified
+location.
+
+</PRE>
+</div>
+</li>
+
+<li id="s844">
+<a href="#s844">Ciphered writing of Areth-Pirn [844]</a>
+<div class="details">
+<PRE>Ciphered writing of Areth-Pirn [844]
+------------------------------------
+Usage:  USE 844 &lt;spell&gt;
+
+Required aura:  two points
+Required item:  blank scroll [84]
+Time to cast:   seven or more days
+
+Transcribe the given spell onto a blank scroll.  The blank scroll will
+be consumed, and a new unique scroll will be produced.  The scroll will
+permit one character to learn the spell from the scroll.
+
+Example:
+
+    USE 844 nnnn       # make a one-time study scroll for spell nnnn
+
+Only Scrying [840] spells may be scribed with this skill.
+
+The spell must be known by the character in order to be written.
+The character will still know the spell after it has been scribed.
+
+This spell requires as much time to cast as the skill takes to learn.
+It takes two weeks to write a spell which requires two weeks of study
+to learn.
+
+</PRE>
+</div>
+</li>
+
+<li id="s845">
+<a href="#s845">Create magical barrier [845]</a>
+<div class="details">
+<PRE>Create magical barrier [845]
+----------------------------
+Usage:  USE 845 [aura]
+
+Required aura:  one to eight points
+Required item:
+Time to cast:   ten days
+
+Erects a magical barrier which prevents anyone from entering the
+location.  The barrier will lose one point of aura at the end of
+each turn, and will dissipate when it has no aura remaining.
+
+For example, USE 845 1 will create a barrier over the location
+which lasts until the end of the turn.  USE 845 2 will create
+a barrier which lasts until the end of the next turn.
+
+Multiple casts of 845 are additive.
+
+A barrier which achieves eight points of aura becomes permanent.
+Permanent barriers do not decay at the end of each month.  They
+may only be removed by a magician.
+
+Aura defaults to one.
+
+</PRE>
+</div>
+</li>
+
+<li id="s846">
+<a href="#s846">Remove magical barrier [846]</a>
+<div class="details">
+<PRE>Remove magical barrier [846]
+----------------------------
+Usage:  USE 846 &lt;direction&gt; &lt;aura&gt;
+
+Required aura:  one to four points, as given
+Required item:
+Time to cast:   seven days
+
+Attempt to remove a magical barrier from the location in the
+given direction.  If direction "0" is given, a barrier over
+the current location will be removed.
+
+The chance that the barrier will be successfully removed is
+proportional to the aura invested in the attempt:
+
+	aura	chance of success
+	----	-----------------
+	 1             10%
+	 2             25%
+	 3	       50%
+	 4	       75%
+
+</PRE>
+</div>
+</li>
+
+<li id="s847">
+<a href="#s847">Locate character [847]</a>
+<div class="details">
+<PRE>Locate character [847]
+----------------------
+Usage:  USE 847 &lt;character&gt; &lt;aura&gt;
+
+Required aura:  one to three points, as given
+Required item:
+Time to cast:   ten days
+
+Attempt to locate the specified character.  If successful, the
+mage will learn the location in which the character is currently
+located.
+
+The more aura expended, the greater the chance that the character
+will be located.
+
+	aura	chance of success
+	----	-----------------
+	 1            50%
+	 2            75%
+	 3            90%
+
+It is not possible to locate a character in Hades or Faery
+if one is in the real world, and vice-versa.
+
+</PRE>
+</div>
+</li>
+
+<li id="s848">
+<a href="#s848">Detect location scry [848]</a>
+<div class="details">
+<PRE>Detect location scry [848]
+--------------------------
+Usage:  USE 848
+
+Required aura:  one point
+Required item:  none
+Time to cast:   seven days
+
+Knowledge of 848 will inform the mage of attempts made by other
+magicians to scry the mage's current location.  No USE is required
+in order for scry attempts to be detected.  The skill is used
+automatically whenever the mage's location is the target of an
+location scry spell.
+
+USE of the skill will cause the magician to practice scry detection.
+Practice should improve the experience rating with this skill over
+time, and cause the mage to become more adept at discovering scry
+attempts and identifying their source.
+
+Aura is only consumed by this spell when it is used for practice.
+No aura is depleted when a scry is detected.
+
+</PRE>
+</div>
+</li>
+
+<li id="s849">
+<a href="#s849">Farcasting [849]</a>
+<div class="details">
+<PRE>Farcasting [849]
+----------------
+Usage:  USE 849 &lt;location&gt;
+
+Required aura:  distance in provinces to &lt;location&gt;
+Required item:
+Time to cast:   seven days
+
+If successful, the location check for the next spell cast
+attempted will be made from the given location instead of
+the location the mage is in.
+
+The amount of aura consumed is equal to the distance in
+provinces from the mage's location to the target location.
+For instance, to project a cast into an adjoining province
+requires two aura.  To project a cast between any of the
+sublocations within a province requires one aura.
+
+The projected cast state will persist until the mage's next use
+of magic.  The mage may move before casting the next spell;
+movement will not alter the target location for spell projection.
+
+Unless the mage is projecting to the same location he is in,
+a magical shroud over the target location will cause this
+spell to fail.
+
+Farcasts may not be initiated between Hades, Faery and the real
+world.
+
+</PRE>
+</div>
+</li>
+
+<li id="s851">
+<a href="#s851">Save farcast state [851]</a>
+<div class="details">
+<PRE>Save farcast state [851]
+------------------------
+Usage:  USE 851
+
+Required aura:   three
+Required item:
+Time to cast:    seven days
+
+The state where a mage's next cast will be projected to a different
+location may be saved with this spell.  A potion will be created
+which, upon use, will revive the projected cast state.
+
+For example, a mage establishes that his next spell cast will be based
+from Drassa [cx59].  He then issues USE 851 to preserve this state.
+Magical potion [8764] is created.  He later issues USE 8764 to drink
+the potion.  His next spell will be based from Drassa.
+
+The mage will no longer have a projected cast state after use of this
+spell.
+
+</PRE>
+</div>
+</li>
+
+<li id="s852">
+<a href="#s852">Banish undead [852]</a>
+<div class="details">
+<PRE>Banish undead [852]
+-------------------
+Usage:  USE 852
+
+Required aura:  number of undead in location
+Time to cast:   seven days
+
+Banish all undead from the caster's location.  Requires one aura
+point for every undead to be banished.  The spell is all-or-none;
+if sufficient aura is not available to banish all of the undead at
+once, the spell fails, and no undead will be banished.  (No aura
+is used if the spell fails, however).
+
+</PRE>
+</div>
+</li>
+
+</ul>
+
+</li>
+
+<li id="s860">
+<a href="#s860">Gatecraft [860]</a>
+<div class="details">
+<PRE>Gatecraft [860] five weeks 1 NP
+----------------------------------
+Long ago the Ancients, a race of wise men who ruled the land with
+the aid of powerful magic, constructed a network of teleportation
+gateways to connect distant cities.  As the reach of their magical
+portals grew, so grew the reach of their armies and knowledge.  At
+their height the rule of the Ancients extended to every corner of
+the known world, and beyond.
+
+With the passing of the Ancients, the system of gates fell into
+disuse and decay, and now retains only a hint of its former majesty.
+Gatecraft, once practiced by the most common among the Ancients, has
+since been forgotten by nearly all men.
+
+The school of Gatecraft retains the only knowledge of the use of
+these mystical portals.  Because knowledge of Gates can be a powerful
+tool or weapon, Gatecraft spells are jealously guarded even within
+the school.  Some aspects of Gatecraft, such as the secret of their
+construction, have been completely lost.
+
+The following skills may be studied directly once Gatecraft is known:
+
+   num    skill                              time to learn
+   ---    -----                              -------------
+   861    Teleport                           two weeks
+   862    Detect gates                       two weeks
+
+Further skills may be found through research.
+
+   863    Jump through gate                  two weeks
+   864    Seal gate                          two weeks
+   865    Unseal gate with key               two weeks
+   866    Notify if gate unsealed            two weeks
+   867    Forcefully unseal gate             three weeks
+   868    Reveal gate key                    three weeks
+   869    Notify of gate jumps               two weeks
+   871    Language of the Ancients           three weeks
+   872    Reverse jump through gate          three weeks
+
+</PRE>
+</div>
+<ul>
+
+<li id="s861">
+<a href="#s861">Teleport [861]</a>
+<div class="details">
+<PRE>Teleport [861]
+--------------
+Usage:  USE 861 &lt;location&gt;
+
+Required aura:  one point for each 50 weight
+Required item:  gate crystal [83]
+Time to cast:   one day
+
+This skill allows a mage to teleport to the given location without
+a gate.  A gate crystal is required to fuel the jump.  The gate
+crystal is consumed by the jump.
+
+One point of aura is required for each 50 units of weight in the
+caster's stack to be transported.
+
+Teleportation between the netherworlds (Hades &amp; Faery) and
+the real world is not possible.
+
+</PRE>
+</div>
+</li>
+
+<li id="s862">
+<a href="#s862">Detect gates [862]</a>
+<div class="details">
+<PRE>Detect gates [862]
+------------------
+Usage:  USE 862
+
+Required aura:  one point
+Required item:  none
+Time to cast:   seven days
+
+Identify any gates present in the current location.
+
+If there are no gates in the caster's location, Detect gates [862]
+will indicate how far away the nearest gate is.
+
+</PRE>
+</div>
+</li>
+
+<li id="s863">
+<a href="#s863">Jump through gate [863]</a>
+<div class="details">
+<PRE>Jump through gate [863]
+-----------------------
+Usage:  USE 863 &lt;gate&gt; [key]
+
+Required aura:  one point for each 50 weight
+Required item:  none
+Time to cast:   one day
+
+The caster will teleport through the specified gate.  The gate
+must be present in the current location.  If the gate is sealed
+with a key, the key must be supplied for the jump to succeed.
+
+One point of aura is required for each 50 units of weight in the
+caster's stack to be transported.
+
+</PRE>
+</div>
+</li>
+
+<li id="s864">
+<a href="#s864">Seal gate [864]</a>
+<div class="details">
+<PRE>Seal gate [864]
+---------------
+Usage:  USE 864 &lt;gate&gt; &lt;key&gt;
+
+Required aura:  six points
+Required item:
+Time to cast:   seven days
+
+Seal the gate with the given key.  The gate must be present in
+the current location, and must not already be sealed.
+
+The key is a numeric password which will be required for further
+access to the gate for jumps or other manipulations.  Only those
+who supply the key number will be granted access.  The number
+should be between 1 and 999.
+
+    For example, if Gate [8192] is sealed with USE 864 8192 123
+    then the key "123" must be supplied as a parameter to the
+    jump spell, or the jump will fail.
+
+</PRE>
+</div>
+</li>
+
+<li id="s865">
+<a href="#s865">Unseal gate with key [865]</a>
+<div class="details">
+<PRE>Unseal gate with key [865]
+--------------------------
+Usage:  USE 865 &lt;gate&gt; &lt;key&gt;
+
+Required aura:  three points
+Required item:
+Time to cast:   seven days.
+
+Remove the seal from a gate by supplying the key.  The key will
+no longer be required for jumps through the gate.
+
+    For example, if Gate [8192] were sealed with key "123",
+    the spell USE 865 8192 123 would unseal the gate.
+    Jumps through the gate could proceed without supplying
+    the key.
+
+</PRE>
+</div>
+</li>
+
+<li id="s866">
+<a href="#s866">Notify if gate unsealed [866]</a>
+<div class="details">
+<PRE>Notify if gate unsealed [866]
+-----------------------------
+Usage:  USE 866 &lt;gate&gt; &lt;key&gt;
+
+Required aura:  five points
+Required item:
+Time to cast:   seven days
+
+Inform the sealer of the gate if the seal is broken, and of the
+identity of the mage who removes the seal.  The gate must be
+present in the current location to apply this spell.  However,
+notification will occur wherever the caster happens to be.
+
+</PRE>
+</div>
+</li>
+
+<li id="s867">
+<a href="#s867">Notify if gate unsealed [867]</a>
+<div class="details">
+<PRE>Forcefully unseal gate [867]
+----------------------------
+Usage:  USE 867 &lt;gate&gt;
+
+Required aura:  eight points
+Required item:
+Time to cast:   seven days
+
+Forcefully remove a seal from a gate without specifying the key.
+The key will no longer be required to perform jumps through the gate.
+The gate must be present in the current location.
+
+</PRE>
+</div>
+</li>
+
+<li id="s868">
+<a href="#s868">Reveal gate key [868]</a>
+<div class="details">
+<PRE>Reveal gate key [868]
+---------------------
+Usage:  USE 868 &lt;gate&gt;
+
+Required aura:  ten points
+Required item:
+Time to cast:   seven days
+
+Reveal the numeric key necessary to make use of a sealed gate.
+The gate must be present in the current location.
+
+</PRE>
+</div>
+</li>
+
+<li id="s869">
+<a href="#s869">Notify of gate jumps [869]</a>
+<div class="details">
+<PRE>Notify of gate jumps [869]
+--------------------------
+Usage:  USE 869 &lt;gate&gt;
+
+Required aura:  six points
+Required item:
+Time to cast:   seven days
+
+Notify the caster of the identity of any mages jumping through the
+specified gate.  The gate must be present in the current location
+to apply this spell.  However, the caster will be notified if the
+gate is used, wherever he may be at the time.
+
+Only one [869] spell may be active on a gate at a time.  Casting
+this spell on a gate already notifying another mage of jumps will
+displace the previous mage's spell.
+
+</PRE>
+</div>
+</li>
+
+<li id="s871">
+<a href="#s871">Language of the Ancients [871]</a>
+<div class="details">
+<PRE>Language of the Ancients [871]
+------------------------------
+Usage:  USE 871 &lt;spell&gt;
+
+Required aura:  two points
+Required item:  blank scroll [84]
+Time to cast:   seven or more days
+
+The Ancients were a race of wise, powerful men who walked the lands
+long before the modern inhabitants had arrived.  Their language is
+heavy and descriptive, well suited to expressing their detailed and
+complex thoughts.
+
+Transcribe the given spell onto a blank scroll.  The blank scroll will
+be consumed, and a new unique scroll will be produced.  The scroll will
+permit one character to learn the spell from the scroll.
+
+Example:
+
+    USE 871 nnnn       # make a one-time study scroll for spell nnnn
+
+Only Gatecraft [860] spells may be scribed with this skill.
+
+The spell must be known by the character in order to be written.
+The character will still know the spell after it has been scribed.
+
+This spell requires as much time to cast as the skill takes to learn.
+It takes two weeks to write a spell which requires two weeks of study
+to learn.
+
+</PRE>
+</div>
+</li>
+
+<li id="s872">
+<a href="#s872">Reverse jump through gate [872]</a>
+<div class="details">
+<PRE>Reverse jump through gate [872]
+-------------------------------
+Usage:  USE 872 &lt;gate&gt; [key]
+
+Required aura:  two points for each 50 weight
+Required item:  none
+Time to cast:   one day
+
+Gates were long thought to be one way portals through space.
+Most mages believed that returning to the starting location
+required a second gate or a conventional journey.
+
+However, it is possible to jump back to a gate from the gate's
+destination.  Reversing the direction of teleportation is
+difficult, so the jump requires twice as much aura as a
+forward jump.
+
+As with a conventional jump, the mage must know the gate's
+entity number as well as the key, if necessary.
+
+</PRE>
+</div>
+</li>
+
+</ul>
+
+</li>
+
+<li id="s880">
+<a href="#s880">Artifact construction [880]</a>
+<div class="details">
+<PRE>Artifact construction [880] six weeks 1 NP
+------------------------------------------
+The domain of high level wizards, artifact construction concerns
+the creation and manipulation of items which may focus and store
+aura, contain spells, or have other magical properties.
+
+The following skills may be studied directly once Artifact construction 
+is
+known:
+
+   num    skill                              time to learn
+   ---    -----                              -------------
+   881    Forge auraculum                    two weeks
+   882    Reveal creator of artifact         two weeks
+   883    Reveal where artifact was created  two weeks
+
+Further skills may be found through research.
+
+   884    Cloak creator of artifact          four weeks
+   885    Cloak region of artifact creation  two weeks
+   886    Curse noncreator loyalty           two weeks
+   887    Forge magical weapon               three weeks
+   888    Forge magical armor                three weeks
+   889    Forge magical bow                  three weeks
+   891    Dispel cloaking from artifact      three weeks
+   892    Arcane symbols                     three weeks
+   893    Destroy artifact                   three weeks
+   894    Forge palantir                     three weeks
+
+</PRE>
+</div>
+<ul>
+
+<li id="s881">
+<a href="#s881">Forge auraculum [881]</a>
+<div class="details">
+<PRE>Forge auraculum [881]
+---------------------
+Usage:  USE 881 &lt;aura-level&gt; "Name"
+
+Required aura:   as specified by caster
+Required items:  100 gold, 5 mithril
+Time to cast:    fourteen days
+
+Forge a magical auraculum, giving it the specified name.
+
+   An auraculum is a magical artifact which concentrates and amplifies
+   a mage's power.  A permanent investment of maximum aura is made when
+   constructing the auraculum.  The artifact doubles the invested aura.
+   However, since a portion of the mage's pneuma has been bound in the
+   auraculum, it is important to safeguard it from being lost or stolen.
+
+In addition to depleting the caster's current aura level, the specified
+aura amount will be permanently removed from the magician's maximum aura
+rating.  The new object, while possessed by its maker, will augment the
+mage's maximum aura rating by twice the amount of aura invested in its
+creation.
+
+Possession of an auraculum doubles the amount of aura a mage naturally
+recovers each month, from two points to four.
+
+Creation of an auraculum also grants knowledge of the Advanced sorcery
+magical skill category.  Advanced sorcery may not be learned in any
+other way.
+
+Example:
+
+   A mage of current aura level 10, maximum aura 10 who issues
+   USE 881 5 "Ring of power" will be reduced to current aura level 5,
+   maximum aura level 5.  However, the new artifact will add 10 points
+   to the maximum aura rating of its creator, but only while it is in
+   his possession.
+
+       Current aura:   10
+       Maximum aura:   10
+
+    1: &gt; use 881 5 "Ring of power"
+    1: Attempt to forge an auraculum.
+       ...
+   14: Created Ring of power [js80].
+   14: Learned Advanced sorcery [166].
+
+       Current aura:   5
+       Maximum aura:   15 (5+10)
+ 
+Characters other than the auraculum's creator do not receive an aura
+bonus from possession of the object.
+
+Since the mage has bound a portion of his aura into the artifact, its
+destruction would deal him an instant, fatal blow.  Thus, the creator
+of such an object should use all means to prevent it from being lost
+or stolen.  However, magical items of such power are hard to destroy.
+An auraculum may only be destroyed in the province in which it was
+created.
+
+This spell may only be used once.  A magician may only create one
+auraculum during his lifetime.
+
+The creator of the artifact may change its name later with the
+NAME order.  The object must be possessed in order to rename it.
+
+   &gt; name js80 "Wooden staff"
+   Ring of power [js80] will now be known as Wooden staff [js80].
+
+</PRE>
+</div>
+</li>
+
+<li id="s882">
+<a href="#s882">Reveal creator of artifact [882]</a>
+<div class="details">
+<PRE>Reveal creator of artifact [882]
+--------------------------------
+Usage: USE 882 &lt;artifact&gt; &lt;aura&gt;
+
+Required aura:  one or more points of aura
+Required item:
+Time to cast:   seven days
+
+Reveal who forged a magical artifact.  The artifact in
+question must be possessed by the caster.
+
+The artifact may be shrouded against magical inspection.
+If so, a greater amount of aura must be specified with
+882 than was used to apply the shroud.
+
+</PRE>
+</div>
+</li>
+
+<li id="s883">
+<a href="#s883">Reveal where artifact was created [883]</a>
+<div class="details">
+<PRE>Reveal where artifact was created [883]
+---------------------------------------
+Usage:  USE 883 &lt;artifact&gt; &lt;aura&gt;
+
+Required aura:  one or more points
+Required item:
+Time to cast:   seven days
+
+Reveal the location in which a magical magical artifact was forged.
+The artifact in question must be possessed by the caster.
+
+Some magical artifacts may only be destroyed in the location where
+they were constructed.
+
+The artifact may be shrouded against magical inspection.  If so,
+a greater amount of aura must be specified with 883 than was
+used to apply the shroud.
+
+</PRE>
+</div>
+</li>
+
+<li id="s884">
+<a href="#s884">Cloak creator of artifact [884]</a>
+<div class="details">
+<PRE>Cloak creator of artifact [884]
+-------------------------------
+Usage:  USE 884 &lt;artifact&gt; [aura]
+
+Required aura:  one or more points
+Required item:
+Time to cast:   seven days
+
+Inhibit the ability of another mage to learn the identity of the
+creator of the specified magical artifact.  The artifact must be
+in the inventory of the caster.
+
+The more aura used, the more difficult it will be for another
+mage to overcome the magical cloaking.
+
+The default aura to use is one point.
+Multiple casts of 884 on the same artifact are additive.
+
+</PRE>
+</div>
+</li>
+
+<li id="s885">
+<a href="#s885">Cloak region of artifact creation [885]</a>
+<div class="details">
+<PRE>Cloak region of artifact creation [885]
+---------------------------------------
+Usage: USE 885 &lt;artifact&gt; [aura]
+
+Required aura:  one or more points
+Required item:
+Time to cast:   seven days
+
+Inhibit the ability of another mage to learn the region in which
+the specified magical artifact was created.  The artifact must
+be in the inventory of the caster.
+
+The more that is aura used, the more difficult it will be for
+another mage to overcome the magical cloaking.
+
+The default aura to use is one point.
+Multiple casts of 885 on the same artifact are additive.
+
+</PRE>
+</div>
+</li>
+
+<li id="s886">
+<a href="#s886">Curse noncreator loyalty [886]</a>
+<div class="details">
+<PRE>Curse noncreator loyalty [886]
+------------------------------
+Usage:  USE 886 &lt;artifact&gt; [aura]
+
+Required aura:  one or more points, as given
+Required item:
+Time to cast:   fourteen days
+
+Curses a forged magical artifact such that possession by any
+character other than the creator will cause that character's
+loyalty to erode.  The amount of loyalty lost is proportional
+to the aura invested with 886.
+
+For example, USE 886 8192 10 would place a ten aura noncreator
+curse on artifact [8192].  Anyone except the artifact's creator
+would lose ten points of loyalty each turn that they held the
+object.
+
+The actual loss of loyalty will occur on a random day during
+the month.
+
+Multiple uses of 886 on the same artifact are additive.
+
+Aura defaults to one.
+
+</PRE>
+</div>
+</li>
+
+<li id="s887">
+<a href="#s887">Forge magical weapon [887]</a>
+<div class="details">
+<PRE>Forge magical weapon [887]
+--------------------------
+Usage: USE 887 &lt;aura&gt; "Name of item"
+
+Required aura:  one or more points
+Required item:  one mithril [82], 500 gold
+Time to cast:   seven days
+
+Create a magical weapon.  The weapon will grant its owner an
+attack bonus equal to 5 * the amount of aura invested in its
+creation.
+
+Up to 20 aura may be invested in a magical weapon.
+
+Example:
+
+	use 887 5 "Sword of Death"
+	&gt; created Sword of Death [ha53].
+
+	Inventory:
+           1  Sword of Death [ha53]           0  +25 attack
+
+</PRE>
+</div>
+</li>
+
+<li id="s888">
+<a href="#s888">Forge magical armor [887]</a>
+<div class="details">
+<PRE>Forge magical armor [888]
+-------------------------
+Usage: USE 888 &lt;aura&gt; "Name of item"
+
+Required aura:  one or more points
+Required item:  one mithril [82], 500 gold
+Time to cast:   seven days
+
+Create magical armor.  The armow will grant its owner a defense
+bonus equal to 5 * the amount of aura invested in its creation.
+
+Up to 20 aura may be invested in magical armor.
+
+Example:
+
+	use 888 5 "Shield of Achilles"
+	&gt; created Shield of Achilles [ha53].
+
+	Inventory:
+           1  Shield of Achilles [ha53]           0  +25 defense
+
+</PRE>
+</div>
+</li>
+
+<li id="s889">
+<a href="#s889">Forge magical bow [889]</a>
+<div class="details">
+<PRE>Forge magical bow [889]
+-----------------------
+Usage: USE 889 &lt;aura&gt; "Name of item"
+
+Required aura:  one or more points
+Required item:  one mallorn wood [70], 500 gold
+Time to cast:   seven days
+
+Create a magical bow.  The bow will grant its owner a missile
+bonus equal to 5 * the amount of aura invested in its creation.
+
+Up to 20 aura may be invested in a magical bow.
+
+Example:
+
+	use 889 5 "Hand of Legolas"
+	&gt; created Hand of Legolas [ha53].
+
+	Inventory:
+           1  Hand of Legolas [ha53]           0  +25 missile
+
+</PRE>
+</div>
+</li>
+
+<li id="s891">
+<a href="#s891">Dispel cloaking from artifact [891]</a>
+<div class="details">
+<PRE>Dispel cloaking from artifact [891]
+-----------------------------------
+Usage:  USE 891 &lt;artifact&gt;
+
+Required aura:  eight points
+Required item:
+Time to cast:   ten days
+
+Remove any cloaking spells from the specified artifact.
+The artifact must be in the caster's inventory.
+
+</PRE>
+</div>
+</li>
+
+<li id="s892">
+<a href="#s892">Arcane symbols [892]</a>
+<div class="details">
+<PRE>Arcane symbols [892]
+--------------------
+Usage:  USE 892 &lt;spell&gt;
+
+Required aura:  two points
+Required item:  blank scroll [84]
+Time to cast:   seven or more days
+
+Transcribe the given spell onto a blank scroll.  The blank scroll will
+be consumed, and a new unique scroll will be produced.  The scroll will
+permit one character to learn the spell from the scroll.
+
+Example:
+
+    USE 892 nnnn       # make a one-time study scroll for spell nnnn
+
+Only Artifact construction [880] spells may be scribed with this skill.
+
+The spell must be known by the character in order to be written.
+The character will still know the spell after it has been scribed.
+
+This spell requires as much time to cast as the skill takes to learn.
+It takes two weeks to write a spell which requires two weeks of study
+to learn.
+
+</PRE>
+</div>
+</li>
+
+<li id="s893">
+<a href="#s893">Arcane symbols [893]</a>
+<div class="details">
+<PRE>Destroy artifact [893]
+----------------------
+Usage:  USE 893 &lt;artifact&gt;
+
+Required aura:  two points
+Required item:  a magical artifact
+Time to cast:   seven days
+
+Attempt to destroy a magical artifact.  The artifact must be in the
+caster's possession.  Some artifacts can only be destroyed in the
+location in which they were created.
+
+Any spells contained in the artifact will be lost when it is destroyed.
+Any aura trapped in the artifact will be released into the caster's
+current aura rating.
+
+</PRE>
+</div>
+</li>
+
+<li id="s894">
+<a href="#s894">Forge palantir [894]</a>
+<div class="details">
+<PRE>Forge palantir [894]
+--------------------
+Usage:  USE 894
+
+Required aura:   eight
+Required items:  one mithril [82]
+                 one gate crystal [83]
+Time to cast:    ten days
+
+A palantir, or stone of far-seeing, is a crystal orb used to
+view images from a great distance.  Once created, the palantir
+may be used to view a distant location:
+
+	use <PALANTIR> <LOCATION>
+
+For example, if a USE 894 creates Palantir [6289], then one may
+view City of Drassa [cx61] with the palantir by issuing the order:
+
+	use 6289 cx61
+
+Use of the palantir takes seven days.  Any character may use the
+palantir; no magical abilities are required.  However, a palantir
+may only be used once each turn.
+
+</PRE>
+</div>
+</li>
+
+</ul>
+
+</li>
+
+<li id="s900">
+<a href="#s900">Necromancy [900]</a>
+<div class="details">
+<PRE>Necromancy [900] six weeks 2 NP
+-------------------------------
+The way of the necromancer leads to fresh graves, the pits of Hades,
+and unspeakable horrors found only in dark corners of men's souls.
+
+Power is gained through animation and enslavement of the dead, both
+followers as well as nobles.  A necromancer looks upon a bloody
+battlefield strewn with the dead as a potential army waiting to be
+trained.
+
+Advanced necromancers wield fierce powers, manipulating evil Runes
+to effect their will upon the world, and making pacts with demons
+to obtain power in return for souls.
+
+With great power also comes great danger, and necromancy is the most
+dangerous of the magical arts.  Only those willing to risk death at
+the hands of civilized men, or worse fates meted out by demons sent
+from the underworld, should even consider its study.
+
+The following skills may be studied directly once Necromancy is known:
+
+   num    skill                              time to learn
+   ---    -----                              -------------
+   901    Transcend death                    four weeks, 1 NP 
+   902    Runes of Evil                      three weeks
+   903    Summon ghost warriors              three weeks
+
+Further skills may be found through research.
+
+   904    Raise undead                       three weeks
+   905    Summon demon lord                  three weeks
+   906    Renew demon bond                   three weeks
+   907    Banish demon lord                  three weeks
+   908    Eating of the dead                 four weeks
+   909    Aura blast                         three weeks
+   911    Absorb aura blast                  three weeks
+
+</PRE>
+</div>
+<ul>
+
+<li id="s901">
+<a href="#s901">Transcend death [901]</a>
+<div class="details">
+<PRE>Transcend death [901]
+---------------------
+Usage:   automatic when needed
+
+Transcend death allows a mortal to pass through Hades unmolested
+by the foul and dangerous spirits who live there.  The necromancer
+must be alone, however.  He cannot be stacked with any other
+nobles, or be accompanied by any followers.
+
+It is also said that when a necromancer with knowledge of 901 dies,
+the body vanishes, and the mage is recreated somewhere in Hades,
+albeit lacking any of his worldly possessions.
+
+</PRE>
+</div>
+</li>
+
+<li id="s902">
+<a href="#s902">Runes of Evil [902]</a>
+<div class="details">
+<PRE>Runes of Evil [902]
+-------------------
+Usage:  USE 902 &lt;spell&gt;
+
+Required aura:  two points
+Required item:  blank scroll [84]
+Time to cast:   seven or more days
+
+The most basic and powerful of the magical languages, Runes of Evil
+may represent vast power.  Descended from neither man or spirit,
+they represent the fundamental Commands which shape the world and
+its events.  They may represent concepts which men are incapable of
+speaking, or even thinking.
+
+Transcribe the given spell onto a blank scroll.  The blank scroll will
+be consumed, and a new unique scroll will be produced.  The scroll will
+permit one character to learn the spell from the scroll.
+
+Example:
+
+    USE 902 nnnn       # make a one-time study scroll for spell nnnn
+
+Only Necromancy [900] spells may be scribed with this skill.
+
+The spell must be known by the character in order to be written.
+The character will still know the spell after it has been scribed.
+
+This spell requires as much time to cast as the skill takes to learn.
+It takes two weeks to write a spell which requires two weeks of study
+to learn.
+
+</PRE>
+</div>
+</li>
+
+<li id="s903">
+<a href="#s903">Summon ghost warriors [903]</a>
+<div class="details">
+<PRE>Summon ghost warriors [903]
+---------------------------
+Usage:  MAKE 18 &lt;days&gt;
+
+Required aura:  one point per day
+Time to cast:   as given
+
+Each day of summoning requires one point of aura, and yields two
+ghost warriors.
+
+Ghost warriors [18] are spirits of dead soldiers summoned to fight
+again on the battlefield.  They have no substance, and thus are
+ineffectual attackers.  Opponents will still select them in combat,
+however, so they are useful for absorbing enemy hits.
+
+Ghost warriors have a attack and defense values of zero.  One hit
+by any attacker will cause them to vanish.
+
+One ghost warrior returns to the Land of the Dead at the end of
+each month.
+
+</PRE>
+</div>
+</li>
+
+<li id="s904">
+<a href="#s904">Summon ghost warriors [904]</a>
+<div class="details">
+<PRE>Raise undead [904]
+------------------
+Usage:   COLLECT 31 [days]
+
+Required aura:  none
+Time to cast:   as given
+
+Undead [31] are dead bodies animated with foul magic, summoned
+from their graves.  While not particularly swift or strong,
+their horrifying nature often inspires terror amongst their
+foes on the battlefield.  Thus they fight with combat rating
+attack-10, defense-10.
+
+One undead may be summoned per day from a graveyard.
+Graveyards furnish up to 15 undead each month.
+
+One or two undead may decompose at the end of each month.
+
+</PRE>
+</div>
+</li>
+
+<li id="s905">
+<a href="#s905">Summon demon lord [905]</a>
+<div class="details">
+<PRE>Summon demon lord [905]
+-----------------------
+Usage:  USE 905 [aura]
+
+Required aura:  three to eight points
+Time to cast:   seven days
+
+Summon a demon lord unit from a graveyard.  The demon lord will
+appear with 15-25 undead and stack with the summoner.
+
+Each graveyard will support the summoning of one demon lord.  No
+further demon lord units may be summoned from a graveyard until
+the graveyard's demon lord has been destroyed or banished.
+
+The amount of aura invested in the summoning determines the
+strength of the demon lord.  The default aura is three points.
+
+	aura	attack/defense
+	----	--------------
+	 3	  (100,100)
+	 4	  (150,150)
+	 5	  (190,190)
+	 6	  (220,220)
+	 7	  (240,240)
+	 8	  (250,250)
+
+Each undead accompanying the demon lord fights with attack-10,
+defense-10.
+
+The demon lord's service is secured with a bond which lasts five
+months, unless renewed.  Demon lords should be banished or have
+their bonds renewed before the five months expires, or they may
+exercise their wrath on the summoner.
+
+Other Necromatic spells provide for banishment of demon lords and
+renewal of their loyalty bonds.
+
+</PRE>
+</div>
+</li>
+
+<li id="s906">
+<a href="#s906">Renew demon bond [906]</a>
+<div class="details">
+<PRE>Renew demon bond [906]
+----------------------
+Usage:  USE 906 &lt;target&gt;
+
+Required aura:  three points
+Time to cast:   seven days
+
+Renew the loyalty bond for a demon lord.  This spell will cause
+the demon lord to remain stacked with its summoner for an additional
+four months.  Demon lord loyalty bonds accumulate to a maximum of
+eight months.
+
+It is wise to keep a demon lord's loyalty bond renewed, lest it
+erode completely, and the demon unit turns on its master.
+
+</PRE>
+</div>
+</li>
+
+<li id="s907">
+<a href="#s907">Banish demon lord [907]</a>
+<div class="details">
+<PRE>Banish demon lord [907]
+-----------------------
+Usage:  USE 907 &lt;target&gt;
+
+Required aura:  six points
+Time to cast:   seven days
+
+Return an demon lord to the Land of the Dead.  The demon lord
+unit must be present in the caster's location.
+
+Once banished, a summoner may again call the demon lord from
+his home graveyard.
+
+</PRE>
+</div>
+</li>
+
+<li id="s908">
+<a href="#s908">Eating of the dead [908]</a>
+<div class="details">
+<PRE>Eating of the dead [908]
+------------------------
+Usage:  USE 908 &lt;dead body&gt;
+
+Required aura:  five points
+Required item:  ratspider venom
+Time to cast:   fourteen days
+
+A complex ritual is executed whereby the mage ingests the ratspider
+venom together with the brains of the dead noble.  The mage will
+learn every skill previously known by the dead noble.
+
+There is a 33% chance that the toxic venom of the ratspider will cause
+the mage to perish during use of this skill.
+
+Advanced Sorcery [920] cannot be learned through the use of 908.
+
+</PRE>
+</div>
+</li>
+
+<li id="s909">
+<a href="#s909">Aura blast [909]</a>
+<div class="details">
+<PRE>Aura blast [909]
+----------------
+Usage:  USE 909 &lt;target&gt; &lt;aura&gt; [have-left]
+
+Required aura:  as given
+Time to cast:   one day
+
+The mage directs a blast of raw energy at the target character.
+The target will suffer two points of damage for each point of
+aura used in the blast.  For example, USE 909 5201 25 would
+send a blast of 25 aura at [5201], causing a 50 point wound.
+
+If aura is zero, all available current aura will be used.  If
+have-left is given, at least that much current aura will be
+retained, and not used for the blast
+
+It is not possible to aura blast between Hades, Faery and
+the real world.
+
+</PRE>
+</div>
+</li>
+
+<li id="s911">
+<a href="#s911">Absorb aura blast [911]</a>
+<div class="details">
+<PRE>Absorb aura blast [911]
+-----------------------
+Usage:  USE 911 &lt;flag&gt;
+
+Required aura:  none
+Time to cast:   zero days
+
+Knowledge of 911 will, by default, cause the mage to absorb any
+blasts of aura instead of being harmed by them.  If absorbed,
+half of the aura used in the blast will be added to the aura
+of the mage being blasted.
+
+Instead of absorbing aura, the blast may be reflected back to the
+attacker.  To set this option, specify a flag of 1:
+
+	use 911 1	# reflect aura blasts back at attacker
+	use 911 0	# absorb aura blasts into current aura
+
+Aura blasts may only be reflected once.  If a blast is reflected back
+to an attacker with knowledge of 911, the attacker will be harmed,
+and will not absorb or reflect the blast.
+
+</PRE>
+</div>
+</li>
+
+</ul>
+
+</li>
+
+<li id="s920">
+<a href="#s920">Advanced sorcery [920]</a>
+<div class="details">
+<PRE>Advanced sorcery [920] six weeks 
+--------------------------------
+The blackest of the black arts, the tool of the most powerful
+mages, Advanced sorcery brings deep knowledge of the workings
+of the mortal and spiritual realms, and the ability to alter
+them at will.
+
+Skills within this category may be found through research.
+
+   921    Trance                             four weeks
+   922    Teleport items                     four weeks
+
+</PRE>
+</div>
+<ul>
+
+<li id="s921">
+<a href="#s921">Trance [921]</a>
+<div class="details">
+<PRE>Trance [921]
+------------
+Usage:  TRANCE
+
+Required aura:   none
+Time to cast:    28 days
+
+Causes the mage enters a deep trance which lasts nearly an
+entire month.  Upon completition, the mage is cured of any
+illness or injury.  The mage's current aura rating will be
+raised to 2/3 of his maximum effective rating (maximum
+aura rating plus bonuses from any items held.)  If the
+mage's current aura rating is already higher than 2/3 of
+his maximum, the current aura rating will be unchanged.
+
+</PRE>
+</div>
+</li>
+
+<li id="s922">
+<a href="#s922">Teleport items [922]</a>
+<div class="details">
+<PRE>Teleport items [922]
+--------------------
+Usage:  USE 922 &lt;to-who&gt; &lt;item&gt; &lt;qty&gt; [have-left]
+
+Required aura:   three points + one per 50 weight
+Time to cast:    three days
+
+Teleport quantity of an item in inventory to another character.
+Specifying zero for quantity will cause the unit to teleport all
+of its inventory of the item.  An amount specified by have-left
+will be retained.
+
+For example, if Feasel has 100 gold [1]:
+
+        USE 922 5499 1 50          #  Send 50 gold to [5499]
+        USE 922 5499 1 0           #  Send all 100 gold to [5499]
+        USE 922 5499 1 100         #  Send all 100 gold to [5499]
+        USE 922 5499 1 100 25      #  Send 75 gold to [5499]
+        USE 922 5499 1 0 25        #  Send 75 gold to [5499]
+
+Three points of aura are required to teleport items, plus one extra
+point of aura for each 50 units of weight to be sent.
+
+Use of 922 is subject to the same permission checks as GIVE.
+
+</PRE>
+</div>
+</li>
+
+</ul>
+
+</li>
+
+</ul>
+</BODY>
+</HTML>

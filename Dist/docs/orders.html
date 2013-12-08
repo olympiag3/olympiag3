@@ -1,0 +1,4445 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
+<HTML lang=en xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<HEAD>
+<TITLE>Orders</TITLE>
+<META content="text/html; charset=utf-8" http-equiv="Content-Type">
+<LINK rel=stylesheet type=text/css href="olympia.css">
+</HEAD>
+<BODY>
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script type="text/javascript">
+function toggleVisibility()
+{
+	$(this).parent().find("div.details").toggle("fast");
+	return false;
+}
+
+$(document).ready(function()
+{
+	$("li > a").click(toggleVisibility);
+});
+</script>
+<DIV class=section-1>
+<DIV id=node-80 class=section-2>
+<H1 class=book-heading>Orders</H1>
+<P>
+These are the different orders accepted by the order scanner.
+The order scanner will report for syntax errors, not logical errors.
+</P>
+<ul>
+
+<li id="accept">
+<a href="#accept">Accept</a>
+<DIV class="details">
+<HR>
+<PRE><B>ACCEPT     &lt;from-who&gt; &lt;item&gt; [qty]             time: 0 days    priority: 0</B></PRE>
+<HR>
+<SPAN>
+The <CODE>accept</CODE> order must be used in order to receive items 
+from other players.
+Gold is exempt from the ACCEPT check.
+The effects of ACCEPT last until the end of the turn, then expire.
+</SPAN><BR>
+<P>
+If ACCEPT is issued by a character, it applies to items given to
+that character only.
+If ACCEPT is issued by the player entity, it applies to every unit
+in the faction.
+</P>
+<P>
+If from-who is 0, the item will be accepted from anyone.
+Otherwise from-who should specify a character or a faction.
+If item is 0, any item will be accepted.
+If qty is zero or is not present, any quantity of the item will
+be accepted.
+</P>
+<P>
+If qty is specified, the given quantity must be less than or equal
+to the qty specified on the matching ACCEPT order.
+If the GIVE is successful, the given quantity will be deduced from
+the remaining qty value in the outstanding ACCEPT.
+</P>
+<P>
+A GIVE which could be passed by multiple overlapping ACCEPT orders
+will choose the first which matches, first for the character, then
+for the player entity.
+If an ACCEPT order specifies an item quantity limit, the quantity
+must be greater than or equal to the amount specified in the GIVE
+order.
+Multiple conflicting ACCEPT orders will not combined to satisfy a
+single GIVE.
+</P>
+<P>
+Examples:
+</P>
+<PRE>    ACCEPT 0 0              # accept anything from anyone
+    ACCEPT 0 10             # accept peasants from anyone
+    ACCEPT 2950 0           # accept anything from character 2950
+    ACCEPT 2950 10          # accept peasants from character 2950
+    ACCEPT 2950 10 5        # accept up to 5 peasants from
+                            # character 2950
+    ACCEPT 501 10           # accept peasants from any character
+                            # in faction 501
+    ACCEPT 501 10 5         # accept up to 5 peasants from characters
+                            # in faction 501
+</PRE>
+</DIV>
+</li>
+
+<li id="admit">
+<a href="#admit">Admit</a>
+<DIV class="details">
+<HR>
+<PRE><B>ADMIT      &lt;who or what&gt; [ALL] [units] time: 0 days    priority: 0</B></SPAN></PRE>
+<HR>
+
+<P>
+Allow units to stack with the specified character, or to enter the
+given building or ship.
+By default, a unit may not stack with a character belonging to
+another faction, or enter a building controlled by another player.
+</P>
+<P>
+The first argument to <CODE>admit</CODE> may either be a
+character, building or ship.
+If a character is given, <CODE>admit</CODE> will specify who may 
+stack with the unit.
+If a building or ship is given, <CODE>admit</CODE> will determine
+who may enter the structure.
+</P>
+<P>
+There are three cases for the rest of <CODE>admit</CODE>'s
+arguments: If no further arguments are given, <CODE>admit</CODE>
+will clear the permissions for the given entity, and deny
+admission or stacking to any foreign unit:</P>
+<P><PRE>admit 3590                  # admit no one to 3590</PRE></P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">If a list 
+of units 
+or players is given, those units will be permitted to enter or stack 
+with the 
+given entity:</P>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DD><PRE>admit 3590 778 2960 4240    # allow any member of faction 
+778,
+                            # as well as 2960 and 4240, into 3590
+</PRE></DD></DL>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Note that 
+if a 
+faction is specified, units within the faction must not be concealing 
+their lord 
+in order to be recognized.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: 
+medium">Permission may be 
+granted to every player's units:</P>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DD><PRE>admit 3590 all              # allow anyone into 3590
+</PRE></DD></DL>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">A list of 
+units to 
+exclude may follow `<CODE>ALL</CODE>':</P>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DD><PRE>admit 3590 all 778 2960 4240    # allow anyone into 3590, 
+except
+                                # any member of faction 778, or
+                                # units 2960 or 4240.
+</PRE></DD></DL>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Summary 
+examples:</P>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DD><PRE>admit 3590              # admit no one to 3590
+admit 3590 all          # admit anyone to 3590
+admit 3590 778          # admit any member of faction 778 to 3590
+admit 3590 all 778      # admit anyone but a member of faction 778
+admit 3590 2960 4240    # admit 2960 or 4240 to 3590
+</PRE></DD></DL>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">If there 
+are too 
+many units to list on a line with a 
+single&nbsp;<CODE>admit</CODE>&nbsp;order, 
+more&nbsp;<CODE>admit</CODE>&nbsp;orders may be used:</P>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DD><PRE>admit 3590 2596 3921 3934 3999 4012 4045 4046 4256 4300
+</PRE></DD></DL>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">has the 
+same 
+meaning as:</P>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DD><PRE>admit 3590 2596 3921 3934 3999 4012
+admit 3590 4045 4046 4256 4300
+</PRE></DD></DL>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Don't 
+forget to 
+give the entity again as the first argument on 
+continuation&nbsp;<CODE>admit</CODE>&nbsp;orders! (3590 in the above 
+example)</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Note, 
+however, that 
+the first&nbsp;<CODE>admit</CODE>&nbsp;order each turn begins a new 
+admit list 
+for the entity. In other words, units cannot be added to admit lists. 
+Suppose, 
+on the turn after the above admit orders were issued, the player 
+ordered:</P>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DD><PRE>admit 3590 4345
+</PRE></DD></DL>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Instead 
+of adding 
+4345 to the admit list for 3590, the list would first be cleared, and 
+4345 would 
+be the only permitted unit.</P>
+<P 
+style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: 
+medium">Only&nbsp;<CODE>admit</CODE>&nbsp;permissions 
+toward the top most character of a stack are considered. Other units 
+which do 
+not have&nbsp;<CODE>admit</CODE>&nbsp;permission may accompany a 
+character who 
+does.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Admit 
+lists are 
+kept for the faction as a whole, not for particular units. 
+The&nbsp;<CODE>admit</CODE>&nbsp;order should be executed by the player 
+entity.</P>
+</DIV>
+</li>
+
+<li id="attack">
+<a href="#attack">Attack</a>
+<DIV class="details">
+<HR>
+<PRE><SPAN style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium" 
+class=Apple-style-span><B>ATTACK     &lt;target&gt; [flag]             
+         time: 1 day     priority: 3
+</B></SPAN></PRE>
+<HR>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Engage 
+two stacks 
+in combat. Only the top most character in a stack may initiate 
+combat.</P>
+<P 
+style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: 
+medium"><VAR>target</VAR>&nbsp;may 
+be another unit, a ship, or a building, or a sub-location.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">If flag 
+is 1, the 
+attacker will not attempt to move into the defender's position.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">For 
+example, one 
+would use the order `<CODE><CODE>attack</CODE>&nbsp;7099</CODE>' to 
+attack this 
+castle:</P>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DD><PRE>Inner locations:
+   Castle [7099], castle, defense 20, owner:
+      Law Netexus [2020], with three peasants
+</PRE></DD></DL>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Do not 
+use 
+`<CODE><CODE>attack</CODE>&nbsp;2020</CODE>', as Law Netexus is not in 
+the same 
+location as characters outside the castle. If successful, the attackers 
+will 
+move into the castle.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">A unit 
+may not 
+attack another member of its own faction. Two units in the same stack 
+may not 
+engage in combat.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Prisoners 
+may not 
+be attacked. To attack the stack holding a prisoner, issue 
+an&nbsp;<CODE>attack</CODE>&nbsp;order for another member of the stack 
+(such as 
+the top unit in the stack).</P>
+</DIV>
+</li>
+
+<li id="banner">
+<a href="#banner">Banner</a>
+<DIV class="details">
+<HR>
+<PRE><SPAN style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium" 
+class=Apple-style-span><B>BANNER     [unit] "message"                  
+   time: 0 days    priority: 1
+</B></SPAN></PRE>
+<HR>
+
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Provide a 
+short 
+message describing something about the unit. The message will appear 
+after the 
+unit in the turn report.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">If a unit 
+number is 
+specified, the given unit's banner will be changed. This is useful for 
+setting 
+banners on entities which don't execute orders directly, such as ships 
+and 
+castles. Banners may not be set for units controlled by another 
+player.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: 
+medium">Example:</P>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DD><PRE>&gt; banner "carrying a gold standard"
+&gt; banner 2019 "carrying a gold standard"
+
+Seen here:
+   Fighters of Pelenth [2019], "carrying a gold standard"
+</PRE></DD></DL>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">The 
+message should 
+be limited to 50 characters or it will be rejected.
+</P>
+</DIV>
+</li>
+
+<li id="behind">
+<a href="#behind">Behind</a>
+<DIV class="details">
+<HR>
+<PRE><SPAN style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium" 
+class=Apple-style-span><B>BEHIND     &lt;number&gt;                    
+         time: 0 days    priority: 1
+</B></SPAN></PRE>
+<HR>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Indicate 
+how close 
+to the front lines the unit should stand in combat. Number should be 
+between 0 
+and 9. 0 is the front, 9 the rear.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Only 
+missile 
+fighters such as archers may attack from the rear. Swordsmen, knights, 
+etc. may 
+not. When all of the units in a row have been killed or taken prisoner, 
+the next 
+row will advance (skipping any empty rows).
+</P>
+</DIV>
+</li>
+
+<li id="board">
+<a href="#board">Board</a>
+<DIV class="details">
+<HR>
+<PRE><SPAN style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium" 
+class=Apple-style-span><B>BOARD      &lt;ship&gt; [maximum fee]        
+         time: 0 days    priority: 2
+</B></SPAN></PRE>
+<HR>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Pay a fee 
+to board 
+a ship operating as a ferry. If a maximum is specified, no more than 
+that amount 
+of gold will be paid as a boarding fee.</P>
+<P 
+style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: 
+medium">The&nbsp;<CODE>board</CODE>&nbsp;order 
+requires that the ship be operating as a ferry. In other words, the 
+ship's 
+captain must have set a boarding fee with 
+the&nbsp;<CODE>fee</CODE>&nbsp;order. 
+Boarding fees are charged per 100 weight of the passengers. For example, 
+if the 
+captain's fee is 200 per 100 weight, and a stack with a total weight of 
+1,500 
+wants to&nbsp;<CODE>board</CODE>&nbsp;the captain's ship, the stack 
+leader must 
+have 3,000 gold. The fee will be deducted from the boarding stack 
+leader's 
+inventory and given to the captain of the ship.</P>
+<P 
+style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: 
+medium">The&nbsp;<CODE>board</CODE>&nbsp;order 
+will fail if the ship is already overloaded, or if the ship would be 
+overloaded 
+if the stack boarded the ship.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: 
+medium">Passengers waiting 
+to board a ferry should use&nbsp;<CODE>wait ferry</CODE>. Ferry captains 
+should 
+sound their horn before departure with 
+the&nbsp;<CODE>ferry</CODE>&nbsp;order.
+</P>
+</DIV>
+</li>
+
+<li id="breed">
+<a href="#breed">Breed</a>
+<DIV class="details">
+<P>
+"Breed" is an alias for using the Beastmastery skill
+<A href="skills.html#s654">Breed Beasts [654]</A>.
+</P>
+</DIV>
+</li>
+
+
+<li id="bribe">
+<a href="#bribe">Bribe</a>
+<DIV class="details">
+<HR>
+<PRE><SPAN style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium" 
+class=Apple-style-span><B>BRIBE      &lt;who&gt; &lt;amount&gt; [flag] 
+               time: 7 days    priority: 3
+</B></SPAN></PRE>
+<HR>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Offer a 
+character 
+gold in an attempt to win their service. The Persuasion subskill Bribe 
+noble 
+[671] is required to use the&nbsp;<CODE>bribe</CODE>&nbsp;order.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">The 
+amount must be 
+at least 250 gold or the receiving noble will not consider it a serious 
+offer.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Nobles 
+with 
+oathbound loyalty ignore bribes. They may accept the gift, but they will 
+not 
+renounce loyalty to their lord.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Nobles 
+with 
+contract loyalty will consider the bribe if it meets or exceeds their 
+current 
+loyalty rating. For example, a noble of loyalty contract-750 would 
+ignore any 
+bribe of less than 750 gold.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Nobles 
+with fear 
+loyalty, or nobles not sworn to any lord, will seriously consider any 
+bribe of 
+at least 250 gold.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">If the 
+receiving 
+noble considers the bribe, there is a 33% chance they will renounce 
+loyalty to 
+their current lord, and swear fealty to the bribing character. There is 
+also a 
+chance that they will report the bribe or pocket it for themselves. In 
+some 
+cases they may even renounce loyalty to their lord, but not swear fealty 
+to the 
+briber, instead choosing to go off on their own.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: 
+medium">Characters who are 
+successfully bribed will have loyalty contract-250 to the bribing 
+character. If 
+flag is 1, and the bribe attempt is successful, the bribed character 
+will stack 
+with the briber.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Bribes 
+will be 
+refused by characters who have already switched lords during the month 
+because 
+of bribery. For example, suppose Osswid successfully bribes Feasel, and 
+Feasel 
+swears loyalty to Osswid. Later that turn, if Procrustes attempts to 
+bribe 
+Feasel, Feasel will refuse to accept the bribe.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: 
+medium">Examples:</P>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DD><PRE>bribe 5499 750      # Offer [5499] 750 gold to switch 
+factions.
+                    # If successful, [5499] will not stack with the
+                    # briber.
+
+bribe 3409 300 1    # Offer [3409] 300 gold to switch factions.
+                    # If successful, [3409] will stack with the 
+briber.</PRE></DD></DL>
+</DIV>
+</li>
+
+<li id="build">
+<a href="#build">Build</a>
+<DIV class="details">
+<HR>
+<PRE><SPAN style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium" 
+class=Apple-style-span><B>BUILD      &lt;structure&gt; "Name" 
+[max-days] [id]   time: varies    priority: 3
+</B></SPAN></PRE>
+<HR>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Build the 
+indicated 
+structure or ship. All construction tasks require at least three workers 
+to 
+begin. The character should acquire the required quantity of building 
+material, 
+unstack from beneath other characters, and issue one of the following 
+build 
+commands:</P>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DT>&nbsp;</DT>
+  <DD><PRE>build inn "<VAR>name of inn</VAR>"
+build mine "<VAR>name of mine</VAR>"
+build temple "<VAR>name of temple</VAR>"
+build tower "<VAR>name of tower</VAR>"
+build castle "<VAR>name of castle</VAR>"
+build galley "<VAR>name of galley</VAR>"
+build roundship "<VAR>name of roundship</VAR>"
+</PRE></DD></DL>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">For 
+example, to 
+start building a castle, one might issue:</P>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DT>&nbsp;</DT>
+  <DD><PRE>build castle "Castle Blood"
+</PRE></DD></DL>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">A new 
+structure or 
+ship will be created, and the builder will be placed inside. 
+Construction 
+proceeds until completed. Interrupted construction may be resumed by 
+entering 
+the uncompleted structure and reissuing the appropriate build command 
+(<CODE>build roundship</CODE>,&nbsp;<CODE>build tower</CODE>, etc.)</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">If the 
+optional&nbsp;<CODE>[id]</CODE>&nbsp;parameter is supplied, the builder 
+may 
+determine the entity-ID of the newly-built structure by specifying one 
+from 
+the&nbsp;<I>unformed</I>&nbsp;list appearing on the most recent turn 
+report.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: 
+medium">&nbsp;</P>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DT>&nbsp;</DT>
+  <DD><PRE>kind        effort    material   skill         where
+----        ------    --------   -----         -----
+inn            300     75 wood    680          province or city
+mine           500     25 wood    680 or 720   mountain or rocky hill
+temple       1,000    50 stone    680          anywhere
+tower        2,000   100 stone    680          anywhere
+castle      10,000   500 stone    680          province or city
+galley         250     50 wood    602          ocean port
+roundship      500    100 wood    602          ocean port
+</PRE></DD></DL>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Effort is 
+in 
+worker-days.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: 
+medium">Construction [680] 
+is required to erect buildings. Shipbuilding [602], a subskill of 
+Shipcraft 
+[600], is required to build ships. Mines may be built either with 
+Construction 
+[680] or Mining [720].</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">The noble 
+will 
+cease work after the specified maximum number of days have been spent at 
+construction, or the task is finished, whichever comes first. If a 
+maximum 
+number of days to spend working is not given, construction continues 
+until the 
+task is finished.
+</P>
+</DIV>
+</li>
+
+<li id="buy">
+<a href="#buy">Buy</a>
+<DIV class="details">
+<HR>
+<PRE><SPAN style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium" 
+class=Apple-style-span><B>BUY        &lt;item&gt; &lt;qty&gt; 
+&lt;price&gt; [have-left]     time: 0 days    priority: 1
+</B></SPAN></PRE>
+<HR>
+
+<P 
+style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: 
+medium">Buy&nbsp;<VAR>quantity</VAR>&nbsp;of 
+the given item for no more than&nbsp;<VAR>price</VAR>&nbsp;each.</P>
+<P 
+style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: 
+medium">If&nbsp;<VAR>quantity</VAR>&nbsp;is 
+zero, any pending&nbsp;<CODE>buy</CODE>&nbsp;order for the indicated 
+item will 
+be canceled.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Only one 
+pending&nbsp;<CODE>buy</CODE>&nbsp;order may be active for each item at 
+a time. 
+If two&nbsp;<CODE>buy</CODE>&nbsp;orders are issued for the same item, 
+and the 
+first has not yet completed, the second&nbsp;<CODE>buy</CODE>&nbsp;order 
+will 
+replace the first.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Buys and 
+sells are 
+only matched in cities, where markets may be found to execute trades. 
+However,&nbsp;<CODE>buy</CODE>&nbsp;and&nbsp;<CODE>sell</CODE>&nbsp;may 
+be 
+issued anywhere.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">If the a 
+match is 
+found with a seller, the trade will be executed immediately. Otherwise, 
+the 
+trade will be saved until a match with a seller may be found.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: 
+medium">Example:</P>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DD><PRE>&gt; buy 79 3 5
+Try to buy three iron [79] for 5 gold each.
+</PRE></DD></DL>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">If there 
+is a 
+seller of iron in the city, selling for 5 gold or less, the trade will 
+be 
+executed:</P>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DD><PRE>1: Bought three iron [79] for 15 gold.
+</PRE></DD></DL>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: 
+medium">Otherwise, the buy 
+will be placed on the character's pending trades list:</P>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DD><PRE>Pending trades:
+
+trade    price    qty   item
+-----    -----    ---   ----
+buy        5      3   iron [79]
+</PRE></DD></DL>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">At the 
+end of the 
+turn, the buy order will appear in the city's market report:</P>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DD><PRE>Market report:
+
+trade    who    price    qty   item
+-----    ---    -----    ---   ----
+  buy   2019        5      3   iron [79]
+</PRE></DD></DL>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">A trade 
+will match 
+between a buyer and a seller if the buyer's price is greater than or 
+equal to 
+the seller's price. The actual price that the trade will be made at is 
+the 
+seller's price.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Have-left 
+is an 
+amount of gold that the character will not spend on this trade. For 
+instance, if 
+the unit issued&nbsp;<CODE>buy</CODE>&nbsp;79 2 10 5, this would mean 
+`<CODE>Buy 
+two iron [79] for 10 gold each, but not if I'll have less than 5 gold 
+left 
+over.</CODE>' If the character had 15 gold, only one of the iron would 
+be 
+bought.
+</P>
+</DIV>
+</li>
+
+<li id="catch">
+<a href="#catch">Catch</a>
+<DIV class="details">
+<HR>
+<PRE><SPAN style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium" 
+class=Apple-style-span><B>CATCH      [number of horses] [days]         
+   time: as given  priority: 3
+</B></SPAN></PRE>
+<HR>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Attempt 
+to catch 
+any wild horses found roaming the plains or in a pasture. Each day the 
+noble 
+will have a 50% chance of catching a wild horse, if any can be found. Up 
+to five 
+horses may be caught per month in a location.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">A unit 
+must know 
+the Catch wild horses [655] subskill of Beastmastery [650] in order to 
+catch 
+horses.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: 
+medium">Examples:</P>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DD><PRE>catch        # catch as many horses as possible
+catch 1      # stop after catching 1 wild horse
+catch 0 10   # try to catch horses for 10 days
+catch 1 10   # stop after catching 1 wild horse, or 10 days,
+             # whichever comes first
+</PRE></DD></DL>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">In all 
+cases, 
+horse-catching ceases when no more horses can be found roaming the 
+plains.&nbsp;<CODE>catch</CODE>&nbsp;is an alias for 
+`<CODE><CODE>collect</CODE>&nbsp;51</CODE>'.
+</P>
+</DIV>
+</li>
+
+<li id="claim">
+<a href="#claim">Claim</a>
+<DIV class="details">
+<HR>
+<PRE><SPAN style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium" 
+class=Apple-style-span><B>CLAIM      &lt;item&gt; [number]             
+          time: 0 days   priority: 1
+</B></SPAN></PRE>
+<HR>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">New 
+players are 
+given a few things to get them started. Rather than load them with 
+possessions 
+when they first set foot in the world, slowing their travel and make 
+them 
+tempting targets for bandits, they may obtain these items at any time 
+with 
+the&nbsp;<CODE>claim</CODE>&nbsp;command.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">New 
+players are 
+given:</P>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DD><PRE>3,000 gold [1]
+  100 stone [78]
+   50 wood [77]
+</PRE></DD></DL>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Any unit 
+in the 
+player's faction may claim the items.</P>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DD><PRE>&gt; claim 77
+Claimed 50 wood.
+&gt; claim 1 1000
+Claimed 1,000 gold.
+</PRE></DD></DL>
+<P 
+style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: 
+medium"><CODE>claim</CODE>&nbsp;may 
+not be used in Hades, Faery or the Cloudlands.
+</P>
+</DIV>
+</li>
+
+<li id="collect">
+<a href="#collect">Collect</a>
+<DIV class="details">
+<HR>
+<PRE><SPAN style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium" 
+class=Apple-style-span><B>COLLECT    &lt;item&gt; [number] [days]      
+         time: as given  priority: 3
+</B></SPAN></PRE>
+<HR>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Catch, 
+harvest, 
+collect or produce the given item from the unit's current location, if 
+possible. 
+Collection proceeds until the desired quantity of the item has been 
+obtained, or 
+the given number of days has passed, whichever comes first.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">If 
+neither number 
+or days is given,&nbsp;<CODE>collect</CODE>&nbsp;will continue until the 
+location's supply of the item is fully depleted.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: 
+medium">Collection ceases 
+when no more of the resource is available in the location. Thus, 
+`<CODE><CODE>collect</CODE>&nbsp;87 10</CODE>' may obtain less than 10 
+fish 
+[87], if the current ocean province's supply of fish runs out.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: 
+medium">Examples:</P>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DD><PRE>collect 10         # Recruit as many peasants [10] as 
+possible
+collect 68 2       # Harvest two yew trees
+collect 87 0 10    # Fish for 10 days
+collect 87 25 10   # Fish until 25 fish [87] have been caught, or
+                   # for 10 days, whichever comes first
+</PRE></DD></DL>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Many 
+collection 
+commands have aliases so they can be more easily remembered. For 
+example, the 
+above orders could be written:</P>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DD><PRE>recruit
+yew 2
+fish 0 10
+fish 25 10
+</PRE></DD></DL>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Most 
+collection 
+tasks require the unit to possess a particular skill, and to be in a 
+likely 
+location to obtain the desired item.</P>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DD><PRE>num  item        who     where              qty  skill  
+chance  alias
+---  ----        ---     -----              ---  -----  ------  -----
+ 10  peasant     noble   city, province[1]   10   none   100%   
+<CODE>recruit</CODE>
+ 68  yew         worker  yew groves           5    703   100%   
+<CODE>yew</CODE>
+ 77  wood        worker  forest              30    702   100%   
+<CODE>wood</CODE>
+ 78  stone       worker  mountains           50    682   100%   
+<CODE>quarry</CODE>
+ 87  fish        sailor  ocean               50    603    50%   
+<CODE>fish</CODE>
+ 51  wild horse  noble   plains               5    655    50%   
+<CODE>catch</CODE>
+</PRE></DD></DL>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Other 
+rare items 
+which may be collected are listed in the lore sheets for Collect rare 
+foliage 
+[704], a subskill of Forestry [700], and Collect rare elements [696], a 
+subskill 
+of Alchemy [690].</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: 
+medium">Explanation of 
+table columns:</P>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DT><EM>num</EM></DT>
+  <DT><EM>item</EM></DT>
+  <DD>The resource to be collected. For example, Fish [87].</DD>
+  <DT><EM>who</EM></DT>
+  <DD>Some tasks may only be performed by a noble, while others must be 
+done by 
+  men, such as workers or sailors. For instance, recruiting requires the 
+
+  attention of a noble. Additional men are of no benefit. 
+  <P>Fishing, however, requires sailors. The noble himself does not 
+participate. 
+  The more sailors available for fishing, the quicker the fish will be 
+  caught.</P></DD>
+  <DT><EM>where</EM></DT>
+  <DT><EM>qty</EM></DT>
+  <DD>Resources are replenished at the end of each month. Every province 
+
+  (forest, mountain or swamp) will have ten recruitable peasants at the 
+  beginning of each turn. Each ocean province will have 50 fish that may 
+be 
+  caught. Mountains yield up to 50 stone per turn.</DD>
+  <DT><EM>skill</EM></DT>
+  <DD>Skills are required for most collection tasks (except 
+recruiting):<BR>
+  <DL>
+    <DD><PRE>activity        subskill                  category
+--------        --------                  --------
+recruiting      none                      none
+cutting yew     Harvest yew [703]         Forestry [700]
+cutting timber  Harvest lumber [702]      Forestry [700]
+quarrying       Stone quarrying [682]     Construction [680]
+fishing         Fishing [603]             Shipcraft [600]
+horse catching  Catch wild horses [655]   Beastmastery [650]
+</PRE></DD></DL></DD>
+  <DT><EM>chance</EM></DT>
+  <DD>The rate of collection is certain for most tasks. Cutting timber 
+yields 
+  one wood [77] per day per worker, as long as the forest has a supply 
+of wood. 
+  <P>However, some tasks have an element of randomness. Horse-catching, 
+for 
+  example, is a difficult, uncertain task. Each day there is only a 50% 
+chance 
+  that a noble will catch a wild horse.</P>
+  <P>The chance is for the unit as a whole, not for individual men 
+engaged in 
+  the task. Thus, a unit of sailors will collect fish about half of the 
+days 
+  they spend fishing. The other half, no fish will be caught.</P></DD>
+  <DT><EM>alias</EM></DT>
+  <DD>Common collection tasks have an alias so they are easier to 
+remember.<BR>
+  <DL>
+    <DD><PRE>task            alias
+----            -----
+<CODE>collect</CODE> 10      <CODE>recruit</CODE>
+<CODE>collect</CODE> 68      <CODE>yew</CODE>
+<CODE>collect</CODE> 77      <CODE>wood</CODE>
+<CODE>collect</CODE> 78      <CODE>quarry</CODE>
+<CODE>collect</CODE> 87      <CODE>fish</CODE>
+<CODE>collect</CODE> 51      <CODE>catch</CODE>
+</PRE></DD></DL>
+  <P>For example, the orders `<CODE><CODE>collect</CODE>&nbsp;51 0 
+10</CODE>' 
+  and `<CODE><CODE>catch</CODE>&nbsp;0 10</CODE>' are 
+equivalent.</P></DD></DL>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Note that 
+if no 
+arguments are supplied to the&nbsp;<CODE>collect</CODE>&nbsp;order (or 
+one of 
+its aliases), it may never terminate. For instance, suppose a unit with 
+one 
+sailor fishes alone in an ocean province:</P>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DD><PRE>fish    -or-    collect 87
+</PRE></DD></DL>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Since no 
+arguments 
+were given for the&nbsp;<CODE>fish</CODE>&nbsp;order, fishing will 
+continue as 
+long as the ocean has a supply of fish. The sailor will produce, on 
+average, a 
+fish every two days, or 15 fish per month. Since this is less than the 
+monthly 
+supply of fish in an ocean province, the sailor will never exhaust the 
+supply, 
+and thus is likely to continue fishing forever, until interrupted with 
+a&nbsp;<CODE>stop</CODE>&nbsp;order.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: 
+medium">&nbsp;</P>
+<HR style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">[1] 
+forest, plains 
+or mountain
+</P>
+</DIV>
+</li>
+
+<li id="contact">
+<a href="#contact">Contact</a>
+<DIV class="details">
+<HR>
+<PRE><SPAN style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium" 
+class=Apple-style-span><B>CONTACT    &lt;who&gt;                       
+         time: 0 days    priority: 0
+</B></SPAN></PRE>
+<HR>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Used by 
+characters 
+hidden through stealth, magic, or because of fog to inform other units 
+of their 
+presence.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">For 
+example, if 
+Osswid [5501] is employing stealth skills to hide, he will not be 
+visible to 
+other characters. Orders issued by other units referencing [5501] will 
+fail.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">However, 
+Osswid may 
+desire to allow certain units to interact with him while he is hidden. 
+If this 
+is the case, he should issue&nbsp;<CODE>contact</CODE>&nbsp;orders for 
+those 
+units to be informed of his presence.</P>
+<P 
+style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: 
+medium">The&nbsp;<CODE>contact</CODE>&nbsp;order 
+may also be specify a player number. In this case, every unit in the 
+specified 
+player's faction will be aware of the hidden unit's presence.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Contact 
+information 
+is maintained until the hidden unit moves. Once the unit has moved, it 
+must 
+issue new&nbsp;<CODE>contact</CODE>&nbsp;orders if other units are to 
+continue 
+to be able to interact with it.</P>
+<P 
+style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: 
+medium">The&nbsp;<CODE>contact</CODE>&nbsp;order 
+is silent; it does not provide a message to the contacted player or 
+faction.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Units 
+belonging to 
+the same player are always aware of each other's presence. They do not 
+need to 
+use&nbsp;<CODE>contact</CODE>.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Hidden 
+units are 
+not shown in the location report, even if their presence has been reveal 
+
+through&nbsp;<CODE>contact</CODE>&nbsp;or&nbsp;<CODE>seek</CODE>.
+</P>
+</DIV>
+</li>
+
+<li id="decree">
+<a href="#decree">Decree</a>
+<DIV class="details">
+<HR>
+<PRE><SPAN style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium" 
+class=Apple-style-span><B>DECREE     &lt;decree&gt;                    
+         time: 0 days    priority: 0
+</B></SPAN></PRE>
+<HR>
+
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Issue a 
+decree to 
+all garrisons that the noble controls, either directly or through other 
+characters who have pledged to the noble. There is no way to issue 
+selective 
+decrees to individual garrisons; all garrisons under control receive the 
+same 
+decree.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">The 
+decree may be 
+one of the following:</P>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DT><EM>watch&nbsp;<VAR>who</VAR></EM></DT>
+  <DD>Instruct the garrisons to watch for the given unit. Each garrison 
+may 
+  accept up to three&nbsp;<CODE>decree watch</CODE>&nbsp;order per 
+month. 
+  Additional watch decrees are ignored.</DD>
+  <DT><EM>hostile&nbsp;<VAR>who</VAR></EM></DT>
+  <DD>Instruct the garrisons to attack the specified unit on sight. Each 
+
+  garrison will accept up to three&nbsp;<CODE>decree 
+hostile</CODE>&nbsp;orders 
+  per month. Additional hostile decrees are 
+ignored.</DD></DL>
+</DIV>
+</li>
+
+<li id="default">
+<a href="#default">Default</a>
+<DIV class="details">
+<HR>
+<PRE><SPAN style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium" 
+class=Apple-style-span><B>DEFAULT    &lt;who&gt;                       
+         time: 0 days    priority: 0
+</B></SPAN></PRE>
+<HR>
+
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Clear 
+any&nbsp;<CODE>hostile</CODE>,&nbsp;<CODE>neutral</CODE>&nbsp;or&nbsp;<CO
+DE>defend</CODE>&nbsp;attitude 
+for the unit or faction. May be issued by either a character or the 
+player 
+entity.
+</P>
+</DIV>
+</li>
+
+<li id="defend">
+<a href="#defend">Defend</a>
+<DIV class="details">
+<HR>
+<PRE><SPAN style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium" 
+class=Apple-style-span><B>DEFEND     &lt;who&gt;                       
+         time: 0 days    priority: 0
+</B></SPAN></PRE>
+<HR>
+
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Declare a 
+unit or 
+player to have attitude&nbsp;<CODE>defend</CODE>&nbsp;towards another 
+unit or 
+player&nbsp;<VAR>who</VAR>. When a unit is attacked, other units which 
+have&nbsp;<CODE>defend</CODE>&nbsp;attitude to the unit will join the 
+combat and 
+aid with defense.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">When a 
+combat 
+occurs, the attitude of the top-most character in each stack in the 
+location is 
+checked. If any unit is declared&nbsp;<CODE>defend</CODE>&nbsp;to the 
+victim of 
+the attack, the unit's stack will join the combat on the victim's 
+side.
+</P>
+</DIV>
+</li>
+
+<li id="die">
+<a href="#die">Die</a>
+<DIV class="details">
+<HR>
+<PRE><SPAN style="FONT-FAMILY: 'times new roman'; FONT-SIZE: medium" 
+class=Apple-style-span><B>DIE   time: 0    priority: 3
+</B></SPAN></PRE>
+<HR>
+
+<P style="FONT-FAMILY: 'times new roman'; FONT-SIZE: medium">Instantly 
+kills the 
+unit. Normal rules for death apply.</P>
+<DL style="FONT-FAMILY: 'times new roman'; FONT-SIZE: medium">
+  <DT>&nbsp;</DT>
+  <DD><PRE></PRE></DD></DL>
+</DIV>
+</li>
+
+<li id="drop">
+<a href="#drop">Drop</a>
+<DIV class="details">
+<HR>
+<PRE><SPAN style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium" 
+class=Apple-style-span><B>DROP       &lt;item&gt; &lt;qty&gt; 
+[have-left]             time: 0 days    priority: 1
+</B></SPAN></PRE>
+<HR>
+
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Discard 
+the 
+specified quantity of item. If have-left is specified, at least this 
+many will 
+not be discarded. If quantity is zero, the entire inventory of the given 
+item 
+will be discarded.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">For 
+example, if 
+Feasel has 100 gold [1]:</P>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DD><PRE>drop 1 50          #  Throw away 50 gold
+drop 1 0           #  Throw away 100 gold  (0 means all)
+drop 1             #  Throw away 100 gold  (blank means all)
+drop 1 100         #  Throw away 100 gold
+drop 1 100 25      #  Throw away 75 gold   (keep 25)
+drop 1 0 25        #  Throw away 75 gold   (keep 25)
+</PRE></DD></DL>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Common 
+items 
+including gold, lumber, swords, beasts, etc. are permanently lost when 
+discarded. It is assumed that they are quickly scavenged by others.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Unique 
+items, such 
+as magical artifacts, scrolls, potions and rare books, do not become 
+permanently 
+lost. Such items will be found through exploration of the province in 
+which they 
+were lost. Unique items lost at sea will wash ashore on a nearby island 
+or 
+coast, where they may also be found through exploration.</P>
+<P 
+style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: 
+medium">The&nbsp;<CODE>drop</CODE>&nbsp;order 
+is also be used to release men such as peasants, workers, soldiers, etc. 
+from 
+service:</P>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DD><PRE>drop 10 3               # Release 3 peasants from service
+</PRE></DD></DL>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">When used 
+on a 
+ship,&nbsp;<CODE>drop</CODE>&nbsp;will throw items 
+overboard.
+</P>
+</DIV>
+</li>
+
+<li id="email">
+<a href="#email">Email</a>
+<DIV class="details">
+<HR>
+<PRE><SPAN style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium" 
+class=Apple-style-span><B>EMAIL      &lt;new email address&gt;
+</B></SPAN></PRE>
+<HR>
+
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Change 
+the address 
+to which turn results should be sent to the given address. Must appear 
+after 
+the&nbsp;<CODE>begin</CODE>&nbsp;order.
+</P>
+</DIV>
+</li>
+
+<li id="execute">
+<a href="#execute">Execute</a>
+<DIV class="details">
+<HR>
+<PRE><SPAN style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium" 
+class=Apple-style-span><B>EXECUTE    [prisoner]                        
+   time: 0 days    priority: 1
+</B></SPAN></PRE>
+<HR>
+
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Put the 
+given 
+prisoner to death. If no prisoner is specified, all of the noble's 
+prisoners 
+will be executed.
+</P>
+</DIV>
+</li>
+
+<li id="explore">
+<a href="#explore">Explore</a>
+<DIV class="details">
+<HR>
+<PRE><SPAN style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium" 
+class=Apple-style-span><B>EXPLORE                                      
+   time: 7 days    priority: 3
+</B></SPAN></PRE>
+<HR>
+
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Explore 
+the current 
+location for hidden features or routes. If there is something to find, 
+there is 
+a random chance with each attempt that the explorer will find it.</P>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DD><PRE>1: &gt; explore
+1: Explore location for hidden features.
+  ...
+7: Exploration uncovers no new features.
+</PRE></DD></DL>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: 
+medium">Exploration in a 
+province may also turn up rare items which have been lost.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">If the 
+exploring 
+character is on a ship on the ocean, the surrounding ocean province will 
+be 
+searched for hidden islands or sea routes.
+</P>
+</DIV>
+</li>
+
+<li id="fee">
+<a href="#fee">Fee</a>
+<DIV class="details">
+<HR>
+<PRE><SPAN style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium" 
+class=Apple-style-span><B>FEE        [gold per 100 wt]                 
+   time: 0 days    priority: 1
+</B></SPAN></PRE>
+<HR>
+
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Set a fee 
+required 
+to&nbsp;<CODE>board</CODE>&nbsp;a ship. The fee is an amount of gold 
+which will 
+be charged per 100 weight to units attempting 
+to&nbsp;<CODE>board</CODE>&nbsp;a 
+ship captained by the unit which issued&nbsp;<CODE>fee</CODE>.</P>
+<P 
+style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: 
+medium">If&nbsp;<CODE>fee</CODE>&nbsp;is 
+zero or is not given, the boarding fee will be cleared. If no fee is 
+set, units 
+may not enter the ship with the&nbsp;<CODE>board</CODE>&nbsp;order.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: 
+medium">Examples:</P>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DD><PRE>&gt; fee 200    # charge passengers 2 gold for every point of 
+weight
+&gt; fee 0      # we're not a ferry anymore; don't let strangers on
+             # with the <CODE>board</CODE> 
+order</PRE></DD></DL>
+</DIV>
+</li>
+
+<li id="ferry">
+<a href="#ferry">Ferry</a>
+<DIV class="details">
+<HR>
+<PRE><SPAN style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium" 
+class=Apple-style-span><B>FERRY                                        
+   time: 0 days    priority: 1
+</B></SPAN></PRE>
+<HR>
+
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Sound a 
+ship's 
+horn, signaling units in port waiting with&nbsp;<CODE>wait 
+ferry</CODE>&nbsp;that they may begin boarding the 
+ferry.&nbsp;<CODE>ferry</CODE>&nbsp;may only be used by the captain of a 
+
+ship.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Units 
+waiting to 
+board a ferry should use&nbsp;<CODE>wait ferry</CODE>&nbsp;instead 
+of&nbsp;<CODE>wait ship</CODE>&nbsp;to allow existing passengers on the 
+ferry 
+time to unload. If those trying to&nbsp;<CODE>board</CODE>&nbsp;do so 
+before 
+existing passengers have unloaded, 
+the&nbsp;<CODE>board</CODE>&nbsp;order may 
+fail because of ship weight limits.
+</P>
+</DIV>
+</li>
+
+<li id="fish">
+<a href="#fish">Fish</a>
+<DIV class="details">
+<HR>
+<PRE><SPAN style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium" 
+class=Apple-style-span><B>FISH       [number of fish]  [days]          
+   time: as given  priority: 3
+</B></SPAN></PRE>
+<HR>
+
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">A unit 
+must be on a 
+ship on the ocean in order to fish. Each day, the unit has a 50% chance 
+of 
+encountering fish. If fish are found, each sailor will catch one fish 
+that day, 
+as long as fish stocks in the ocean province last. Ocean provinces 
+generate 50 
+catchable fish per month.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">A unit 
+must know 
+the Fishing [603] subskill of Shipcraft [600] in order to fish, and must 
+have at 
+least one sailor.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Only 
+sailors may be 
+used for fishing. Pirates will not fish.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: 
+medium">Examples:</P>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DD><PRE>fish         # obtain as many fish as possible
+fish 25      # stop after getting 25 fish
+fish 0 5     # fish for five days
+fish 25 5    # stop after five days, or 25 fish, whichever
+             # comes first
+</PRE></DD></DL>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">In all 
+cases, 
+fishing will cease as soon as the stocks in the ocean province have been 
+
+exhausted.&nbsp;<CODE>fish</CODE>&nbsp;is an alias for 
+`<CODE><CODE>collect</CODE>&nbsp;87</CODE>'.
+</P>
+</DIV>
+</li>
+
+<li id="flag">
+<a href="#flag">Flag</a>
+<DIV class="details">
+<HR>
+<PRE><SPAN style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium" 
+class=Apple-style-span><B>FLAG       string                            
+   time: 0 days    priority: 1
+</B></SPAN></PRE>
+<HR>
+
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Signal 
+characters 
+waiting with a&nbsp;<CODE>wait flag</CODE>&nbsp;order. The string is an 
+arbitrary sequence of characters or numbers, but it should match the 
+flag 
+specified in the&nbsp;<CODE>wait flag</CODE>&nbsp;order.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">For 
+example, a 
+character may wait for a particular signal from Osswid [5499]:</P>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DD><PRE>&gt; wait flag yellow 5499
+</PRE></DD></DL>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">This will 
+wait for 
+Osswid [5499] to raise a flag saying `<CODE>yellow</CODE>'. Osswid would 
+
+issue:</P>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DD><PRE>&gt; flag yellow
+</PRE></DD></DL>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Which 
+would cause 
+the wait order to complete.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: 
+medium">The&nbsp;<CODE>wait 
+flag</CODE>&nbsp;order defaults to watching for flags from units in the 
+player's 
+faction. It may also watch for flags from units in another faction, a 
+flag from 
+a specific unit, or a flag from any unit in the game:</P>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DD><PRE>wait flag yellow        # wait for 'flag yellow' from a unit
+                        # in our faction
+
+wait flag yellow 5499   # wait for 5499 to order 'flag yellow'
+
+wait flag yellow 918    # wait for any unit belonging to player
+                        # 918 to order 'flag yellow'.
+
+wait flag yellow 0      # wait for any unit in the game to give
+                        # the yellow flag
+</PRE></DD></DL>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: 
+medium">Characters do not 
+need to be in the same location to flag.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Flags are 
+
+remembered for the duration of the month. If a&nbsp;<CODE>wait 
+flag</CODE>&nbsp;is issued for a flag which has already been raised, the 
+wait 
+will immediately finish (it will take zero time).</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">However, 
+flags 
+which have been raised are not remembered between turns, so a flag 
+raised on the 
+30th of month 5 will not satisfy a&nbsp;<CODE>wait flag</CODE>&nbsp;on 
+the 1st 
+of month 6.
+</P>
+</DIV>
+</li>
+
+<li id="fly">
+<a href="#fly">Fly</a>
+<DIV class="details">
+<HR>
+<PRE><SPAN style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium" 
+class=Apple-style-span><B>FLY        &lt;direction or destination&gt; 
+[...]     time: varies    priority: 2
+</B></SPAN></PRE>
+<HR>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Fly in 
+the 
+indicated direction, or to the specified location. Refer to 
+the&nbsp;<CODE>move</CODE>&nbsp;order for details about movement.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: 
+medium">Characters must 
+have some means of flight to be able to use&nbsp;<CODE>fly</CODE>. For 
+instance, 
+a sufficient number of winged horses must be available to carry the 
+entire stack 
+and its belongings. If the weight of the stack exceeds the flight weight 
+
+capacity, the&nbsp;<CODE>fly</CODE>&nbsp;order will fail.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Flying 
+traverses 
+any link in a maximum of four days.</P>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DD><PRE>rated time      time to fly
+ of route         across
+----------      -----------
+ 0 days          0 days
+ 1 day           1 day
+ 3 days          3 days
+ 4 days          3 days
+ 8 days          4 days
+14 days          4 days
+</PRE></DD></DL>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Flying 
+animals, 
+such as winged horses, become tired when flying over the ocean, as they 
+have no 
+place to land and rest. Up to fifteen days may be spent flying over the 
+ocean. 
+At the end of the fifteenth day, the exhausted animals will be unable to 
+
+continue, and the entire stack will plunge into the sea, killing all of 
+the 
+stack's characters.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Any 
+arrival at a 
+land or ship location will allow the flying creatures to rest and regain 
+their 
+strength.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Multiple 
+destinations or destinations may be given as arguments 
+to&nbsp;<CODE>fly</CODE>. 
+If the first fails, the next will be tried, until a passable route is 
+found, 
+or&nbsp;<CODE>fly</CODE>&nbsp;runs out of arguments.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">For 
+example, 
+`<CODE><CODE>fly</CODE>&nbsp;n e w</CODE>' would first try to fly north. 
+If 
+travel north was not possible for any reason, east would next be tried, 
+then 
+west. In this way exploring units can attempt to deal with the case of 
+running 
+into a hole in the map or other impassable province.
+</P>
+</DIV>
+</li>
+
+<li id="forget">
+<a href="#forget">Forget</a>
+<DIV class="details">
+<HR>
+<PRE><SPAN style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium" 
+class=Apple-style-span><B>FORGET       skill                           
+    time: 0 days    priority: 3
+</B></SPAN></PRE>
+<HR>
+
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Forgets 
+the known 
+skill.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Any 
+invested noble 
+points for learning advanced skills are refunded if the skill was 
+completely 
+known. &nbsp;If you forget the main skill, any subskills are also 
+forgotten.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">WARNING: 
+To recover 
+the noble point for Transcend Death [901] while forgetting 
+Necromancy[900], you 
+have to forget Transcend Death [901] before forgetting Necromancy 
+[900].</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Gold that 
+was 
+invested while learning the skill is never refunded.</P>
+<P 
+style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: 
+medium">&nbsp;</P>
+</DIV>
+</li>
+
+<li id="form">
+<a href="#form">Form</a>
+<DIV class="details">
+<HR>
+<PRE><SPAN style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium" 
+class=Apple-style-span><B>FORM       &lt;unit&gt; "Name of new 
+character"       time: 7 days    priority: 3
+</B></SPAN></PRE>
+<HR>
+
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Spend a 
+Noble Point 
+to obtain a new character for the player's faction. Nobles must be 
+formed in a 
+city.</P>
+<P 
+style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: 
+medium">The&nbsp;<VAR>unit</VAR>&nbsp;parameter 
+should be selected from the line near the top of the turn report listing 
+new 
+character numbers:</P>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DD><PRE>The next five nobles formed will be:  5717 3215 4902 4489 
+5628
+</PRE></DD></DL>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">If 0 is 
+given 
+for&nbsp;<VAR>unit</VAR>, the first number in the list will be chosen. 
+However, 
+if more than one&nbsp;<CODE>form</CODE>&nbsp;is to be issued during the 
+month, 
+it can be uncertain which will execute first. By specifying the new unit 
+number, 
+the player will know the correct entity number when submitting orders 
+for the 
+new character.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Any 
+character in 
+the player's faction may issue&nbsp;<CODE>form</CODE>. The newly 
+obtained noble 
+will appear and stack beneath the forming character. The new noble is 
+given the 
+name specified as the second argument to&nbsp;<CODE>form</CODE>.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Orders 
+for new 
+units may be submitted in the turn they are formed. As soon as the new 
+unit 
+comes into existence, it will begin to execute its commands.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">New units 
+are 
+unequipped and untrained, and join with loyalty contract-500.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: 
+medium">Example:</P>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DD><PRE>1: &gt; form 3215 "Feasel the Wicked"
+1: Attempt to form a new noble.
+7: Feasel the Wicked [3215] stacks beneath us.
+</PRE></DD></DL>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">More than 
+five 
+units may not be formed in a turn.
+</P>
+</DIV>
+</li>
+
+<li id="format">
+<a href="#format">Format</a>
+<DIV class="details">
+<HR>
+<PRE><SPAN style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium" 
+class=Apple-style-span><B>FORMAT     &lt;num&gt;
+</B></SPAN></PRE>
+<HR>
+
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Some 
+players find 
+the location activity logs less useful than others, and prefer them to 
+be 
+banished to the end of the turn report. 
+`<CODE><CODE>format</CODE>&nbsp;1</CODE>' will do this. 
+`<CODE><CODE>format</CODE>&nbsp;0</CODE>' is the 
+default.&nbsp;<CODE>format</CODE>&nbsp;should appear after 
+the&nbsp;<CODE>begin</CODE>&nbsp;order.</P>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DT><EM>0</EM></DT>
+  <DD>Character reports listed first, followed by location reports 
+including 
+  activity logs.</DD>
+  <DT><EM>1</EM></DT>
+  <DD>Location reports without activity logs, followed by character 
+reports, 
+  followed by location activity logs.</DD></DL>
+</DIV>
+</li>
+
+<li id="garrison">
+<a href="#garrison">Garrison</a>
+<DIV class="details">
+<HR>
+<PRE><SPAN style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium" 
+class=Apple-style-span><B>GARRISON   &lt;castle&gt;                    
+         time: 1 day     priority: 3
+</B></SPAN></PRE>
+<HR>
+
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Claim a 
+province in 
+the name of a castle by leaving a garrison of soldiers to defend it.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">The 
+castle must be 
+completed in order to bind a garrison to it.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">There may 
+not be 
+any existing garrison in the location. Only provinces may be garrisoned 
+(the 
+character should be at the outermost level, not inside a sublocation or 
+building).</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">The 
+character must 
+have ten soldiers [12] to create a garrison. The soldiers will be 
+removed from 
+the noble's inventory and placed in the new garrison.
+</P>
+</DIV>
+</li>
+
+<li id="get">
+<a href="#get">Get</a>
+<DIV class="details">
+<HR>
+<PRE><SPAN style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium" 
+class=Apple-style-span><B>GET        &lt;who&gt; &lt;item&gt; [qty] 
+[have-left]       time: 0 days    priority: 1
+</B></SPAN></PRE>
+<HR>
+
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Get the 
+given 
+quantity of item from the specified target.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: 
+medium">Characters 
+may&nbsp;<CODE>get</CODE>&nbsp;items from other units in their faction, 
+or from 
+garrisons which they control.&nbsp;<CODE>get</CODE>&nbsp;may not be used 
+to take 
+items from another faction's units; the other faction's units must 
+issue&nbsp;<CODE>give</CODE>&nbsp;orders.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: 
+medium">Specifying zero for 
+the quantity will cause the unit to attempt to take all of the target's 
+inventory of the item. If have-left is given, at least that many will 
+not be 
+taken.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">For 
+example, if 
+Feasel [5499] had 100 gold[1]:</P>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DD><PRE>get 5499 1 50          #  Get 50 gold from Feasel
+get 5499 1 0           #  Get all 100 gold from Feasel
+get 5499 1 100         #  Get all 100 gold from Feasel
+get 5499 1 100 25      #  Get 75 gold from Feasel
+get 5499 1 0 25        #  Get 75 gold from Feasel
+</PRE></DD></DL>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Prisoners 
+may also 
+be transferred with the&nbsp;<CODE>get</CODE>&nbsp;order.</P>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DD><PRE>get 5499 4569          #  Transfer prisoner [4569] from 
+[5499]
+</PRE></DD></DL>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">When 
+taking men 
+from a garrison, the garrison must be left with at least ten men, or 
+the&nbsp;<CODE>get</CODE>&nbsp;will fail. For example, if a garrison had 
+five 
+peasants and six soldiers, either a peasant or a soldier could be taken. 
+No men 
+can be taken from a garrison with less than ten men.
+</P>
+</DIV>
+</li>
+
+<li id="give">
+<a href="#give">Give</a>
+<DIV class="details">
+<HR>
+<PRE><SPAN style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium" 
+class=Apple-style-span><B>GIVE       &lt;to-who&gt; &lt;item&gt; [qty] 
+[have-left]    time: 0 days    priority: 1
+</B></SPAN></PRE>
+<HR>
+
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Give 
+quantity of an 
+item in inventory to another character. Specifying zero for quantity 
+will cause 
+the unit to give all of its inventory of the item. An amount specified 
+by 
+have-left will be retained.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">For 
+example, if 
+Feasel has 100 gold [1]:</P>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DD><PRE>give 5499 1 50          #  Give 50 gold to [5499]
+give 5499 1 0           #  Give all 100 gold to [5499]
+give 5499 1 100         #  Give all 100 gold to [5499]
+give 5499 1 100 25      #  Give 75 gold to [5499]
+give 5499 1 0 25        #  Give 75 gold to [5499]
+</PRE></DD></DL>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Prisoners 
+may also 
+be transferred with the&nbsp;<CODE>give</CODE>&nbsp;order.</P>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DD><PRE>give 5499 4569          #  Give prisoner [4569] to 
+[5499]</PRE></DD></DL>
+</DIV>
+</li>
+
+<li id="guard">
+<a href="#guard">Guard</a>
+<DIV class="details">
+<HR>
+<PRE><SPAN style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium" 
+class=Apple-style-span><B>GUARD      &lt;flag&gt;                      
+         time: 0 days    priority: 1
+</B></SPAN></PRE>
+<HR>
+
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Protect a 
+city or 
+province from looting and pillaging. 
+`<CODE><CODE>guard</CODE>&nbsp;1</CODE>' 
+will cause the unit to suppress&nbsp;<CODE>pillage</CODE>&nbsp;attempts 
+by other 
+characters. The guarding unit must be the top unit in its stack.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Any 
+number of units 
+in a location may be on guard. The message `<CODE>on guard</CODE>' will 
+appear 
+next to guard units in the location report.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">A 
+character 
+attempting to pillage the city or province may specify a flag which 
+causes them 
+to attack the guards. In this case, all of the stacks on guard will 
+respond to 
+the attack. However, allies of the guard units will not respond. Only 
+guard 
+stacks will be involved in combat to suppress looting and pillaging.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: 
+medium">Specifying a flag 
+of 0 turns off guarding. Any movement by the guarding character will 
+also clear 
+the guard flag. For example, if a unit issued 
+`<CODE><CODE>guard</CODE>&nbsp;1</CODE>' in a city, then moved out of 
+the city, 
+the&nbsp;<CODE>guard</CODE>&nbsp;flag would be cleared, and the unit 
+would no 
+longer be on guard.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">The 
+guarding units 
+must be inside the location they are to guard. Units in a castle in a 
+city will 
+not protect the city. Units guarding a city will not protect the 
+surrounding 
+province.
+</P>
+</DIV>
+</li>
+
+<li id="honor">
+<a href="#honor">Honor</a>
+<DIV class="details">
+<HR>
+<PRE><SPAN style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium" 
+class=Apple-style-span><B>HONOR      &lt;amount&gt;                    
+         time: 1 day     priority: 3
+</B></SPAN></PRE>
+<HR>
+
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Pay a 
+unit for its 
+service. Units paid will take gold out of their own inventory and use it 
+for 
+their own purposes.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Nobles 
+with 
+oathbound loyalty will refuse to be paid, and reject the gold. Nobles 
+with fear 
+loyalty will be converted to contract loyalty.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">The 
+amount of money 
+paid accumulates in the noble's contract loyalty rating. For instance, a 
+fear-10 
+noble honored with 500 gold would have loyalty contract-500. A 
+contract-250 
+noble honored with 500 gold would become contract-750.
+</P>
+</DIV>
+</li>
+
+<li id="hostile">
+<a href="#hostile">Hostile</a>
+<DIV class="details">
+<HR>
+<PRE><SPAN style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium" 
+class=Apple-style-span><B>HOSTILE    &lt;who&gt;                       
+         time: 0 days    priority: 0
+</B></SPAN></PRE>
+<HR>
+
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Declare 
+unit or 
+player&nbsp;<VAR>who</VAR>&nbsp;hostile to the unit or player issuing 
+the order. 
+Units declared hostile will be attacked on sight.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">If the 
+player 
+entity issues&nbsp;<CODE>hostile</CODE>, any unit in the player's 
+faction will 
+attack the hostile unit on sight. If an individual character 
+issues&nbsp;<CODE>hostile</CODE>, the character will attack the hostile 
+unit on 
+sight.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Units 
+will only 
+initiate automatic attacks if they are in perfect health. Hostile units 
+which 
+are being held prisoner will not be attacked.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">An entire 
+faction 
+may be declared hostile by specifying another player entity instead of 
+an 
+individual unit. Any unit not concealing its affiliation with the 
+faction 
+declared hostile would be attacked on sight.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: 
+medium">Examples:</P>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DD><PRE>hostile 4240            # attack 4240 on sight
+hostile 778             # attack any member of faction 778 on 
+sight</PRE></DD></DL>
+</DIV>
+</li>
+
+<li id="improve">
+<a href="#improve">Improve</a>
+<DIV class="details">
+<HR>
+<PRE><SPAN style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium" 
+class=Apple-style-span><B>IMPROVE    [days]                            
+   time: varies    priority: 3
+</B></SPAN></PRE>
+<HR>
+
+<P 
+style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: 
+medium">The&nbsp;<CODE>improve</CODE>&nbsp;order, 
+when executed inside the castle, uses workers and stone to raise the 
+improvement 
+level of a castle.</P><PRE><SPAN style="FONT-FAMILY: 'Times New 
+Roman'; FONT-SIZE: medium" class=Apple-style-span>     level   stone   
+worker-days
+     -----   -----   -----------
+       1       50       1000
+       2       60       1250
+       3       70       1500
+       4       80       1750
+       5       90       2000
+       6      100       2500
+</SPAN></PRE>
+<P 
+style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: 
+medium"><CODE>improve</CODE>&nbsp;runs 
+for the specified number of days, or until the next improvement level is 
+
+reached, whichever comes first.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Castles 
+start at 
+defense 50. Each level of improvement grants 5 more defense points.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">A 
+castle's 
+improvement level also determines how many provinces may be garrisoned 
+to 
+it:</P><PRE><SPAN style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: 
+medium" class=Apple-style-span>     castle     provinces      rank
+     ------     ---------      ----
+        0            1-5           lord
+        1            6-12         knight
+        2          13-24         baron
+        3          25-37         count
+        4          38-50         earl
+        5          51-63         marquess
+        6           64+           duke
+                    region         king
+
+     (A region must have at least 15 provinces to have a 
+king)</SPAN></PRE>
+</DIV>
+</li>
+
+<li id="lore">
+<a href="#lore">Lore</a>
+<DIV class="details">
+<HR>
+<PRE><SPAN style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium" 
+class=Apple-style-span><B>LORE       &lt;lore sheet&gt;
+</B></SPAN></PRE>
+<HR>
+
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Resend a 
+lore sheet 
+which has appeared before in the player's turn report. Must appear after 
+
+the&nbsp;<CODE>begin</CODE>&nbsp;order.</P>
+<P 
+style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: 
+medium">The&nbsp;<CODE>lore</CODE>&nbsp;command 
+is processed by the order scanner, and does not appear in the turn 
+report. 
+Requested lore sheets appear at the end of the acknowledgement sent by 
+the order 
+scanner.
+</P>
+</DIV>
+</li>
+
+<li id="make">
+<a href="#make">Make</a>
+<DIV class="details">
+<HR>
+<PRE><SPAN style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium" 
+class=Apple-style-span><B>MAKE       &lt;item&gt; [qty]                
+         time: as given  priority: 3
+</B></SPAN></PRE>
+<HR>
+
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Make the 
+indicated 
+item.&nbsp;<VAR>qty</VAR>&nbsp;defaults to as many as possible. Each of 
+the 
+following items requires one day each to produce:</P>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DD><PRE>num   item           skill    material
+---   ----           -----    --------
+ 72   longbow         617     yew [68]
+ 73   plate armor     617     iron [79]
+ 74   longsword       617     iron [79]
+ 75   pike            617     wood [77]
+ 84   blank scroll    690     lana bark [64]
+ 85   crossbow        617     wood [77]
+ 94   woven basket   none     none
+ 95   clay pot       none     none
+ 99   hides          none     ox [76]
+</PRE></DD></DL>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Knowledge 
+of 
+Weaponsmithing [617], a subskill of Combat [610], is required to make 
+weapons 
+and armor. Alchemy [690] must be known to produce blank scrolls from 
+lana bark. 
+No skills or input materials are needed to make woven baskets or clay 
+pots.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: 
+medium">Examples:</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">To make 5 
+longbows 
+from 5 yew (a kind of wood):</P>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DD><PRE>make 72 5               # takes 5 days
+</PRE></DD></DL>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">To make 1 
+plate 
+armor from 1 iron:</P>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DD><PRE>make 73 1               # takes 1 day
+</PRE></DD></DL>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">To make 5 
+woven 
+baskets:</P>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DD><PRE>make 94 5               # takes 5 days
+</PRE></DD></DL>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Although 
+making 
+pots and baskets is considered menial labor, some desperate nobles have 
+resorted 
+to selling them in cities to earn gold. Each city in Olympia either buys 
+woven 
+baskets or clay pots.
+</P>
+</DIV>
+</li>
+
+<li id="message">
+<a href="#message">Message</a>
+<DIV class="details">
+<HR>
+<PRE><SPAN style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium" 
+class=Apple-style-span><B>MESSAGE    &lt;# of lines of text&gt; 
+&lt;to-who&gt;        time: 1 day     priority: 3
+</B></SPAN></PRE>
+<HR>
+
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Send a 
+message to 
+the target named in the second parameter. The target may be any valid 
+entity, 
+such as a character, a player, or a location (including provinces, 
+cities, 
+ships, buildings, or other sublocations).</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">The 
+number of lines 
+in the message should be given as the first argument 
+to&nbsp;<CODE>message</CODE>. The text of the message should follow 
+the&nbsp;<CODE>message</CODE>&nbsp;order.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">For 
+example:</P>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DD><PRE>message 2 2909
+  Aye, ye not be safe in this world for long, Oleg.
+  I be remembering ya, and yer past fould deeds.  Arrr!
+move ev18
+recruit
+</PRE></DD></DL>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">(The text 
+of the 
+message is indented here to make the orders easier to read. The order 
+scanner 
+will ignore leading spaces on each line.)</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">This 
+would send the 
+message to character [2909]. The recipient would see the message in his 
+turn 
+report:</P>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DD><PRE>Received a message from Captain McCook [2104]:
+   "Aye, ye not be safe for long in this world, Oleg.
+I be remembering ya, and yer past foul deeds.  Arrr!"
+</PRE></DD></DL>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Take care 
+to 
+carefully count the lines of text in the message. If the wrong number of 
+lines 
+is given, your character may end up sending his orders to the recipient 
+instead 
+of executing them.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Each line 
+of 
+message text must be less than 60 characters long, or the message will 
+be 
+rejected.
+</P>
+</DIV>
+</li>
+
+<li id="move">
+<a href="#move">Move</a>
+<DIV class="details">
+<HR>
+<PRE><SPAN style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium" 
+class=Apple-style-span><B>MOVE       &lt;direction or destination&gt; 
+[...]     time: varies    priority: 2
+</B></SPAN></PRE>
+<HR>
+
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Travel in 
+the 
+indicated direction, or to the specified location. If a location is 
+specified, 
+there must be a direct route to it from the character's current 
+location.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Compass 
+points may 
+be abbreviated: `<CODE>n</CODE>', `<CODE>s</CODE>', `<CODE>e</CODE>', 
+`<CODE>w</CODE>'. Units may also&nbsp;<CODE>move out</CODE>&nbsp;of a 
+sublocation to the surrounding province or location.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Visible 
+routes 
+leaving each province are listed in the turn report.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">For 
+example:</P>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DD><PRE>Routes leaving Plain [cw04]:
+   North, to Ocean [cv04], South Sea, 1 day
+   East, to Plain [cw05], 7 days
+   South, to Plain [cx04], 7 days
+   West, to Plain [cw03], 7 days
+</PRE></DD></DL>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">The 
+following would 
+be valid move commands from the example province:</P>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DD><PRE>move e  -or-  move cw05  -or-  move east
+move s  -or-  move cx04  -or-  move south
+move w  -or-  move cw03  -or-  move west
+</PRE></DD></DL>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Note 
+that&nbsp;<CODE>move</CODE>&nbsp;cannot be used to enter the ocean 
+region 
+[cv04]. The character would need to issue 
+the&nbsp;<CODE>sail</CODE>&nbsp;order 
+as captain of a ship to move north into the South Sea.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Route 
+distances are 
+rated in the number of days it would normally take a lightly loaded 
+character, 
+walking, to traverse them. Actual travel times may differ from the rated 
+
+times.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: 
+medium">Characters 
+overloaded with belongings will make slower progress. Horses usually 
+speed 
+progress, but over especially rough or treacherous terrain, they may 
+actually 
+slow travel because they must be led and managed.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Inventory 
+is 
+considered for the stack as a whole. For instance, if one character 
+possesses 
+enough horses for every member of the stack, the stack may ride. 
+Similarly, if 
+one character is badly overloaded, but other characters have extra 
+carrying 
+capacity, they will assist their stackmate. Distribution of goods 
+between units 
+within a stack is irrelevant to movement.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">The units 
+stacked 
+beneath a moving character will move with the stack leader. If the unit 
+issuing&nbsp;<CODE>move</CODE>&nbsp;is stacked beneath another 
+character, he 
+will first automatically unstack before movement begins.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">For 
+example:</P>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DD><PRE>Seen here:
+   Osswid the Constructor [5499], accompanied by:
+      Feasel the Wicked [502]
+</PRE></DD></DL>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">If Osswid 
+issues 
+a&nbsp;<CODE>move</CODE>&nbsp;order, Feasel will go with Osswid. If 
+Feasel 
+issues a&nbsp;<CODE>move</CODE>&nbsp;order, however, Feasel would first 
+unstack 
+from Osswid before beginning travel.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Multiple 
+destinations or destinations may be given as arguments to 
+the&nbsp;<CODE>move</CODE>&nbsp;order. If the first fails, the next will 
+be 
+tried, until a passable route is found, 
+or&nbsp;<CODE>move</CODE>&nbsp;runs out 
+of arguments.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">For 
+example, 
+`<CODE><CODE>move</CODE>&nbsp;n e w</CODE>' would first try to move 
+north. If 
+travel north was not possible for any reason, east would next be tried, 
+then 
+west. In this way exploring units can attempt to deal with the case of 
+running 
+into an impassable province or a coast.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Stacks 
+with large 
+numbers of figures relative to the number of nobles travel slower. A 
+movement 
+penalty of:</P><PRE><SPAN style="FONT-FAMILY: 'Times New Roman'; 
+FONT-SIZE: medium" class=Apple-style-span>    delay = number of 
+figures / (number of nobles * 10)
+</SPAN></PRE>
+<P><SPAN style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium" 
+class=Apple-style-span>is imposed for stack movement. For example, a 
+stack with 
+one noble and 9 peasants will move in the rated time. A stack with 10 
+peasants 
+and one noble will take an extra day to move. A stack with 40 peasants 
+and 2 
+nobles will take two extra days, etc. A figure is either a man or 
+something that 
+fights, but does not include beasts without combat attack or defense 
+values.</SPAN><BR></P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">The 
+additional 
+delay is capped at a maximum of twice the original route 
+distance.
+</P>
+</DIV>
+</li>
+
+<li id="name">
+<a href="#name">Name</a>
+<DIV class="details">
+<HR>
+<PRE><SPAN style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium" 
+class=Apple-style-span><B>NAME       [unit] "new name for unit"        
+   time: 0 days    priority: 1
+</B></SPAN></PRE>
+<HR>
+
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Change 
+the name of 
+a unit. If a unit number is specified, the given unit's name will be 
+changed. 
+This is useful for setting the name on entities which don't execute 
+orders 
+directly, such as ships and castles. Names may not be set for units 
+controlled 
+by another player.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Names of 
+characters 
+should be no longer than 35 characters. Names for other entities, such 
+as 
+towers, ships and items should be no longer than 25 characters. Longer 
+names 
+will be rejected.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Note that 
+the name 
+must be enclosed in quotes or it will not be recognized.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: 
+medium">Examples:</P>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DD><PRE>&gt; name "Feasel the Wicked"
+&gt; name cx53 "Castle Chardia"</PRE></DD></DL>
+</DIV>
+</li>
+
+<li id="neutral">
+<a href="#neutral">Neutral</a>
+<DIV class="details">
+<HR>
+<PRE><SPAN style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium" 
+class=Apple-style-span><B>NEUTRAL    &lt;who&gt;                       
+         time: 0 days    priority: 0
+</B></SPAN></PRE>
+<HR>
+
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Declare 
+unit or 
+player&nbsp;<VAR>who</VAR>&nbsp;to have 
+attitude&nbsp;<CODE>neutral</CODE>&nbsp;to the player or faction issuing 
+the 
+order. Units declared neutral will not be aided if they are 
+attacked.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Units in 
+the same 
+faction will defend each other if they are attacked, unless either unit 
+is 
+concealing its lord. This behavior may be suppressed 
+with&nbsp;<CODE>neutral</CODE>. A unit may declare other units in its 
+faction 
+neutral. Or, the entire faction may declare itself neutral. In this 
+case, 
+members of the faction who were attacked would not aid each other, 
+unless they 
+were stacked together.
+</P>
+</DIV>
+</li>
+
+<li id="notab">
+<a href="#notab">Notab</a>
+<DIV class="details">
+<HR>
+<PRE><SPAN style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium" 
+class=Apple-style-span><B>NOTAB      &lt;num&gt;
+</B></SPAN></PRE>
+<HR>
+
+<P 
+style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: 
+medium">Ordinarily,&nbsp;<CODE>tab</CODE>&nbsp;characters 
+may appear in turn reports. Some players read their reports on computer 
+equipment which cannot correctly 
+display&nbsp;<CODE>tab</CODE>&nbsp;characters. 
+If this is the case, issue the command:</P>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DD><PRE>notab 1
+</PRE></DD></DL>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">and tabs 
+will be 
+converted to spaces for your report.
+</P>
+</DIV>
+</li>
+
+<li id="oath">
+<a href="#oath">Oath</a>
+<DIV class="details">
+<HR>
+<PRE><SPAN style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium" 
+class=Apple-style-span><B>OATH       &lt;level&gt;                     
+         time: 1 day     priority: 3
+</B></SPAN></PRE>
+<HR>
+
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Have a 
+character 
+take an oath of loyalty. Either 1 or 2 should be specified 
+for&nbsp;<VAR>level</VAR>. One or two NPs will be deducted from the 
+player's 
+faction, and the specified character's loyalty will become oath-1 or 
+oath-2.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Noble 
+Points's 
+spent on oathbound loyalty accumulate. Thus, oath-1 may be upgraded to 
+oath-2 
+with the `<CODE><CODE>oath</CODE>&nbsp;1</CODE>' order.
+</P>
+</DIV>
+</li>
+
+<li id="password">
+<a href="#password">Password</a>
+<DIV class="details">
+<HR>
+<PRE><SPAN style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium" 
+class=Apple-style-span><B>PASSWORD   ["password"]
+</B></SPAN></PRE>
+<HR>
+
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Set or 
+clear a 
+password for the player. If no argument is given, any existing password 
+will be 
+cleared. Otherwise, the specified password will be set.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: 
+medium">Examples:</P>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DD><PRE>begin 663
+password "xyzzy9"
+end
+</PRE></DD></DL>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">This 
+would set a 
+password `<CODE>xyzzy9</CODE>' for the faction. Further orders will 
+require the 
+password to be specified after the player number on 
+the&nbsp;<CODE>begin</CODE>&nbsp;line:</P>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DD><PRE>begin 663 "xyzzy9"
+password                # clear the password
+end</PRE></DD></DL>
+</DIV>
+</li>
+
+<li id="pay">
+<a href="#pay">Pay</a>
+<DIV class="details">
+<HR>
+<PRE><SPAN style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium" 
+class=Apple-style-span><B>PAY        &lt;to-who&gt; [amount] 
+[have-left]        time: 0 days    priority: 1
+</B></SPAN></PRE>
+<HR>
+
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Pay 
+amount of gold 
+to indicated entity, keeping at least have-left funds available. 
+The&nbsp;<CODE>pay</CODE>&nbsp;command is shorthand for the 
+equivalent&nbsp;<CODE>give</CODE>&nbsp;command to transfer gold from one 
+unit to 
+another.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">The 
+amount of gold 
+to be paid will default to all of the unit's gold if not specified or if 
+
+zero.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">For 
+example, if 
+Feasel has 100 gold:</P>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DD><PRE>pay 5499 100            # pay 100 to [5499]
+pay 5499 0              # pay 100 to [5499]
+pay 5499 0 25           # pay 75 to [5499]
+pay 5499 100 25         # pay 75 to [5499]</PRE></DD></DL>
+</DIV>
+</li>
+
+<li id="pillage">
+<a href="#pillage">Pillage</a>
+<DIV class="details">
+<HR>
+<PRE><SPAN style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium" 
+class=Apple-style-span><B>PILLAGE    [flag]                            
+   time: 7 days    priority: 3
+</B></SPAN></PRE>
+<HR>
+
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Loot and 
+pillage a 
+province or city. If flag is not given, pillaging will not take place if 
+the 
+province is being protected by guards. If flag is 1, the looters will 
+first 
+attack the guards, then proceed with pillaging if the guards are 
+defeated.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">At least 
+10 
+fighters must be in the pillaging stack. They may be soldiers, pikemen, 
+nobles, 
+or other kinds of fighting units. Only the top most character in a stack 
+may 
+initiate pillaging.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Pillaging 
+will 
+seize 1/3 of the available tax base, which otherwise would have gone to 
+the 
+location owner (if there is one). Another 1/3 of the potential taxes are 
+
+destroyed.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Pillaging 
+reduces 
+the future tax base for a city or province. Locations take as many 
+months to 
+recover from pillaging as they have been pillaged. A city pillaged at 
+least once 
+per month for three months in a row will take three months to recover 
+its full 
+tax base.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Pillaging 
+can be 
+dangerous. There is a 33% chance that a mob of 12-36 angry peasants will 
+form to 
+resist further pillaging attempts. Angry peasants have a combat rating 
+of 
+(attack-2, defense-1, missile-0). If a mob forms, there is a 33% chance 
+that the 
+mob will immediately attack the pillager in retaliation.
+</P>
+</DIV>
+</li>
+
+<li id="players">
+<a href="#players">Players</a>
+<DIV class="details">
+<HR>
+<PRE><SPAN style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium" 
+class=Apple-style-span><B>PLAYERS                                      
+                              
+</B></SPAN></PRE>
+<HR>
+
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Ask the 
+order 
+scanner to send a list of the players in the game.
+</P>
+</DIV>
+</li>
+
+<li id="pledge">
+<a href="#pledge">Pledge</a>
+<DIV class="details">
+<HR>
+<PRE><SPAN style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium" 
+class=Apple-style-span><B>PLEDGE     &lt;who&gt;                       
+         time: 0 days    priority: 1
+</B></SPAN></PRE>
+<HR>
+
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Pledge 
+all lands 
+under control to another noble. The target noble will share control of 
+all lands 
+the pledging character owns, and the pledged lands will count towards 
+the 
+target's status.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Issue 
+`<CODE><CODE>pledge</CODE>&nbsp;0</CODE>' to revoke control.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">There is 
+no way to 
+pledge individual provinces. The target receives control and status for 
+every 
+province that the character owns, including provinces the character 
+obtains 
+after the&nbsp;<CODE>pledge</CODE>&nbsp;order is given.
+</P>
+</DIV>
+</li>
+
+<li id="post">
+<a href="#post">Post</a>
+<DIV class="details">
+<HR>
+<PRE><SPAN style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium" 
+class=Apple-style-span><B>POST       &lt;# of lines of following 
+text&gt;       time: 1 day     priority: 3
+</B></SPAN></PRE>
+<HR>
+
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Post a 
+public 
+message in the location. All characters in the location will see the 
+text of the 
+message in the location description section of their turn reports. Signs 
+remain 
+visible for one turn.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">The 
+number of lines 
+in the post should be given as an argument to&nbsp;<CODE>post</CODE>, 
+followed 
+by the text of the sign. For example, here is a post command followed by 
+a move 
+and a recruit:</P>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DD><PRE>post 3
+  All ye beware!  These lands are the property of
+  noble Osswid.  Those who trespass here without
+  his permission will come to a GRAVE end!
+move ev18
+recruit
+</PRE></DD></DL>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">(The text 
+of the 
+post is indented here to make the orders easier to read. The order 
+scanner will 
+ignore leading spaces on each line.)</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Take care 
+to 
+carefully count the lines of text in the post. If the wrong number of 
+lines is 
+given, your character may end up posting his orders on a sign instead of 
+
+executing them.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Each line 
+of posted 
+text must be less than 60 characters long, or the post will be 
+rejected.
+</P>
+</DIV>
+</li>
+
+<li id="press">
+<a href="#press">Press</a>
+<DIV class="details">
+<HR>
+<PRE><SPAN style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium" 
+class=Apple-style-span><B>PRESS      &lt;# of lines of text&gt;        
+         time: 0 days    priority: 1
+</B></SPAN></PRE>
+<HR>
+
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Submit a 
+signed 
+message to the Olympia Times.</P>
+<P 
+style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: 
+medium">The&nbsp;<CODE>press</CODE>&nbsp;order 
+may be given by a character or by the player entity. The identity of the 
+
+submitting entity will appear in the Times beneath the entry.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">The 
+number of lines 
+in the entry should be given as an argument to&nbsp;<CODE>press</CODE>, 
+followed 
+by the text of the entry. For example, here is a press item submitted by 
+Osswid 
+[501].</P>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DD><PRE>PRESS 3
+  All ye beware!  Osswid hereby claims the entire continent
+  of Provinia as his rightful domain.  Those who trespass here
+  without his permission will come to a GRAVE end!
+</PRE></DD></DL>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Take care 
+to 
+carefully count the lines of text in the post. If the wrong number of 
+lines is 
+given, your character orders may end up published in the Olympia Times 
+instead 
+of executing them.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: 
+medium">Alternatively, one 
+may specify 0 for the lines of text argument, and terminate the message 
+with 
+the&nbsp;<CODE>end</CODE>&nbsp;keyword:</P>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DD><PRE>PRESS 0
+  All ye beware!  Osswid hereby claims the entire continent
+  of Provinia as his rightful domain.  Those who trespass here
+  without his permission will come to a GRAVE end!
+END
+</PRE></DD></DL>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Take 
+great care 
+when using the 0 lines/<CODE>end</CODE>&nbsp;keyword feature. If you 
+forget 
+the&nbsp;<CODE>end</CODE>, or mistype it, none of the orders following 
+the&nbsp;<CODE>press</CODE>&nbsp;command will execute. Instead, they 
+will be 
+published in the Olympia Times. This is obviously very bad, so if you 
+intend to 
+use the&nbsp;<CODE>end</CODE>&nbsp;keyword to avoid having to count 
+lines, 
+please be careful.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Each line 
+of posted 
+text must be less than 78 characters long, or the post will be 
+rejected.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Editorial 
+
+guidelines for submissions to the Olympia Times:</P>
+<OL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <LI>No profanity.</LI>
+  <LI>No personal insults to other humans (in-character roleplaying 
+insults are 
+  fine).</LI>
+  <LI>No "junk" submissions ; just something half-way reasonable (i.e. 
+don't 
+  send in "Blah blah.")</LI></OL>
+</DIV>
+</li>
+
+<li id="promote">
+<a href="#promote">Promote</a>
+<DIV class="details">
+<HR>
+<PRE><SPAN style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium" 
+class=Apple-style-span><B>PROMOTE    &lt;who&gt;                       
+         time: 0 days    priority: 1
+</B></SPAN></PRE>
+<HR>
+
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Advance 
+the given 
+unit so that it appears before the character 
+issuing&nbsp;<CODE>promote</CODE>&nbsp;in the location list.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">The 
+character to be 
+promoted should be stacked immediately beneath the promoting character, 
+or 
+appear later in the location list at the same level.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: 
+medium">Examples:</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: 
+medium">Before:</P>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DD><PRE>Osswid the Constructor [5499], accompanied by:
+   Feasel the Wicked [502]
+</PRE></DD></DL>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Osswid 
+issues 
+`<CODE><CODE>promote</CODE>&nbsp;502</CODE>':</P>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DD><PRE>Feasel the Wicked [502]
+Osswid the Constructor [5499]
+</PRE></DD></DL>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: 
+medium">Before:</P>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DD><PRE>Osswid the Constructor [5499], accompanied by:
+   Feasel the Wicked [502]
+Candide [1269]
+</PRE></DD></DL>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Osswid 
+issues 
+`<CODE><CODE>promote</CODE>&nbsp;1269</CODE>':</P>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DD><PRE>Candide [1269]
+Osswid the Constructor [5499], accompanied by:
+   Feasel the Wicked [502]</PRE></DD></DL>
+</DIV>
+</li>
+
+<li id="public">
+<a href="#public">Public</a>
+<DIV class="details">
+<HR>
+<PRE><SPAN style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium" 
+class=Apple-style-span><B>PUBLIC
+</B></SPAN></PRE>
+<HR>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+This order publishes your next turn report. 
+The faction receives 100 claim gold.
+The order template will be omitted in the published report</SPAN>
+</P>
+</DIV>
+</li>
+
+<li id="quarry">
+<a href="#quarry">Quarry</a>
+<DIV class="details">
+<HR>
+<PRE><SPAN style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium" 
+class=Apple-style-span><B>QUARRY     [number of stones]  [days]        
+   time: as given  priority: 3
+</B></SPAN></PRE>
+<HR>
+
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Building 
+stone is 
+used in the construction of temples, castles and towers. Up to 50 stone 
+may be 
+removed from mountain provinces or rocky hills each month. Ten stone may 
+be 
+taken from desert provinces each month.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">A unit 
+must have 
+the Stone quarrying [682] subskill of Construction [680] in order to cut 
+
+building stone. At least one worker is also required.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Each 
+worker will 
+cut and prepare one building stone [78] per day.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: 
+medium">Examples:</P>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DD><PRE>quarry         # cut as much building stone as possible
+quarry 25      # stop after cutting 25 stone
+quarry 0 5     # quarry stone for five days
+quarry 25 5    # stop after five days, or 25 stone, whichever
+               # comes first
+</PRE></DD></DL>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">In all 
+cases, 
+quarrying will cease as soon as the supply of ready stone in the 
+province has 
+been exhausted.
+</P>
+</DIV>
+</li>
+
+<li id="quest">
+<a href="#quest">Quest</a>
+<DIV class="details">
+<HR>
+<PRE><SPAN style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium" 
+class=Apple-style-span><B>QUEST                                        
+   time: 7 days    priority: 3
+</B></SPAN></PRE>
+<HR>
+<SPAN style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium" 
+class=Apple-style-span>When used in an appropriate sublocation, will 
+search for 
+groups of beasts or monsters to do battle with. Often monsters will be 
+found 
+guarding some treasure, which the noble will obtain if victorious in 
+combat.</SPAN><BR>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">There is 
+a 50% 
+chance that QUEST will succeed and discover a group of monsters or 
+beasts. Once 
+QUEST has been successful in a particular sublocation, it will not yield 
+further 
+results there during the following 4-12 turns.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">If QUEST 
+discovers 
+a group of monsters or beasts, the questing noble will immediately 
+initiate an 
+attack. Note that the questing noble and his stack may be killed or 
+taken 
+prisoner if they are overpowered in combat by the monsters.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">QUEST may 
+not be 
+used in safe havens, or initiated by a character who is not a stack 
+leader.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">The type 
+and number 
+of monsters discovered depends in some part on the kind of sublocation 
+which is 
+quested in. The following table describes which sort of adversaries will 
+be 
+found in the various locations. The choice between the adversaries 
+discovered 
+via QUEST is random. The table indicates how many of the given foes can 
+be 
+expected to appear.</P>
+<TABLE style="WIDTH: 500px" border=1 cellSpacing=1 
+cellPadding=1>
+  <THEAD>
+  <TR>
+    <TH scope=col>Where</TH>
+    <TH scope=col>What</TH>
+    <TH scope=col>Combat</TH>
+    <TH scope=col>How Many</TH></TR></THEAD>
+  <TBODY>
+  <TR>
+    <TD>Islands</TD>
+    <TD>Pirate [24]</TD>
+    <TD>(5,5,0)</TD>
+    <TD>5-30</TD></TR>
+  <TR>
+    <TD>&nbsp;</TD>
+    <TD>Cyclops [291]</TD>
+    <TD>(25,75,0)</TD>
+    <TD>1-5</TD></TR>
+  <TR>
+    <TD>&nbsp;</TD>
+    <TD>&nbsp;</TD>
+    <TD>&nbsp;</TD>
+    <TD>&nbsp;</TD></TR>
+  <TR>
+    <TD>Caves</TD>
+    <TD>Rat [279]</TD>
+    <TD>(3,3,0)</TD>
+    <TD>10-50</TD></TR>
+  <TR>
+    <TD>&nbsp;</TD>
+    <TD>Wolf [289]</TD>
+    <TD>(5,5,0)</TD>
+    <TD>3-10</TD></TR>
+  <TR>
+    <TD>&nbsp;</TD>
+    <TD>Ratspider [81]</TD>
+    <TD>(5,5,0)</TD>
+    <TD>5-20</TD></TR>
+  <TR>
+    <TD>&nbsp;</TD>
+    <TD>Gorgon [288]</TD>
+    <TD>(10,20,0)</TD>
+    <TD>3-5</TD></TR>
+  <TR>
+    <TD>&nbsp;</TD>
+    <TD>Orc [287]</TD>
+    <TD>(20,15,0)</TD>
+    <TD>5-20</TD></TR>
+  <TR>
+    <TD>&nbsp;</TD>
+    <TD>&nbsp;</TD>
+    <TD>&nbsp;</TD>
+    <TD>&nbsp;</TD></TR>
+  <TR>
+    <TD>Ruins</TD>
+    <TD>Bandit [283]</TD>
+    <TD>(3,3,0)</TD>
+    <TD>2-10</TD></TR>
+  <TR>
+    <TD>&nbsp;</TD>
+    <TD>Cyclops [291]</TD>
+    <TD>(25,75,0)</TD>
+    <TD>2-5</TD></TR>
+  <TR>
+    <TD>&nbsp;</TD>
+    <TD>Minotaur [272]</TD>
+    <TD>(30,5,0)</TD>
+    <TD>3-10</TD></TR>
+  <TR>
+    <TD>&nbsp;</TD>
+    <TD>Centaur [271]</TD>
+    <TD>(30,30,0)</TD>
+    <TD>3-10</TD></TR>
+  <TR>
+    <TD>&nbsp;</TD>
+    <TD>Giant Lizard [282]</TD>
+    <TD>(45,45,0)</TD>
+    <TD>1-3</TD></TR>
+  <TR>
+    <TD>&nbsp;</TD>
+    <TD>&nbsp;</TD>
+    <TD>&nbsp;</TD>
+    <TD>&nbsp;</TD></TR>
+  <TR>
+    <TD>Battlefields</TD>
+    <TD>Skeleton [33]</TD>
+    <TD>(6,6,0)</TD>
+    <TD>10-100</TD></TR>
+  <TR>
+    <TD>&nbsp;</TD>
+    <TD>Spirit [26]</TD>
+    <TD>(50,50,0)</TD>
+    <TD>5-50</TD></TR>
+  <TR>
+    <TD>&nbsp;</TD>
+    <TD>Giant [292]</TD>
+    <TD>(75,25,0)</TD>
+    <TD>3-10</TD></TR>
+  <TR>
+    <TD>&nbsp;</TD>
+    <TD>Nazgul [55]</TD>
+    <TD>(80,80,0)</TD>
+    <TD>5-20</TD></TR>
+  <TR>
+    <TD>&nbsp;</TD>
+    <TD>&nbsp;</TD>
+    <TD>&nbsp;</TD>
+    <TD>&nbsp;</TD></TR>
+  <TR>
+    <TD>Graveyards</TD>
+    <TD>Undead [31]</TD>
+    <TD>(10,10,0)</TD>
+    <TD>10-100</TD></TR>
+  <TR>
+    <TD>&nbsp;</TD>
+    <TD>Harpie [285]</TD>
+    <TD>(80,120,0)</TD>
+    <TD>3-10</TD></TR>
+  <TR>
+    <TD>&nbsp;</TD>
+    <TD>Giant Spider [278]</TD>
+    <TD>(150,100,0)</TD>
+    <TD>3-10</TD></TR>
+  <TR>
+    <TD>&nbsp;</TD>
+    <TD>Giant Bird [281]</TD>
+    <TD>(200,150,0)</TD>
+    <TD>1-3</TD></TR>
+  <TR>
+    <TD>&nbsp;</TD>
+    <TD>&nbsp;</TD>
+    <TD>&nbsp;</TD>
+    <TD>&nbsp;</TD></TR>
+  <TR>
+    <TD>Lairs</TD>
+    <TD>Lion [280]</TD>
+    <TD>(100,100,0)</TD>
+    <TD>3-8</TD></TR>
+  <TR>
+    <TD>&nbsp;</TD>
+    <TD>Chimera [284]</TD>
+    <TD>(130,130,0)</TD>
+    <TD>2-10</TD></TR>
+  <TR>
+    <TD>&nbsp;</TD>
+    <TD>Dragon [286]</TD>
+    <TD>(500,500,250)</TD>
+    <TD>1</TD></TR>
+  <TR>
+    <TD>&nbsp;</TD>
+    <TD>&nbsp;</TD>
+    <TD>&nbsp;</TD>
+    <TD>&nbsp;</TD></TR>
+  <TR>
+    <TD>
+      <P>Enchanted Forests,</P>
+      <P>Faery hills</P></TD>
+    <TD>Faery [293]</TD>
+    <TD>(9,9,9)</TD>
+    <TD>5-20</TD></TR>
+  <TR>
+    <TD>&nbsp;</TD>
+    <TD>Elf [25]</TD>
+    <TD>(50,50,100)</TD>
+    <TD>5-20</TD></TR>
+  <TR>
+    <TD>&nbsp;</TD>
+    <TD>&nbsp;</TD>
+    <TD>&nbsp;</TD>
+    <TD>&nbsp;</TD></TR>
+  <TR>
+    <TD>Pits &amp; Bogs</TD>
+    <TD>Rat [279]</TD>
+    <TD>(3,3,0)</TD>
+    <TD>5-25</TD></TR>
+  <TR>
+    <TD>&nbsp;</TD>
+    <TD>Gorgon [288]</TD>
+    <TD>(10,20,0)</TD>
+    <TD>3-7</TD></TR>
+  <TR>
+    <TD>&nbsp;</TD>
+    <TD>Cyclops [291]</TD>
+    <TD>(25,75,0)</TD>
+    <TD>2-3</TD></TR>
+  <TR>
+    <TD>&nbsp;</TD>
+    <TD>Minotaur [272]</TD>
+    <TD>(30,5,0)</TD>
+    <TD>1-5</TD></TR>
+  <TR>
+    <TD>&nbsp;</TD>
+    <TD>&nbsp;</TD>
+    <TD>&nbsp;</TD>
+    <TD>&nbsp;</TD></TR>
+  <TR>
+    <TD>Sand Pits</TD>
+    <TD>Giant Lizard [282]</TD>
+    <TD>(45,45,0)</TD>
+    <TD>15-30</TD></TR>
+  <TR>
+    <TD>&nbsp;</TD>
+    <TD>&nbsp;</TD>
+    <TD>&nbsp;</TD>
+    <TD>&nbsp;</TD></TR>
+  <TR>
+    <TD>Circles of Stone</TD>
+    <TD>Skeleton [33]</TD>
+    <TD>(6,6,0)</TD>
+    <TD>3-15</TD></TR>
+  <TR>
+    <TD>&nbsp;</TD>
+    <TD>Gorgon [288]</TD>
+    <TD>(10,20,0)</TD>
+    <TD>3-15</TD></TR>
+  <TR>
+    <TD>&nbsp;</TD>
+    <TD>Orc [287]</TD>
+    <TD>(20,15,0)</TD>
+    <TD>3-15</TD></TR>
+  <TR>
+    <TD>&nbsp;</TD>
+    <TD>Cyclops [291]</TD>
+    <TD>(25,75,0)</TD>
+    <TD>3-15</TD></TR>
+  <TR>
+    <TD>&nbsp;</TD>
+    <TD>Minotaur [272]</TD>
+    <TD>(30,5,0)</TD>
+    <TD>3-15</TD></TR>
+  <TR>
+    <TD>&nbsp;</TD>
+    <TD>Centaur [271]</TD>
+    <TD>(30,30,0)</TD>
+    <TD>3-15</TD></TR>
+  <TR>
+    <TD>&nbsp;</TD>
+    <TD>Spirit [26]</TD>
+    <TD>(50,50,0)</TD>
+    <TD>3-15</TD></TR>
+  <TR>
+    <TD>&nbsp;</TD>
+    <TD>Giant [292]</TD>
+    <TD>(75,25,0)</TD>
+    <TD>3-15</TD></TR>
+  <TR>
+    <TD>&nbsp;</TD>
+    <TD>Nazgul [55]</TD>
+    <TD>(80,80,0)</TD>
+    <TD>3-15</TD></TR>
+  <TR>
+    <TD>&nbsp;</TD>
+    <TD>Harpie [285]</TD>
+    <TD>(80,120,0)</TD>
+    <TD>3-15</TD></TR>
+  <TR>
+    <TD>&nbsp;</TD>
+    <TD>Chimera [284]</TD>
+    <TD>(130,130,0)</TD>
+    <TD>3-15</TD></TR>
+  <TR>
+    <TD>&nbsp;</TD>
+    <TD>&nbsp;</TD>
+    <TD>&nbsp;</TD>
+    <TD>&nbsp;</TD></TR>
+  <TR>
+    <TD>
+      <P>Tunnel Chamber,</P>
+      <P>levels 1-6</P></TD>
+    <TD>Rat [279]</TD>
+    <TD>(3,3,0)</TD>
+    <TD>10-50</TD></TR>
+  <TR>
+    <TD>&nbsp;</TD>
+    <TD>Ratspider [81]</TD>
+    <TD>(5,5,0)</TD>
+    <TD>5-20</TD></TR>
+  <TR>
+    <TD>&nbsp;</TD>
+    <TD>Gorgon [288]</TD>
+    <TD>(10,20,0)</TD>
+    <TD>3-6</TD></TR>
+  <TR>
+    <TD>&nbsp;</TD>
+    <TD>Orc [287]</TD>
+    <TD>(20,15,0)</TD>
+    <TD>5-20</TD></TR>
+  <TR>
+    <TD>&nbsp;</TD>
+    <TD>&nbsp;</TD>
+    <TD>&nbsp;</TD>
+    <TD>&nbsp;</TD></TR>
+  <TR>
+    <TD>
+      <P>Tunnel Chamber,</P>
+      <P>levels 5-6</P></TD>
+    <TD>Cyclops [291]</TD>
+    <TD>(25,75,0)</TD>
+    <TD>5-10</TD></TR>
+  <TR>
+    <TD>&nbsp;</TD>
+    <TD>Minotaur [272]</TD>
+    <TD>(30,5,0)</TD>
+    <TD>5-15</TD></TR>
+  <TR>
+    <TD>&nbsp;</TD>
+    <TD>Giant Lizard [282]</TD>
+    <TD>(45,45,0)</TD>
+    <TD>5-15</TD></TR>
+  <TR>
+    <TD>&nbsp;</TD>
+    <TD>Giant Spider [278]</TD>
+    <TD>(150,100,0)</TD>
+    <TD>5-15</TD></TR></TBODY></TABLE>
+<P 
+style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: 
+medium">&nbsp;
+</P>
+</DIV>
+</li>
+
+<li id="quit">
+<a href="#quit">Quit</a>
+<DIV class="details">
+<HR>
+<PRE><SPAN style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium" 
+class=Apple-style-span><B>QUIT
+</B></SPAN></PRE>
+<HR>
+
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Quit 
+Olympia. This 
+command must be issued by the player entity.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">No turn 
+report is 
+mailed for the turn a&nbsp;<CODE>quit</CODE>&nbsp;order is 
+processed.
+</P>
+</DIV>
+</li>
+
+<li id="raze">
+<a href="#raze">Raze</a>
+<DIV class="details">
+<HR>
+<PRE><SPAN style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium" 
+class=Apple-style-span><B>RAZE       [building]                        
+   time: varies    priority: 3
+</B></SPAN></PRE>
+<HR>
+
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Tear down 
+a 
+building the character is inside. The command completes when the 
+structure has 
+been completely destroyed. The noble will safely leave buildings before 
+they 
+collapse.</P>
+<P 
+style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: 
+medium"><CODE>raze</CODE>&nbsp;must 
+be executed by the owner of the structure (the top-most unit inside the 
+building).</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Sturdier 
+structures 
+require more men to do a given amount of damage:</P>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DD><PRE>man-days per
+structure       point of damage
+---------       ---------------
+galley               1
+roundship            1
+temple               2
+inn                  2
+tower                2
+mine                 2
+castle               3
+</PRE></DD></DL>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">For 
+example, two 
+men can cause 1% of damage to a tower in a day.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Any men 
+present 
+with the noble will help with destruction. The noble is counted when the 
+number 
+of men are computed.
+</P>
+</DIV>
+</li>
+
+<li id="recruit">
+<a href="#recruit">Recruit</a>
+<DIV class="details">
+<HR>
+<PRE><SPAN style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium" 
+class=Apple-style-span><B>RECRUIT    [days]                            
+   time: as given  priority: 3
+</B></SPAN></PRE>
+<HR>
+
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Recruit 
+one peasant 
+each day for the given number of days. If days is not specified, 
+recruiting will 
+obtain as many peasants as possible.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Peasants 
+must be 
+recruited in plains, mountain or forest provinces, or in cities. 
+Recruiting can 
+not be done in other sublocations (such as rocky hills, forest glades, 
+etc.)</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Up to 10 
+peasants 
+may be recruited per location each month. One peasant is recruited each 
+day 
+the&nbsp;<CODE>recruit</CODE>&nbsp;command is used.</P>
+<P 
+style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: 
+medium">The&nbsp;<CODE>recruit</CODE>&nbsp;order 
+will stop or fail when no further peasants are available to be 
+recruited.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">For 
+example, one 
+player could recruit for up to 10 days per month in a mountain province, 
+
+obtaining one peasant on each of the 10 days.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">If two 
+players in a 
+mountain province each issued&nbsp;<CODE>recruit</CODE>&nbsp;10, both 
+would 
+recruit five peasants (each player would get a peasant a day until all 
+10 had 
+been recruited).</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Recruit 
+is an alias 
+for `<CODE><CODE>collect</CODE>&nbsp;10</CODE>'.
+</P>
+</DIV>
+</li>
+
+<li id="repair">
+<a href="#repair">Repair</a>
+<DIV class="details">
+<HR>
+<PRE><SPAN style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium" 
+class=Apple-style-span><B>REPAIR     [days]                            
+   time: as given  priority: 3
+</B></SPAN></PRE>
+<HR>
+
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Repair 
+the damaged 
+ship or building that the character is inside. Requires at least one 
+worker 
+[11].</P>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DD><PRE>worker-days per
+structure       point of damage
+---------       ---------------
+galley               1
+roundship            1
+temple               2
+inn                  2
+tower                2
+mine                 2
+castle               3
+</PRE></DD></DL>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Work 
+proceeds until 
+the structure has been fully repaired, or the given number of days has 
+passed. 
+Multiple units may work at repair simultaneously.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">For 
+example, a 
+tower with 50% damage would require 100 worker-days to fully repair. A 
+ship with 
+50% damage would require 50 worker-days. A castle, 150 worker-days.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Each use 
+of&nbsp;<CODE>repair</CODE>&nbsp;on a ship requires one unit of pitch 
+[261]. One 
+unit of pitch is sufficient for a ship repair job, no matter how many 
+days the 
+repair takes. Pitch may be purchased in any port city.
+</P>
+</DIV>
+</li>
+
+<li id="research">
+<a href="#research">Research</a>
+<DIV class="details">
+<HR>
+<PRE><SPAN style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium" 
+class=Apple-style-span><B>RESEARCH   &lt;skill&gt;                     
+         time: 7 days    priority: 3
+</B></SPAN></PRE>
+<HR>
+
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Attempt 
+to learn 
+hidden sub-skills of the specified category skill. Research into any 
+skill 
+except Religion [750] must be performed in a tower, by the tower's owner 
+(the 
+first character inside the tower). Research into Religion [750] must be 
+performed in a temple.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Research 
+requires a 
+nominal fee of 25 gold to pay for materials. This fee is charge 
+regardless of 
+whether the research yields any results.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">There is 
+a 25% 
+chance of success for each week of research.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">If 
+successful, the 
+new subskill will be added to the character's partially known skill 
+list. It 
+then must be studied in order to become fully known and usable.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: 
+medium">Example:</P>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DD><PRE>1: &gt; research 600
+1: Will research Shipcraft for seven days.
+7: Research uncovers a new skill:  Improve ship rigging [9999].
+7: To begin learning this skill, order 'study 9999'.
+
+Partially known skills:
+   9999  Improve ship rigging, 0/7
+</PRE></DD></DL>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Research 
+will fail 
+immediately if there are no researchable skills to learn under the 
+category. In 
+this case the 25 gold fee is not charged.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Research 
+by mages 
+of 6th black circle level and above (maximum aura of 31 or higher) must 
+be done 
+in provinces with a civilization level of 1 or less.
+</P>
+</DIV>
+</li>
+
+<li id="resend">
+<a href="#resend">Resend</a>
+<DIV class="details">
+<HR>
+<PRE><SPAN style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium" 
+class=Apple-style-span><B>RESEND     [turn]                            
+                              
+</B></SPAN></PRE>
+<HR>
+
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Ask the 
+order 
+scanner to resend a turn report. The turn argument defaults to the turn 
+most 
+recently run.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Because 
+of their 
+large size, turn reports other than the most recent may not be kept by 
+the order 
+scanner. If you request a report and the scanner responds that the 
+report cannot 
+be found, then the reports for that turn were deleted to reclaim disk 
+space.
+</P>
+</DIV>
+</li>
+
+<li id="rumor">
+<a href="#rumor">Rumor</a>
+<DIV class="details">
+<HR>
+<PRE><SPAN style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium" 
+class=Apple-style-span><B>RUMOR      &lt;# of lines of text&gt;        
+         time: 0 days    priority: 1
+</B></SPAN></PRE>
+<HR>
+
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Submit an 
+unsigned 
+message to the Olympia Times.</P>
+<P 
+style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: 
+medium">The&nbsp;<CODE>rumor</CODE>&nbsp;order 
+may be given by a character or by the player entity. The identity of the 
+
+submitting entity will not appear with the 
+message;&nbsp;<CODE>rumor</CODE>&nbsp;posts are anonymous.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">The 
+number of lines 
+in the entry should be given as an argument to&nbsp;<CODE>rumor</CODE>, 
+followed 
+by the text of the entry. For example: here is a rumor someone 
+submitted.</P>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DD><PRE>RUMOR 3
+As whispered from ear to ear in the great hall of the Chateau Olympique:
+Q:  Why do so many people take an instant dislike to Oleg the Loudmouth?
+A:  Saves time in the long run.
+</PRE></DD></DL>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Take care 
+to 
+carefully count the lines of text in the post. If the wrong number of 
+lines is 
+given, your character may end up publishing his orders in the Olympia 
+Times 
+instead of executing them.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: 
+medium">Alternatively, one 
+may specify 0 for the lines of text argument, and terminate the message 
+with the 
+END keyword:</P>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DD><PRE>RUMOR 0 
+As whispered from ear to ear in the great hall of the Chateau Olympique:
+Q:  Why do so many people take an instant dislike to Oleg the Loudmouth?
+A:  Saves time in the long run.
+END
+</PRE></DD></DL>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Take 
+great care 
+when using the 0 lines/END keyword feature. If you forget the END, or 
+mistype 
+it, none of the orders following 
+the&nbsp;<CODE>rumor</CODE>&nbsp;command will 
+execute. Instead, they will be published in the Olympia Times. This is 
+obviously 
+very bad, so if you intend to use the END keyword to avoid having to 
+count 
+lines, please be careful.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Each line 
+of posted 
+text must be less than 78 characters long, or the post will be 
+rejected.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Editorial 
+
+guidelines for submissions to the Olympia Times:</P>
+<OL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <LI>No profanity.</LI>
+  <LI>No personal insults to other humans (in-character roleplaying 
+insults are 
+  fine).</LI>
+  <LI>No "junk" submissions ; just something half-way reasonable (i.e. 
+don't 
+  send in "Blah blah.")</LI></OL>
+</DIV>
+</li>
+
+<li id="sail">
+<a href="#sail">Sail</a>
+<DIV class="details">
+<HR>
+<PRE><SPAN style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium" 
+class=Apple-style-span><B>SAIL       &lt;direction or destination&gt; 
+[...]     time: varies    priority: 4
+</B></SPAN></PRE>
+<HR>
+
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Pilot a 
+ship in the 
+given direction, or to the specified location. If a location is 
+specified, there 
+must be a direct route to it from the current location of the ship.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Compass 
+points may 
+be abbreviated: `<CODE>n</CODE>', `<CODE>s</CODE>', `<CODE>e</CODE>', 
+`<CODE>w</CODE>'.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">The 
+Sailing [9502] 
+subskill of Shipcraft [120] is required to use 
+the&nbsp;<CODE>sail</CODE>&nbsp;order.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">The 
+character 
+issuing the sail order must be the ship's captain, i.e. the character 
+must be 
+the first unit listed in the `<CODE>Seen here</CODE>' report of the 
+ship.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">The 
+captain must 
+have a crew to assist in the handling of the ship. Galleys require 
+fourteen 
+pirates or sailors to row the ship. Roundships require at least eight 
+pirates or 
+sailors to man the ship's rigging.</P>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DD><PRE>ship          crew     capacity
+----          ----     --------
+galley         14        5,000
+roundship       8       25,000
+</PRE></DD></DL>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">If the 
+required 
+number of crew are not available, travel is still possible, but will 
+take an 
+extra day for each hand the crew is short.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">For 
+example, a 
+galley with only 10 men at the oars will take four extra days to travel 
+across 
+an ocean route. A roundship with no sailors at all would take eight 
+extra days 
+to traverse a route.</P>
+<P 
+style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: 
+medium">The&nbsp;<CODE>sail</CODE>&nbsp;order 
+will fail if the ship is overloaded. Use&nbsp;<CODE>drop</CODE>&nbsp;to 
+throw 
+items overboard if necessary.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Multiple 
+destinations or destinations may be given as arguments 
+to&nbsp;<CODE>sail</CODE>. If the first fails, the next will be tried, 
+until a 
+passable route is found, or&nbsp;<CODE>sail</CODE>&nbsp;runs out of 
+arguments.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">For 
+example, 
+`<CODE><CODE>sail</CODE>&nbsp;n e w</CODE>' would first try to sail 
+north. If 
+travel north was not possible for any reason, east would next be tried, 
+then 
+west. In this way exploring units can attempt to deal with the case of 
+running 
+into an impassable ocean route, or a coast.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: 
+medium">Roundships sail 
+from windy provinces in one day less than the rated time, provided the 
+route 
+would require two days or longer. For example, a roundship leaving a 
+windy 
+province across a route rated at three days would take only two to 
+travel the 
+link. But a roundship leaving port will always take one day, never zero 
+days.
+</P>
+</DIV>
+</li>
+
+<li id="seek">
+<a href="#seek">Seek</a>
+<DIV class="details">
+<HR>
+<PRE><SPAN style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium" 
+class=Apple-style-span><B>SEEK       &lt;who&gt;                       
+         time: 7 days    priority: 3
+</B></SPAN></PRE>
+<HR>
+
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Seek for 
+a hidden 
+character. Characters may be hidden because of fog lying over a 
+province, or 
+through the application of stealth or magical skills.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Hidden 
+characters 
+can not be interacted with by a unit unless 
+they&nbsp;<CODE>contact</CODE>&nbsp;the unit first, or the unit 
+successfully 
+finds them with&nbsp;<CODE>seek</CODE>. 
+The&nbsp;<CODE>seek</CODE>&nbsp;order 
+will return immediately if the character is visible, or has already been 
+found 
+with a previous&nbsp;<CODE>seek</CODE>&nbsp;order.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">If a 
+character is 
+specified, there is a 10% chance that the character will be found during 
+each of 
+the seven days the order is being executed.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">If 
+the&nbsp;<VAR>who</VAR>&nbsp;argument is not 
+given,&nbsp;<CODE>seek</CODE>&nbsp;will seek for any hidden nobles 
+present. In 
+this case there will be a 5% chance of finding a hidden noble during 
+each of the 
+seven days.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">If a unit 
+found 
+with&nbsp;<CODE>seek</CODE>&nbsp;moves, the contact information is lost, 
+and the 
+unit again becomes inaccessible.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Hidden 
+units are 
+not shown in the location report, even if their presence has been 
+revealed 
+through&nbsp;<CODE>contact</CODE>&nbsp;or&nbsp;<CODE>seek</CODE>.
+</P>
+</DIV>
+</li>
+
+<li id="sell">
+<a href="#sell">Sell</a>
+<DIV class="details">
+<HR>
+<PRE><SPAN style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium" 
+class=Apple-style-span><B>SELL       &lt;item&gt; &lt;qty&gt; 
+&lt;price&gt; [have-left]     time: 0 days    priority: 1
+</B></SPAN></PRE>
+<HR>
+
+<P 
+style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: 
+medium">Sell&nbsp;<VAR>quantity</VAR>&nbsp;of 
+the given item for&nbsp;<VAR>max-price</VAR>&nbsp;each.</P>
+<P 
+style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: 
+medium">If&nbsp;<VAR>quantity</VAR>&nbsp;is 
+zero, any pending&nbsp;<CODE>sell</CODE>&nbsp;order for the indicated 
+item will 
+be canceled.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Only one 
+pending&nbsp;<CODE>sell</CODE>&nbsp;order may be active for each item at 
+a time. 
+If two&nbsp;<CODE>sell</CODE>&nbsp;orders are issued for the same item, 
+and the 
+first has not yet completed, the 
+second&nbsp;<CODE>sell</CODE>&nbsp;order will 
+replace the first.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Buys and 
+sells are 
+only matched in cities, where markets may be found to execute trades. 
+However,&nbsp;<CODE>buy</CODE>&nbsp;and&nbsp;<CODE>sell</CODE>&nbsp;may 
+be 
+issued anywhere.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">If the a 
+match is 
+found with a buyer, the trade will be executed immediately. Otherwise, 
+the trade 
+will be saved until a match with a buyer may be found.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: 
+medium">Example:</P>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DD><PRE>&gt; sell 79 3 5
+Try to sell three iron [79] for 5 gold each.
+</PRE></DD></DL>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">If there 
+is a buyer 
+of iron in the city, buying for 5 gold or more, the trade will be 
+executed:</P>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DD><PRE>1: Sold three iron [79] for 5 gold.
+</PRE></DD></DL>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: 
+medium">Otherwise, the sell 
+will be placed on the character's pending trades list:</P>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DD><PRE>Pending trades:
+
+trade    price    qty   item
+-----    -----    ---   ----
+ sell        5      3   iron [79]
+</PRE></DD></DL>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">At the 
+end of the 
+turn, the sell order will appear in the city's market report:</P>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DD><PRE>Market report:
+
+trade    who    price    qty   item
+-----    ---    -----    ---   ----
+ sell   2019        5      3   iron [79]
+</PRE></DD></DL>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">A trade 
+will match 
+between a buyer and a seller if the buyer's price is greater than or 
+equal to 
+the seller's price. The actual price that the trade will be made at is 
+the 
+seller's price.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Have-left 
+is an 
+amount of the item that character will keep and not sell. For instance, 
+if the 
+unit issued `<CODE><CODE>sell</CODE>&nbsp;79 10 15 5</CODE>', this would 
+mean 
+"Sell ten iron for 15 gold each, but keep 5 iron for myself." If there 
+character 
+only have ten iron, this order would put five up them up for 
+sale.
+</P>
+</DIV>
+</li>
+
+<li id="stack">
+<a href="#stack">Stack</a>
+<DIV class="details">
+<HR>
+<PRE><SPAN style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium" 
+class=Apple-style-span><B>STACK      &lt;character&gt;                 
+         time: 0 days    priority: 1
+</B></SPAN></PRE>
+<HR>
+
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Stack 
+beneath the 
+specified character. If the character is already stacked beneath another 
+unit, 
+the character will first unstack before stacking with the new 
+character.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Example: 
+Two 
+characters, Feasel and Osswid, are in the same location:</P>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DD><PRE>Seen here:
+   Osswid [5499]
+   Feasel the Wicked [502]
+</PRE></DD></DL>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">If Feasel 
+issued 
+the order `<CODE><CODE>stack</CODE>&nbsp;5499</CODE>', he would stack 
+beneath 
+Osswid:</P>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DD><PRE>Seen here:
+   Osswid [5499], accompanied by:
+      Feasel the Wicked [502]</PRE></DD></DL>
+</DIV>
+</li>
+
+<li id="stop">
+<a href="#stop">Stop</a>
+<DIV class="details">
+<HR>
+<PRE><SPAN style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium" 
+class=Apple-style-span><B>STOP
+</B></SPAN></PRE>
+<HR>
+
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Interrupt 
+a command 
+left running at the end of a turn. Must be the first order queued for a 
+unit.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">For 
+example, 
+suppose on day 28 a unit begins an explore command. Explore takes seven 
+days, so 
+as of the end of the turn, it will still have four days left before it 
+completes. The order template for the unit will list the executing 
+command:</P>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DD><PRE>unit 5499  # Osswid
+   # &gt; explore (executing for four more days)
+</PRE></DD></DL>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">The 
+player may 
+interrupt this command with the&nbsp;<CODE>stop</CODE>&nbsp;order, and 
+begin 
+unit 5499 executing a new set of orders (say, beginning with 
+a&nbsp;<CODE>move</CODE>) on day 1 of the next turn:</P>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DD><PRE>unit 5499  # Osswid
+   # &gt; explore (executing for four more days)
+   stop
+   move
+   ...
+</PRE></DD></DL>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">(Remember 
+that 
+`<CODE>#</CODE>' begins a comment in the orders, from the 
+`<CODE>#</CODE>' to 
+the end of the line).</P>
+<P 
+style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: 
+medium">The&nbsp;<CODE>stop</CODE>&nbsp;order 
+will interrupt the executing&nbsp;<CODE>explore</CODE>&nbsp;before day 1 
+begins 
+on the next turn. Some commands, such as&nbsp;<CODE>collect</CODE>, will 
+give 
+partial results; the unit will have whatever it has already collected. 
+Other 
+orders, such as&nbsp;<CODE>explore</CODE>, give no partial benefit, and 
+the 
+three days already invested in exploration will be wasted.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">If a 
+character 
+executing a&nbsp;<CODE>move</CODE>&nbsp;order is interrupted 
+with&nbsp;<CODE>stop</CODE>, the character will return to the original 
+location, 
+as if no travel had taken place.
+</P>
+</DIV>
+</li>
+
+<li id="study">
+<a href="#study">Study</a>
+<DIV class="details">
+<HR>
+<PRE><SPAN style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium" 
+class=Apple-style-span><B>STUDY      &lt;skill&gt;                     
+         time: 7 days    priority: 3
+</B></SPAN></PRE>
+<HR>
+
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Study the 
+given 
+skill for one week.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">If the 
+skill has 
+been studied before, learning will continue. Otherwise, the character 
+must meet 
+the requirements necessary to begin learning the skill.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: 
+medium">Characters are 
+limited to studying for at most 14 days per turn. (This does not include 
+any 
+"fast study" days spent).</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">To begin 
+study of a 
+skill requires the following:</P>
+<UL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <LI>A source of instruction, one of the following: 
+  <UL>
+    <LI>The location teaches the skill</LI>
+    <LI>The character has a book or scroll which teaches the skill</LI>
+    <LI>The character discovered the skill through 
+research</LI></UL></LI>
+  <LI>Payment of 100 gold to begin study.</LI>
+  <LI>Payment of Noble Points to learn advanced 
+skills</LI></UL>
+</DIV>
+</li>
+
+<li id="surrender">
+<a href="#surrender">Surrender</a>
+<DIV class="details">
+<HR>
+<PRE><SPAN style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium" 
+class=Apple-style-span><B>SURRENDER  &lt;character&gt;                 
+         time: 0 days    priority: 1
+</B></SPAN></PRE>
+<HR>
+
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Surrender 
+to the 
+specified character. The effect is exactly as if the new prisoner lost 
+in 
+combat, except there is no combat. A portion of the prisoner's items 
+will always 
+be lost. If a unique item is lost, it will have to have found by 
+exploration of 
+the province.
+</P>
+</DIV>
+</li>
+
+<li id="take">
+<a href="#take">Take</a>
+<DIV class="details">
+<HR>
+<PRE><SPAN style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium" 
+class=Apple-style-span><B>TAKE       &lt;who&gt; &lt;item&gt; [qty] 
+[have-left]       time: 0 days    priority: 1
+</B></SPAN></PRE>
+<HR>
+
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Same 
+as
+<A href="#get"><CODE>get</CODE></A>.
+</P>
+</DIV>
+</li>
+
+<li id="terrorize">
+<a href="#terrorize">Terrorize</a>
+<DIV class="details">
+<HR>
+<PRE><SPAN style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium" 
+class=Apple-style-span><B>TERRORIZE  &lt;who&gt; &lt;severity&gt;      
+               time: 7 days    priority: 3
+</B></SPAN></PRE>
+<HR>
+
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Terror 
+may be used 
+to convert prisoners to a faction, or to reinforce fear loyalty among 
+the 
+faction's own units. The character to be terrorized must be stacked 
+beneath the 
+terrorizing unit.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">When used 
+on one's 
+own units,&nbsp;<CODE>terrorize</CODE>&nbsp;will establish or increase 
+fear 
+loyalty. Nobles of contract loyalty will be converted to fear. The 
+severity 
+amount will be added to the noble's fear rating. For instance, a fear-4 
+noble 
+terrorized at severity 10 will become fear-14.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">The 
+severity 
+indicates how much the noble will be abused to gain fear. The noble will 
+suffer 
+a&nbsp;<VAR>severity</VAR>&nbsp;hit to health as a result. Thus, there 
+is a 
+danger that the noble will fall ill with increasing amounts of 
+terror.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Prisoners 
+may also 
+be terrorized. Prisoners of contract or fear loyalty lord 
+have&nbsp;<VAR>severity</VAR>&nbsp;percent chance of swearing fealty to 
+the 
+terrorizing unit. Oathbound units can not be induced to convert through 
+terror.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Thus, the 
+more 
+severe the terrorization, the greater the chance that a prisoner will 
+swear to 
+the terrorizer, but also the greater the victim's wounds. Prisoners have 
+been 
+known to die as a result of over-zealous conversion attempts.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: 
+medium">Characters 
+belonging to other player factions may not be terrorized unless they are 
+being 
+held prisoner.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Units of 
+fear 
+loyalty may not use the&nbsp;<CODE>terrorize</CODE>&nbsp;order.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">To avoid 
+a newly 
+terrorized unit to immediately renounce loyalty at the end of the turn, 
+if a 
+severity is not provided when terrorizing, it defaults to 3. &nbsp;This 
+buys you 
+one turn to get it right.
+</P>
+</DIV>
+</li>
+
+<li id="times">
+<a href="#times">Times</a>
+<DIV class="details">
+<HR>
+<PRE><SPAN style="FONT-FAMILY: 'times new roman'; FONT-SIZE: medium" 
+class=Apple-style-span><B>TIMES   time: 0    priority: 3
+</B></SPAN></PRE>
+<HR>
+
+<P style="FONT-FAMILY: 'times new roman'; FONT-SIZE: medium">TIMES 1 
+&nbsp; 
+&nbsp; # deactivates the Olympia Times being sent to you</P>
+<P style="FONT-FAMILY: 'times new roman'; FONT-SIZE: medium">TIMES 0 
+&nbsp; 
+&nbsp; # activates the Olympia Times being sent to you</P>
+</DIV>
+</li>
+
+<li id="train">
+<a href="#train">Train</a>
+<DIV class="details">
+<HR>
+<PRE><SPAN style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium" 
+class=Apple-style-span><B>TRAIN      &lt;kind&gt; [days]               
+         time: as given  priority: 3
+</B></SPAN></PRE>
+<HR>
+
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Attempt 
+to produce 
+the given kind of men through training. One day is required to train 
+each 
+man.</P>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DD><PRE>num  kind            skill  input man       input item        
+where
+---  -----------     -----  --------------  ----------------  ------
+ 11  worker           none  peasant [10]
+ 12  soldier           610  peasant [10]
+ 13  archer            615  soldier [12]    longbow [72]
+ 14  knight            616  swordsman [20]  warmount [53]
+ 15  elite guard       616  knight [14]     plate armor [73]  castle
+ 16  pikeman           610  soldier [12]    pike [75]
+ 17  blessed soldier   750  soldier [12]                      temple
+ 19  sailor            601  peasant [10]
+ 20  swordsman         616  soldier [12]    longsword [74]
+ 21  crossbowman       610  peasant [10]    crossbow [85]
+ 22  elite archer      615  archer [13]                       castle
+ 24  pirate            616  sailor [19]     longsword [74]    ship
+</PRE></DD></DL>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: 
+medium">Examples:</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">To train 
+5 peasants 
+into 5 workers:</P>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DD><PRE>train 11 5              # takes 5 days
+</PRE></DD></DL>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">To train 
+5 peasants 
+into 5 sailors (requires knowledge of Sailing [601]):</P>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DD><PRE>train 19 5              # takes 5 days
+</PRE></DD></DL>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">To train 
+3 soldiers 
+into 3 swordsmen (requires knowledge of Swordplay [616], and a longsword 
+[74] 
+for each soldier to be trained):</P>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DD><PRE>train 20 3              # takes 3 
+days</PRE></DD></DL>
+</DIV>
+</li>
+
+<li id="ungarrison">
+<a href="#ungarrison">Ungarrison</a>
+<DIV class="details">
+<HR>
+<PRE><SPAN style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium" 
+class=Apple-style-span><B>UNGARRISON   [garrison]                      
+   time: 1 day     priority: 3
+</B></SPAN></PRE>
+<HR>
+
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Disband 
+the 
+garrison in the current province. The character removing the garrison 
+must be a 
+member of a faction which has rulership over the province.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">If a 
+specific 
+garrison is given as an argument to&nbsp;<CODE>ungarrison</CODE>, only 
+that 
+garrison will be disbanded. This can be useful as a safety check, in 
+case a 
+failed&nbsp;<CODE>move</CODE>&nbsp;order might cause the wrong garrison 
+unit to 
+be disbanded.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">The 
+garrison's men 
+will be transferred to the noble 
+issuing&nbsp;<CODE>ungarrison</CODE>.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: 
+medium">Examples:</P>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DD><PRE>ungarrison 5611         # remove Garrison [5611] from this 
+province
+ungarrison              # remove any garrison from this 
+province</PRE></DD></DL>
+</DIV>
+</li>
+
+<li id="unload">
+<a href="#unload">Unload</a>
+<DIV class="details">
+<HR>
+<PRE><SPAN style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium" 
+class=Apple-style-span><B>UNLOAD                                       
+   time: 0 days    priority: 3
+</B></SPAN></PRE>
+<HR>
+
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Unload 
+all 
+passengers from a ship. May only be used by the captain of a ship. Every 
+
+character not in the captain's stack will disembark from the ship.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: 
+medium">Passengers may only 
+be unloaded while the ship is docked in a port. They will not jump off a 
+ship at 
+sea.
+</P>
+</DIV>
+</li>
+
+<li id="unstack">
+<a href="#unstack">Unstack</a>
+<DIV class="details">
+<HR>
+<PRE><SPAN style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium" 
+class=Apple-style-span><B>UNSTACK    [who]                             
+   time: 0 days    priority: 1
+</B></SPAN></PRE>
+<HR>
+
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">When used 
+without 
+an argument,&nbsp;<CODE>unstack</CODE>&nbsp;removes the noble from being 
+stacked 
+beneath another noble:</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: 
+medium">Before:</P>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DD><PRE>Osswid the Constructor [5499], accompanied by:
+   Feasel the Wicked [502]
+   Captain McCook [2019], with five workers
+</PRE></DD></DL>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DD><PRE>502: &gt; unstack
+</PRE></DD></DL>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: 
+medium">After:</P>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DD><PRE>Osswid the Constructor [5499]
+Feasel the Wicked [502], accompanied by:
+   Captain McCook [2019], with five workers
+</PRE></DD></DL>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">A stack 
+leader may 
+give an argument to&nbsp;<CODE>unstack</CODE>, specifying a unit to be 
+dropped 
+from the stack:</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: 
+medium">Before:</P>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DD><PRE>Osswid the Constructor [5499], accompanied by:
+   Feasel the Wicked [502]
+   Captain McCook [2019], with five workers
+</PRE></DD></DL>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DD><PRE>5499: &gt; unstack 502
+</PRE></DD></DL>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: 
+medium">After:</P>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DD><PRE>Osswid the Constructor [5499]
+Feasel the Wicked [502], accompanied by:
+   Captain McCook [2019], with five workers
+</PRE></DD></DL>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Note that 
+in this 
+example [2019] is stacked beneath [502], not [5499]. That is why Captain 
+McCook 
+remains with Feasel when Feasel unstacks.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">A special 
+case 
+of&nbsp;<CODE>unstack</CODE>&nbsp;is invoked if the noble specifies 
+itself as 
+the argument. In this case, the noble will drop out of the stack alone, 
+leaving 
+behind both those stack above as well as below:</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: 
+medium">Before:</P>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DD><PRE>Osswid the Constructor [5499], accompanied by:
+   Feasel the Wicked [502], accompanied by:
+      Captain McCook [2019], with five workers
+</PRE></DD></DL>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DD><PRE>502: &gt; unstack 502
+</PRE></DD></DL>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: 
+medium">After:</P>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DD><PRE>Osswid the Constructor [5499], accompanied by:
+   Captain McCook [2019], with five workers
+Feasel the Wicked [502]
+</PRE></DD></DL>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">The 
+effect on the 
+stack in this case is the same as if Feasel had died or been captured in 
+
+battle.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">More 
+examples:</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: 
+medium">Before:</P>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DD><PRE>Osswid the Constructor [5499], accompanied by:
+   Feasel the Wicked [502]
+</PRE></DD></DL>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">After 
+Feasel 
+unstacks:</P>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DD><PRE>Osswid the Constructor [5499]
+Feasel the Wicked [502]
+</PRE></DD></DL>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">If other 
+characters 
+were stacked beneath Feasel, they would remain with him.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: 
+medium">Before:</P>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DD><PRE>Osswid the Constructor [5499], accompanied by:
+   Feasel the Wicked [502], accompanied by:
+      Candide [1269]
+</PRE></DD></DL>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">If 
+Candide were 
+stacked beneath Feasel, and Feasel unstacked, then:</P>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DD><PRE>Osswid the Constructor [5499]
+Feasel the Wicked [502], accompanied by:
+   Candide [1269]
+</PRE></DD></DL>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">On the 
+other hand, 
+if Candide were stacked beneath Osswid, then:</P>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DD><PRE>Osswid the Constructor [5499], accompanied by:
+   Candide [1269]
+Feasel the Wicked [502]</PRE></DD></DL>
+</DIV>
+</li>
+
+<li id="use">
+<a href="#use">Use</a>
+<DIV class="details">
+<HR>
+<PRE><SPAN style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium" 
+class=Apple-style-span><B>USE        &lt;skill&gt;  [arguments...]     
+         time: varies    priority: 3
+</B></SPAN></PRE>
+<HR>
+
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Make use 
+of a skill 
+or spell that the character knows. Sub-skills usually have a function 
+which is 
+invoked through&nbsp;<CODE>use</CODE>. These actions are described in 
+the lore 
+sheets revealed when sub-skills are learned.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Category 
+skills do 
+not have direct&nbsp;<CODE>use</CODE>&nbsp;functions. For example, one 
+could use 
+the Sailing [601] skill to sail a ship:</P>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DD><PRE>use 601 west
+</PRE></DD></DL>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">But no 
+use function 
+exists for the category skill, Shipcraft [600].
+</P>
+</DIV>
+</li>
+
+<li id="vis_email">
+<a href="#vis_email">Vis_email</a>
+<DIV class="details">
+<HR>
+<PRE><SPAN style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium" 
+class=Apple-style-span><B>VIS_EMAIL  &lt;new email address for the 
+player list&gt;
+</B></SPAN></PRE>
+<HR>
+
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Set a 
+different 
+email address to appear in the player list than the one the turn reports 
+are 
+sent to.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">For 
+example:</P>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DD><PRE>email "skrenta@shadow.com"
+vis_email "skrenta@pbm.com"
+</PRE></DD></DL>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Would 
+cause turn 
+reports to be sent to <A 
+href="mailto:skrenta@shadow.com">skrenta@shadow.com</A>, while the 
+player list 
+shows <A href="mailto:skrenta@pbm.com">skrenta@pbm.com</A> as player 
+501's email 
+address:</P>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DD><PRE>501    House of Osswid
+       Rich Skrenta &lt;skrenta@pbm.com&gt;</PRE></DD></DL>
+</DIV>
+</li>
+
+<li id="wait">
+<a href="#wait">Wait</a>
+<DIV class="details">
+<HR>
+<PRE><SPAN style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium" 
+class=Apple-style-span><B>WAIT       conditions                        
+   time: varies    priority: 1
+</B></SPAN></PRE>
+<HR>
+
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Wait for 
+one of the 
+the specified conditions to occur. The first condition which is 
+satisfied will 
+cause the wait command to terminate. If one of the specified wait 
+conditions is 
+true when the wait order is issued, no wait will take place, and the 
+order will 
+complete in zero time.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">The 
+following 
+conditions may be waited on:</P>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DT><EM>clear</EM></DT>
+  <DD>Wait until it is not foggy, windy or rainy.</DD>
+  <DT><EM>day&nbsp;<VAR>n</VAR></EM></DT>
+  <DD>Wait until the day of the month is&nbsp;<VAR>n</VAR></DD>
+  <DT><EM>turn&nbsp;<VAR>n</VAR></EM></DT>
+  <DD>Wait until it is turn&nbsp;<VAR>n</VAR></DD>
+  <DT><EM>ferry&nbsp;<VAR>n</VAR></EM></DT>
+  <DD>Wait for the ship&nbsp;<VAR>n</VAR>&nbsp;to sound its horn with 
+  the&nbsp;<CODE>ferry</CODE>&nbsp;order. 
+  <P>Units waiting to&nbsp;<CODE>board</CODE>&nbsp;a ferry should 
+  use&nbsp;<CODE>wait ferry</CODE>&nbsp;instead of&nbsp;<CODE>wait 
+ship</CODE>. 
+  This will allow passengers on the ship time to disembark. When 
+passenger 
+  unloaded is complete, the captain will sound the ship's horn, and 
+those 
+  wishing to&nbsp;<CODE>board</CODE>&nbsp;may proceed.</P>
+  <P>Otherwise, those waiting to board may try to get on the ship before 
+the 
+  current load of passengers has left, 
+  causing&nbsp;<CODE>board</CODE>&nbsp;orders to fail because of ship 
+weight 
+  limits.</P></DD>
+  <DT><EM>flag&nbsp;<VAR>f</VAR>&nbsp;[<VAR>n</VAR>]</EM></DT>
+  <DD>Wait until character&nbsp;<VAR>n</VAR>, or a character belonging 
+to 
+  player&nbsp;<VAR>n</VAR>, signals with 
+  flag&nbsp;<VAR>f</VAR>.&nbsp;<VAR>n</VAR>&nbsp;defaults to the player 
+issuing 
+  the flag order. If&nbsp;<VAR>n</VAR>&nbsp;is zero, wait until any 
+character 
+  signals with flag&nbsp;<VAR>f</VAR>.</DD>
+  <DT><EM>fog</EM></DT>
+  <DD>Wait until it is foggy in the noble's province.</DD>
+  <DT><EM>gold&nbsp;<VAR>n</VAR></EM></DT>
+  <DD>Wait until the character has at 
+least&nbsp;<VAR>n</VAR>&nbsp;gold</DD>
+  <DT><EM>item&nbsp;<VAR>n</VAR>&nbsp;<VAR>q</VAR></EM></DT>
+  <DD>Wait until the character has at least 
+quantity&nbsp;<VAR>q</VAR>&nbsp;of 
+  item&nbsp;<VAR>n</VAR></DD>
+  <DT><EM>loc&nbsp;<VAR>n</VAR></EM></DT>
+  <DD>Wait until arrival at the given location.</DD>
+  <DT><EM>not</EM></DT>
+  <DD>Invert the sense of the following condition.</DD>
+  <DT><EM>owner</EM></DT>
+  <DD>Wait until the noble is the first character in the location 
+list.</DD>
+  <DT><EM>rain</EM></DT>
+  <DD>Wait until it is raining in the noble's province.</DD>
+  <DT><EM>ship&nbsp;<VAR>n</VAR></EM></DT>
+  <DD>Wait until the specified ship arrives in port.</DD>
+  <DT><EM>shiploc&nbsp;<VAR>n</VAR></EM></DT>
+  <DD>Many players have been bitten by using&nbsp;<CODE>wait 
+  loc</CODE>&nbsp;while they're on a ship to wait for the ship's arrival 
+at a 
+  particular port. Don't do this!&nbsp;<CODE>wait loc</CODE>&nbsp;waits 
+for the 
+  noble to arrive at a particular location. If the noble is on a 
+  ship,&nbsp;<EM>the ship</EM>&nbsp;is the location the noble is in, not 
+the 
+  ship's location. 
+  <P>Use&nbsp;<CODE>wait shiploc</CODE>&nbsp;to wait for the ship's 
+arrival at a 
+  particular place.</P></DD>
+  <DT><EM>stack&nbsp;<VAR>n</VAR></EM></DT>
+  <DD>Wait until the character and unit&nbsp;<VAR>n</VAR>&nbsp;are 
+members of 
+  the same stack. Position within the stack is not important; The 
+condition is 
+  true whenever&nbsp;<VAR>n</VAR>&nbsp;and the character share a common 
+stack 
+  leader.</DD>
+  <DT><EM>time&nbsp;<VAR>n</VAR></EM></DT>
+  <DD>Wait for&nbsp;<VAR>n</VAR>&nbsp;days to elapse</DD>
+  <DT><EM>top</EM></DT>
+  <DD>Wait until the unit becomes a stack leader. This could happen if 
+the 
+  units's current stack leader unstacked or promoted the unit.</DD>
+  <DT><EM>unit&nbsp;<VAR>n</VAR></EM></DT>
+  <DD>Wait until the character and the specified unit are in the same 
+  location</DD>
+  <DT><EM>wind</EM></DT>
+  <DD>Wait until it is windy in the noble's province.</DD></DL>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">For 
+example:</P>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DD><PRE>1: &gt; wait time 1
+1: Wait finished: one day has passed.
+2: &gt; wait time 10 day 5
+5: Wait finished: today is day 5.
+</PRE></DD></DL>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">The first 
+condition 
+to become true will end the wait. This can be used to specify the 
+maximum amount 
+of time that the character will wait for something.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">For 
+instance, 
+suppose we want to wait for [5499] to show up, but we don't want to wait 
+past 
+day 15.</P>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DD><PRE>&gt; wait unit 5499 day 15
+</PRE></DD></DL>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">This 
+order will 
+finish on day 15 or as soon as 5499 shows up, which ever comes first. If 
+5499 is 
+already here when the order is issued, no wait will take place. 
+Likewise, if it 
+is already past day 15, no wait will take place.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Keep in 
+mind that 
+the order priority mechanism eliminates the need to use waits in many 
+cases. 
+Consider synchronization in the following example:</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Feasel 
+[502] 
+arrives at Osswid's [5499] location. Feasel gives Osswid some gold, and 
+then 
+leaves. Osswid departs after receiving the gold.</P>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DD><PRE>unit 502   # Feasel
+  move ...
+  pay 5499 100
+  move ...
+
+unit 5499  # Osswid
+  wait unit 502
+  move ...
+</PRE></DD></DL>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">The 
+orders above 
+will work; no additional waits are needed. After the&nbsp;<CODE>wait 
+unit</CODE>&nbsp;becomes true, both 502's&nbsp;<CODE>pay</CODE>&nbsp;and 
+
+5499's&nbsp;<CODE>move</CODE>&nbsp;are ready to execute. 
+Since&nbsp;<CODE>pay</CODE>&nbsp;has a lower priority 
+than&nbsp;<CODE>move</CODE>,&nbsp;<CODE>pay</CODE>&nbsp;will happen 
+first.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">This 
+technique also 
+works with&nbsp;<CODE>stack</CODE>&nbsp;and&nbsp;<CODE>give</CODE>, 
+since they 
+also have a lower priority than&nbsp;<CODE>move</CODE>.</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">The NOT 
+keyword 
+inverts the sense of the condition which follows. For example:</P>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DD><PRE>&gt; wait not rain time 7
+</PRE></DD></DL>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Will wait 
+until it 
+is not raining, or for seven days, whichever comes first.</P>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DD><PRE>&gt; wait not rain not wind
+</PRE></DD></DL>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Will wait 
+until it 
+is not raining or not windy.
+</P>
+</DIV>
+</li>
+
+<li id="wood">
+<a href="#wood">Wood</a>
+<DIV class="details">
+<HR>
+<PRE><SPAN style="FONT-FAMILY: 'times new roman'; FONT-SIZE: medium" 
+class=Apple-style-span><B>WOOD     [number of wood]  [days]           
+time: as given  priority: 3
+</B></SPAN></PRE>
+<HR>
+
+<P style="FONT-FAMILY: 'times new roman'; FONT-SIZE: medium">Wood is 
+used in the 
+construction of inns, mines and ships. And also are used to make weapons 
+Up to 
+30 wood may be removed from forest provinces each month.</P>
+<P style="FONT-FAMILY: 'times new roman'; FONT-SIZE: medium">A unit 
+must have 
+the Harvest lumber [702] subskill of Forestry [700] in order to cut 
+wood. At 
+least one worker is also required.</P>
+<P style="FONT-FAMILY: 'times new roman'; FONT-SIZE: medium">Each 
+worker will 
+cut and prepare one wood [77] per day.</P>
+<P style="FONT-FAMILY: 'times new roman'; FONT-SIZE: 
+medium">Examples:</P>
+<DL style="FONT-FAMILY: 'times new roman'; FONT-SIZE: medium">
+  <DD><PRE>wood         # cut as much wood as possible
+wood 25      # stop after cutting 25 wood
+wood 0 5     # wood for five days
+wood 25 5    # stop after five days, or 25 wood, whichever
+               # comes first
+</PRE></DD></DL>
+<P style="FONT-FAMILY: 'times new roman'; FONT-SIZE: medium">In all 
+cases, 
+wooding will cease as soon as the supply of ready wood in the province 
+has been 
+exhausted.
+</P>
+</DIV>
+</li>
+
+</ul>
+</DIV>
+</DIV>
+</BODY>
+</HTML>
