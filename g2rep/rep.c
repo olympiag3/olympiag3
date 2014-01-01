@@ -364,6 +364,7 @@ dehtml(s)
   return buf;
 }
 
+void
 out_line(s)
      char *s;
 {
