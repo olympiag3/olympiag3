@@ -2244,7 +2244,7 @@ entab(int pl)
 #ifdef _WIN32
 	return "entab | ";
 #else
-	return "unexpand -t8 - | ";
+	return "unexpand -t8 | ";
 #endif
 }
 

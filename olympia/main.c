@@ -366,7 +366,7 @@ send_rep(int pl, int turn)
 		if (player_notab(pl)) {
 			cmd = sout("g2rep %s >> %s", fnam, report);
 		} else {
-			cmd = sout("g2rep %s | unexpand -t8 - >> %s", fnam, report);
+			cmd = sout("g2rep %s | unexpand -t8 >> %s", fnam, report);
 		}
 	}
 
