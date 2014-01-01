@@ -1,12 +1,17 @@
-#Spell:  Transcend death [9125]
+#Spell:  Raise undead [9180]
 #
-Usage:   automatic when needed
+Usage:   COLLECT 31 [days]
 
-Transcend death allows a mortal to pass through Hades unmolested
-by the foul and dangerous spirits who live there.  The necromancer
-must be alone, however.  He cannot be stacked with any other
-nobles, or be accompanied by any followers.
+Required aura:  none
+Time to cast:   as given
 
-It is also said that when a necromancer with knowledge of @@@@ dies,
-the body vanishes, and the mage is recreated somewhere in Hades,
-albeit lacking any of his worldly possessions.
+Undead [31] are dead bodies animated with foul magic, summoned
+from their graves.  While not particularly swift or strong,
+their horrifying nature often inspires terror amongst their
+foes on the battlefield.  Thus they fight with combat rating
+attack-10, defense-10.
+
+One undead may be summoned per day from a graveyard.
+Graveyards furnish up to 15 undead each month.
+
+One or two undead may decompose at the end of each month.

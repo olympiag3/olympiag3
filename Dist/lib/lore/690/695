@@ -1,23 +1,15 @@
-#Skill:  Record skill on scroll [9573]
+#Skill:  Collect rare element [9584]
 #
-Usage:  USE @@@@ <skill>
+Usage:  COLLECT <item> [number] [days]
+Time:   as given or necessary
 
-Requires:  blank scroll [84]
-Time:      seven or more days
+The noble will seek rare elements to collect.  See the COLLECT order
+for details on the syntax of the arguments and an explanation of the
+columns in the following table.
 
-Record the given skill on a blank scroll.  The blank scroll will be
-consumed, and a new unique scroll will be produced.  The new scroll
-will allow one character to learn the skill.
+The followings kinds of rare elements may be collected with this skill:
 
-Example:
-
-    USE @@@@ nnnn     # make a one-time study scroll for skill nnnn
-
-Magical skills may not be scribed with this skill.
-
-The skill must be known in order to be written.  The character will
-still know the skill after writing it.
-
-This skill requires as much time as the recorded skill takes to learn.
-Writing a skill which requires two weeks of study to learn will take
-two weeks.
+   num  item         who      where          qty  skill  chance
+   ---  ----         ---      -----          ---  -----  ------
+    67  farrenstone  noble    caves            2   9584   100%
+    71  pretus bones noble    sand pits        1   9584   100%

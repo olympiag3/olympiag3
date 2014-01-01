@@ -1,24 +1,17 @@
-#Spell:  Arcane symbols [9153]
+#Spell: Cloak region of artifact creation [9111]
 #
-Usage:  USE @@@@ <spell>
+Usage: USE @@@@ <artifact> [aura]
 
-Required aura:  two points
-Required item:  blank scroll [84]
-Time to cast:   seven or more days
+Required aura:  one or more points
+Required item:
+Time to cast:   seven days
 
-Transcribe the given spell onto a blank scroll.  The blank scroll will
-be consumed, and a new unique scroll will be produced.  The scroll will
-permit one character to learn the spell from the scroll.
+Inhibit the ability of another mage to learn the region in which
+the specified magical artifact was created.  The artifact must
+be in the inventory of the caster.
 
-Example:
+The more that is aura used, the more difficult it will be for
+another mage to overcome the magical cloaking.
 
-    USE @@@@ nnnn       # make a one-time study scroll for spell nnnn
-
-Only Artifact construction [164] spells may be scribed with this skill.
-
-The spell must be known by the character in order to be written.
-The character will still know the spell after it has been scribed.
-
-This spell requires as much time to cast as the skill takes to learn.
-It takes two weeks to write a spell which requires two weeks of study
-to learn.
+The default aura to use is one point.
+Multiple casts of @@@@ on the same artifact are additive.

@@ -80,7 +80,7 @@ na Stealth
 SK
  tl 28
  of 631 632 633 634 635 
- re 636 637 639 641 
+ re 636 637 638 639 
 
 631 skill 0
 na Petty thievery
@@ -124,16 +124,16 @@ SK
  tl 21
  rs 630
 
+638 skill 0
+na Conceal self
+SK
+ tl 28
+ rs 630
+
 639 skill 0
 na Sneak into structure
 SK
  tl 21
- rs 630
-
-641 skill 0
-na Conceal self
-SK
- tl 28
  rs 630
 
 650 skill 0
@@ -275,10 +275,24 @@ SK
 na Alchemy
 SK
  tl 28
- of 691 692 693 
- re 694 695 696 697 
+ of 691 692
+ re 693 694 695 696 697 
 
 691 skill 0
+na Brew healing potion
+SK
+ tl 21
+ rs 690
+ rq	65 1 1
+
+692 skill 0
+na Record skill on scroll
+SK
+ tl 21
+ rs 690
+ rq	84 1 1
+
+693 skill 0
 na Extract venom from ratspider
 SK
  tl 21
@@ -286,39 +300,25 @@ SK
  rq	81 1 1
  pr 63
 
-692 skill 0
+694 skill 0
 na Make potion of slavery
 SK
  tl 21
  rs 690
  rq	63 1 1
 
-693 skill 0
-na Brew healing potion
+695 skill 0
+na Collect rare elements
 SK
- tl 21
+ tl 14
  rs 690
- rq	65 1 1
 
-694 skill 0
+696 skill 0
 na Brew potion of death
 SK
  tl 21
  rs 690
  rq	64 1 1
-
-695 skill 0
-na Record skill on scroll
-SK
- tl 21
- rs 690
- rq	84 1 1
-
-696 skill 0
-na Collect rare elements
-SK
- tl 14
- rs 690
 
 697 skill 0
 na Turn lead into gold
@@ -432,8 +432,8 @@ SK
 na Religion
 SK
  tl 35
- of 751 
- re 752 753 754 755 756 
+ of 751 752
+ re 753 754 755 756 
  np 1
 
 751 skill 0
@@ -443,7 +443,7 @@ SK
  rs 750
 
 752 skill 0
-na Resurrect dead noble
+na Lay to rest
 SK
  tl 28
  rs 750
@@ -455,7 +455,7 @@ SK
  rs 750
 
 754 skill 0
-na Lay to rest
+na Resurrect dead noble
 SK
  tl 28
  rs 750
@@ -476,8 +476,8 @@ SK
 na Magic
 SK
  tl 28
- of 801 802 803 804 805 
- re 806 807 808 809 811 812 813 814 
+ of 801 802 803 804 805 806
+ re 807 808 809 811 812 813 814 
  np 1
 
 801 skill 0
@@ -505,29 +505,29 @@ SK
  rs 800
 
 805 skill 0
-na Reveal abilities of another mage
-SK
- tl 14
- rs 800
-
-806 skill 0
-na Tap health for aura
-SK
- tl 21
- rs 800
-
-807 skill 0
 na Heal
 SK
  tl 21
  rs 800
 
-808 skill 0
+806 skill 0
 na Modern magic script
 SK
  tl 21
  rs 800
  rq	84 1 1
+
+807 skill 0
+na Reveal abilities of another mage
+SK
+ tl 14
+ rs 800
+
+808 skill 0
+na Tap health for aura
+SK
+ tl 21
+ rs 800
 
 809 skill 0
 na Shroud abilities from scry
@@ -587,13 +587,13 @@ SK
  rq	84 1 1
 
 824 skill 0
-na Summon rain
+na Summon wind
 SK
  tl 21
  rs 820
 
 825 skill 0
-na Summon wind
+na Summon rain
 SK
  tl 21
  rs 820
@@ -644,9 +644,8 @@ SK
 na Scrying
 SK
  tl 35
- of 841 
- re 842 843 844 845 846 847 848 849 851 \
-	852 
+ of 841 842
+ re 843 844 845 846 847 848 849 851 852 
  np 1
 
 841 skill 0
@@ -656,23 +655,23 @@ SK
  rs 840
 
 842 skill 0
-na Shroud location from magical scry
-SK
- tl 14
- rs 840
-
-843 skill 0
-na Dispel location shroud
-SK
- tl 21
- rs 840
-
-844 skill 0
 na Ciphered writing of Areth-Pirn
 SK
  tl 21
  rs 840
  rq	84 1 1
+
+843 skill 0
+na Shroud location from magical scry
+SK
+ tl 14
+ rs 840
+
+844 skill 0
+na Dispel location shroud
+SK
+ tl 21
+ rs 840
 
 845 skill 0
 na Create magical barrier
@@ -720,27 +719,28 @@ SK
 na Gatecraft
 SK
  tl 35
- of 861 862 
- re 863 864 865 866 867 868 869 871 872 
+ of 861 862 863 
+ re 864 865 866 867 868 869 871 872 
  np 1
 
 861 skill 0
-na Teleport
-SK
- tl 14
- rs 860
-
-862 skill 0
 na Detect gates
 SK
  tl 14
  rs 860
 
-863 skill 0
+862 skill 0
 na Jump through gate
 SK
  tl 14
  rs 860
+
+863 skill 0
+na Language of the Ancients
+SK
+ tl 21
+ rs 860
+ rq	84 1 1
 
 864 skill 0
 na Seal gate
@@ -779,11 +779,10 @@ SK
  rs 860
 
 871 skill 0
-na Language of the Ancients
+na Teleport
 SK
- tl 21
+ tl 14
  rs 860
- rq	84 1 1
 
 872 skill 0
 na Reverse jump through gate
@@ -795,9 +794,8 @@ SK
 na Artifact construction
 SK
  tl 42
- of 881 882 883 
- re 884 885 886 887 888 889 891 892 893 \
-	894 
+ of 881 882 883 884 
+ re 885 886 887 888 889 891 892 893 894 
  np 1
 
 881 skill 0
@@ -807,30 +805,28 @@ SK
  rs 880
 
 882 skill 0
-na Reveal creator of artifact
+na Arcane symbols
 SK
- tl 14
+ tl 21
  rs 880
+ rq	84 1 1
 
 883 skill 0
-na Reveal where artifact was created
+na Forge magical weapon
 SK
- tl 14
+ tl 21
  rs 880
 
 884 skill 0
-na Cloak creator of artifact
+na Forge magical armor
 SK
- tl 28
+ tl 21
  rs 880
- rq	1 100 1 \
-	82 5 1
- ne 1
 
 885 skill 0
-na Cloak region of artifact creation
+na Forge magical bow
 SK
- tl 14
+ tl 21
  rs 880
 
 886 skill 0
@@ -840,41 +836,44 @@ SK
  rs 880
 
 887 skill 0
-na Forge magical weapon
+na Reveal creator of artifact
 SK
- tl 21
+ tl 14
  rs 880
 
 888 skill 0
-na Forge magical armor
+na Reveal where artifact was created
 SK
- tl 21
+ tl 14
  rs 880
 
 889 skill 0
-na Forge magical bow
-SK
- tl 21
- rs 880
-
-891 skill 0
-na Dispel cloaking from artifact
-SK
- tl 21
- rs 880
-
-892 skill 0
-na Arcane symbols
-SK
- tl 21
- rs 880
-
-893 skill 0
 na Destroy artifact
 SK
  tl 21
  rs 880
  rq	84 1 1
+
+891 skill 0
+na Cloak creator of artifact
+SK
+ tl 28
+ rs 880
+ rq	1 100 1 \
+	82 5 1
+ ne 1
+
+892 skill 0
+na Cloak region of artifact creation
+SK
+ tl 14
+ rs 880
+
+893 skill 0
+na Dispel cloaking from artifact
+SK
+ tl 21
+ rs 880
 
 894 skill 0
 na Forge palantir
@@ -893,66 +892,66 @@ SK
  np 2
 
 901 skill 0
-na Transcend death
+na Raise undead
 SK
- tl 28
+ tl 21
  rs 900
- np 1
 
 902 skill 0
+na Summon ghost warriors
+SK
+ tl 21
+ rs 900
+
+903 skill 0
 na Runes of Evil
 SK
  tl 21
  rs 900
  rq	84 1 1
 
-903 skill 0
-na Summon ghost warriors
-SK
- tl 21
- rs 900
-
 904 skill 0
-na Raise undead
-SK
- tl 21
- rs 900
-
-905 skill 0
 na Summon demon lord
 SK
  tl 21
  rs 900
 
-906 skill 0
+905 skill 0
 na Renew demon bond
 SK
  tl 21
  rs 900
 
-907 skill 0
+906 skill 0
 na Banish demon lord
 SK
  tl 21
  rs 900
 
-908 skill 0
+907 skill 0
 na Eating of the dead
 SK
  tl 28
  rs 900
 
-909 skill 0
+908 skill 0
 na Aura blast
 SK
  tl 21
  rs 900
 
-911 skill 0
+909 skill 0
 na Absorb aura blast
 SK
  tl 21
  rs 900
+
+911 skill 0
+na Transcend death
+SK
+ tl 28
+ rs 900
+ np 1
 
 920 skill magic
 na Advanced sorcery

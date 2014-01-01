@@ -1,17 +1,20 @@
-#Spell:  Cloak creator of artifact [9110]
+#Spell: Forge magical armor [9132]
 #
-Usage:  USE @@@@ <artifact> [aura]
+Usage: USE @@@@ <aura> "Name of item"
 
 Required aura:  one or more points
-Required item:
+Required item:  one mithril [82], 500 gold
 Time to cast:   seven days
 
-Inhibit the ability of another mage to learn the identity of the
-creator of the specified magical artifact.  The artifact must be
-in the inventory of the caster.
+Create magical armor.  The armow will grant its owner a defense
+bonus equal to 5 * the amount of aura invested in its creation.
 
-The more aura used, the more difficult it will be for another
-mage to overcome the magical cloaking.
+Up to 20 aura may be invested in magical armor.
 
-The default aura to use is one point.
-Multiple casts of @@@@ on the same artifact are additive.
+Example:
+
+	use @@@@ 5 "Shield of Achilles"
+	> created Shield of Achilles [ha53].
+
+	Inventory:
+           1  Shield of Achilles [ha53]           0  +25 defense

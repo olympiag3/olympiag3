@@ -1,20 +1,15 @@
-#Spell: Forge magical bow [9133]
+#Spell:  Destroy magical artifact [9164]
 #
-Usage: USE @@@@ <aura> "Name of item"
+Usage:  USE 9164 <artifact>
 
-Required aura:  one or more points
-Required item:  one mallorn wood [70], 500 gold
+Required aura:  two points
+Required item:  a magical artifact
 Time to cast:   seven days
 
-Create a magical bow.  The bow will grant its owner a missile
-bonus equal to 5 * the amount of aura invested in its creation.
+Attempt to destroy a magical artifact.  The artifact must be in the
+caster's possession.  Some artifacts can only be destroyed in the
+location in which they were created.
 
-Up to 20 aura may be invested in a magical bow.
-
-Example:
-
-	use @@@@ 5 "Hand of Legolas"
-	> created Hand of Legolas [ha53].
-
-	Inventory:
-           1  Hand of Legolas [ha53]           0  +25 missile
+Any spells contained in the artifact will be lost when it is destroyed.
+Any aura trapped in the artifact will be released into the caster's
+current aura rating.

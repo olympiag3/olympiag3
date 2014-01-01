@@ -1,12 +1,14 @@
-#Spell:  Detect gates [9115]
+#Spell:  Jump through gate [9116]
 #
-Usage:  USE @@@@
+Usage:  USE @@@@ <gate> [key]
 
-Required aura:  one point
+Required aura:  one point for each 250 weight
 Required item:  none
-Time to cast:   seven days
+Time to cast:   one day
 
-Identify any gates present in the current location.
+The caster will teleport through the specified gate.  The gate
+must be present in the current location.  If the gate is sealed
+with a key, the key must be supplied for the jump to succeed.
 
-If there are no gates in the caster's location, Detect gates [@@@@]
-will indicate how far away the nearest gate is.
+One point of aura is required for each 250 units of weight in the
+caster's stack to be transported, rounded up.

@@ -1,14 +1,18 @@
-#Skill:  Eating of the dead [9184]
+#Skill:  Aura blast [9185]
 #
-Usage:  USE @@@@ <dead body>
+Usage:  USE @@@@ <target> [aura] [have-left]
 
-Required aura:  five points
-Required item:  ratspider venom
-Time to cast:   fourteen days
+Required aura:  as given
+Time to cast:   one day
 
-A complex ritual is executed whereby the mage ingests the ratspider
-venom together with the brains of the dead noble.  The mage will
-learn every skill previously known by the dead noble.
+The mage directs a blast of raw energy at the target character.
+The target will suffer two points of damage for each point of
+aura used in the blast.  For example, USE @@@@ 5201 25 would
+send a blast of 25 aura at [5201], causing a 50 point wound.
 
-There is a 33% chance that the toxic venom of the ratspider will cause
-the mage to perish during use of this skill.
+If aura is zero, all available current aura will be used.  If
+have-left is given, at least that much current aura will be
+retained, and not used for the blast
+
+It is not possible to aura blast between Hades, Faery and
+the real world.

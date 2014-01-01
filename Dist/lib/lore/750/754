@@ -1,10 +1,18 @@
-#Skill:  Lay to rest [754]
+#Skill:  Resurrect dead noble [752]
 #
-Usage:  USE @@@@ <dead noble>
+Usage:  USE @@@@ <body>
 Time:   ten days
 
-Use of @@@@ will commend a dead noble's body to its final resting
-place.  The priest must possess the body of the deceased, and
-perform @@@@ in a graveyard.  Upon completion, the dead body will
-be consumed, and the NPs invested in the deceased character will
-be returned to the original owner.
+Resurrect dead noble [@@@@] must be performed by a priest
+in a temple.  The priest must be holding the body of the
+dead noble.  There is a 50% chance of success for each
+attempt.
+
+If successful, the character will be restored to full
+health in the priest's location, and be under the
+command of the original owner.
+
+The defense rating of the resurrected noble will be
+lowered by 25 points.  If the noble would have a new
+defense rating lower than 1, resurrection is not
+possible.

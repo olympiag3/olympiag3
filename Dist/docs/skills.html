@@ -392,8 +392,8 @@ Further skills may be found through research.
 
    636    Learn of richest nearby noble      two weeks
    637    Torture prisoner                   three weeks
+   638    Conceal self                       four weeks
    639    Sneak into structure               three weeks
-   641    Conceal self                       four weeks
 
 </PRE>
 </div>
@@ -553,6 +553,42 @@ The chance of success depends on the prisoner's loyalty:
 </div>
 </li>
 
+<li id="s638">
+<a href="#s638">Conceal Self [638]</a>
+<div class="details">
+<PRE>Conceal self [638] four weeks
+-----------------------------
+Usage:  USE 638 &gt;flag&lt;
+Time:   three days
+
+This skill allows a character to conceal itself from view.
+When activiated, other characters will not see the unit in their
+location reports, and will not see the unit come and go.
+
+The unit must be alone in order to conceal itself.  It may not be
+stacked with any other characters, or possess any followers, such
+as peasants, soldiers, workers, etc.  It may also not be the first
+character inside a sublocation, building or ship.  The owners of
+these small locations are always visible.
+
+Hiding takes three days to accomplish.  However, turning off
+concealment takes zero time.
+
+Use of the skill will set whether or not the unit is trying to
+hide from view:
+
+	use 638 1	# Hide from view, takes three days
+	use 638 0	# Don't conceal self from view, zero days
+
+Note that attempts to gain entrance to buildings or ships with
+the MOVE order will subject to the unit to the ADMIT system.
+A failure to gain entrance with MOVE will give the unit away to
+the structure's owner.
+
+</PRE>
+</div>
+</li>
+
 <li id="s639">
 <a href="#s639">Sneak into structure [639]</a>
 <div class="details">
@@ -573,42 +609,6 @@ arguments.
 The unit must be alone in order to sneak into and out of buildings
 or ships.  It may not be stacked with any other characters, or
 possess any followers, such as peasants, soldiers, workers, etc.
-
-</PRE>
-</div>
-</li>
-
-<li id="s641">
-<a href="#s641">Conceal Self [641]</a>
-<div class="details">
-<PRE>Conceal self [641] four weeks
------------------------------
-Usage:  USE 641 &gt;flag&lt;
-Time:   three days
-
-This skill allows a character to conceal itself from view.
-When activiated, other characters will not see the unit in their
-location reports, and will not see the unit come and go.
-
-The unit must be alone in order to conceal itself.  It may not be
-stacked with any other characters, or possess any followers, such
-as peasants, soldiers, workers, etc.  It may also not be the first
-character inside a sublocation, building or ship.  The owners of
-these small locations are always visible.
-
-Hiding takes three days to accomplish.  However, turning off
-concealment takes zero time.
-
-Use of the skill will set whether or not the unit is trying to
-hide from view:
-
-	use 641 1	# Hide from view, takes three days
-	use 641 0	# Don't conceal self from view, zero days
-
-Note that attempts to gain entrance to buildings or ships with
-the MOVE order will subject to the unit to the ADMIT system.
-A failure to gain entrance with MOVE will give the unit away to
-the structure's owner.
 
 </PRE>
 </div>
@@ -806,6 +806,7 @@ dependent on the type of animal produced:
      giant spider [278]       21
      chimera [284]            21
      nazgul [55]              14
+     centaur [271]            14
      lion [280]               14
      harpie [285]             14
      all other beasts          7
@@ -1314,15 +1315,15 @@ The following skills may be studied directly once Alchemy is known:
 
    num    skill                              time to learn
    ---    -----                              -------------
-   691    Extract venom from ratspider       three weeks
-   692    Make potion of slavery             three weeks
-   693    Brew healing potion                three weeks
+   691    Brew healing potion                three weeks
+   692    Record skill on scroll             three weeks
 
 Further skills may be found through research.
 
-   694    Brew potion of death               three weeks
-   695    Record skill on scroll             three weeks
-   696    Collect rare elements              two weeks
+   693    Extract venom from ratspider       three weeks
+   694    Make potion of slavery             three weeks
+   695    Collect rare elements              two weeks
+   696    Brew potion of death               three weeks
    697    Turn lead into gold                four weeks
 
 </PRE>
@@ -1330,11 +1331,68 @@ Further skills may be found through research.
 <ul>
 
 <li id="s691">
-<a href="#s691">Extract venom from ratspider [691]</a>
+<a href="#s691">Brew healing potion [691]</a>
 <div class="details">
-<PRE>Extract venom from ratspider [691] three weeks
-----------------------------------------------
+<PRE>Brew healing potion [691]  three weeks
+--------------------------------------
 Usage:  USE 691
+
+Required:  avinia leaf [65]
+Time:      seven days
+
+The alchemist brews a potion of healing.  Any character
+ingesting the potion will be cured of any illness and
+begin to recover.  The character may also receive a
+random increase in their health rating.
+
+Upon completion, the potion will be added to the alchemist's
+inventory.  The potion's label will not reveal its purpose.
+
+A character wishing to drink the potion should specify it
+to the USE order.  For instance, to drink potion [602], issue
+the order:  USE 602.
+
+</PRE>
+</div>
+</li>
+
+<li id="s692">
+<a href="#s692">Record skill on scroll [692]</a>
+<div class="details">
+<PRE>Record skill on scroll [692]
+----------------------------
+Usage:  USE 692 &lt;SKILL&gt;
+
+Requires:  blank scroll [84]
+Time:      seven or more days
+
+Record the given skill on a blank scroll.  The blank scroll will be
+consumed, and a new unique scroll will be produced.  The new scroll
+will allow another character to learn the skill.
+
+Example:
+
+    USE 692 nnnn     # make a study scroll for skill nnnn
+
+Magical skills may not be scribed with this skill.
+
+The skill must be known in order to be written.  The character will
+still know the skill after writing it.
+
+This skill requires as much time as the recorded skill takes to learn.
+Writing a skill which requires two weeks of study to learn will take
+two weeks.
+
+</PRE>
+</div>
+</li>
+
+<li id="s693">
+<a href="#s693">Extract venom from ratspider [693]</a>
+<div class="details">
+<PRE>Extract venom from ratspider [693] three weeks
+----------------------------------------------
+Usage:  USE 693
 
 Required:  one ratspider [81]
 Produces:  one ratspider venom [63]
@@ -1355,12 +1413,12 @@ ratspider.  The ratspider is killed in the process.
 </div>
 </li>
 
-<li id="s692">
-<a href="#s692">Make potion of slavery [692]</a>
+<li id="s694">
+<a href="#s694">Make potion of slavery [694]</a>
 <div class="details">
-<PRE>Make potion of slavery [692]  three weeks
+<PRE>Make potion of slavery [694]  three weeks
 -----------------------------------------
-Usage:  USE 692
+Usage:  USE 694
 
 Required:  one ratspider venom [63]
 Time:      seven days
@@ -1391,94 +1449,10 @@ returned.
 </div>
 </li>
 
-<li id="s693">
-<a href="#s693">Brew healing potion [693]</a>
-<div class="details">
-<PRE>Brew healing 
-potion [693]  three weeks
---------------------------------------
-Usage:  USE 693
-
-Required:  avinia leaf [65]
-Time:      seven days
-
-The alchemist brews a potion of healing.  Any character
-ingesting the potion will be cured of any illness and
-begin to recover.  The character may also receive a
-random increase in their health rating.
-
-Upon completion, the potion will be added to the alchemist's
-inventory.  The potion's label will not reveal its purpose.
-
-A character wishing to drink the potion should specify it
-to the USE order.  For instance, to drink potion [602], issue
-the order:  USE 602.
-
-</PRE>
-</div>
-</li>
-
-<li id="s694">
-<a href="#s694">Brew potion of death [694]</a>
-<div class="details">
-<PRE>Brew potion of death [694]
---------------------------
-Usage:  USE 694
-
-Required:  lana bark [64]
-Time:      ten days
-
-The alchemist brews a potion which will cause instant death
-to any character which drinks it.
-
-Upon completion, the potion will be added to the alchemist's
-inventory.  The potion's label will not reveal its sinister
-purpose.
-
-A character wishing to drink the potion should specify it
-to the USE order.  For instance, to drink potion [603], issue
-the order:  USE 603.
-
-</PRE>
-</div>
-</li>
-
 <li id="s695">
-<a href="#s695">Record skill on scroll [695]</a>
+<a href="#s695">Collect rare elements [695]</a>
 <div class="details">
-<PRE>Record 
-skill on scroll [695]
-----------------------------
-Usage:  USE 695 &lt;SKILL&gt;
-
-Requires:  blank scroll [84]
-Time:      seven or more days
-
-Record the given skill on a blank scroll.  The blank scroll will be
-consumed, and a new unique scroll will be produced.  The new scroll
-will allow another character to learn the skill.
-
-Example:
-
-    USE 695 nnnn     # make a study scroll for skill nnnn
-
-Magical skills may not be scribed with this skill.
-
-The skill must be known in order to be written.  The character will
-still know the skill after writing it.
-
-This skill requires as much time as the recorded skill takes to learn.
-Writing a skill which requires two weeks of study to learn will take
-two weeks.
-
-</PRE>
-</div>
-</li>
-
-<li id="s696">
-<a href="#s696">Collect rare elements [696]</a>
-<div class="details">
-<PRE>Collect rare elements [696]
+<PRE>Collect rare elements [695]
 ---------------------------
 Usage:  COLLECT &lt;ITEM&gt; [number] [days]
 Time:   as given or necessary
@@ -1493,6 +1467,31 @@ The followings kinds of rare elements may be collected with this skill:
    ---  ----         ---      -----          ---  -----  ------
     67  farrenstone  noble    caves            2   9584   100%
     71  pretus bones noble    sand pits        1   9584   100%
+
+</PRE>
+</div>
+</li>
+
+<li id="s696">
+<a href="#s696">Brew potion of death [696]</a>
+<div class="details">
+<PRE>Brew potion of death [696]
+--------------------------
+Usage:  USE 696
+
+Required:  lana bark [64]
+Time:      ten days
+
+The alchemist brews a potion which will cause instant death
+to any character which drinks it.
+
+Upon completion, the potion will be added to the alchemist's
+inventory.  The potion's label will not reveal its sinister
+purpose.
+
+A character wishing to drink the potion should specify it
+to the USE order.  For instance, to drink potion [603], issue
+the order:  USE 603.
 
 </PRE>
 </div>
@@ -2018,12 +2017,12 @@ The following skills may be studied directly once Religion is known:
    num    skill                              time to learn
    ---    -----                              -------------
    751    Receive vision                     four weeks
+   752    Lay to rest                        four weeks
 
 Further skills may be found through research.
 
-   752    Resurrect dead noble               four weeks
    753    Preparatory ritual                 three weeks
-   754    Lay to rest                        four weeks
+   754    Resurrect dead noble               four weeks
    755    Remove blessing from soldiers      four weeks
    756    Immunity from Vision               four weeks
 
@@ -2053,26 +2052,18 @@ Each attempt to receive a vision has a 50% chance of success.
 </li>
 
 <li id="s752">
-<a href="#s752">Resurrect dead noble [752]</a>
+<a href="#s752">Lay to rest [752]</a>
 <div class="details">
-<PRE>Resurrect dead noble [752] four weeks
--------------------------------------
-Usage:  USE 752 &lt;id&gt;
+<PRE>Lay to rest [752] four weeks
+----------------------------
+Usage:  USE 752 &lt;DEAD noble&gt;
 Time:   ten days
 
-Resurrect dead noble [752] must be performed by a priest
-in a temple.  The priest must be holding the body of the
-dead noble.  There is a 50% chance of success for each
-attempt.
-
-If successful, the character will be restored to full
-health in the priest's location, and be under the
-command of the original owner.
-
-The defense rating of the resurrected noble will be
-lowered by 25 points.  If the noble would have a new
-defense rating lower than 1, resurrection is not
-possible.
+Use of 752 will commend a dead noble's body to its final resting
+place.  The priest must possess the body of the deceased, and
+perform 752 in a graveyard.  Upon completion, the dead body will
+be consumed, and the NPs invested in the deceased character will
+be returned to the original owner.
 
 </PRE>
 </div>
@@ -2096,18 +2087,26 @@ removes the possibility of their failure.
 </li>
 
 <li id="s754">
-<a href="#s754">Lay to rest [754]</a>
+<a href="#s754">Resurrect dead noble [754]</a>
 <div class="details">
-<PRE>Lay to rest [754] four weeks
-----------------------------
-Usage:  USE 754 &lt;DEAD noble&gt;
+<PRE>Resurrect dead noble [754] four weeks
+-------------------------------------
+Usage:  USE 754 &lt;id&gt;
 Time:   ten days
 
-Use of 754 will commend a dead noble's body to its final resting
-place.  The priest must possess the body of the deceased, and
-perform 754 in a graveyard.  Upon completion, the dead body will
-be consumed, and the NPs invested in the deceased character will
-be returned to the original owner.
+Resurrect dead noble [754] must be performed by a priest
+in a temple.  The priest must be holding the body of the
+dead noble.  There is a 50% chance of success for each
+attempt.
+
+If successful, the character will be restored to full
+health in the priest's location, and be under the
+command of the original owner.
+
+The defense rating of the resurrected noble will be
+lowered by 25 points.  If the noble would have a new
+defense rating lower than 1, resurrection is not
+possible.
 
 </PRE>
 </div>
@@ -2190,13 +2189,13 @@ The following skills may be studied directly once Magic is known:
    802    Perform common tasks for gold      two weeks
    803    Appear common                      two weeks
    804    View current aura level of others  three weeks
-   805    Reveal abilities of another mage   two weeks
+   805    Heal                               three weeks
+   806    Modern magic script                three weeks
 
 Further skills may be found through research.
 
-   806    Tap health for aura                three weeks
-   807    Heal                               three weeks
-   808    Modern magic script                three weeks
+   807    Reveal abilities of another mage   two weeks
+   808    Tap health for aura                three weeks
    809    Shroud abilities from scry         three weeks
    811    Detect ability scry                three weeks
    812    Dispel ability shroud              three weeks
@@ -2325,60 +2324,11 @@ points of aura.
 </li>
 
 <li id="s805">
-<a href="#s805">Reveal abilities of another mage [805]</a>
+<a href="#s805">Heal [805]</a>
 <div class="details">
-<PRE>Reveal abilities of another mage [805] two weeks
-------------------------------------------------
-Usage:  USE 805 &lt;target&gt; &lt;magical skill category&gt; [aura]
-
-Required aura:  one or more points of aura, as given
-Required item:
-Time to cast:   seven days
-
-Used against another magician, this spell will attempt to
-reveal all spells known by the other mage within the given
-magical skill category.
-
-If the target is shrouding his abilities, the aura invested in
-USE 805 must exceed the shroud's aura, or the spell will fail.
-For instance, USE 805 4 (costing four aura points) is required 
-to overcome a three-aura ability shroud.
-
-</PRE>
-</div>
-</li>
-
-<li id="s806">
-<a href="#s806">Tap health for aura [806]</a>
-<div class="details">
-<PRE>Tap health for aura [806] three weeks
--------------------------------------
-Usage:  USE 806 &lt;amount of aura&gt;
-
-Required aura:  none
-Time to cast:   seven days
-
-The mage will dip into his own health to generate current aura.
-The health loss received is equal to five times the amount of
-aura generated.
-
-For example, USE 806 10 would generate 10 points of current aura,
-and cause the mage to receive a 50 point wound.
-
-Use of this spell is dangerous, as any wound runs the risk of
-infection, and death could result.  See the section on Health
-in the rules for more information about wounds and healing.
-
-</PRE>
-</div>
-</li>
-
-<li id="s807">
-<a href="#s807">Heal [807]</a>
-<div class="details">
-<PRE>Heal [807] three weeks
+<PRE>Heal [805] three weeks
 ----------------------
-Usage:  USE 807 &lt;target&gt; &lt;aura&gt;
+Usage:  USE 805 &lt;target&gt; &lt;aura&gt;
 
 Required aura:  1-3 points, as given
 Required item:
@@ -2405,12 +2355,12 @@ same location as the caster.
 </div>
 </li>
 
-<li id="s808">
-<a href="#s808">Modern magic script [808]</a>
+<li id="s806">
+<a href="#s806">Modern magic script [806]</a>
 <div class="details">
-<PRE>Modern magic script [808]  three weeks
+<PRE>Modern magic script [806]  three weeks
 -------------------------------------
-Usage:  USE 808 &lt;spell&gt;
+Usage:  USE 806 &lt;spell&gt;
 
 Required aura:  two points
 Required item:  blank scroll [84]
@@ -2422,7 +2372,7 @@ permit one character to learn the spell from the scroll.
 
 Example:
 
-    USE 808 nnnn       # make a one-time study scroll for spell nnnn
+    USE 806 nnnn       # make a one-time study scroll for spell nnnn
 
 Only Magic [800] spells may be scribed with this skill.
 
@@ -2432,6 +2382,55 @@ The character will still know the spell after it has been scribed.
 This spell requires as much time to cast as the skill takes to learn.
 It takes two weeks to write a spell which requires two weeks of study
 to learn.
+
+</PRE>
+</div>
+</li>
+
+<li id="s807">
+<a href="#s807">Reveal abilities of another mage [807]</a>
+<div class="details">
+<PRE>Reveal abilities of another mage [807] two weeks
+------------------------------------------------
+Usage:  USE 807 &lt;target&gt; &lt;magical skill category&gt; [aura]
+
+Required aura:  one or more points of aura, as given
+Required item:
+Time to cast:   seven days
+
+Used against another magician, this spell will attempt to
+reveal all spells known by the other mage within the given
+magical skill category.
+
+If the target is shrouding his abilities, the aura invested in
+USE 805 must exceed the shroud's aura, or the spell will fail.
+For instance, USE 807 4 (costing four aura points) is required 
+to overcome a three-aura ability shroud.
+
+</PRE>
+</div>
+</li>
+
+<li id="s808">
+<a href="#s808">Tap health for aura [808]</a>
+<div class="details">
+<PRE>Tap health for aura [808] three weeks
+-------------------------------------
+Usage:  USE 808 &lt;amount of aura&gt;
+
+Required aura:  none
+Time to cast:   seven days
+
+The mage will dip into his own health to generate current aura.
+The health loss received is equal to five times the amount of
+aura generated.
+
+For example, USE 808 10 would generate 10 points of current aura,
+and cause the mage to receive a 50 point wound.
+
+Use of this spell is dangerous, as any wound runs the risk of
+infection, and death could result.  See the section on Health
+in the rules for more information about wounds and healing.
 
 </PRE>
 </div>
@@ -2603,11 +2602,11 @@ known:
    821    Fierce wind                        three weeks
    822    Bind storm to ship                 three weeks
    823    Scribe weather symbols             three weeks
-   824    Summon rain                        three weeks
+   824    Summon wind                        three weeks
 
 Further skills may be found through research.
 
-   825    Summon wind                        three weeks
+   825    Summon rain                        three weeks
    826    Summon fog                         three weeks
    827    Direct storm                       three weeks
    828    Dissipate storm                    three weeks
@@ -2704,37 +2703,11 @@ to learn.
 </li>
 
 <li id="s824">
-<a href="#s824">Summon rain [824]</a>
+<a href="#s824">Summon wind [824]</a>
 <div class="details">
-<PRE>Summon rain [824]
+<PRE>Summon wind [824]
 -----------------
 Usage:  USE 824 &lt;aura&gt; ["Name of storm"]
-
-Required aura:  three or more points
-Time to cast:   seven days
-
-Summon a rain weather entity.  Rain storms may be summoned from
-forest or ocean provinces.  Once a location has produced a rain
-storm, another rain storm may not be summoned from that place
-until the first storm has dissipated.
-
-The storm will have a strength of twice the amount of aura invested
-in its summoning.  Storms lose one point of strength at the end of
-each month.  When a storm's strength reaches zero, it dissipates.
-
-While the storm exists, the summoner will get a location report
-for the storm's province.
-
-</PRE>
-</div>
-</li>
-
-<li id="s825">
-<a href="#s825">Summon wind [825]</a>
-<div class="details">
-<PRE>Summon wind [825]
------------------
-Usage:  USE 825 &lt;aura&gt; ["Name of storm"]
 
 Required aura:  three or more points
 Time to cast:   seven days
@@ -2751,6 +2724,32 @@ it dissipates.
 
 While the wind exists, the summoner will get a location report
 the province that it is in.
+
+</PRE>
+</div>
+</li>
+
+<li id="s825">
+<a href="#s825">Summon rain [825]</a>
+<div class="details">
+<PRE>Summon rain [825]
+-----------------
+Usage:  USE 825 &lt;aura&gt; ["Name of storm"]
+
+Required aura:  three or more points
+Time to cast:   seven days
+
+Summon a rain weather entity.  Rain storms may be summoned from
+forest or ocean provinces.  Once a location has produced a rain
+storm, another rain storm may not be summoned from that place
+until the first storm has dissipated.
+
+The storm will have a strength of twice the amount of aura invested
+in its summoning.  Storms lose one point of strength at the end of
+each month.  When a storm's strength reaches zero, it dissipates.
+
+While the storm exists, the summoner will get a location report
+for the storm's province.
 
 </PRE>
 </div>
@@ -2941,12 +2940,12 @@ The following skills may be studied directly once Scrying is known:
    num    skill                              time to learn
    ---    -----                              -------------
    841    Scry location                      three weeks
+   842    Ciphered writing of Areth-Pirn     three weeks
 
 Further skills may be found through research.
 
-   842    Shroud location from magical scry  two weeks
-   843    Dispel location shroud             three weeks
-   844    Ciphered writing of Areth-Pirn     three weeks
+   843    Shroud location from magical scry  two weeks
+   844    Dispel location shroud             three weeks
    845    Create magical barrier             three weeks
    846    Remove magical barrier             three weeks
    847    Locate character                   three weeks
@@ -2988,11 +2987,43 @@ The default aura to use is one point.
 </li>
 
 <li id="s842">
-<a href="#s842">Shroud location from magical scry [842]</a>
+<a href="#s842">Ciphered writing of Areth-Pirn [842]</a>
 <div class="details">
-<PRE>Shroud location from magical scry [842]
+<PRE>Ciphered writing of Areth-Pirn [842]
+------------------------------------
+Usage:  USE 842 &lt;spell&gt;
+
+Required aura:  two points
+Required item:  blank scroll [84]
+Time to cast:   seven or more days
+
+Transcribe the given spell onto a blank scroll.  The blank scroll will
+be consumed, and a new unique scroll will be produced.  The scroll will
+permit one character to learn the spell from the scroll.
+
+Example:
+
+    USE 842 nnnn       # make a one-time study scroll for spell nnnn
+
+Only Scrying [840] spells may be scribed with this skill.
+
+The spell must be known by the character in order to be written.
+The character will still know the spell after it has been scribed.
+
+This spell requires as much time to cast as the skill takes to learn.
+It takes two weeks to write a spell which requires two weeks of study
+to learn.
+
+</PRE>
+</div>
+</li>
+
+<li id="s843">
+<a href="#s843">Shroud location from magical scry [843]</a>
+<div class="details">
+<PRE>Shroud location from magical scry [843]
 ---------------------------------------
-Usage:  USE 842 [aura]
+Usage:  USE 843 [aura]
 
 Required aura:  one or more points, as given
 Required item:
@@ -3008,8 +3039,8 @@ scry spell must expend a greater amount of aura than the shroud
 possesses to succeed.
 
 The shroud loses one point of aura at the end of each month.
-Successive uses of 842 are additive.  For example, USE 842 1
-followed by USE 842 3 will result in a location shroud with an
+Successive uses of 843 are additive.  For example, USE 843 1
+followed by USE 843 3 will result in a location shroud with an
 aura of eight points.
 
 The default aura to use is one point.
@@ -3018,12 +3049,12 @@ The default aura to use is one point.
 </div>
 </li>
 
-<li id="s843">
-<a href="#s843">Dispel location shroud [843]</a>
+<li id="s844">
+<a href="#s844">Dispel location shroud [844]</a>
 <div class="details">
-<PRE>Dispel location shroud [843]
+<PRE>Dispel location shroud [844]
 ----------------------------
-Usage:  USE 843 &lt;location&gt;
+Usage:  USE 844 &lt;location&gt;
 
 Required aura:  three points
 Required item:
@@ -3031,38 +3062,6 @@ Time to cast:   three days
 
 Dispels any magical shroud inhibiting scrying of the specified
 location.
-
-</PRE>
-</div>
-</li>
-
-<li id="s844">
-<a href="#s844">Ciphered writing of Areth-Pirn [844]</a>
-<div class="details">
-<PRE>Ciphered writing of Areth-Pirn [844]
-------------------------------------
-Usage:  USE 844 &lt;spell&gt;
-
-Required aura:  two points
-Required item:  blank scroll [84]
-Time to cast:   seven or more days
-
-Transcribe the given spell onto a blank scroll.  The blank scroll will
-be consumed, and a new unique scroll will be produced.  The scroll will
-permit one character to learn the spell from the scroll.
-
-Example:
-
-    USE 844 nnnn       # make a one-time study scroll for spell nnnn
-
-Only Scrying [840] spells may be scribed with this skill.
-
-The spell must be known by the character in order to be written.
-The character will still know the spell after it has been scribed.
-
-This spell requires as much time to cast as the skill takes to learn.
-It takes two weeks to write a spell which requires two weeks of study
-to learn.
 
 </PRE>
 </div>
@@ -3302,19 +3301,19 @@ The following skills may be studied directly once Gatecraft is known:
 
    num    skill                              time to learn
    ---    -----                              -------------
-   861    Teleport                           two weeks
-   862    Detect gates                       two weeks
+   861    Detect gates                       two weeks
+   862    Jump through gate                  two weeks
+   863    Language of the Ancients           three weeks
 
 Further skills may be found through research.
 
-   863    Jump through gate                  two weeks
    864    Seal gate                          two weeks
    865    Unseal gate with key               two weeks
    866    Notify if gate unsealed            two weeks
    867    Forcefully unseal gate             three weeks
    868    Reveal gate key                    three weeks
    869    Notify of gate jumps               two weeks
-   871    Language of the Ancients           three weeks
+   871    Teleport                           two weeks
    872    Reverse jump through gate          three weeks
 
 </PRE>
@@ -3322,36 +3321,11 @@ Further skills may be found through research.
 <ul>
 
 <li id="s861">
-<a href="#s861">Teleport [861]</a>
+<a href="#s861">Detect gates [861]</a>
 <div class="details">
-<PRE>Teleport [861]
---------------
-Usage:  USE 861 &lt;location&gt;
-
-Required aura:  one point for each 50 weight
-Required item:  gate crystal [83]
-Time to cast:   one day
-
-This skill allows a mage to teleport to the given location without
-a gate.  A gate crystal is required to fuel the jump.  The gate
-crystal is consumed by the jump.
-
-One point of aura is required for each 50 units of weight in the
-caster's stack to be transported.
-
-Teleportation between the netherworlds (Hades &amp; Faery) and
-the real world is not possible.
-
-</PRE>
-</div>
-</li>
-
-<li id="s862">
-<a href="#s862">Detect gates [862]</a>
-<div class="details">
-<PRE>Detect gates [862]
+<PRE>Detect gates [861]
 ------------------
-Usage:  USE 862
+Usage:  USE 861
 
 Required aura:  one point
 Required item:  none
@@ -3359,19 +3333,19 @@ Time to cast:   seven days
 
 Identify any gates present in the current location.
 
-If there are no gates in the caster's location, Detect gates [862]
+If there are no gates in the caster's location, Detect gates [861]
 will indicate how far away the nearest gate is.
 
 </PRE>
 </div>
 </li>
 
-<li id="s863">
-<a href="#s863">Jump through gate [863]</a>
+<li id="s862">
+<a href="#s862">Jump through gate [862]</a>
 <div class="details">
-<PRE>Jump through gate [863]
+<PRE>Jump through gate [862]
 -----------------------
-Usage:  USE 863 &lt;gate&gt; [key]
+Usage:  USE 862 &lt;gate&gt; [key]
 
 Required aura:  one point for each 50 weight
 Required item:  none
@@ -3383,6 +3357,43 @@ with a key, the key must be supplied for the jump to succeed.
 
 One point of aura is required for each 50 units of weight in the
 caster's stack to be transported.
+
+</PRE>
+</div>
+</li>
+
+<li id="s863">
+<a href="#s863">Language of the Ancients [863]</a>
+<div class="details">
+<PRE>Language of the Ancients [863]
+------------------------------
+Usage:  USE 863 &lt;spell&gt;
+
+Required aura:  two points
+Required item:  blank scroll [84]
+Time to cast:   seven or more days
+
+The Ancients were a race of wise, powerful men who walked the lands
+long before the modern inhabitants had arrived.  Their language is
+heavy and descriptive, well suited to expressing their detailed and
+complex thoughts.
+
+Transcribe the given spell onto a blank scroll.  The blank scroll will
+be consumed, and a new unique scroll will be produced.  The scroll will
+permit one character to learn the spell from the scroll.
+
+Example:
+
+    USE 863 nnnn       # make a one-time study scroll for spell nnnn
+
+Only Gatecraft [860] spells may be scribed with this skill.
+
+The spell must be known by the character in order to be written.
+The character will still know the spell after it has been scribed.
+
+This spell requires as much time to cast as the skill takes to learn.
+It takes two weeks to write a spell which requires two weeks of study
+to learn.
 
 </PRE>
 </div>
@@ -3459,7 +3470,7 @@ notification will occur wherever the caster happens to be.
 </li>
 
 <li id="s867">
-<a href="#s867">Notify if gate unsealed [867]</a>
+<a href="#s867">Forcefully unseal gate [867]</a>
 <div class="details">
 <PRE>Forcefully unseal gate [867]
 ----------------------------
@@ -3520,37 +3531,25 @@ displace the previous mage's spell.
 </li>
 
 <li id="s871">
-<a href="#s871">Language of the Ancients [871]</a>
+<a href="#s871">Teleport [871]</a>
 <div class="details">
-<PRE>Language of the Ancients [871]
-------------------------------
-Usage:  USE 871 &lt;spell&gt;
+<PRE>Teleport [871]
+--------------
+Usage:  USE 871 &lt;location&gt;
 
-Required aura:  two points
-Required item:  blank scroll [84]
-Time to cast:   seven or more days
+Required aura:  one point for each 50 weight
+Required item:  gate crystal [83]
+Time to cast:   one day
 
-The Ancients were a race of wise, powerful men who walked the lands
-long before the modern inhabitants had arrived.  Their language is
-heavy and descriptive, well suited to expressing their detailed and
-complex thoughts.
+This skill allows a mage to teleport to the given location without
+a gate.  A gate crystal is required to fuel the jump.  The gate
+crystal is consumed by the jump.
 
-Transcribe the given spell onto a blank scroll.  The blank scroll will
-be consumed, and a new unique scroll will be produced.  The scroll will
-permit one character to learn the spell from the scroll.
+One point of aura is required for each 50 units of weight in the
+caster's stack to be transported.
 
-Example:
-
-    USE 871 nnnn       # make a one-time study scroll for spell nnnn
-
-Only Gatecraft [860] spells may be scribed with this skill.
-
-The spell must be known by the character in order to be written.
-The character will still know the spell after it has been scribed.
-
-This spell requires as much time to cast as the skill takes to learn.
-It takes two weeks to write a spell which requires two weeks of study
-to learn.
+Teleportation between the netherworlds (Hades &amp; Faery) and
+the real world is not possible.
 
 </PRE>
 </div>
@@ -3603,20 +3602,20 @@ known:
    num    skill                              time to learn
    ---    -----                              -------------
    881    Forge auraculum                    two weeks
-   882    Reveal creator of artifact         two weeks
-   883    Reveal where artifact was created  two weeks
+   882    Arcane symbols                     three weeks
+   883    Forge magical weapon               three weeks
+   884    Forge magical armor                three weeks
 
 Further skills may be found through research.
 
-   884    Cloak creator of artifact          four weeks
-   885    Cloak region of artifact creation  two weeks
+   885    Forge magical bow                  three weeks
    886    Curse noncreator loyalty           two weeks
-   887    Forge magical weapon               three weeks
-   888    Forge magical armor                three weeks
-   889    Forge magical bow                  three weeks
-   891    Dispel cloaking from artifact      three weeks
-   892    Arcane symbols                     three weeks
-   893    Destroy artifact                   three weeks
+   887    Reveal creator of artifact         two weeks
+   888    Reveal where artifact was created  two weeks
+   889    Destroy artifact                   three weeks
+   891    Cloak creator of artifact          four weeks
+   892    Cloak region of artifact creation  two weeks
+   893    Dispel cloaking from artifact      three weeks
    894    Forge palantir                     three weeks
 
 </PRE>
@@ -3670,7 +3669,7 @@ Example:
     1: Attempt to forge an auraculum.
        ...
    14: Created Ring of power [js80].
-   14: Learned Advanced sorcery [166].
+   14: Learned Advanced sorcery [920].
 
        Current aura:   5
        Maximum aura:   15 (5+10)
@@ -3699,97 +3698,117 @@ NAME order.  The object must be possessed in order to rename it.
 </li>
 
 <li id="s882">
-<a href="#s882">Reveal creator of artifact [882]</a>
+<a href="#s882">Arcane symbols [882]</a>
 <div class="details">
-<PRE>Reveal creator of artifact [882]
---------------------------------
-Usage: USE 882 &lt;artifact&gt; &lt;aura&gt;
+<PRE>Arcane symbols [882]
+--------------------
+Usage:  USE 882 &lt;spell&gt;
 
-Required aura:  one or more points of aura
-Required item:
-Time to cast:   seven days
+Required aura:  two points
+Required item:  blank scroll [84]
+Time to cast:   seven or more days
 
-Reveal who forged a magical artifact.  The artifact in
-question must be possessed by the caster.
+Transcribe the given spell onto a blank scroll.  The blank scroll will
+be consumed, and a new unique scroll will be produced.  The scroll will
+permit one character to learn the spell from the scroll.
 
-The artifact may be shrouded against magical inspection.
-If so, a greater amount of aura must be specified with
-882 than was used to apply the shroud.
+Example:
+
+    USE 882 nnnn       # make a one-time study scroll for spell nnnn
+
+Only Artifact construction [880] spells may be scribed with this skill.
+
+The spell must be known by the character in order to be written.
+The character will still know the spell after it has been scribed.
+
+This spell requires as much time to cast as the skill takes to learn.
+It takes two weeks to write a spell which requires two weeks of study
+to learn.
 
 </PRE>
 </div>
 </li>
 
 <li id="s883">
-<a href="#s883">Reveal where artifact was created [883]</a>
+<a href="#s883">Forge magical weapon [883]</a>
 <div class="details">
-<PRE>Reveal where artifact was created [883]
----------------------------------------
-Usage:  USE 883 &lt;artifact&gt; &lt;aura&gt;
+<PRE>Forge magical weapon [883]
+--------------------------
+Usage: USE 883 &lt;aura&gt; "Name of item"
 
 Required aura:  one or more points
-Required item:
+Required item:  one mithril [82], 500 gold
 Time to cast:   seven days
 
-Reveal the location in which a magical magical artifact was forged.
-The artifact in question must be possessed by the caster.
+Create a magical weapon.  The weapon will grant its owner an
+attack bonus equal to 5 * the amount of aura invested in its
+creation.
 
-Some magical artifacts may only be destroyed in the location where
-they were constructed.
+Up to 20 aura may be invested in a magical weapon.
 
-The artifact may be shrouded against magical inspection.  If so,
-a greater amount of aura must be specified with 883 than was
-used to apply the shroud.
+Example:
+
+	use 883 5 "Sword of Death"
+	&gt; created Sword of Death [ha53].
+
+	Inventory:
+           1  Sword of Death [ha53]           0  +25 attack
 
 </PRE>
 </div>
 </li>
 
 <li id="s884">
-<a href="#s884">Cloak creator of artifact [884]</a>
+<a href="#s884">Forge magical armor [884]</a>
 <div class="details">
-<PRE>Cloak creator of artifact [884]
--------------------------------
-Usage:  USE 884 &lt;artifact&gt; [aura]
+<PRE>Forge magical armor [884]
+-------------------------
+Usage: USE 884 &lt;aura&gt; "Name of item"
 
 Required aura:  one or more points
-Required item:
+Required item:  one mithril [82], 500 gold
 Time to cast:   seven days
 
-Inhibit the ability of another mage to learn the identity of the
-creator of the specified magical artifact.  The artifact must be
-in the inventory of the caster.
+Create magical armor.  The armow will grant its owner a defense
+bonus equal to 5 * the amount of aura invested in its creation.
 
-The more aura used, the more difficult it will be for another
-mage to overcome the magical cloaking.
+Up to 20 aura may be invested in magical armor.
 
-The default aura to use is one point.
-Multiple casts of 884 on the same artifact are additive.
+Example:
+
+	use 884 5 "Shield of Achilles"
+	&gt; created Shield of Achilles [ha53].
+
+	Inventory:
+           1  Shield of Achilles [ha53]           0  +25 defense
 
 </PRE>
 </div>
 </li>
 
 <li id="s885">
-<a href="#s885">Cloak region of artifact creation [885]</a>
+<a href="#s885">Forge magical bow [885]</a>
 <div class="details">
-<PRE>Cloak region of artifact creation [885]
----------------------------------------
-Usage: USE 885 &lt;artifact&gt; [aura]
+<PRE>Forge magical bow [885]
+-----------------------
+Usage: USE 885 &lt;aura&gt; "Name of item"
 
 Required aura:  one or more points
-Required item:
+Required item:  one mallorn wood [70], 500 gold
 Time to cast:   seven days
 
-Inhibit the ability of another mage to learn the region in which
-the specified magical artifact was created.  The artifact must
-be in the inventory of the caster.
+Create a magical bow.  The bow will grant its owner a missile
+bonus equal to 5 * the amount of aura invested in its creation.
 
-The more that is aura used, the more difficult it will be for
-another mage to overcome the magical cloaking.
+Up to 20 aura may be invested in a magical bow.
 
-The default aura to use is one point.
-Multiple casts of 885 on the same artifact are additive.
+Example:
+
+	use 885 5 "Hand of Legolas"
+	&gt; created Hand of Legolas [ha53].
+
+	Inventory:
+           1  Hand of Legolas [ha53]           0  +25 missile
 
 </PRE>
 </div>
@@ -3828,146 +3847,58 @@ Aura defaults to one.
 </li>
 
 <li id="s887">
-<a href="#s887">Forge magical weapon [887]</a>
+<a href="#s887">Reveal creator of artifact [887]</a>
 <div class="details">
-<PRE>Forge magical weapon [887]
---------------------------
-Usage: USE 887 &lt;aura&gt; "Name of item"
+<PRE>Reveal creator of artifact [887]
+--------------------------------
+Usage: USE 887 &lt;artifact&gt; &lt;aura&gt;
 
-Required aura:  one or more points
-Required item:  one mithril [82], 500 gold
+Required aura:  one or more points of aura
+Required item:
 Time to cast:   seven days
 
-Create a magical weapon.  The weapon will grant its owner an
-attack bonus equal to 5 * the amount of aura invested in its
-creation.
+Reveal who forged a magical artifact.  The artifact in
+question must be possessed by the caster.
 
-Up to 20 aura may be invested in a magical weapon.
-
-Example:
-
-	use 887 5 "Sword of Death"
-	&gt; created Sword of Death [ha53].
-
-	Inventory:
-           1  Sword of Death [ha53]           0  +25 attack
+The artifact may be shrouded against magical inspection.
+If so, a greater amount of aura must be specified with
+887 than was used to apply the shroud.
 
 </PRE>
 </div>
 </li>
 
 <li id="s888">
-<a href="#s888">Forge magical armor [887]</a>
+<a href="#s888">Reveal where artifact was created [888]</a>
 <div class="details">
-<PRE>Forge magical armor [888]
--------------------------
-Usage: USE 888 &lt;aura&gt; "Name of item"
+<PRE>Reveal where artifact was created [888]
+---------------------------------------
+Usage:  USE 888 &lt;artifact&gt; &lt;aura&gt;
 
 Required aura:  one or more points
-Required item:  one mithril [82], 500 gold
+Required item:
 Time to cast:   seven days
 
-Create magical armor.  The armow will grant its owner a defense
-bonus equal to 5 * the amount of aura invested in its creation.
+Reveal the location in which a magical magical artifact was forged.
+The artifact in question must be possessed by the caster.
 
-Up to 20 aura may be invested in magical armor.
+Some magical artifacts may only be destroyed in the location where
+they were constructed.
 
-Example:
-
-	use 888 5 "Shield of Achilles"
-	&gt; created Shield of Achilles [ha53].
-
-	Inventory:
-           1  Shield of Achilles [ha53]           0  +25 defense
+The artifact may be shrouded against magical inspection.  If so,
+a greater amount of aura must be specified with 888 than was
+used to apply the shroud.
 
 </PRE>
 </div>
 </li>
 
 <li id="s889">
-<a href="#s889">Forge magical bow [889]</a>
+<a href="#s889">Destroy artifact [889]</a>
 <div class="details">
-<PRE>Forge magical bow [889]
------------------------
-Usage: USE 889 &lt;aura&gt; "Name of item"
-
-Required aura:  one or more points
-Required item:  one mallorn wood [70], 500 gold
-Time to cast:   seven days
-
-Create a magical bow.  The bow will grant its owner a missile
-bonus equal to 5 * the amount of aura invested in its creation.
-
-Up to 20 aura may be invested in a magical bow.
-
-Example:
-
-	use 889 5 "Hand of Legolas"
-	&gt; created Hand of Legolas [ha53].
-
-	Inventory:
-           1  Hand of Legolas [ha53]           0  +25 missile
-
-</PRE>
-</div>
-</li>
-
-<li id="s891">
-<a href="#s891">Dispel cloaking from artifact [891]</a>
-<div class="details">
-<PRE>Dispel cloaking from artifact [891]
------------------------------------
-Usage:  USE 891 &lt;artifact&gt;
-
-Required aura:  eight points
-Required item:
-Time to cast:   ten days
-
-Remove any cloaking spells from the specified artifact.
-The artifact must be in the caster's inventory.
-
-</PRE>
-</div>
-</li>
-
-<li id="s892">
-<a href="#s892">Arcane symbols [892]</a>
-<div class="details">
-<PRE>Arcane symbols [892]
---------------------
-Usage:  USE 892 &lt;spell&gt;
-
-Required aura:  two points
-Required item:  blank scroll [84]
-Time to cast:   seven or more days
-
-Transcribe the given spell onto a blank scroll.  The blank scroll will
-be consumed, and a new unique scroll will be produced.  The scroll will
-permit one character to learn the spell from the scroll.
-
-Example:
-
-    USE 892 nnnn       # make a one-time study scroll for spell nnnn
-
-Only Artifact construction [880] spells may be scribed with this skill.
-
-The spell must be known by the character in order to be written.
-The character will still know the spell after it has been scribed.
-
-This spell requires as much time to cast as the skill takes to learn.
-It takes two weeks to write a spell which requires two weeks of study
-to learn.
-
-</PRE>
-</div>
-</li>
-
-<li id="s893">
-<a href="#s893">Arcane symbols [893]</a>
-<div class="details">
-<PRE>Destroy artifact [893]
+<PRE>Destroy artifact [889]
 ----------------------
-Usage:  USE 893 &lt;artifact&gt;
+Usage:  USE 889 &lt;artifact&gt;
 
 Required aura:  two points
 Required item:  a magical artifact
@@ -3980,6 +3911,74 @@ location in which they were created.
 Any spells contained in the artifact will be lost when it is destroyed.
 Any aura trapped in the artifact will be released into the caster's
 current aura rating.
+
+</PRE>
+</div>
+</li>
+
+<li id="s891">
+<a href="#s891">Cloak creator of artifact [891]</a>
+<div class="details">
+<PRE>Cloak creator of artifact [891]
+-------------------------------
+Usage:  USE 891 &lt;artifact&gt; [aura]
+
+Required aura:  one or more points
+Required item:
+Time to cast:   seven days
+
+Inhibit the ability of another mage to learn the identity of the
+creator of the specified magical artifact.  The artifact must be
+in the inventory of the caster.
+
+The more aura used, the more difficult it will be for another
+mage to overcome the magical cloaking.
+
+The default aura to use is one point.
+Multiple casts of 891 on the same artifact are additive.
+
+</PRE>
+</div>
+</li>
+
+<li id="s892">
+<a href="#s892">Cloak region of artifact creation [892]</a>
+<div class="details">
+<PRE>Cloak region of artifact creation [892]
+---------------------------------------
+Usage: USE 892 &lt;artifact&gt; [aura]
+
+Required aura:  one or more points
+Required item:
+Time to cast:   seven days
+
+Inhibit the ability of another mage to learn the region in which
+the specified magical artifact was created.  The artifact must
+be in the inventory of the caster.
+
+The more that is aura used, the more difficult it will be for
+another mage to overcome the magical cloaking.
+
+The default aura to use is one point.
+Multiple casts of 892 on the same artifact are additive.
+
+</PRE>
+</div>
+</li>
+
+<li id="s893">
+<a href="#s893">Dispel cloaking from artifact [893]</a>
+<div class="details">
+<PRE>Dispel cloaking from artifact [893]
+-----------------------------------
+Usage:  USE 893 &lt;artifact&gt;
+
+Required aura:  eight points
+Required item:
+Time to cast:   ten days
+
+Remove any cloaking spells from the specified artifact.
+The artifact must be in the caster's inventory.
 
 </PRE>
 </div>
@@ -4046,86 +4045,53 @@ The following skills may be studied directly once Necromancy is known:
 
    num    skill                              time to learn
    ---    -----                              -------------
-   901    Transcend death                    four weeks, 1 NP 
-   902    Runes of Evil                      three weeks
-   903    Summon ghost warriors              three weeks
+   901    Raise undead                       three weeks
+   902    Summon ghost warriors              three weeks
+   903    Runes of Evil                      three weeks
 
 Further skills may be found through research.
 
-   904    Raise undead                       three weeks
-   905    Summon demon lord                  three weeks
-   906    Renew demon bond                   three weeks
-   907    Banish demon lord                  three weeks
-   908    Eating of the dead                 four weeks
-   909    Aura blast                         three weeks
-   911    Absorb aura blast                  three weeks
+   904    Summon demon lord                  three weeks
+   905    Renew demon bond                   three weeks
+   906    Banish demon lord                  three weeks
+   907    Eating of the dead                 four weeks
+   908    Aura blast                         three weeks
+   909    Absorb aura blast                  three weeks
+   911    Transcend death                    four weeks, 1 NP 
 
 </PRE>
 </div>
 <ul>
 
 <li id="s901">
-<a href="#s901">Transcend death [901]</a>
+<a href="#s901">Raise undead [901]</a>
 <div class="details">
-<PRE>Transcend death [901]
----------------------
-Usage:   automatic when needed
+<PRE>Raise undead [901]
+------------------
+Usage:   COLLECT 31 [days]
 
-Transcend death allows a mortal to pass through Hades unmolested
-by the foul and dangerous spirits who live there.  The necromancer
-must be alone, however.  He cannot be stacked with any other
-nobles, or be accompanied by any followers.
+Required aura:  none
+Time to cast:   as given
 
-It is also said that when a necromancer with knowledge of 901 dies,
-the body vanishes, and the mage is recreated somewhere in Hades,
-albeit lacking any of his worldly possessions.
+Undead [31] are dead bodies animated with foul magic, summoned
+from their graves.  While not particularly swift or strong,
+their horrifying nature often inspires terror amongst their
+foes on the battlefield.  Thus they fight with combat rating
+attack-10, defense-10.
+
+One undead may be summoned per day from a graveyard.
+Graveyards furnish up to 15 undead each month.
+
+One or two undead may decompose at the end of each month.
 
 </PRE>
 </div>
 </li>
 
 <li id="s902">
-<a href="#s902">Runes of Evil [902]</a>
+<a href="#s902">Summon ghost warriors [902]</a>
 <div class="details">
-<PRE>Runes of Evil [902]
--------------------
-Usage:  USE 902 &lt;spell&gt;
-
-Required aura:  two points
-Required item:  blank scroll [84]
-Time to cast:   seven or more days
-
-The most basic and powerful of the magical languages, Runes of Evil
-may represent vast power.  Descended from neither man or spirit,
-they represent the fundamental Commands which shape the world and
-its events.  They may represent concepts which men are incapable of
-speaking, or even thinking.
-
-Transcribe the given spell onto a blank scroll.  The blank scroll will
-be consumed, and a new unique scroll will be produced.  The scroll will
-permit one character to learn the spell from the scroll.
-
-Example:
-
-    USE 902 nnnn       # make a one-time study scroll for spell nnnn
-
-Only Necromancy [900] spells may be scribed with this skill.
-
-The spell must be known by the character in order to be written.
-The character will still know the spell after it has been scribed.
-
-This spell requires as much time to cast as the skill takes to learn.
-It takes two weeks to write a spell which requires two weeks of study
-to learn.
-
-</PRE>
-</div>
-</li>
-
-<li id="s903">
-<a href="#s903">Summon ghost warriors [903]</a>
-<div class="details">
-<PRE>Summon ghost warriors [903]
+<PRE>Summon ghost warriors [902]
 ---------------------------
 Usage:  MAKE 18 &lt;days&gt;
 
@@ -4150,37 +4116,50 @@ each month.
 </div>
 </li>
 
-<li id="s904">
-<a href="#s904">Summon ghost warriors [904]</a>
+<li id="s903">
+<a href="#s903">Runes of Evil [903]</a>
 <div class="details">
-<PRE>Raise undead [904]
-------------------
-Usage:   COLLECT 31 [days]
+<PRE>Runes of Evil [903]
+-------------------
+Usage:  USE 903 &lt;spell&gt;
 
-Required aura:  none
-Time to cast:   as given
+Required aura:  two points
+Required item:  blank scroll [84]
+Time to cast:   seven or more days
 
-Undead [31] are dead bodies animated with foul magic, summoned
-from their graves.  While not particularly swift or strong,
-their horrifying nature often inspires terror amongst their
-foes on the battlefield.  Thus they fight with combat rating
-attack-10, defense-10.
+The most basic and powerful of the magical languages, Runes of Evil
+may represent vast power.  Descended from neither man or spirit,
+they represent the fundamental Commands which shape the world and
+its events.  They may represent concepts which men are incapable of
+speaking, or even thinking.
 
-One undead may be summoned per day from a graveyard.
-Graveyards furnish up to 15 undead each month.
+Transcribe the given spell onto a blank scroll.  The blank scroll will
+be consumed, and a new unique scroll will be produced.  The scroll will
+permit one character to learn the spell from the scroll.
 
-One or two undead may decompose at the end of each month.
+Example:
+
+    USE 903 nnnn       # make a one-time study scroll for spell nnnn
+
+Only Necromancy [900] spells may be scribed with this skill.
+
+The spell must be known by the character in order to be written.
+The character will still know the spell after it has been scribed.
+
+This spell requires as much time to cast as the skill takes to learn.
+It takes two weeks to write a spell which requires two weeks of study
+to learn.
 
 </PRE>
 </div>
 </li>
 
-<li id="s905">
-<a href="#s905">Summon demon lord [905]</a>
+<li id="s904">
+<a href="#s904">Summon demon lord [904]</a>
 <div class="details">
-<PRE>Summon demon lord [905]
+<PRE>Summon demon lord [904]
 -----------------------
-Usage:  USE 905 [aura]
+Usage:  USE 904 [aura]
 
 Required aura:  three to eight points
 Time to cast:   seven days
@@ -4219,12 +4198,12 @@ renewal of their loyalty bonds.
 </div>
 </li>
 
-<li id="s906">
-<a href="#s906">Renew demon bond [906]</a>
+<li id="s905">
+<a href="#s905">Renew demon bond [905]</a>
 <div class="details">
-<PRE>Renew demon bond [906]
+<PRE>Renew demon bond [905]
 ----------------------
-Usage:  USE 906 &lt;target&gt;
+Usage:  USE 905 &lt;target&gt;
 
 Required aura:  three points
 Time to cast:   seven days
@@ -4241,17 +4220,17 @@ erode completely, and the demon unit turns on its master.
 </div>
 </li>
 
-<li id="s907">
-<a href="#s907">Banish demon lord [907]</a>
+<li id="s906">
+<a href="#s906">Banish demon lord [906]</a>
 <div class="details">
-<PRE>Banish demon lord [907]
+<PRE>Banish demon lord [906]
 -----------------------
-Usage:  USE 907 &lt;target&gt;
+Usage:  USE 906 &lt;target&gt;
 
 Required aura:  six points
 Time to cast:   seven days
 
-Return an demon lord to the Land of the Dead.  The demon lord
+Return a demon lord to the Land of the Dead.  The demon lord
 unit must be present in the caster's location.
 
 Once banished, a summoner may again call the demon lord from
@@ -4261,12 +4240,12 @@ his home graveyard.
 </div>
 </li>
 
-<li id="s908">
-<a href="#s908">Eating of the dead [908]</a>
+<li id="s907">
+<a href="#s907">Eating of the dead [907]</a>
 <div class="details">
-<PRE>Eating of the dead [908]
+<PRE>Eating of the dead [907]
 ------------------------
-Usage:  USE 908 &lt;dead body&gt;
+Usage:  USE 907 &lt;dead body&gt;
 
 Required aura:  five points
 Required item:  ratspider venom
@@ -4279,25 +4258,25 @@ learn every skill previously known by the dead noble.
 There is a 33% chance that the toxic venom of the ratspider will cause
 the mage to perish during use of this skill.
 
-Advanced Sorcery [920] cannot be learned through the use of 908.
+Advanced Sorcery [920] cannot be learned through the use of 907.
 
 </PRE>
 </div>
 </li>
 
-<li id="s909">
-<a href="#s909">Aura blast [909]</a>
+<li id="s908">
+<a href="#s908">Aura blast [908]</a>
 <div class="details">
-<PRE>Aura blast [909]
+<PRE>Aura blast [908]
 ----------------
-Usage:  USE 909 &lt;target&gt; &lt;aura&gt; [have-left]
+Usage:  USE 908 &lt;target&gt; &lt;aura&gt; [have-left]
 
 Required aura:  as given
 Time to cast:   one day
 
 The mage directs a blast of raw energy at the target character.
 The target will suffer two points of damage for each point of
-aura used in the blast.  For example, USE 909 5201 25 would
+aura used in the blast.  For example, USE 908 5201 25 would
 send a blast of 25 aura at [5201], causing a 50 point wound.
 
 If aura is zero, all available current aura will be used.  If
@@ -4311,17 +4290,17 @@ the real world.
 </div>
 </li>
 
-<li id="s911">
-<a href="#s911">Absorb aura blast [911]</a>
+<li id="s909">
+<a href="#s909">Absorb aura blast [909]</a>
 <div class="details">
-<PRE>Absorb aura blast [911]
+<PRE>Absorb aura blast [909]
 -----------------------
-Usage:  USE 911 &lt;flag&gt;
+Usage:  USE 909 &lt;flag&gt;
 
 Required aura:  none
 Time to cast:   zero days
 
-Knowledge of 911 will, by default, cause the mage to absorb any
+Knowledge of 909 will, by default, cause the mage to absorb any
 blasts of aura instead of being harmed by them.  If absorbed,
 half of the aura used in the blast will be added to the aura
 of the mage being blasted.
@@ -4329,12 +4308,32 @@ of the mage being blasted.
 Instead of absorbing aura, the blast may be reflected back to the
 attacker.  To set this option, specify a flag of 1:
 
-	use 911 1	# reflect aura blasts back at attacker
-	use 911 0	# absorb aura blasts into current aura
+	use 909 1	# reflect aura blasts back at attacker
+	use 909 0	# absorb aura blasts into current aura
 
 Aura blasts may only be reflected once.  If a blast is reflected back
-to an attacker with knowledge of 911, the attacker will be harmed,
+to an attacker with knowledge of 909, the attacker will be harmed,
 and will not absorb or reflect the blast.
+
+</PRE>
+</div>
+</li>
+
+<li id="s911">
+<a href="#s911">Transcend death [911]</a>
+<div class="details">
+<PRE>Transcend death [911]
+---------------------
+Usage:   automatic when needed
+
+Transcend death allows a mortal to pass through Hades unmolested
+by the foul and dangerous spirits who live there.  The necromancer
+must be alone, however.  He cannot be stacked with any other
+nobles, or be accompanied by any followers.
+
+It is also said that when a necromancer with knowledge of 911 dies,
+the body vanishes, and the mage is recreated somewhere in Hades,
+albeit lacking any of his worldly possessions.
 
 </PRE>
 </div>

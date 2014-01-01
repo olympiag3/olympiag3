@@ -1,21 +1,14 @@
-#Spell: Forge magical weapon [9131]
+#Spell: Reveal creator of magical artifact [9108]
 #
-Usage: USE @@@@ <aura> "Name of item"
+Usage: USE @@@@ <artifact> [aura]
 
-Required aura:  one or more points
-Required item:  one mithril [82], 500 gold
+Required aura:  one or more points of aura
+Required item:
 Time to cast:   seven days
 
-Create a magical weapon.  The weapon will grant its owner an
-attack bonus equal to 5 * the amount of aura invested in its
-creation.
+Reveal who forged a magical artifact.  The artifact in
+question must be possessed by the caster.
 
-Up to 20 aura may be invested in a magical weapon.
-
-Example:
-
-	use @@@@ 5 "Sword of Death"
-	> created Sword of Death [ha53].
-
-	Inventory:
-           1  Sword of Death [ha53]           0  +25 attack
+The artifact may be shrouded against magical inspection.
+If so, a greater amount of aura must be specified with
+@@@@ than was used to apply the shroud.

@@ -1,17 +1,20 @@
-#Spell: Cloak region of artifact creation [9111]
+#Spell: Forge magical bow [9133]
 #
-Usage: USE @@@@ <artifact> [aura]
+Usage: USE @@@@ <aura> "Name of item"
 
 Required aura:  one or more points
-Required item:
+Required item:  one mallorn wood [70], 500 gold
 Time to cast:   seven days
 
-Inhibit the ability of another mage to learn the region in which
-the specified magical artifact was created.  The artifact must
-be in the inventory of the caster.
+Create a magical bow.  The bow will grant its owner a missile
+bonus equal to 5 * the amount of aura invested in its creation.
 
-The more that is aura used, the more difficult it will be for
-another mage to overcome the magical cloaking.
+Up to 20 aura may be invested in a magical bow.
 
-The default aura to use is one point.
-Multiple casts of @@@@ on the same artifact are additive.
+Example:
+
+	use @@@@ 5 "Hand of Legolas"
+	> created Hand of Legolas [ha53].
+
+	Inventory:
+           1  Hand of Legolas [ha53]           0  +25 missile

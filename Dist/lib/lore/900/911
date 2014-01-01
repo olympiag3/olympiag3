@@ -1,21 +1,12 @@
-#Skill:  Absorb aura blast [9186]
+#Spell:  Transcend death [9125]
 #
-Usage:  USE @@@@ <flag>
+Usage:   automatic when needed
 
-Required aura:  none
-Time to cast:   zero days
+Transcend death allows a mortal to pass through Hades unmolested
+by the foul and dangerous spirits who live there.  The necromancer
+must be alone, however.  He cannot be stacked with any other
+nobles, or be accompanied by any followers.
 
-Knowledge of @@@@ will, by default, cause the mage to absorb any
-blasts of aura instead of being harmed by them.  If absorbed,
-half of the aura used in the blast will be added to the aura
-of the mage being blasted.
-
-Instead of absorbing aura, the blast may be reflected back to the
-attacker.  To set this option, specify a flag of 1:
-
-	use @@@@ 1	# reflect aura blasts back at attacker
-	use @@@@ 0	# absorb aura blasts into current aura
-
-Aura blasts may only be reflected once.  If a blast is reflected back
-to an attacker with knowledge of @@@@, the attacker will be harmed,
-and will not absorb or reflect the blast.
+It is also said that when a necromancer with knowledge of @@@@ dies,
+the body vanishes, and the mage is recreated somewhere in Hades,
+albeit lacking any of his worldly possessions.

@@ -1,17 +1,21 @@
-#Spell:  Reveal region of artifact creation [9109]
+#Spell: Forge magical weapon [9131]
 #
-Usage:  USE @@@@ <artifact> [aura]
+Usage: USE @@@@ <aura> "Name of item"
 
 Required aura:  one or more points
-Required item:
+Required item:  one mithril [82], 500 gold
 Time to cast:   seven days
 
-Reveal the location in which a magical magical artifact was forged.
-The artifact in question must be possessed by the caster.
+Create a magical weapon.  The weapon will grant its owner an
+attack bonus equal to 5 * the amount of aura invested in its
+creation.
 
-Some magical artifacts may only be destroyed in the location where
-they were constructed.
+Up to 20 aura may be invested in a magical weapon.
 
-The artifact may be shrouded against magical inspection.  If so,
-a greater amount of aura must be specified with @@@@ than was
-used to apply the shroud.
+Example:
+
+	use @@@@ 5 "Sword of Death"
+	> created Sword of Death [ha53].
+
+	Inventory:
+           1  Sword of Death [ha53]           0  +25 attack

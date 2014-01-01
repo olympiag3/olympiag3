@@ -1,14 +1,24 @@
-#Spell: Reveal creator of magical artifact [9108]
+#Spell:  Arcane symbols [9153]
 #
-Usage: USE @@@@ <artifact> [aura]
+Usage:  USE @@@@ <spell>
 
-Required aura:  one or more points of aura
-Required item:
-Time to cast:   seven days
+Required aura:  two points
+Required item:  blank scroll [84]
+Time to cast:   seven or more days
 
-Reveal who forged a magical artifact.  The artifact in
-question must be possessed by the caster.
+Transcribe the given spell onto a blank scroll.  The blank scroll will
+be consumed, and a new unique scroll will be produced.  The scroll will
+permit one character to learn the spell from the scroll.
 
-The artifact may be shrouded against magical inspection.
-If so, a greater amount of aura must be specified with
-@@@@ than was used to apply the shroud.
+Example:
+
+    USE @@@@ nnnn       # make a one-time study scroll for spell nnnn
+
+Only Artifact construction [880] spells may be scribed with this skill.
+
+The spell must be known by the character in order to be written.
+The character will still know the spell after it has been scribed.
+
+This spell requires as much time to cast as the skill takes to learn.
+It takes two weeks to write a spell which requires two weeks of study
+to learn.

@@ -1,12 +1,14 @@
-#Skill:  Banish demon lord [9183]
+#Skill:  Eating of the dead [9184]
 #
-Usage:  USE @@@@ <target>
+Usage:  USE @@@@ <dead body>
 
-Required aura:  six points
-Time to cast:   seven days
+Required aura:  five points
+Required item:  ratspider venom
+Time to cast:   fourteen days
 
-Return an demon lord to the Land of the Dead.  The demon lord
-unit must be present in the caster's location.
+A complex ritual is executed whereby the mage ingests the ratspider
+venom together with the brains of the dead noble.  The mage will
+learn every skill previously known by the dead noble.
 
-Once banished, a summoner may again call the demon lord from
-his home graveyard.
+There is a 33% chance that the toxic venom of the ratspider will cause
+the mage to perish during use of this skill.

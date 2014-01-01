@@ -1,18 +1,18 @@
-#Skill:  Extract venom from ratspider [9549]
+#Skill:  Brew healing potion [9551]
 #
 Usage:  USE @@@@
 
-Required:  one ratspider [81]
-Produces:  one ratspider venom [63]
+Required:  avinia leaf [65]
 Time:      seven days
 
-The alchemist performs a delicate operation to extract the
-highly poisonous ratspider venom.
+The alchemist brews a potion of healing.  Any character
+ingesting the potion will be cured of any illness and
+begin to recover.  The character may also receive a
+random increase in their health rating.
 
-The top of the ratspider's head is removed by inserting a sharp
-knife above the head joint and twisting.  Two glands, from which
-the ratspider venom is later extracted, are removed from behind
-the mandible.
+Upon completion, the potion will be added to the alchemist's
+inventory.  The potion's label will not reveal its purpose.
 
-Risk is minimized by taking extreme care when handling the
-ratspider.  The ratspider is killed in the process. 
+A character wishing to drink the potion should specify it
+to the USE order.  For instance, to drink potion [602], issue
+the order:  USE 602.

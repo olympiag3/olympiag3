@@ -1,20 +1,30 @@
-#Spell:  Summon ghost warriors [9179]
+#Spell:  Runes of Evil [9154]
 #
-Usage:  MAKE 18 [days]
+Usage:  USE @@@@ <spell>
 
-Required aura:  one point per day
-Time to cast:   as given
+Required aura:  two points
+Required item:  blank scroll [84]
+Time to cast:   seven or more days
 
-Each day of summoning requires one point of aura, and yields two
-ghost warriors.
+The most basic and powerful of the magical languages, Runes of Evil
+may represent vast power.  Descended from neither man or spirit,
+they represent the fundamental Commands which shape the world and
+its events.  They may represent concepts which men are incapable of
+speaking, or even thinking.
 
-Ghost warriors [18] are spirits of dead soldiers summoned to fight
-again on the battlefield.  They have no substance, and thus are
-ineffectual attackers.  Opponents will still select them in combat,
-however, so they are useful for absorbing enemy hits.
+Transcribe the given spell onto a blank scroll.  The blank scroll will
+be consumed, and a new unique scroll will be produced.  The scroll will
+permit one character to learn the spell from the scroll.
 
-Ghost warriors have a attack and defense values of zero.  One hit
-by any attacker will cause them to vanish.
+Example:
 
-One ghost warrior returns to the Land of the Dead at the end of
-each month.
+    USE @@@@ nnnn       # make a one-time study scroll for spell nnnn
+
+Only Necromancy [900] spells may be scribed with this skill.
+
+The spell must be known by the character in order to be written.
+The character will still know the spell after it has been scribed.
+
+This spell requires as much time to cast as the skill takes to learn.
+It takes two weeks to write a spell which requires two weeks of study
+to learn.

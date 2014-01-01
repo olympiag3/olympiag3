@@ -1,18 +1,21 @@
-#Skill:  Aura blast [9185]
+#Skill:  Absorb aura blast [9186]
 #
-Usage:  USE @@@@ <target> [aura] [have-left]
+Usage:  USE @@@@ <flag>
 
-Required aura:  as given
-Time to cast:   one day
+Required aura:  none
+Time to cast:   zero days
 
-The mage directs a blast of raw energy at the target character.
-The target will suffer two points of damage for each point of
-aura used in the blast.  For example, USE @@@@ 5201 25 would
-send a blast of 25 aura at [5201], causing a 50 point wound.
+Knowledge of @@@@ will, by default, cause the mage to absorb any
+blasts of aura instead of being harmed by them.  If absorbed,
+half of the aura used in the blast will be added to the aura
+of the mage being blasted.
 
-If aura is zero, all available current aura will be used.  If
-have-left is given, at least that much current aura will be
-retained, and not used for the blast
+Instead of absorbing aura, the blast may be reflected back to the
+attacker.  To set this option, specify a flag of 1:
 
-It is not possible to aura blast between Hades, Faery and
-the real world.
+	use @@@@ 1	# reflect aura blasts back at attacker
+	use @@@@ 0	# absorb aura blasts into current aura
+
+Aura blasts may only be reflected once.  If a blast is reflected back
+to an attacker with knowledge of @@@@, the attacker will be harmed,
+and will not absorb or reflect the blast.

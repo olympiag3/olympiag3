@@ -1,28 +1,23 @@
-#Skill:  Make potion of slavery [9550]
+#Skill:  Record skill on scroll [9573]
 #
-Usage:  USE @@@@
+Usage:  USE @@@@ <skill>
 
-Required:  one ratspider venom [63]
-Time:      seven days
+Requires:  blank scroll [84]
+Time:      seven or more days
 
-The alchemist brews a potion which, when ingested by a character,
-causes that character to become a servant of the alchemist.
-The unfortunate noble will swear fealty to the alchemist and
-promise to do his bidding.
+Record the given skill on a blank scroll.  The blank scroll will be
+consumed, and a new unique scroll will be produced.  The new scroll
+will allow one character to learn the skill.
 
-Use of the potion is dangerous:  there is a 33% chance that
-the noble who drinks it will die.
+Example:
 
-The rare and highly poisonous ratspider venom is used in the
-preparation of this potion.  Upon completion, the new potion
-will be added to the alchemist's inventory.  The potion will,
-of course, be unlabeled.
+    USE @@@@ nnnn     # make a one-time study scroll for skill nnnn
 
-A character wishing to drink the potion should specify it
-to the USE order.  For instance, to drink potion [601], issue
-the order:  USE 601.
+Magical skills may not be scribed with this skill.
 
-The creator of a potion must have the necessary NPs to assume
-control of the character who drinks the slavery potion.  The
-previous owner of the unfornated character will have their NPs
-returned.
+The skill must be known in order to be written.  The character will
+still know the skill after writing it.
+
+This skill requires as much time as the recorded skill takes to learn.
+Writing a skill which requires two weeks of study to learn will take
+two weeks.

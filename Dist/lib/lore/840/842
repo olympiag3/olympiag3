@@ -1,23 +1,24 @@
-#Spell:  Shroud location from magical scry [9142]
+#Spell:  Ciphered writing of Areth-Pirn [9151]
 #
-Usage:  USE @@@@ [aura]
+Usage:  USE @@@@ <spell>
 
-Required aura:  one or more points, as given
-Required item:
-Time to cast:   three days
+Required aura:  two points
+Required item:  blank scroll [84]
+Time to cast:   seven or more days
 
-Creates a magical shroud over the mage's current province.  The
-shroud hinders attempts by distant mages to view the location by
-magical scrying.
+Transcribe the given spell onto a blank scroll.  The blank scroll will
+be consumed, and a new unique scroll will be produced.  The scroll will
+permit one character to learn the spell from the scroll.
 
-The shroud is invested with twice the aura used in its creation.
-A mage attempting to view the location from a distance with a
-scry spell must expend a greater amount of aura than the shroud
-possesses to succeed.
+Example:
 
-The shroud loses one point of aura at the end of each month.
-Successive uses of @@@@ are additive.  For example, USE @@@@ 1
-followed by USE @@@@ 3 will result in a location shroud with an
-aura of eight points.
+    USE @@@@ nnnn       # make a one-time study scroll for spell nnnn
 
-The default aura to use is one point.
+Only Scrying [840] spells may be scribed with this skill.
+
+The spell must be known by the character in order to be written.
+The character will still know the spell after it has been scribed.
+
+This spell requires as much time to cast as the skill takes to learn.
+It takes two weeks to write a spell which requires two weeks of study
+to learn.

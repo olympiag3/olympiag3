@@ -1,24 +1,17 @@
-#Spell:  Modern magic script [9147]
+#Spell:  Tap health for aura [9126]
 #
-Usage:  USE @@@@ <spell>
+Usage:  USE @@@@ <amount of aura>
 
-Required aura:  two points
-Required item:  blank scroll [84]
-Time to cast:   seven or more days
+Required aura:  none
+Time to cast:   seven days
 
-Transcribe the given spell onto a blank scroll.  The blank scroll will
-be consumed, and a new unique scroll will be produced.  The scroll will
-permit one character to learn the spell from the scroll.
+The mage will dip into his own health to generate current aura.
+The health loss received is equal to five times the amount of
+aura generated.
 
-Example:
+For example, USE @@@@ 10 would generate 10 points of current aura,
+and cause the mage to receive a 50 point wound.
 
-    USE @@@@ nnnn       # make a one-time study scroll for spell nnnn
-
-Only Magic [160] spells may be scribed with this skill.
-
-The spell must be known by the character in order to be written.
-The character will still know the spell after it has been scribed.
-
-This spell requires as much time to cast as the skill takes to learn.
-It takes two weeks to write a spell which requires two weeks of study
-to learn.
+Use of this spell is dangerous, as any wound runs the risk of
+infection, and death could result.  See the section on Health
+in the rules for more information about wounds and healing.

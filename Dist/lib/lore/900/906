@@ -1,14 +1,12 @@
-#Skill:  Renew demon bond [9182]
+#Skill:  Banish demon lord [9183]
 #
 Usage:  USE @@@@ <target>
 
-Required aura:  three points
+Required aura:  six points
 Time to cast:   seven days
 
-Renew the loyalty bond for a demon lord.  This spell will cause
-the demon lord to remain stacked with its summoner for an additional
-four months.  Demon lord loyalty bonds accumulate to a maximum of
-eight months.
+Return an demon lord to the Land of the Dead.  The demon lord
+unit must be present in the caster's location.
 
-It is wise to keep a demon lord's loyalty bond renewed, lest it
-erode completely, and the demon unit turns on its master.
+Once banished, a summoner may again call the demon lord from
+his home graveyard.

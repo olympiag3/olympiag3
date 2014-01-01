@@ -233,8 +233,8 @@ typedef		signed char	schar;
 #define		sk_hide_lord		635
 #define		sk_find_rich		636
 #define		sk_torture		637
+#define		sk_hide_self		638
 #define		sk_sneak_build		639
-#define		sk_hide_self		641
 
 #define		sk_beast		650
 #define		sk_bird_spy		651
@@ -261,12 +261,12 @@ typedef		signed char	schar;
 #define		sk_quarry_stone		682
 
 #define		sk_alchemy		690
-#define		sk_extract_venom	691	/* from ratspider */
-#define		sk_brew_slave		692	/* potion of slavery */
-#define		sk_brew_heal		693
-#define		sk_brew_death		694
-#define		sk_record_skill		695
-#define		sk_collect_elem		696
+#define		sk_brew_heal		691
+#define		sk_record_skill		692
+#define		sk_extract_venom	693	/* from ratspider */
+#define		sk_brew_slave		694	/* potion of slavery */
+#define		sk_collect_elem		695
+#define		sk_brew_death		696
 #define		sk_lead_to_gold		697
 
 #define		sk_forestry		700
@@ -290,9 +290,9 @@ typedef		signed char	schar;
 
 #define		sk_religion		750
 #define		sk_reveal_vision	751
-#define		sk_resurrect		752
+#define		sk_last_rites		752
 #define		sk_pray			753
-#define		sk_last_rites		754
+#define		sk_resurrect		754
 #define		sk_remove_bless		755
 #define		sk_vision_protect	756
 
@@ -301,10 +301,10 @@ typedef		signed char	schar;
 #define		sk_mage_menial		802	/* menial labor for mages */
 #define		sk_appear_common	803
 #define		sk_view_aura		804
-#define		sk_reveal_mage		805	/* reveal abilities of mage */
-#define		sk_tap_health		806
-#define		sk_heal			807
-#define		sk_write_basic		808
+#define		sk_heal			805
+#define		sk_write_basic		806
+#define		sk_reveal_mage		807	/* reveal abilities of mage */
+#define		sk_tap_health		808
 #define		sk_shroud_abil		809	/* ability shroud */
 #define		sk_detect_abil		811	/* detect ability scry */
 #define		sk_dispel_abil		812	/* dispel ability shroud */
@@ -315,8 +315,8 @@ typedef		signed char	schar;
 #define		sk_fierce_wind		821
 #define		sk_bind_storm		822
 #define		sk_write_weather	823
-#define		sk_summon_rain		824
-#define		sk_summon_wind		825
+#define		sk_summon_wind		824
+#define		sk_summon_rain		825
 #define		sk_summon_fog		826
 #define		sk_direct_storm		827
 #define		sk_dissipate		828
@@ -327,9 +327,9 @@ typedef		signed char	schar;
 
 #define		sk_scry			840
 #define		sk_scry_region		841
-#define		sk_shroud_region	842
-#define		sk_dispel_region	843	/* dispel region shroud */
-#define		sk_write_scry		844
+#define		sk_write_scry		842
+#define		sk_shroud_region	843
+#define		sk_dispel_region	844	/* dispel region shroud */
 #define		sk_bar_loc		845	/* create location barrier */
 #define		sk_unbar_loc		846
 #define		sk_locate_char		847
@@ -339,44 +339,44 @@ typedef		signed char	schar;
 #define		sk_banish_corpses	852
 
 #define		sk_gate			860
-#define		sk_teleport		861
-#define		sk_detect_gates		862
-#define		sk_jump_gate		863
+#define		sk_detect_gates		861
+#define		sk_jump_gate		862
+#define		sk_write_gate		863
 #define		sk_seal_gate		864
 #define		sk_unseal_gate		865
 #define		sk_notify_unseal	866
 #define		sk_rem_seal		867	/* forcefully unseal gate */
 #define		sk_reveal_key		868
 #define		sk_notify_jump		869
-#define		sk_write_gate		871
+#define		sk_teleport		871
 #define		sk_rev_jump		872
 
 #define		sk_artifact		880
 #define		sk_forge_aura		881	/* forge auraculum */
-#define		sk_show_art_creat	882	/* learn who created art */
-#define		sk_show_art_reg		883	/* learn where art created */
-#define		sk_cloak_creat		884
-#define		sk_cloak_reg		885
+#define		sk_write_art		882
+#define		sk_forge_weapon		883
+#define		sk_forge_armor		884
+#define		sk_forge_bow		885
 #define		sk_curse_noncreat	886	/* curse noncreator loyalty */
-#define		sk_forge_weapon		887
-#define		sk_forge_armor		888
-#define		sk_forge_bow		889
-#define		sk_rem_art_cloak	891	/* dispel artifact cloaks */
-#define		sk_write_art		892
-#define		sk_destroy_art		893
+#define		sk_show_art_creat	887	/* learn who created art */
+#define		sk_show_art_reg		888	/* learn where art created */
+#define		sk_destroy_art		889
+#define		sk_cloak_creat		891
+#define		sk_cloak_reg		892
+#define		sk_rem_art_cloak	893	/* dispel artifact cloaks */
 #define		sk_forge_palantir	894
 
 #define		sk_necromancy		900
-#define		sk_transcend_death	901
-#define		sk_write_necro		902
-#define		sk_summon_ghost		903	/* summon ghost warriors */
-#define		sk_raise_corpses	904	/* summon undead corpses */
-#define		sk_undead_lord		905	/* summon undead unit */
-#define		sk_renew_undead		906
-#define		sk_banish_undead	907
-#define		sk_eat_dead		908
-#define		sk_aura_blast		909
-#define		sk_absorb_blast		911
+#define		sk_raise_corpses	901	/* summon undead corpses */
+#define		sk_summon_ghost		902	/* summon ghost warriors */
+#define		sk_write_necro		903
+#define		sk_undead_lord		904	/* summon undead unit */
+#define		sk_renew_undead		905
+#define		sk_banish_undead	906
+#define		sk_eat_dead		907
+#define		sk_aura_blast		908
+#define		sk_absorb_blast		909
+#define		sk_transcend_death	911
 
 #define		sk_adv_sorcery		920
 #define		sk_trance		921

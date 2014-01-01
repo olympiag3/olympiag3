@@ -22,7 +22,7 @@ invested in @@@@, the greater the chance the target mage will fail:
 	 5	      90%
 
 Hinder meditation [@@@@] directed against mages using Advanced
-Meditiation [9174] will cause them to only gain half of the
+Meditiation [813] will cause them to only gain half of the
 normal aura obtained.
 
 If the target does not meditate, the spell will lose one point
@@ -34,8 +34,8 @@ For example, if two mages each cast USE @@@@ 501 3, character [501]
 will have a 90% chance of failure in his next attempt to meditate.
 (One aura point has been wasted, since only five may accumulate on
 the target).  At the end of the month, the strength of the @@@@
-spell against [501] will diminish to two points, and [501] will
-have a 50% chance of failure during his next meditation.
+spell against [501] will diminish to four points, and [501] will
+have a 75% chance of failure during his next meditation.
 
 A mage may cast multiple @@@@ spells; they accumulate on the targets,
 not on the casting magician.
