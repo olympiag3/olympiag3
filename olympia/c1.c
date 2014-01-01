@@ -1328,7 +1328,7 @@ check_wait_conditions(struct command *c)
 			break;
 
 		case 1:		/* day n */
-			cond = (sysclock.day >= p->a1);
+			cond = (sysclock.day == p->a1);
 			cond = not - cond;
 			if (cond)
 			{
