@@ -1109,7 +1109,7 @@ inn_income()
 		base = rnd(50, 75);
 
 		if (pil = loc_pillage(where))
-			base /= pil;
+			base /= (pil + 1);
 
 		base /= n_inns;
 
@@ -1157,6 +1157,9 @@ temple_income()
 {
 	int i;			/* variable to iterate over temples */
 	int owner;		/* owner of inn */
+	int where;
+	int amount;
+	int pil;
 	extern int gold_temple;
 
 	loop_temple(i)
@@ -1166,10 +1169,14 @@ temple_income()
 		if (owner == 0 || !is_priest(owner))
 			continue;
 
-		gen_item(owner, item_gold, 100);
-		gold_temple += 100;
+		amount = 100;
+		where = subloc(i);
+		if (pil = loc_pillage(where))
+			amount /= (pil + 1);
+		gen_item(owner, item_gold, amount);
+		gold_temple += amount;
 		wout(owner, "%s collected offerings of %s.",
-				box_name(i), gold_s(100));
+				box_name(i), gold_s(amount));
 	}
 	next_temple;
 }

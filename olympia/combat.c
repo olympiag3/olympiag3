@@ -2798,18 +2798,19 @@ d_pillage(struct command *c)
 		return FALSE;
 	}
 
-	amount = has / 3;
-	consume_item(where, item_tax_cookie, amount * 2);
+	amount = has;
+	consume_item(where, item_tax_cookie, amount);
 	gen_item(c->who, item_gold, amount);
 	gold_pillage += amount;
 
-	if (!recent_pillage(where))
-	{
-		p_subloc(where)->loot++;
-		p_subloc(where)->recent_loot = TRUE;
-	}
+	p_subloc(where)->loot += 4;
+	p_subloc(where)->recent_loot = TRUE;
 
 	wout(c->who, "Pillaging yielded %s.", gold_s(amount));
+
+	/* Pillaging will also scare off any mage's customers */
+	amount = has_item(where, item_mage_menial);
+	consume_item(where, item_mage_menial, amount);
 
 	if (subkind(where) == sub_city)
 		wout(where, "%s loots the city.", box_name(c->who));

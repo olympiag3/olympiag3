@@ -578,8 +578,10 @@ seed_taxes()
 		consume_item(where, item_tax_cookie,
 					has_item(where, item_tax_cookie));
 
-		gen_item(where, item_mage_menial,
-			loc_civ(province(where)) * 5);
+		base = loc_civ(province(where)) * 5;
+		if (pil = loc_pillage(where))
+			base /= (pil + 1);
+		gen_item(where, item_mage_menial, base);
 
 		assert(has_item(where, item_tax_cookie) == 0);
 
