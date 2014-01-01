@@ -847,7 +847,7 @@ auto_drop()
 }
 
 
-static int
+int
 maint_cost(int item)
 {
 

@@ -330,6 +330,9 @@ summary_land_owned()
 
 	loop_garrison(i)
 	{
+		if (garrison_strength(i) < 10)
+			continue;
+
 		l = players_who_rule_here(i);
 
 		for (j = 0; j < ilist_len(l); j++)

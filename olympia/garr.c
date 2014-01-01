@@ -51,6 +51,24 @@ garrison_here(int where)
 	return 0;
 }
 
+int
+garrison_strength(int garr)
+{
+	int strength = 0;
+	struct item_ent *e;
+
+	loop_inv(garr, e)
+	{
+		if (man_item(e->item) &&
+			maint_cost(e->item) > 0 &&
+			item_attack(e->item) >= item_attack(item_soldier) &&
+			item_defense(e->item) >= item_defense(item_soldier))
+			strength += e->qty;
+	}
+	next_inv;
+
+	return strength;
+}
 
 int
 province_admin(int n)
@@ -477,6 +495,10 @@ garrison_gold()
 		remain = base - spent;
 		consume_item(garr, item_gold, remain);
 
+		/* Under-strength garrisons don't forward tax */
+		if (garrison_strength(garr) < 10)
+			continue;
+
 /*
  *  castle gets remaining tax base
  */
@@ -700,6 +722,9 @@ determine_noble_ranks()
 
 	loop_garrison(garr)
 	{
+		if (garrison_strength(garr) < 10)
+			continue;
+
 		loop_loc_owner(garr, owner)
 		{
 			bx[owner]->temp++;
@@ -895,6 +920,9 @@ v_decree_watch(struct command *c)
 		ncontrol++;
 		p = p_misc(garr);
 
+		if (garrison_strength(garr) < 10)
+			continue;
+
 		if (ilist_len(p->garr_watch) < 3)
 		{
 			ilist_append(&p->garr_watch, target);
@@ -948,6 +976,9 @@ v_decree_hostile(struct command *c)
 
 		ncontrol++;
 		p = p_misc(garr);
+
+		if (garrison_strength(garr) < 10)
+			continue;
 
 		if (ilist_len(p->garr_host) < 3)
 		{
@@ -1036,6 +1067,9 @@ ping_garrisons()
 		assert(rp_char(garr) != NULL);
 
 		rp_char(garr)->guard = FALSE;
+
+		if (garrison_strength(garr) < 10)
+			continue;
 
 		wout(where, "%s guards %s.",
 				liner_desc(garr), box_name(where));
