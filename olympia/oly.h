@@ -1264,6 +1264,8 @@ extern ilist new_players;		/* new players added this turn */
 
 extern void style(int n);
 
+extern char * char_rep_location(int who);
+
 #define		RELIC_THRONE		401
 #define		RELIC_CROWN		402
 #define		RELIC_BTA_SKULL		403
