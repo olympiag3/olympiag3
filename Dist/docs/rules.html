@@ -98,7 +98,8 @@ game time. An Olympian month lasts 30 game days.</P>
 <li id="schedule">
 <a href="#schedule">Turn schedule</a>
 <div class="details">
-<P>Turns are run daily, at 5:00pm, Australian Eastern Standard Time (AEST).</P>
+<P>Turns are run on Mondays, at 12:00 noon,
+Australian Eastern Standard Time (AEST).</P>
 <P>Players should receive their turn reports as soon as email can be delivered. 
 Late 
 orders will queue for the next turn. Beware! Even if mailed before the 
@@ -1630,7 +1631,7 @@ initial default garrison with 25-150 pikemen. Each garrison is set to
 <EM>admit 
 all </EM>and <EM>defend all</EM>. Each noble stacked with the garrison 
 will earn 
-4gp/day for aiding the city's defenses.</P>
+2gp/day for aiding the city's defenses.</P>
 <P>&nbsp;</P>
 </div>
 </li>
@@ -1679,7 +1680,7 @@ the two
 digits. The northwest corner is [aa00], with rows increasing to the 
 south, and 
 columns increasing to the east.</P>
-<P>&nbsp;</P><PRE>    00   01   02  ... 99
+<P>&nbsp;</P><PRE>    00   01   02  ... 79
   +----------------------
 aa|
 ab|          ab02
@@ -1688,15 +1689,16 @@ ad|          ad02
 af|
 ...  
 ...
-fz|          fz02
+dz|          dz02
 </PRE>
 <P>&nbsp;</P>
 <P>Row sequence is: "abcdfghjkmnpqrstvwxz"</P>
 <P>Entity numbers for sub-locations do not correspond to any coordinate 
 system.</P>
-<P>The map wraps at the east and west edges. Traveling west from ac00 
-will lead 
-to ac99, for instance.</P>
+<P>
+The edges of the map are not passable, so for example it is not possible
+to travel either north or west from aa00.
+</P>
 </div>
 </li>
 
@@ -1994,8 +1996,8 @@ magic is taught in these three cities.</P>
 <P><I><IMG 
 style="BORDER-BOTTOM: 2px solid; BORDER-LEFT: 2px solid; BORDER-TOP: 
 2px solid; BORDER-RIGHT: 2px solid" 
-alt="G3 Map" 
-src="http://g3_map.jpg"></I></P>
+alt="G4 Map" 
+src="g4_map.png"></I></P>
 </DIV>
 </div>
 </li>
@@ -3061,7 +3063,7 @@ towards this limit.</P>
 <li id="fast_study">
 <a href="#fast_study">Fast study</a>
 <div class="details">
-<P>All new players are given 100+ "fast study" points. Each fast study 
+<P>All new players are given 200+ "fast study" points. Each fast study 
 point may 
 be applied to a skill being studied in lieu of actually spending a day 
 studying.</P>
@@ -3544,7 +3546,7 @@ having learned the category skill.</P>
   <DD>The most common and well-known of the magical schools, Magic 
 nonetheless 
   has many useful and powerful spells. 
-  <P>Since all cities offer instruction in Magic, and several useful 
+  <P>Since most cities offer instruction in Magic, and several useful 
 spells may 
   be learned quickly, apprentice mages often begin their studies 
 here.</P>
@@ -3563,7 +3565,7 @@ cities of
   <DD>Scrying is the study of magical far-seeing, the ability to view 
 images or 
   learn information at a distance. 
-  <P>Scrying is taught in the Faery City, and randomly in non safe haven 
+  <P>Scrying is taught in the Faery Cities, and randomly in non safe haven 
 
   cities.</P>
   <P>&nbsp;</P></DD>
@@ -3571,7 +3573,8 @@ images or
   <DD>The study of ancient portals of teleportation which long ago 
 connected 
   distant regions of the land. 
-  <P>Knowledge of this art is taught in all safe haven cities.</P>
+  <P>Knowledge of this art is taught in all safe haven cities, and
+  in random non safe haven cities.</P>
   <P>&nbsp;</P></DD>
   <DT><EM>Artifact construction [880]</EM></DT>
   <DD>The realm of very advanced sorcerers, artifact construction 
@@ -3582,7 +3585,7 @@ mage's
 levels 
   of aura. 
   <P>Knowledge of this art is taught in random non safe haven 
-cities.</P>
+cities and in some cities in Hades.</P>
   <P>&nbsp;</P></DD>
   <DT><EM>Necromancy [900]</EM></DT>
   <DT style="MARGIN-LEFT: 40px">The darkest of the Dark Arts, 
@@ -3927,8 +3930,8 @@ orders are needed to wield them.</P></DIV>
 <a href="#prisoners">Prisoners</a>
 <div class="details">
 <P>Characters may become prisoners by losing to an enemy in battle, or 
-by being 
-kidnaped (kidnaping is a subskill of Stealth).</P>
+by using the surrender order (see orders section for description).
+</P>
 <P>Since prisoners are unable to report where they are and what they are 
 seeing, 
 they do not contribute to the turn report of their faction. The player's 
@@ -4326,22 +4329,18 @@ the more tax revenues will be reduced.</P>
 <div class="details">
 <P>Gangs of ten or more fighters may use the <CODE>pillage</CODE> 
 command to 
-seize loot from a province or a city. Pillaging yields 1/3 of the tax 
+seize loot from a province or a city. Pillaging siezes the tax 
 base for a 
-location, and destroys another third. For example, a location with a tax 
-base of 
-300 gold would yield 100 gold to a pillager, and be left with 100 gold 
-(100 was 
-destroyed by the act of pillaging).</P>
+location, leaving none available for taxation.
+</P>
 <P>Pillaging has a harmful effect on the future tax revenue of the 
 location. The 
 more a location has been pillaged, the lower its tax base. Provinces and 
 cities 
-take as many months to recover as they have been pillaged. For example, 
+take four months to recover from each pillaging. For example, 
 a city 
-which was pillaged for five months in a row would take five months to 
-return to 
-its normal tax base.</P>
+which was pillaged for five months in a row would take twenty months
+from the first pillaging to return to its normal tax base.</P>
 <P>Pillagers must first defeat any units guarding the province, 
 including any 
 province garrisons.</P>
@@ -4369,6 +4368,9 @@ pillaging. Garrisons must be bound to a castle.</P>
 <P>A garrison pays maintenance for its members from the province tax 
 base, then 
 forwards 1/2 of the remaining gold to its castle.</P>
+<P>Garrisons with fewer than 10 fighting men will pay maintenance for
+themselves, but will not be able to forward tax to a castle, guard
+against pillaging or obey decree orders.
 <P>The castle owner gains status from the number of provinces under 
 control:</P>
 <DL>
@@ -5376,6 +5378,7 @@ of animal produced:</P><PRE>beast			days
 	giant spider [278]    	 21
 	chimera [284]        	 21
 	nazgul [55]           	 14
+        centaur [271]            14
 	lion [280]           	 14
 	harpie [285]             14
 	all other beasts          7
@@ -5518,8 +5521,8 @@ Stealth [630]
    635    Conceal faction                    four weeks
    636    Learn of richest nearby noble      two weeks
    637    Torture prisoner                   three weeks
+   638    Conceal self                       four weeks
    639    Sneak into structure               three weeks
-   641    Conceal self                       four weeks
 
 Beastmastery [650]
    651    Bird spy                           three weeks
@@ -5546,12 +5549,12 @@ Construction [680]
    682    Stone quarrying                    two weeks
 
 Alchemy [690]
-   691    Extract venom from ratspider       three weeks
-   692    Make potion of slavery             three weeks
-   693    Brew healing potion                three weeks
-   694    Brew potion of death               three weeks
-   695    Record skill on scroll             three weeks
-   696    Collect rare elements              two weeks
+   691    Brew healing potion                three weeks
+   692    Record skill on scroll             three weeks
+   693    Extract venom from ratspider       three weeks
+   694    Make potion of slavery             three weeks
+   695    Collect rare elements              two weeks
+   696    Brew potion of death               three weeks
    697    Turn lead into gold                four weeks
 
 Forestry [700]
@@ -5575,9 +5578,9 @@ Trade [730]
 
 Religion [750]
    751    Receive vision                     four weeks
-   752    Resurrect dead noble               four weeks
+   752    Lay to rest                        four weeks
    753    Preparatory ritual                 three weeks
-   754    Lay to rest                        four weeks
+   754    Resurrect dead noble               four weeks
    755    Remove blessing from soldiers      four weeks
    756    Immunity from Vision               four weeks
 
@@ -5586,10 +5589,10 @@ Magic [800]
    802    Perform common tasks for gold      two weeks
    803    Appear common                      two weeks
    804    View current aura level of others  three weeks
-   805    Reveal abilities of another mage   two weeks
-   806    Tap health for aura                three weeks
-   807    Heal                               three weeks
-   808    Modern magic script                three weeks
+   805    Heal                               three weeks
+   806    Modern magic script                three weeks
+   807    Reveal abilities of another mage   two weeks
+   808    Tap health for aura                three weeks
    809    Shroud abilities from scry         three weeks
    811    Detect ability scry                three weeks
    812    Dispel ability shroud              three weeks
@@ -5600,8 +5603,8 @@ Weather magic [820]
    821    Fierce wind                        three weeks
    822    Bind storm to ship                 three weeks
    823    Scribe weather symbols             three weeks
-   824    Summon rain                        three weeks
-   825    Summon wind                        three weeks
+   824    Summon wind                        three weeks
+   825    Summon rain                        three weeks
    826    Summon fog                         three weeks
    827    Direct storm                       three weeks
    828    Dissipate storm                    three weeks
@@ -5612,9 +5615,9 @@ Weather magic [820]
 
 Scrying [840]
    841    Scry location                      three weeks
-   842    Shroud location from magical scry  two weeks
-   843    Dispel location shroud             three weeks
-   844    Ciphered writing of Areth-Pirn     three weeks
+   842    Ciphered writing of Areth-Pirn     three weeks
+   843    Shroud location from magical scry  two weeks
+   844    Dispel location shroud             three weeks
    845    Create magical barrier             three weeks
    846    Remove magical barrier             three weeks
    847    Locate character                   three weeks
@@ -5624,44 +5627,44 @@ Scrying [840]
    852    Banish undead                      three weeks
 
 Gatecraft [860]
-   861    Teleport                           two weeks
-   862    Detect gates                       two weeks
-   863    Jump through gate                  two weeks
+   861    Detect gates                       two weeks
+   862    Jump through gate                  two weeks
+   863    Language of the Ancients           three weeks
    864    Seal gate                          two weeks
    865    Unseal gate with key               two weeks
    866    Notify if gate unsealed            two weeks
    867    Forcefully unseal gate             three weeks
    868    Reveal gate key                    three weeks
    869    Notify of gate jumps               two weeks
-   871    Language of the Ancients           three weeks
+   871    Teleport                           two weeks
    872    Reverse jump through gate          three weeks
 
 Artifact construction [880]
    881    Forge auraculum                    two weeks
-   882    Reveal creator of artifact         two weeks
-   883    Reveal where artifact was created  two weeks
-   884    Cloak creator of artifact          four weeks
-   885    Cloak region of artifact creation  two weeks
+   882    Arcane symbols                     three weeks
+   883    Forge magical weapon               three weeks
+   884    Forge magical armor                three weeks
+   885    Forge magical bow                  three weeks
    886    Curse noncreator loyalty           two weeks
-   887    Forge magical weapon               three weeks
-   888    Forge magical armor                three weeks
-   889    Forge magical bow                  three weeks
-   891    Dispel cloaking from artifact      three weeks
-   892    Arcane symbols                     three weeks
-   893    Destroy artifact                   three weeks
+   887    Reveal creator of artifact         two weeks
+   888    Reveal where artifact was created  two weeks
+   889    Destroy artifact                   three weeks
+   891    Cloak creator of artifact          four weeks
+   892    Cloak region of artifact creation  two weeks
+   893    Dispel cloaking from artifact      three weeks
    894    Forge palantir                     three weeks
 
 Necromancy [900]
-   901    Transcend death                    four weeks, 1 NP req'd
-   902    Runes of Evil                      three weeks
-   903    Summon ghost warriors              three weeks
-   904    Raise undead                       three weeks
-   905    Summon demon lord                  three weeks
-   906    Renew demon bond                   three weeks
-   907    Banish demon lord                  three weeks
-   908    Eating of the dead                 four weeks
-   909    Aura blast                         three weeks
-   911    Absorb aura blast                  three weeks
+   901    Raise undead                       three weeks
+   902    Summon ghost warriors              three weeks
+   903    Runes of Evil                      three weeks
+   904    Summon demon lord                  three weeks
+   905    Renew demon bond                   three weeks
+   906    Banish demon lord                  three weeks
+   907    Eating of the dead                 four weeks
+   908    Aura blast                         three weeks
+   909    Absorb aura blast                  three weeks
+   911    Transcend death                    four weeks, 1 NP req'd
 
 Advanced sorcery [920]
    921    Trance                             four weeks
