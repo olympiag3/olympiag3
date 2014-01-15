@@ -14,9 +14,29 @@ function toggleVisibility()
 	return false;
 }
 
+function expandAll()
+{
+        $("div.details").show();
+        $("ul").show();
+        return false;
+}
+
+function collapseAll()
+{
+        $("div.details").hide();
+        $("li > ul").hide();
+        return false;
+}
+
 $(document).ready(function()
 {
-	$("li > a").click(toggleVisibility);
+        $("li > a").click(toggleVisibility);
+        $("li > ul").hide();
+        $(window.location.hash).parent().parent().find("> div.details").show();
+        $(window.location.hash).parent().parent().find("> ul").show();
+        $("a.showall").click(expandAll);
+        $("a.hideall").click(collapseAll);
+        $("div#controls").show();
 });
 </script>
 <DIV class=section-1>
@@ -4438,5 +4458,15 @@ exhausted.
 </ul>
 </DIV>
 </DIV>
+<div id="controls" style="display:none;">
+<a href="" class="showall">Expand all</a>
+&nbsp;
+<a href="" class="hideall">Collapse all</a>
+<p>
+You may use your browser's search function (usually ctrl-F)
+to look for specific words you're interested in within this document.
+<p>
+Note that it will only search the currently expanded sections!
+</div>
 </BODY>
 </HTML>
