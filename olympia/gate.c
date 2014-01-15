@@ -606,7 +606,7 @@ v_teleport(struct command *c)
 	}
 
 	determine_stack_weights(c->who, &w);
-	cost = (w.total_weight + 249) / 250;
+	cost = (w.total_weight + 49) / 50;
 
 	if (has_item(c->who, item_gate_crystal) < 1)
 	{
