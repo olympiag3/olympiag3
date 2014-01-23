@@ -601,7 +601,11 @@ v_buy(struct command *c)
 		}
 	}
 
-	if (cost < 1) cost = 1;
+	if (cost < 1)
+	{
+		wout(c->who, "No price given.");
+		return FALSE;
+	}
 
 	t = new_trade(c->who, BUY, item);
 	assert(t->who == c->who);
@@ -668,7 +672,11 @@ v_sell(struct command *c)
 		}
 	}
 
-	if (cost < 1) cost = 1;
+	if (cost < 1)
+	{
+		wout(c->who, "No price given.");
+		return FALSE;
+	}
 
 	t = new_trade(c->who, SELL, item);
 	assert(t->who == c->who);
