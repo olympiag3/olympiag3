@@ -42,6 +42,8 @@ terr_prod[] =
 	{sub_graveyard,		item_corpse,		15},
 	{sub_tree_circle,	item_lana_bark,		3},
 	{sub_sand_pit,		item_pretus_bones,	1},
+
+	{sub_swamp,		item_opium,		POPPY_OPIUM},
 	{sub_poppy_field,	item_opium,		POPPY_OPIUM},
 
 	{sub_forest,		item_peasant,		10},
