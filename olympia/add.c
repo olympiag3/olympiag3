@@ -100,7 +100,7 @@ pick_starting_city(char *start_city)
 	int city, empty, garrison, here, prov;
 	ilist garrisoned = NULL, ungarrisoned = NULL;
 
-	if (!strcasecmp(start_city, "empty"))
+	if (!i_strcmp(start_city, "empty"))
 	{
 		loop_city(city)
 		{
