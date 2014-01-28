@@ -1030,7 +1030,7 @@ v_unload(struct command *c)
 
 	loop_char_here(ship, i)
 	{
-		if (i == c->who)
+		if (stack_leader(i) == c->who)
 			continue;
 
 		wout(c->who, "%s disembarks.", box_name(i));
