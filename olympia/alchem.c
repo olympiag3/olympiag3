@@ -116,42 +116,28 @@ v_use_heal(struct command *c)
 
 	wout(c->who, "%s drinks the potion...", just_name(c->who));
 
-	if (char_health(c->who) == 100)
+	if (char_health(c->who) == 100 && !char_sick(c->who))
 	{
 		wout(c->who, "Nothing happens.");
 		destroy_unique_item(c->who, item);
 		return TRUE;
 	}
 
-	p_char(c->who)->sick = FALSE;
-	wout(c->who, "%s has been cured of illness.", just_name(c->who));
-
-#if 0
-	if (char_sick(c->who)) {
+	if (char_sick(c->who))
+	{
 		p_char(c->who)->sick = FALSE;
 		wout(c->who, "%s has been cured of illness.",
 				just_name(c->who));
 	}
 
+	if (char_health(c->who) < 100)
 	{
-		int bonus = rnd(0,3) * 10;
-
-		if (bonus)
-		{
-			p_char(c->who)->health += bonus;
-			if (char_health(c->who) > 100)
-				p_char(c->who)->health = 100;
-			wout(c->who, "Health is now %d.",
-				char_health(c->who));
-		}
+		p_char(c->who)->health += rnd(0,3) * 10;
+		if (char_health(c->who) > 100)
+			p_char(c->who)->health = 100;
+		wout(c->who, "Health is now %d.",
+			char_health(c->who));
 	}
-
-	wout(c->who, "%s is immediately healed of all wounds!",
-				just_name(c->who));
-
-	p_char(c->who)->sick = FALSE;
-	rp_char(c->who)->health = 100;
-#endif
 
 	destroy_unique_item(c->who, item);
 
