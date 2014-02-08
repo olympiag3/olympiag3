@@ -57,7 +57,7 @@ extern int count_loc_char_item(int where, int item);
 extern int check_char_here(int who, int target);
 extern int check_char_gone(int who, int target);
 extern int check_still_here(int who, int target);
-extern int add_structure_damage(int fort, int damage);
+extern int add_structure_damage(int fort, int damage, int can_destroy);
 extern void delta_loyalty(int who, int amount, int silent);
 extern void add_np(int pl, int num);
 extern int deduct_np(int pl, int num);

@@ -1493,7 +1493,7 @@ check_fatal_survive(struct fight **l)
  */
 
 static void
-structure_damage(struct fight **l)
+structure_damage(struct fight **l, int can_destroy)
 {
 	int unit;
 
@@ -1507,7 +1507,7 @@ structure_damage(struct fight **l)
 		assert(damage >= 0);
 
 		if (damage)
-			add_structure_damage(unit, damage);
+			add_structure_damage(unit, damage, can_destroy);
 
 		p_subloc(unit)->defense = l[0]->defense;
 	}
@@ -2190,8 +2190,8 @@ reconcile(int winner, struct fight **l_a, struct fight **l_b)
  *  Sink ships, destroy castles, etc.
  */
 
-	structure_damage(l_a);
-	structure_damage(l_b);
+	structure_damage(l_a, !winner);
+	structure_damage(l_b, TRUE);
 }
 
 
@@ -2339,6 +2339,8 @@ combat_top(struct fight **l_a, struct fight **l_b, int force_win)
 
 		if (subkind(province(where)) == sub_swamp)
 			combat_swampy = TRUE;
+		else
+			combat_swampy = FALSE;
 	}
 
 	combat_banner(l_a, l_b);

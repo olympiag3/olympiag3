@@ -887,7 +887,7 @@ d_lightning(struct command *c)
 				box_name(target));
 
 	if (is_loc_or_ship(target))
-		add_structure_damage(target, aura);
+		add_structure_damage(target, aura, TRUE);
 	else
 		add_char_damage(target, aura, MATES);
 
@@ -1411,7 +1411,7 @@ d_fierce_wind(struct command *c)
 	vector_add(c->who);
 	wout(VECT, "%s is buffeted by a fierce wind!", box_name(target));
 
-	add_structure_damage(target, aura);
+	add_structure_damage(target, aura, TRUE);
 
 	if (p->storm_str <= 0)
 		dissipate_storm(storm, TRUE);

@@ -62,7 +62,7 @@ ship_coastal_damage()
 				wout(ship, "%s struck a coastal reef.  "
 					"There is minor damage to the ship.",
 							box_name(ship));
-				add_structure_damage(ship, rnd(3,5));
+				add_structure_damage(ship, rnd(3,5), TRUE);
 			}
 			break;
 
@@ -72,7 +72,7 @@ ship_coastal_damage()
 				wout(ship, "%s struck some submerged rocks.  "
 					"There is minor damage to the ship.",
 							box_name(ship));
-				add_structure_damage(ship, rnd(6,9));
+				add_structure_damage(ship, rnd(6,9), TRUE);
 			}
 			break;
 
@@ -166,7 +166,7 @@ mine_calamity(int mine)
 		next_char_here;
 	}
 
-	add_structure_damage(mine, rnd(1, 15));
+	add_structure_damage(mine, rnd(1, 15), TRUE);
 }
 
 
@@ -217,7 +217,7 @@ inn_calamity(int where)
 				box_name(where), buf, dam);
 	}
 
-	add_structure_damage(where, dam);
+	add_structure_damage(where, dam, TRUE);
 }
 
 

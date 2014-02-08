@@ -1107,7 +1107,7 @@ d_raze(struct command *c)
  *	     damage, as with combat damage against structures?
  */
 
-	if (add_structure_damage(where, points))
+	if (add_structure_damage(where, points, TRUE))
 		c->wait = 0;
 	return TRUE;
 }

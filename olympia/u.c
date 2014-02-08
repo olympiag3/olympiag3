@@ -976,7 +976,7 @@ building_collapses(int fort)
 
 
 int
-add_structure_damage(int fort, int damage)
+add_structure_damage(int fort, int damage, int can_destroy)
 {
 	struct entity_subloc *p;
 
@@ -992,6 +992,11 @@ add_structure_damage(int fort, int damage)
 	if (p->damage < 100)
 		return FALSE;
 
+	if (!can_destroy)
+	{
+		p->damage = 99;
+		return FALSE;
+	}
 /*
  *  Completely destroyed
  */
