@@ -601,7 +601,7 @@ v_buy(struct command *c)
 		}
 	}
 
-	if (cost < 1)
+	if (qty > 0 && cost < 1)
 	{
 		wout(c->who, "No price given.");
 		return FALSE;
@@ -672,7 +672,7 @@ v_sell(struct command *c)
 		}
 	}
 
-	if (cost < 1)
+	if (qty > 0 && cost < 1)
 	{
 		wout(c->who, "No price given.");
 		return FALSE;
