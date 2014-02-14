@@ -729,6 +729,17 @@ v_forge_aura(struct command *c)
 		return FALSE;
 	}
 
+	if (!can_pay(c->who, 500))
+	{
+		wout(c->who, "Requires %s.", gold_s(500));
+		return FALSE;
+	}
+	if (!has_item(c->who, item_mithril))
+	{
+		wout(c->who, "Requires %s.", box_name_qty(item_mithril, 1));
+		return FALSE;
+	}
+
 	wout(c->who, "Attempt to forge an auraculum.");
 	return TRUE;
 }
@@ -764,15 +775,29 @@ d_forge_aura(struct command *c)
 	struct item_magic *pm;
 	struct char_magic *cm;
 
-	if (aura > char_max_aura(c->who))
+	if (aura > char_max_aura(c->who) ||
+		!check_aura(c->who, aura))
 	{
-		wout(c->who, "The specified amount of aura exceeds the "
-			"maximum aura level of %s.", box_name(c->who));
+		wout(c->who, "%s does not have enough aura to create "
+			"an auraculum that powerful.", box_name(c->who));
 		return FALSE;
 	}
 
-	if (!charge_aura(c->who, aura))
+	if (!has_item(c->who, item_mithril))
+	{
+		wout(c->who, "Requires %s.", box_name_qty(item_mithril, 1));
 		return FALSE;
+	}
+
+	if (!can_pay(c->who, 500))
+	{
+		wout(c->who, "Requires %s.", gold_s(500));
+		return FALSE;
+	}
+
+	charge_aura(c->who, aura);
+	charge(c->who, 500);
+	consume_item(c->who, item_mithril, 1);
 
 	if (numargs(c) < 2)
 	{
