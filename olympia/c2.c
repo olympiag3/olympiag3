@@ -105,11 +105,13 @@ drop_player(int pl)
 	log_write(LOG_DROP, "Dropped player %s", box_name(pl));
 	log_write(LOG_DROP, "    %s <%s>", s, email);
 
+#if 0
 	if (save_flag)
 	{
 		sprintf(cmd, "/u/oly/bin/acct -p %s -g g2 -d", box_code_less(pl));
 		system(cmd);
 	}
+#endif
 
 	delete_box(pl);
 }
