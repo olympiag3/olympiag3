@@ -1046,6 +1046,7 @@ v_forget(struct command *c)
 	int sum = 0;
 	int pl;
 	int teller;
+	struct skill_ent *p;
 
 	/* FORGET BUG FIX */
 	// Not allowed to forget magic skills when the noble has an auraculum
@@ -1060,11 +1061,13 @@ v_forget(struct command *c)
 		return FALSE;
 	}
 
-	sum = skill_np_req(skill);
+	p = rp_skill_ent(c->who, skill);
+	if (p && p->know != SKILL_dont)
+		sum += skill_np_req(skill);
 
 	if (!forget_skill(c->who, skill))
 	{
-		wout(c->who, "Don't know any %s.", box_code(skill));
+		wout(c->who, "Don't know %s.", box_code(skill));
 		return FALSE;
 	}
 
@@ -1072,21 +1075,30 @@ v_forget(struct command *c)
 
 	if (skill_school(skill) == skill)
 	{
-	    loop_skill(i)
-	    {
-		if (skill_school(i) == skill && p_skill_ent(c->who, i))
+		loop_skill(i)
 		{
-			forget_skill(c->who, i);
-			wout(c->who, "Forgot %s.", box_code(i));
+			if (skill_school(i) == skill)
+			{
+				p = rp_skill_ent(c->who, i);
+				if (p)
+				{
+					if (p->know != SKILL_dont)
+						sum += skill_np_req(i);
+					forget_skill(c->who, i);
+					wout(c->who, "Forgot %s.", box_code(i));
+				}
+			}
 		}
-	    }
-	    next_skill;
+		next_skill;
 	}
 
-	pl = player(c->who);
-	add_np(pl,sum);
-	wout(c->who, "Refunded %d noble point%s.",
-		sum, add_s(sum));
+	if (sum > 0)
+	{
+		pl = player(c->who);
+		add_np(pl,sum);
+		wout(c->who, "Refunded %d noble point%s.",
+			sum, add_s(sum));
+	}
 
 	return TRUE;
 }
