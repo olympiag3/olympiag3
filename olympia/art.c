@@ -29,6 +29,8 @@ max_eff_aura(int who)
 	int ac;				/* auraculum */
 
 	a = char_max_aura(who);
+	if (a < 0)
+		a = 0;
 	if (ac = has_auraculum(who))
 		a += item_aura(ac);
 
@@ -48,11 +50,28 @@ max_eff_aura(int who)
 }
 
 
+int
+max_current_aura(int who)
+{
+	int aura;
+
+	aura = max_eff_aura(who) * 5;
+	
+	if (aura < 0)
+		aura = 0;
+
+	if (!aura && char_auraculum(who))
+		aura = 1;
+	
+	return aura;
+}
+
+
 void
 limit_cur_aura(int who)
 {
-	if (char_cur_aura(who) > MAX_CURRENT_AURA(who))
-		p_magic(who)->cur_aura = MAX_CURRENT_AURA(who);
+	if (char_cur_aura(who) > max_current_aura(who))
+		p_magic(who)->cur_aura = max_current_aura(who);
 }
 
 
@@ -734,7 +753,7 @@ v_forge_aura(struct command *c)
 		wout(c->who, "Requires %s.", gold_s(500));
 		return FALSE;
 	}
-	if (!has_item(c->who, item_mithril))
+	if (has_item(c->who, item_mithril) < 1)
 	{
 		wout(c->who, "Requires %s.", box_name_qty(item_mithril, 1));
 		return FALSE;
@@ -783,7 +802,7 @@ d_forge_aura(struct command *c)
 		return FALSE;
 	}
 
-	if (!has_item(c->who, item_mithril))
+	if (has_item(c->who, item_mithril) < 1)
 	{
 		wout(c->who, "Requires %s.", box_name_qty(item_mithril, 1));
 		return FALSE;

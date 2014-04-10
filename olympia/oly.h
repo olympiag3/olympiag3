@@ -1249,8 +1249,6 @@ extern ilist new_players;		/* new players added this turn */
 
 #define	MAX_POST 60	/* max line length for posts and messages */
 
-#define	MAX_CURRENT_AURA(n)	(max_eff_aura(n) * 5)
-
 
 /*
  *  style() tags:

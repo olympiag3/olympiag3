@@ -1026,10 +1026,8 @@ forget_skill(int who, int skill)
 	{
 		ch = p_magic(who);
 		ch->max_aura--;
-		if (ch->max_aura < 0)
-			ch->max_aura = 0;
 
-	if (ch->cur_aura > ch->max_aura)
+		if (ch->cur_aura > max_eff_aura(who) && ch->cur_aura > 0)
 			ch->cur_aura--;
 
 	}
@@ -1047,13 +1045,6 @@ v_forget(struct command *c)
 	int pl;
 	int teller;
 	struct skill_ent *p;
-
-	/* FORGET BUG FIX */
-	// Not allowed to forget magic skills when the noble has an auraculum
-	// Exception: Transcend Death
-	if (has_auraculum(c->who) && magic_skill(skill) && skill != sk_transcend_death )
-		return FALSE;
-	/* FORGET BUG FIX */
 
 	if (kind(skill) != T_skill)
 	{
@@ -1090,6 +1081,22 @@ v_forget(struct command *c)
 			}
 		}
 		next_skill;
+	}
+
+	if (skill == sk_weather)
+		p_magic(c->who)->knows_weather = 0;
+
+	if (is_magician(c->who))
+	{
+		// See if they still qualify as a magician
+		p_magic(c->who)->magician = FALSE;
+
+		loop_char_skill_known(c->who, p)
+		{
+			if (magic_skill(p->skill))
+				p_magic(c->who)->magician = TRUE;
+		}
+		next_char_skill_known;
 	}
 
 	if (sum > 0)

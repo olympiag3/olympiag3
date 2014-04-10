@@ -618,6 +618,9 @@ char_rep_magic(int who, int num)
 	ma = char_max_aura(num);
 	mea = max_eff_aura(num);
 
+	if (ma < 0)
+		ma = 0;
+
 	out(who, "");
 	out(who, "Current aura:   %d", ca);
 
@@ -629,7 +632,7 @@ char_rep_magic(int who, int num)
 
 	if (char_abil_shroud(num) > 0)
 		out(who, "Ability shroud: %d aura",
-					char_abil_shroud(num));
+				char_abil_shroud(num));
 
 	if (is_loc_or_ship(char_proj_cast(num)))
 		out(who, "Project cast:   %s",
@@ -637,7 +640,11 @@ char_rep_magic(int who, int num)
 
 	if (char_quick_cast(num))
 		out(who, "Quicken cast:   %d",
-					char_quick_cast(num));
+				char_quick_cast(num));
+
+	if (char_hide_mage(num) > 0)
+		out(who, "Appear common:  turn %d",
+				sysclock.turn + char_hide_mage(num));
 }
 
 
