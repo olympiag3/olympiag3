@@ -4,7 +4,7 @@ Usage:  automatic when necessary
 
 Knowledge of @@@@ causes a character to keep its faction affiliation
 secret.  Other units attempting to learn the what player the unit
-belongs with the skill Determine character's lord [9521] will fail.
+belongs with the skill Determine character's lord [634] will fail.
 
 Permissions set for the player of a character concealing its faction
 affiliation will not include the character.  For example, suppose

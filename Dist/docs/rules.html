@@ -116,7 +116,9 @@ game time. An Olympian month lasts 30 game days.</P>
 <a href="#schedule">Turn schedule</a>
 <div class="details">
 <P>Turns are run on Mondays, at 12:00 noon,
-Australian Eastern Standard Time (AEST).</P>
+Australian Eastern Standard Time (AEST)
+or Australian Eastern Daylight Time (AEDT),
+depending on whether daylight savings is in effect in Sydney, Australia.</P>
 <P>Players should receive their turn reports as soon as email can be delivered. 
 Late 
 orders will queue for the next turn. Beware! Even if mailed before the 
@@ -929,20 +931,27 @@ safety before venturing out into the world.</P>
 <li id="submit_orders">
 <a href="#submit_orders">Submitting orders</a>
 <div class="details">
-<P>Orders for Olympia game 3 should be sent to <A 
+<P>Orders for Olympia game 4 should be sent to <A 
 href="mailto:olympia@shadowlandgames.com">olympia@shadowlandgames.com</A>.</P>
 <P>The 'Reply-To:' header on turn reports is set to this e-mail address, 
 so 
 using the reply feature of your e-mail client should send orders to the 
 right 
 place.</P>
-<P>Your orders are automatically loaded into the game and scanned for 
-syntax 
-errors and queues them for your units. It will send a reply as soon as 
-it 
-receives mail from you, showing whether or not there were any errors 
+<P>Your orders are automatically loaded into the game
+and queued for your units. The scanner will send a reply as soon as it
+processes your mail, showing whether or not there were any errors 
 with the 
 orders it received.</P>
+<P>Note that the order scanner does not do an exhaustive check of your
+orders' syntax; it checks that the commands given exist, and checks the
+parameters of those commands that are executed at parse time - notably
+those involved in parsing (begin, unit, password, email and vis_email),
+in report formatting (format and notab)
+and those which have immediate secondary effects (resend and lore).
+Other commands' parameters are only checked when they are executed
+during the turn run.
+</P>
 <P>Orders must be of the following form:</P>
 <P>&nbsp;</P>
 <P style="MARGIN-LEFT: 40px">begin player-number password</P>
@@ -3057,10 +3066,8 @@ practice of the skill.</P>
 <div class="details">
 <P>Some advanced skills require Noble Points to begin study. Each player 
 begins 
-the game with a number of NPs, and receives an additional one each year 
-on the 
-anniversary of their entry into the game. Noble Points may be spent to 
-acquire 
+the game with a number of NPs, and receives an additional one each year.
+Noble Points may be spent to acquire 
 new nobles, or to learn advanced skills.</P>
 <P>Most skills do not require Noble Points to learn. NPs are required 
 for some 
@@ -4080,7 +4087,7 @@ Defend units
   <DT style="MARGIN-LEFT: 40px">&nbsp;</DT></DL>
 <P>Every character, and player faction entity, keeps three lists of 
 units or 
-other factions which have attitudes declared towards them. A unit is 
+other factions towards which it has declared attitudes. A unit is 
 either on 
 the <CODE>hostile</CODE>, <CODE>defend</CODE>, or <CODE>neutral</CODE> 
 list. If 
@@ -4120,7 +4127,7 @@ faction. Thus, one may declare a faction hostile, but exclude certain
 units 
 within the faction by specifically declaring them neutral.</P>
 <P>A unit must be the top-most character in its stack to aid in defense. 
-If a 
+If a top-most
 unit joins a combat because of <CODE>defend</CODE>, it will bring its 
 entire 
 stack along, even if the other members of the stack have not declared a 
@@ -4798,11 +4805,8 @@ roundships.</P>
 <P>A galley, also known as a warship, is a slender rowed vessel. Galleys 
 require 
 14 sailors as oarsmen for travel, and may carry up to 5,000 units of 
-cargo. The 
-oars permit the ship to be maneuvered regardless of wind conditions.</P>
-<P>Galleys may be fitted with rams, which are used to crush the sides of 
-enemy 
-ships in battle.</P>
+cargo.
+</P>
 <P>The roundship, also known as the merchantman, is a deep, wide sailing 
 ship, 
 usually with one or two masts and steered with great, oar-like paddles. 
@@ -5087,14 +5091,18 @@ fighter
               faery [293]     no       yes      no    (9,9,9)
               hound [295]     yes      no       no    (1,1,0)
 </PRE>
+Items with a "yes" in the "swamp" column will cause their stack to
+move more slowly through swamps, as they need to be lead.
+<p>
+Items with a "yes" in the "beast" column are counted as beasts for the
+various Beastmastery skills.
 </div>
 </li>
 
 <li id="weights">
 <a href="#weights">Weights</a>
 <div class="details">
-<P>The weights of some of the animals has been increased a bit. A -1 in 
-a 
+<P>A -1 in a 
 carrying capacity field means that the item will carry its own weight, 
 but 
 nothing additional. Capacity does not include the weight of the item 
@@ -5159,19 +5167,12 @@ itself.</P>
   93 opium                         1    0    0    0
   94 woven basket                  1    0    0    0
   95 clay pot                      5    0    0    0
-  96 tax cookie                    0    0    0    0
   98 drum                          2    0    0    0
   99 hide                         50    0    0    0
- 101 mob cookie                    0    0    0    0
  102 lead                         10    0    0    0
  261 pitch                       100    0    0    0
  271 centaur                   1,000  150  150    0
  272 minotaur                    800   -1   -1    0
- 273 undead cookie                 0    0    0    0
- 274 fog cookie                    0    0    0    0
- 275 wind cookie                   0    0    0    0
- 276 rain cookie                   0    0    0    0
- 277 mage menial cookie            0    0    0    0
  278 giant spider                500   -1   -1    0
  279 rat                          50   -1   -1    0
  280 lion                        750   -1   -1    0
@@ -5188,7 +5189,6 @@ itself.</P>
  291 cyclops                     200  200    0    0
  292 giant                       200  200    0    0
  293 faery                        10   10    0    0
- 294 petty thief cookie            0    0    0    0
  295 hound                        65   -1    0    0
  401 Imperial Throne               0    0    0    0
 </PRE>

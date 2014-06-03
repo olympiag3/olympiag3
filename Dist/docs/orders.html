@@ -1477,16 +1477,9 @@ the known
 skill.</P>
 <P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Any 
 invested noble 
-points for learning advanced skills are refunded if the skill was 
-completely 
-known. &nbsp;If you forget the main skill, any subskills are also 
+points for learning advanced skills are refunded.
+&nbsp;If you forget the main skill, any subskills are also 
 forgotten.</P>
-<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">WARNING: 
-To recover 
-the noble point for Transcend Death [901] while forgetting 
-Necromancy[900], you 
-have to forget Transcend Death [901] before forgetting Necromancy 
-[900].</P>
 <P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Gold that 
 was 
 invested while learning the skill is never refunded.</P>
@@ -1808,10 +1801,11 @@ class=Apple-style-span><B>HOSTILE    &lt;who&gt;
 <HR>
 
 <P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Declare 
-unit or 
-player&nbsp;<VAR>who</VAR>&nbsp;hostile to the unit or player issuing 
-the order. 
-Units declared hostile will be attacked on sight.</P>
+hostility toward the unit or 
+player&nbsp;<VAR>who</VAR>.
+Units declared hostile will be attacked on sight.
+Declaring players hostile is ineffective, as there is no way to
+tell in passing what player a unit belongs to.</P>
 <P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">If the 
 player 
 entity issues&nbsp;<CODE>hostile</CODE>, any unit in the player's 
@@ -1825,19 +1819,11 @@ will only
 initiate automatic attacks if they are in perfect health. Hostile units 
 which 
 are being held prisoner will not be attacked.</P>
-<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">An entire 
-faction 
-may be declared hostile by specifying another player entity instead of 
-an 
-individual unit. Any unit not concealing its affiliation with the 
-faction 
-declared hostile would be attacked on sight.</P>
 <P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: 
 medium">Examples:</P>
 <DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
   <DD><PRE>hostile 4240            # attack 4240 on sight
-hostile 778             # attack any member of faction 778 on 
-sight</PRE></DD></DL>
+</PRE></DD></DL>
 </DIV>
 </li>
 
@@ -1986,6 +1972,47 @@ resorted
 to selling them in cities to earn gold. Each city in Olympia either buys 
 woven 
 baskets or clay pots.
+</P>
+</DIV>
+</li>
+
+<li id="mallorn">
+<a href="#mallorn">Mallorn</a>
+<DIV class="details">
+<HR>
+<PRE><SPAN style="FONT-FAMILY: 'times new roman'; FONT-SIZE: medium" 
+class=Apple-style-span><B>MALLORN     [number of mallorn]  [days]           
+time: as given  priority: 3
+</B></SPAN></PRE>
+<HR>
+<P style="FONT-FAMILY: 'times new roman'; FONT-SIZE: medium">Mallorn is 
+used to make war drums and magical bows.
+Up to 5 mallorn may be harvested from mallorn groves each month.
+</P>
+<P style="FONT-FAMILY: 'times new roman'; FONT-SIZE: medium">A noble 
+must have 
+the Harvest mallorn wood [705] subskill of Forestry [700] in order to cut 
+mallorn.
+</P>
+<P style="FONT-FAMILY: 'times new roman'; FONT-SIZE: medium">The 
+noble has a 20% chance each day to
+cut and prepare one mallorn [70].</P>
+<P style="FONT-FAMILY: 'times new roman'; FONT-SIZE: 
+medium">Examples:</P>
+<DL style="FONT-FAMILY: 'times new roman'; FONT-SIZE: medium">
+  <DD><PRE>mallorn         # cut as much mallorn as possible
+mallorn 5      # stop after cutting 5 mallorn
+mallorn 0 5    # cut mallorn for five days
+mallorn 5 10   # stop after ten days, or 5 mallorn, whichever
+               # comes first
+</PRE></DD></DL>
+<P style="FONT-FAMILY: 'times new roman'; FONT-SIZE: medium">In all 
+cases, 
+harvesting will cease as soon as the supply of mallorn in the grove 
+has been exhausted.
+</P>
+<P style="FONT-FAMILY: 'times new roman'; FONT-SIZE: medium">
+MALLORN is an alias for COLLECT 70.
 </P>
 </DIV>
 </li>
@@ -3266,12 +3293,11 @@ skill
 except Religion [750] must be performed in a tower, by the tower's owner 
 (the 
 first character inside the tower). Research into Religion [750] must be 
-performed in a temple.</P>
+performed in a temple, by the temple's owner.</P>
 <P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Research 
-requires a 
-nominal fee of 25 gold to pay for materials. This fee is charge 
-regardless of 
-whether the research yields any results.</P>
+requires a nominal fee of 25 gold to pay for materials.
+This fee is charged regardless of whether the research yields
+any results.</P>
 <P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">There is 
 a 25% 
 chance of success for each week of research.</P>
@@ -3750,7 +3776,7 @@ as if no travel had taken place.
 <DIV class="details">
 <HR>
 <PRE><SPAN style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium" 
-class=Apple-style-span><B>STUDY      &lt;skill&gt;                     
+class=Apple-style-span><B>STUDY    &lt;skill&gt;    [fast days]
          time: 7 days    priority: 3
 </B></SPAN></PRE>
 <HR>
@@ -3781,6 +3807,24 @@ research</LI></UL></LI>
   <LI>Payment of 100 gold to begin study.</LI>
   <LI>Payment of Noble Points to learn advanced 
 skills</LI></UL>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+If a number of fast study days is given, then instead of spending time
+to study, the noble will use their faction's fast study day pool to
+accelerate learning.  Fast study takes no time, but does have the
+same requirements to begin study as normal study.
+The number of fast study days given will be deducted from the faction's
+pool and used towards the skill specified.
+</P>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Examples:</P>
+<DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+  <DD><PRE>
+study 800         # Study Magic [800] for one week
+study 800 21      # Use 21 fast study days to accelerate learning
+</PRE></DD></DL>
+<P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
+Note that normal and fast study can be freely mixed, and that fast
+study is not limited to 14 days per month.
+</P>
 </DIV>
 </li>
 
@@ -4098,8 +4142,8 @@ behind both those stack above as well as below:</P>
 medium">Before:</P>
 <DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
   <DD><PRE>Osswid the Constructor [5499], accompanied by:
-   Feasel the Wicked [502], accompanied by:
-      Captain McCook [2019], with five workers
+   Feasel the Wicked [502]
+   Captain McCook [2019], with five workers
 </PRE></DD></DL>
 <DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
   <DD><PRE>502: &gt; unstack 502
@@ -4138,8 +4182,8 @@ were stacked beneath Feasel, they would remain with him.</P>
 medium">Before:</P>
 <DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
   <DD><PRE>Osswid the Constructor [5499], accompanied by:
-   Feasel the Wicked [502], accompanied by:
-      Candide [1269]
+   Feasel the Wicked [502]
+   Candide [1269]
 </PRE></DD></DL>
 <P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">If 
 Candide were 
@@ -4209,20 +4253,17 @@ sent to.</P>
 <P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">For 
 example:</P>
 <DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
-  <DD><PRE>email "skrenta@shadow.com"
-vis_email "skrenta@pbm.com"
+  <DD><PRE>email "someone@example.com"
+vis_email "dont@spam.me"
 </PRE></DD></DL>
 <P style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">Would 
 cause turn 
-reports to be sent to <A 
-href="mailto:skrenta@shadow.com">skrenta@shadow.com</A>, while the 
-player list 
-shows <A href="mailto:skrenta@pbm.com">skrenta@pbm.com</A> as player 
-501's email 
+reports to be sent to someone@example.com, while the 
+player list shows dont@spam.me as player ne1's email 
 address:</P>
 <DL style="FONT-FAMILY: 'Times New Roman'; FONT-SIZE: medium">
-  <DD><PRE>501    House of Osswid
-       Rich Skrenta &lt;skrenta@pbm.com&gt;</PRE></DD></DL>
+  <DD><PRE>ne1    House of Osswid
+       Anonymous Malefactor &lt;dont@spam.me&gt;</PRE></DD></DL>
 </DIV>
 </li>
 
@@ -4423,12 +4464,12 @@ class=Apple-style-span><B>WOOD     [number of wood]  [days]
 time: as given  priority: 3
 </B></SPAN></PRE>
 <HR>
-
 <P style="FONT-FAMILY: 'times new roman'; FONT-SIZE: medium">Wood is 
-used in the 
-construction of inns, mines and ships. And also are used to make weapons 
-Up to 
-30 wood may be removed from forest provinces each month.</P>
+used in the construction of inns, mines and ships.
+It is also are used to make weapons.
+Up to 30 wood may be removed from forest provinces each month.
+5 wood may be obtained each month from circles of trees and sacred groves.
+</P>
 <P style="FONT-FAMILY: 'times new roman'; FONT-SIZE: medium">A unit 
 must have 
 the Harvest lumber [702] subskill of Forestry [700] in order to cut 
@@ -4448,9 +4489,50 @@ wood 25 5    # stop after five days, or 25 wood, whichever
 </PRE></DD></DL>
 <P style="FONT-FAMILY: 'times new roman'; FONT-SIZE: medium">In all 
 cases, 
-wooding will cease as soon as the supply of ready wood in the province 
+cutting will cease as soon as the supply of ready wood in the province 
 has been 
 exhausted.
+</P>
+</DIV>
+</li>
+
+<li id="yew">
+<a href="#yew">Yew</a>
+<DIV class="details">
+<HR>
+<PRE><SPAN style="FONT-FAMILY: 'times new roman'; FONT-SIZE: medium" 
+class=Apple-style-span><B>YEW     [number of yew]  [days]           
+time: as given  priority: 3
+</B></SPAN></PRE>
+<HR>
+<P style="FONT-FAMILY: 'times new roman'; FONT-SIZE: medium">Yew is 
+used to make longbows, which are needed to train archers.
+Up to 5 yew may be harvested from yew groves each month.
+</P>
+<P style="FONT-FAMILY: 'times new roman'; FONT-SIZE: medium">A unit 
+must have 
+the Harvest yew [703] subskill of Forestry [700] in order to cut 
+yew. At 
+least one worker is also required.</P>
+<P style="FONT-FAMILY: 'times new roman'; FONT-SIZE: medium">Each 
+worker will 
+cut and prepare one yew [68] per day.</P>
+<P style="FONT-FAMILY: 'times new roman'; FONT-SIZE: 
+medium">Examples:</P>
+<DL style="FONT-FAMILY: 'times new roman'; FONT-SIZE: medium">
+  <DD><PRE>yew         # cut as much yew as possible
+yew 5      # stop after cutting 5 yew
+yew 0 5    # cut yew for five days
+yew 5 3    # stop after three days, or 5 yew, whichever
+               # comes first
+</PRE></DD></DL>
+<P style="FONT-FAMILY: 'times new roman'; FONT-SIZE: medium">In all 
+cases, 
+harvesting will cease as soon as the supply of yew in the grove 
+has been exhausted.
+</P>
+<P style="FONT-FAMILY: 'times new roman'; FONT-SIZE: medium">
+YEW is an alias for COLLECT 68.
 </P>
 </DIV>
 </li>

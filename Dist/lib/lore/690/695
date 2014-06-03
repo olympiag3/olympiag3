@@ -9,7 +9,7 @@ columns in the following table.
 
 The followings kinds of rare elements may be collected with this skill:
 
-   num  item         who      where          qty  skill  chance
-   ---  ----         ---      -----          ---  -----  ------
-    67  farrenstone  noble    caves            2   9584   100%
-    71  pretus bones noble    sand pits        1   9584   100%
+   num  item         who      where          qty  chance
+   ---  ----         ---      -----          ---  ------
+    67  farrenstone  noble    caves            2    100%
+    71  pretus bones noble    sand pits        1    100%
