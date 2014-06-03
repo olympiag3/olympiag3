@@ -519,7 +519,6 @@ do_unit(struct command *c)
 	else if (!valid_char_or_player(c->a))
 	{
 	    err(EAT_ERR, "Not a character or unformed unit");
-	    return TRUE;
 	}
 	else if (player(c->a) != pl)
 	{

@@ -142,6 +142,9 @@ flush_unit_orders(int pl, int who)
 {
 	struct command *c;
 
+	if (!bx[who])
+		return;
+
 	while (top_order(pl, who))
 		pop_order(pl, who);
 
