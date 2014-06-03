@@ -222,7 +222,7 @@ main()
 	clear_alloc_flag();
 	dir_assert();
 	open_fps();
-	load_seed();
+	load_seed("randseed");
 	map_init();
 	read_map();
 	fix_terrain_land();
@@ -1193,8 +1193,8 @@ int dir;
 		return 0;
 
 	if (col < 0)
-		col = 99;
-	if (col > 99)
+		col = max_col;
+	if (col > max_col)
 		col = 0;
 
 	if (map[row][col] == NULL)

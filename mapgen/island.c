@@ -176,7 +176,7 @@ int main(int argc, char *argv[])
 		}
 	}
 
-	load_seed();
+	load_seed("randseed");
 
 	/* Divide the map into available and unavailable space */
 	/* Only count ,. ' chars as available */
@@ -440,7 +440,7 @@ int main(int argc, char *argv[])
 		}
 	}
 
-	save_seed();
+	save_seed("randseed");
 
 	fprintf(stderr, "Added island of %d provinces.\n", island_size);
 
