@@ -715,18 +715,22 @@ contacted(int a, int b)
 
 
 int
-char_here(int who, int target)
+char_where(int where, int who, int target)
 {
-	int where = subloc(who);
 	int pl;
 
 	if (where != subloc(target))
 		return FALSE;
 
-	if (char_really_hidden(target))
+	if (char_really_hidden(target) ||
+		(loc_depth(where) == LOC_province &&
+		weather_here(where, sub_fog)))
 	{
 		pl = player(who);
 		if (pl == player(target))
+			return TRUE;
+
+		if (target == garrison_here(where))
 			return TRUE;
 
 		if (contacted(target, who))
@@ -740,7 +744,16 @@ char_here(int who, int target)
 
 
 int
-check_char_here(int who, int target)
+char_here(int who, int target)
+{
+	int where = subloc(who);
+
+	return char_where(where, who, target);
+}
+
+
+int
+check_char_where(int where, int who, int target)
 {
 
 	if (target == garrison_magic)
@@ -755,13 +768,22 @@ check_char_here(int who, int target)
 		return FALSE;
 	}
 
-	if (!char_here(who, target))
+	if (!char_where(where, who, target))
 	{
-		wout(who, "%s can not be seen here.", box_code(target));
+		wout(who, "%s cannot be seen here.", box_code(target));
 		return FALSE;
 	}
 
 	return TRUE;
+}
+
+
+int
+check_char_here(int who, int target)
+{
+	int where = subloc(who);
+
+	return check_char_where(where, who, target);
 }
 
 
@@ -783,7 +805,7 @@ check_char_gone(int who, int target)
 
 	if (!char_here(who, target))
 	{
-		wout(who, "%s can not be seen here.", box_code(target));
+		wout(who, "%s cannot be seen here.", box_code(target));
 		return FALSE;
 	}
 

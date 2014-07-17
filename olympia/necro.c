@@ -10,6 +10,7 @@ static int
 keep_undead_check(struct command *c, int check_bond)
 {
 	int target = c->a;
+	int where = c->d;
 
 	if (kind(target) != T_char || subkind(target) != sub_undead)
 	{
@@ -17,9 +18,13 @@ keep_undead_check(struct command *c, int check_bond)
 	    return FALSE;
 	}
 
-	if (subloc(target) != subloc(c->who))
+	if (subloc(target) != where)
 	{
-		wout(c->who, "%s is not here.", box_code(target));
+		if (subloc(c->who) == where)
+			wout(c->who, "%s is not here.", box_code(target));
+		else
+			wout(c->who, "%s is not in %s.", box_code(target),
+					box_code(where));
 		return FALSE;
 	}
 
@@ -37,6 +42,7 @@ int
 v_keep_undead(struct command *c)
 {
 	int target = c->a;
+	c->d = subloc(c->who);
 
 	if (!keep_undead_check(c, TRUE))
 		return FALSE;
@@ -144,11 +150,11 @@ d_undead_lord(struct command *c)
 int
 v_banish_undead(struct command *c)
 {
-
-	if (!keep_undead_check(c, FALSE))
+	if (!check_aura(c->who, 6))
 		return FALSE;
 
-	if (!check_aura(c->who, 6))
+	c->d = reset_cast_where(c->who);
+	if (!keep_undead_check(c, FALSE))
 		return FALSE;
 
 	return TRUE;
@@ -159,13 +165,13 @@ int
 d_banish_undead(struct command *c)
 {
 	int target = c->a;
-	int where = cast_where(c->who);
+	int where = c->d;
 	int head;
 
-	if (!keep_undead_check(c, FALSE))
+	if (!charge_aura(c->who, 6))
 		return FALSE;
 
-	if (!charge_aura(c->who, 6))
+	if (!keep_undead_check(c, FALSE))
 		return FALSE;
 
 	head = stack_leader(target);
@@ -175,8 +181,6 @@ d_banish_undead(struct command *c)
 
 	extract_stacked_unit(target);
 	kill_char(target, 0);
-
-	reset_cast_where(c->who);
 
 	return TRUE;
 }
@@ -414,23 +418,28 @@ v_aura_blast(struct command *c)
 	int target = c->a;
 	int aura = c->b;
 	int have_left = c->c;
-	int where = subloc(c->who);
+	int where;
 
-	if (in_safe_now(where))
+	if (in_safe_now(c->who))
 	{
 		wout(c->who, "Not allowed in a safe haven.");
 		return FALSE;
 	}
 
-	if (!check_char_here(c->who, target)) {
+	where = reset_cast_where(c->who);
+	if (!check_char_where(where, c->who, target)) {
 		return FALSE;
 	}
 
+/*
 	if (diff_region(c->who, target))
 	{
 		wout(c->who, "%s is too far away.", box_code(c->who));
 		return FALSE;
 	}
+*/
+
+	c->d = where;
 
 	return TRUE;
 }
@@ -442,22 +451,24 @@ d_aura_blast(struct command *c)
 	int target = c->a;
 	int aura = c->b;
 	int have_left = c->c;
-	int where = subloc(c->who);
+	int where = c->d;
 
-	if (!cast_check_char_here(c->who, target))
+	if (!check_char_where(where, c->who, target))
 		return FALSE;
 
-	if (in_safe_now(where) || in_safe_now(target))
+	if (in_safe_now(c->who) || in_safe_now(target))
 	{
 		wout(c->who, "Not allowed in a safe haven.");
 		return FALSE;
 	}
 
+/*
 	if (diff_region(c->who, target))
 	{
 		wout(c->who, "%s is too far away.", box_code(c->who));
 		return FALSE;
 	}
+*/
 
 	if (aura < 1)
 		aura = char_cur_aura(c->who);

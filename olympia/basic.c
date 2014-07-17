@@ -120,6 +120,7 @@ v_hinder_med(struct command *c)
 {
 	int target = c->a;
 	int aura;
+	int where;
 
 	if (c->b < 1)
 		c->b = 1;
@@ -127,10 +128,13 @@ v_hinder_med(struct command *c)
 		c->b = 5;
 	aura = c->b;
 
-	if (!cast_check_char_here(c->who, target))
+	if (!check_aura(c->who, aura))
 		return FALSE;
 
-	if (!check_aura(c->who, aura))
+	where = reset_cast_where(c->who);
+	c->d = where;
+
+	if (!check_char_where(where, c->who, target))
 		return FALSE;
 
 	wout(c->who, "Attempt to hinder attempts at meditation by %s.",
@@ -179,8 +183,12 @@ d_hinder_med(struct command *c)
 	int target = c->a;
 	int aura = c->b;
 	struct char_magic *p;
+	int where = c->d;
 
 	if (!charge_aura(c->who, aura))
+		return FALSE;
+
+	if (!check_char_where(where, c->who, target))
 		return FALSE;
 
 	wout(c->who, "Successfully cast %s on %s.",
@@ -204,6 +212,7 @@ v_heal(struct command *c)
 {
 	int target = c->a;
 	int aura;
+	int where;
 
 	if (c->b < 1)
 		c->b = 1;
@@ -211,7 +220,13 @@ v_heal(struct command *c)
 		c->b = 3;
 	aura = c->b;
 
-	if (!cast_check_char_here(c->who, target))
+	if (!check_aura(c->who, aura))
+		return FALSE;
+
+	where = reset_cast_where(c->who);
+	c->d = where;
+
+	if (!check_char_where(where, c->who, target))
 		return FALSE;
 
 	if (!char_sick(target))
@@ -219,9 +234,6 @@ v_heal(struct command *c)
 		wout(c->who, "%s is not sick.", box_name(target));
 		return FALSE;
 	}
-
-	if (!check_aura(c->who, aura))
-		return FALSE;
 
 	return TRUE;
 }
@@ -233,6 +245,7 @@ d_heal(struct command *c)
 	int target = c->a;
 	int aura = c->b;
 	int chance;
+	int where = c->d;
 
 	if (kind(target) != T_char)
 	{
@@ -240,6 +253,9 @@ d_heal(struct command *c)
 					box_code(target));
 		return FALSE;
 	}
+
+	if (!check_char_where(where, c->who, target))
+		return FALSE;
 
 	if (!char_sick(target))
 	{
@@ -296,16 +312,11 @@ v_reveal_mage(struct command *c)
 	int target = c->a;
 	int category = c->b;
 	int aura;
+	int where;
 
 	if (c->c < 1)
 		c->c = 1;
 	aura = c->c;
-
-	if (!cast_check_char_here(c->who, target))
-		return FALSE;
-
-	if (!check_aura(c->who, aura))
-		return FALSE;
 
 	// by Cappinator:
 	// Add a check that verifies of the given category is a valid skill/category id
@@ -314,14 +325,25 @@ v_reveal_mage(struct command *c)
 		return FALSE;
   	}
 
+	if (!check_aura(c->who, aura))
+		return FALSE;
+
+	where = reset_cast_where(c->who);
+	c->d = where;
+	if (!check_char_where(where, c->who, target))
+		return FALSE;
+
 	if (skill_school(category) != category || !magic_skill(category))
 	{
 		wout(c->who, "%s is not a magical skill category.",
 					box_code(category));
-		wout(c->who , "Assuming %s.", box_name(sk_basic));
+		if (!magic_skill(category))
+			category = sk_basic;
+		else
+			category = skill_school(category);
+		wout(c->who , "Assuming %s.", box_name(category));
 
-		c->b = sk_basic;
-		category = sk_basic;
+		c->b = category;
 	}
 
 	wout(c->who, "Attempt to scry the magical abilities of %s within %s.",
@@ -338,9 +360,13 @@ d_reveal_mage(struct command *c)
 	int category = c->b;
 	int aura = c->c;
 	int has_detect;
+	int where = c->d;
 	char *source;
 
 	if (!charge_aura(c->who, aura))
+		return FALSE;
+
+	if (!check_char_where(where, c->who, target))
 		return FALSE;
 
 	assert(valid_box(category));
@@ -582,11 +608,15 @@ int
 v_dispel_abil(struct command *c)
 {
 	int target = c->a;
-
-	if (!cast_check_char_here(c->who, target))
-		return FALSE;
+	int where;
 
 	if (!check_aura(c->who, 3))
+		return FALSE;
+
+	where = reset_cast_where(c->who);
+	c->d = where;
+
+	if (!check_char_where(where, c->who, target))
 		return FALSE;
 
 	wout(c->who, "Attempt to dispel any ability shroud from %s.",
@@ -601,6 +631,10 @@ d_dispel_abil(struct command *c)
 {
 	int target = c->a;
 	struct char_magic *p;
+	int where = c->d;
+
+	if (!check_char_where(where, c->who, target))
+		return FALSE;
 
 	p = rp_magic(target);
 

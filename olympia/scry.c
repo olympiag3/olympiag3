@@ -65,7 +65,7 @@ cast_check_char_here(int who, int target)
 	else
 		where = subloc(who);
 
-#if 1
+#if 0
 	p_magic(who)->project_cast = 0;
 #endif
 
@@ -771,7 +771,10 @@ v_proj_cast(struct command *c)
 		c->a = subloc(c->who);
 	to_where = c->a;
 
+/*
 	if (!is_loc_or_ship(to_where) || (loc_depth(to_where) != LOC_province))
+*/
+	if (!is_loc_or_ship(to_where))
 	{
 		wout(c->who, "%s is not a location.", box_code(to_where));
 		return FALSE;
@@ -841,7 +844,10 @@ d_proj_cast(struct command *c)
 	p = p_magic(c->who);
 	p->project_cast = to_where;
 
-	wout(c->who, "Next cast will be based from %s.", box_name(to_where));
+	// wout(c->who, "Next cast will be based from %s.", box_name(to_where));
+	wout(c->who, "Next cast will be based from %s (cost %d aura).",
+		box_name(to_where),
+		aura);
 
 	return TRUE;
 }

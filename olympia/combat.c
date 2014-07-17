@@ -2879,11 +2879,6 @@ check_auto_attack_sup(int who)
 	if (in_safe_now(who))	/* safe haven, no combat permitted */
 		return;
 
-#if 0
-	if (loc_depth(where) == LOC_province && weather_here(where, sub_fog))
-		return;
-#endif
-
 	if (char_gone(who))
 		return;
 

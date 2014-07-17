@@ -341,16 +341,16 @@ v_summon_rain(struct command *c)
 	int aura = c->a;
 	int where;
 
-	where = province(cast_where(c->who));
-	c->d = where;
-
 	if (aura < 3)
 		c->a = aura = 3;
 
-	if (!may_cookie_npc(c->who, where, item_rain_cookie))
+	if (!check_aura(c->who, aura))
 		return FALSE;
 
-	if (!check_aura(c->who, aura))
+	where = province(reset_cast_where(c->who));
+	c->d = where;
+
+	if (!may_cookie_npc(c->who, where, item_rain_cookie))
 		return FALSE;
 
 	return TRUE;
@@ -379,14 +379,14 @@ d_summon_rain(struct command *c)
 		return FALSE;
 	}
 
-	reset_cast_where(c->who);
-
 	if (numargs(c) >= 2 && name && *name)
 		set_name(new, name);
 
 	new_storm(new, sub_rain, aura*2, where);
 
 	wout(c->who, "Summoned %s.", box_name_kind(new));
+
+	touch_loc_pl(player(c->who), where);
 
 	return TRUE;
 }
@@ -398,16 +398,16 @@ v_summon_wind(struct command *c)
 	int aura = c->a;
 	int where;
 
-	where = province(cast_where(c->who));
-	c->d = where;
-
 	if (aura < 3)
 		c->a = aura = 3;
 
-	if (!may_cookie_npc(c->who, where, item_wind_cookie))
+	if (!check_aura(c->who, aura))
 		return FALSE;
 
-	if (!check_aura(c->who, aura))
+	where = province(reset_cast_where(c->who));
+	c->d = where;
+
+	if (!may_cookie_npc(c->who, where, item_wind_cookie))
 		return FALSE;
 
 	return TRUE;
@@ -448,6 +448,8 @@ d_summon_wind(struct command *c)
 
 	wout(c->who, "Summoned %s.", box_name_kind(new));
 
+	touch_loc_pl(player(c->who), where);
+
 	return TRUE;
 }
 
@@ -458,16 +460,16 @@ v_summon_fog(struct command *c)
 	int aura = c->a;
 	int where;
 
-	where = province(cast_where(c->who));
-	c->d = where;
-
 	if (aura < 3)
 		c->a = aura = 3;
 
-	if (!may_cookie_npc(c->who, where, item_fog_cookie))
+	if (!check_aura(c->who, aura))
 		return FALSE;
 
-	if (!check_aura(c->who, aura))
+	where = province(reset_cast_where(c->who));
+	c->d = where;
+
+	if (!may_cookie_npc(c->who, where, item_fog_cookie))
 		return FALSE;
 
 	return TRUE;
@@ -504,6 +506,8 @@ d_summon_fog(struct command *c)
 	new_storm(new, sub_fog, aura*2, where);
 
 	wout(c->who, "Summoned %s.", box_name_kind(new));
+
+	touch_loc_pl(player(c->who), where);
 
 	return TRUE;
 }
@@ -629,7 +633,7 @@ v_dissipate(struct command *c)
 		return FALSE;
 	}
 
-	where = province(cast_where(c->who));
+	where = province(reset_cast_where(c->who));
 
 	if (where == province(subloc(c->who)))
 		strcpy(here_s, "here");
@@ -709,7 +713,7 @@ v_renew_storm(struct command *c)
 	if (!check_aura(c->who, aura))
 		return FALSE;
 
-	where = province(cast_where(c->who));
+	where = province(reset_cast_where(c->who));
 
 	if (where == province(subloc(c->who)))
 		strcpy(here_s, "here");
@@ -976,7 +980,7 @@ v_seize_storm(struct command *c)
 	if (!check_aura(c->who, 5))
 		return FALSE;
 
-	where = province(cast_where(c->who));
+	where = province(reset_cast_where(c->who));
 
 	if (where == province(subloc(c->who)))
 		strcpy(here_s, "here");
@@ -1040,6 +1044,8 @@ d_seize_storm(struct command *c)
 					box_name(c->who), box_name(storm));
 
 	p_misc(storm)->summoned_by = c->who;
+
+	touch_loc_pl(player(c->who), where);
 
 	return TRUE;
 }
@@ -1250,22 +1256,7 @@ d_death_fog(struct command *c)
 int
 v_banish_corpses(struct command *c)
 {
-	int where = cast_where(c->who);
-	int i;
-	int sum = 0;
-
-	loop_char_here(where, i)
-	{
-		sum += has_item(i, item_corpse);
-	}
-	next_char_here;
-
-	if (sum == 0)
-	{
-		wout(c->who, "There are no %s here.",
-					plural_item_name(item_corpse, 2));
-		return FALSE;
-	}
+	c->d = reset_cast_where(c->who);
 
 	return TRUE;
 }
@@ -1274,7 +1265,7 @@ v_banish_corpses(struct command *c)
 int
 d_banish_corpses(struct command *c)
 {
-	int where = cast_where(c->who);
+	int where = c->d;
 	int i;
 	int sum = 0;
 	int n;
@@ -1312,8 +1303,6 @@ d_banish_corpses(struct command *c)
 					plural_item_name(item_corpse, n));
 	}
 	next_char_here;
-
-	reset_cast_where(c->who);
 
 	return TRUE;
 }

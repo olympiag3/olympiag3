@@ -317,7 +317,7 @@ auto_bandit(int who, int prog)
 			char_alone(i))
 			continue;
 
-		ilist_append(targets, i);
+		ilist_append(&targets, i);
 	}
 	next_here;
 
@@ -424,6 +424,25 @@ may_cookie_npc(int who, int where, int cookie)
 
 	if (t->terrain > 0 && subkind(where) != t->terrain)
 		bad_place = TRUE;
+
+	if (!t->terrain)
+	{
+		if (cookie == item_wind_cookie && (
+				subkind(where) != sub_plain &&
+				subkind(where) != sub_mountain &&
+				subkind(where) != sub_desert &&
+				subkind(where) != sub_ocean))
+			bad_place = TRUE;
+		if (cookie == item_rain_cookie && (
+				subkind(where) != sub_forest &&
+				subkind(where) != sub_ocean))
+			bad_place = TRUE;
+		if (cookie == item_fog_cookie && (
+				subkind(where) != sub_forest &&
+				subkind(where) != sub_swamp &&
+				subkind(where) != sub_ocean))
+			bad_place = TRUE;
+	}
 
 	if (t->terrain == PROV_OR_CITY &&
 	    subkind(where) != sub_city && loc_depth(where) != LOC_province)
