@@ -823,9 +823,9 @@ d_proj_cast(struct command *c)
 	int aura = c->d;
 	struct char_magic *p;
 
-	if (!is_loc_or_ship(to_where) || (loc_depth(to_where) != LOC_province))
+	if (!is_loc_or_ship(to_where))
 	{
-		wout(c->who, "%s is not a valid location.",
+		wout(c->who, "%s is not a location.",
 				box_code(to_where));
 		return FALSE;
 	}
@@ -844,10 +844,7 @@ d_proj_cast(struct command *c)
 	p = p_magic(c->who);
 	p->project_cast = to_where;
 
-	// wout(c->who, "Next cast will be based from %s.", box_name(to_where));
-	wout(c->who, "Next cast will be based from %s (cost %d aura).",
-		box_name(to_where),
-		aura);
+	wout(c->who, "Next cast will be based from %s.", box_name(to_where));
 
 	return TRUE;
 }
@@ -919,7 +916,7 @@ v_use_proj_cast(struct command *c)
 	p_magic(c->who)->project_cast = im->project_cast;
 
 	wout(c->who, "Project next cast to %s.",
-				char_rep_location(im->project_cast));
+				box_name(im->project_cast));
 	destroy_unique_item(c->who, item);
 
 	return TRUE;
