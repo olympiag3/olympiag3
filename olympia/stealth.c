@@ -320,7 +320,10 @@ v_contact(struct command *c)
 					c->parse[1]);
 		}
 		else
+		{
 			ilist_append(&p_char(c->who)->contact, c->a);
+			wout(c->a, "%s contacted us.", box_name(c->who));
+		}
 
 		cmd_shift(c);
 	}
