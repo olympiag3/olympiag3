@@ -736,6 +736,9 @@ char_where(int where, int who, int target)
 		if (contacted(target, who))
 			return TRUE;
 
+		if (stack_leader(target) == stack_leader(who))
+			return TRUE;
+
 		return FALSE;
 	}
 
