@@ -172,7 +172,7 @@ d_resurrect(struct command *c)
 	if (char_defense(body) < 50)
 	{
 		wout(c->who, "Defense rating of %s is lower than 50, no resurrection "
-			"is possible.");
+			"is possible.", box_name(body));
 		return FALSE;
 	}
 
