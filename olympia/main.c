@@ -394,7 +394,9 @@ send_rep(int pl, int turn)
 				split_bytes, split_lines, report);
 	}
 
-	fprintf(stderr, "   %s\n", cmd);
+	fprintf(stderr, "   sending report for %s to %s\n",
+		box_code_less(pl),
+		p->email);
 	ret = system(cmd);
 
 	if (ret)
@@ -461,7 +463,7 @@ void setup_html_dir(int pl)
 	fprintf(fp, "AuthName ByPassword\n");
 	fprintf(fp, "AuthType Basic\n");
 	fprintf(fp, "\n");
-	fprintf(fp, "<Limit GET>\n");
+	fprintf(fp, "<Limit GET POST>\n");
 	fprintf(fp, "require user %s admin\n", box_code_less(pl));
 	fprintf(fp, "</Limit>\n");
 
@@ -501,22 +503,26 @@ random randompassword
 	}
 
 	if (win_flag) {
-		sprintf(buf, "htpasswd -b lib\\.htpasswd %s \"%s\"",
-		box_code_less(pl), pw);
+		sprintf(buf,
+			"htpasswd -b lib\\.htpasswd %s \"%s\"",
+			box_code_less(pl),
+			pw);
 		ret = system(buf);
 		if (ret) {
-			sprintf(buf, "htpasswd -c -b lib\\.htpasswd %s \"%s\"",
-			box_code_less(pl), pw);
+			sprintf(buf,
+				"htpasswd -c -b lib\\.htpasswd %s \"%s\"",
+				box_code_less(pl),
+				pw);
 			system(buf);
 		}
 	} else {
-		sprintf(buf, "htpasswd -b %s %s \"%s\"",
+		sprintf(buf, "htpasswd -b %s %s \"%s\" &> /dev/null",
 			htpasswd_loc,
 			box_code_less(pl),
 			pw);
 		ret = system(buf);
 		if (ret) {
-			sprintf(buf, "htpasswd -c -b %s %s \"%s\"",
+			sprintf(buf, "htpasswd -c -b %s %s \"%s\" &> /dev/null",
 				htpasswd_loc,
 				box_code_less(pl),
 				pw);
