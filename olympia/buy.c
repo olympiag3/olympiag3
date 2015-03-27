@@ -939,22 +939,39 @@ opium_market_delta(int where)
 void
 expire_trades(int where)
 {
+	int i, j, done;
 	struct trade *t;
-	int i;
+	struct item_ent *e;
 
 	for (i = 0; i < plist_len(bx[where]->trades); i++)
 	{
 		t = bx[where]->trades[i];
 
-		if (t->kind != PRODUCE && t->kind != CONSUME)
-			continue;
-
 		if (t->expire > 0)
 			t->expire--;
 
 		if (is_tradegood(t->item) && t->expire <= 0) {
-			plist_delete((plist *) &bx[where]->trades, i);
-			i--;
+			done = TRUE;
+			if (t->kind == BUY) {
+				/*
+				 * Leave the last BUY order if someone is still
+				 * carrying some of the trade good
+				 */
+				loop_char(j)
+				{
+					loop_inv(j, e)
+					{
+						if (e->item == t->item)
+							done = FALSE;
+					}
+					next_inv;
+				}
+				next_char;
+			}
+			if (done) {
+				plist_delete((plist *) &bx[where]->trades, i);
+				i--;
+			}
 		}
 	}
 }
@@ -998,6 +1015,7 @@ loc_trade_sup(int where, int override)
 
 			new->cost = t->cost;
 			new->cloak = t->cloak;
+			new->expire = t->expire;
 		}
 		else if (t->kind == CONSUME)
 		{
@@ -1007,6 +1025,7 @@ loc_trade_sup(int where, int override)
 
 			new->cost = t->cost;
 			new->cloak = t->cloak;
+			new->expire = t->expire;
 		}
 	}
 	next_trade;
@@ -1430,7 +1449,7 @@ d_find_buy(struct command *c)
 
 	tt = add_city_trade(where, CONSUME, item, qty, cost, 0);
 
-	tt->expire = t->expire + rnd(2,5);
+	tt->expire = t->expire; /*  + rnd(2,5); */
 
 	wout(c->who, "%s buys %s at %s.",
 				box_name(where),
