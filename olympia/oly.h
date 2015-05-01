@@ -655,11 +655,12 @@ struct entity_loc {
 	ilist prov_dest;
 	short shroud;			/* magical scry shroud */
 	short barrier;			/* magical barrier */
-	schar civ;			/* civilization level (0 = wild) */
+	schar civ;				/* civilization level (0 = wild) */
 	schar hidden;			/* is location hidden? */
 	schar dist_from_gate;
 	schar sea_lane;			/* fast ocean travel here */
-					/* also "tracks" for npc ferries */
+							/* also "tracks" for npc ferries */
+	int next;				/* temp loc list link */
 };
 
 struct entity_subloc {

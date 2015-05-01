@@ -1339,8 +1339,7 @@ d_find_buy(struct command *c)
 {
 	int where = subloc(c->who);
 	int item = c->a;
-	int qty;
-	int cost;
+	int qty, cost, distance;
 	ilist l;
 	struct trade *t, *tt;
 	int city_sold, city_bought;
@@ -1414,7 +1413,14 @@ d_find_buy(struct command *c)
  *  Distance check 
  */
 
-	if (los_province_distance(where, city_sold) < 8)
+	distance = los_province_distance(where, city_sold);
+	if (distance < 0)
+	{
+		wout(c->who, "Cannot find route to the source of %s!",
+				box_name(item));
+		return FALSE;
+	}
+	if (distance < 8)
 	{
 		wout(c->who, "Must find a city further away from the source of %s.",
 				box_name(item));

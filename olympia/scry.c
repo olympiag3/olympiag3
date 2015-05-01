@@ -765,7 +765,7 @@ int
 v_proj_cast(struct command *c)
 {
 	int to_where;
-	int aura;
+	int distance, aura;
 
 	if (c->a == 0)
 		c->a = subloc(c->who);
@@ -786,15 +786,16 @@ v_proj_cast(struct command *c)
 		return FALSE;
 	}
 
-	if (diff_region(c->who, to_where))
+	distance = los_province_distance(cast_where(c->who), to_where);
+	if (diff_region(cast_where(c->who), to_where) || distance < 0)
 	{
 	    wout(c->who, "Spells may not be projected to there from here.");
 	    return FALSE;
 	}
 
-	aura = los_province_distance(cast_where(c->who), to_where) + 1;
+	aura = distance + 1;
 	c->d = aura;
-	assert(aura >= 0 && aura < 100);
+	assert(aura >= 0 && aura < 999);
 
 /*
  *  Don't needlessly give away the exact distance with

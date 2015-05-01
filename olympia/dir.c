@@ -89,41 +89,45 @@ determine_map_edges()
 int
 los_province_distance(int a, int b)
 {
-	int ra, rb, r1, r2;
-	int ca, cb, c1, c2;
-	int d1, d2;
+	int here, end, i;
+	struct entity_loc *p;
 
 	a = province(a);
 	b = province(b);
 
-	ra = region_row(a) - 1;
-	rb = region_row(b) - 1;
-	ca = region_col(a) - 1;
-	cb = region_col(b) - 1;
+	loop_province(here)
+	{
+		bx[here]->temp = -1;
+		rp_loc(here)->next = 0;
+	}
+	next_province;
 
-	r1 = min(ra, rb);
-	r2 = max(ra, rb);
-	c1 = min(ca, cb);
-	c2 = max(ca, cb);
+	here = a;
+	bx[here]->temp = 0;
+	end = here;
 
-	/* no wrap N-S */
+	do
+	{
+		/* check if dest found */
+		if (here == b)
+		{
+			return bx[here]->temp;
+		}
+		/* Add neighbours to list */
+		p = rp_loc(here);
+		for (i = 0; i < ilist_len(p->prov_dest); i++)
+			if (p->prov_dest[i] && bx[p->prov_dest[i]]->temp == -1)
+			{
+				rp_loc(end)->next = p->prov_dest[i];
+				end = p->prov_dest[i];
+				bx[end]->temp = bx[here]->temp + 1;
+			}
+		/* keep looking */
+		here = rp_loc(here)->next;
+	}
+	while (here);
 
-	d1 = r2 - r1;
-	if (d1 > (r1 + max_map_row) - r2)
-		d1 = (r1 + max_map_row) - r2;
-
-	d2 = c2 - c1;
-	if (d2 > (c1 + max_map_col) - c2)
-		d2 = (c1 + max_map_col) - c2;
-
-#if 1
-	return d1 + d2;		/* since there is no diagonal movement */
-#else
-	d1 *= d1;
-	d2 *= d2;
-
-	return my_sqrt(d1 + d2);
-#endif
+	return -1;
 }
 
 
