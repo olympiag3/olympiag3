@@ -1191,6 +1191,7 @@ extern int combat_pl;			/* combat log */
 extern int garrison_magic;
 extern int show_to_garrison;
 extern int mount_olympus;
+extern int pledge_backlinks;
 
 #define	in_faery(n)		(region(n) == faery_region)
 #define	in_hades(n)		(region(n) == hades_region)

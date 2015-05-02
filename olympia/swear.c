@@ -111,7 +111,10 @@ set_lord(int who, int new_lord, int k, int lev)
 		reswear_all_sworn(who);
 
 		if (char_pledge(who))
+		{
 			p_magic(who)->pledge = 0;
+			pledge_backlinks = FALSE;
+		}
 
 		ilist_rem_value(&p_player(old_pl)->units, who);
 	}

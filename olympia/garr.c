@@ -399,6 +399,7 @@ v_pledge(struct command *c)
 		p_magic(c->who)->pledge = 0;
 		out(c->who, "Pledge cleared.  "
 				"Lands will be claimed for ourselves.");
+		pledge_backlinks = FALSE;
 		return TRUE;
 	}
 
@@ -426,6 +427,7 @@ v_pledge(struct command *c)
 	out(target, "%s pledges to us.", box_name(c->who), add_s(n));
 
 	p_magic(c->who)->pledge = target;
+	pledge_backlinks = FALSE;
 
 #if 0
 /*

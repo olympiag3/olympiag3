@@ -410,7 +410,7 @@ char_rep_stack_info(int who, int num)
 }
 
 
-static int pledge_backlinks = FALSE;
+int pledge_backlinks = FALSE;
 
 static void
 collect_pledge_backlinks()
