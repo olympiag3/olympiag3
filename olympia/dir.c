@@ -98,7 +98,7 @@ los_province_distance(int a, int b)
 	loop_province(here)
 	{
 		bx[here]->temp = -1;
-		rp_loc(here)->next = 0;
+		p_loc(here)->next = 0;
 	}
 	next_province;
 
