@@ -423,6 +423,13 @@ collect_pledge_backlinks()
 
 	loop_char(i)
 	{
+		p = p_magic(i);
+		ilist_clear(&p->pledged_to_us);
+	}
+	next_char;
+
+	loop_char(i)
+	{
 		if (n = char_pledge(i))
 		{
 			p = p_magic(n);
