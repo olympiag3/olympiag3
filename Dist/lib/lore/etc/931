@@ -1,9 +1,9 @@
-# lore_orc_npc_token [9002]
+# lore_skeleton_npc_token [9001]
 #
-You discover a rough golden idol, crudely fashioned.  Upon grasping
-hold of it, you sense the presence of an orc nearby that responds to
-your mental control.  You find you can issue the following commands
-to your orc unit:
+You discover a tattered banner, crudely fashioned.  Upon grasping
+hold of it, you sense the presence of a skeleton nearby that responds
+to your mental control.  You find you can issue the following commands
+to your skeletal unit:
 
    ADMIT, ATTACK, BANNER, BEHIND, CONTACT, DEFAULT, DEFEND, DROP,
    EXECUTE, FLAG, GIVE, HOSTILE, MOVE, NAME, NEUTRAL, PILLAGE,
