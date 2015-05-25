@@ -38,6 +38,7 @@ create_a_relic(int n, char *name, int use, int weight)
 
 	set_name(n, name);
 	p_item_magic(n)->use_key = use;
+	p_item_magic(n)->lore = n;
 	p_item(n)->weight = weight;
 
 	fprintf(stderr, "Created %s\n", box_name(n));
