@@ -124,8 +124,8 @@ v_hinder_med(struct command *c)
 
 	if (c->b < 1)
 		c->b = 1;
-	if (c->b > 5)
-		c->b = 5;
+	if (c->b > 3)
+		c->b = 3;
 	aura = c->b;
 
 	if (!check_aura(c->who, aura))
@@ -198,8 +198,8 @@ d_hinder_med(struct command *c)
 	p = p_magic(target);
 	p->hinder_meditation += aura;
 
-	if (p->hinder_meditation > 3)
-		p->hinder_meditation = 3;
+	if (p->hinder_meditation > 5)
+		p->hinder_meditation = 5;
 
 	hinder_med_omen(target, c->who);
 
