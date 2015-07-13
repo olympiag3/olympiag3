@@ -1,0 +1,38 @@
+#!/bin/bash
+if [ "$#" -ne 1 ]; then
+    echo "Usage: archipelago <filename>"
+    exit
+fi
+if [ ! -f "$1" ]; then
+    if  [ -e "$1" ]; then
+        echo "Not a valid file"
+    else
+        echo "How big should this map be (0-100)?"
+        read x
+        if [[ ( "$x" -lt 1 ) || ( "$x" -gt 100 ) ]]; then
+            echo "Value out of range"
+            exit
+        fi
+    fi
+    ROW=0
+    for (( row=0; row<"$x"; row++ )); do
+        for (( col=0; col<"$x"; col++ )); do
+            printf "." >> $1
+        done
+        printf "\n" >> $1
+    done
+fi
+
+temp="/tmp/archipelago.$$"
+while true ; do
+    island -b 3 -c 5 < $1 > $temp
+    cat $temp
+    read command
+    case "$command" in
+        A | a) mv $temp $1 ;;
+        R | r) rm $temp ;;
+        F | f) mv $temp $1 ; break ;;
+        Q | q) rm $temp ; break ;;
+        *) echo "Options are (A)ccept, (R)eject, (F)inish or (Q)uit" ;;
+    esac
+done
