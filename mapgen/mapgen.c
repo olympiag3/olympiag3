@@ -17,10 +17,11 @@
 
 
 #include	<stdio.h>
+#include	<stdlib.h>
 #include	"z.h"
 
 
-#define		LEN		256
+#define		LINE_LEN	256
 
 #define		TRUE		1
 #define		FALSE		0
@@ -64,12 +65,12 @@
 
 
 #define		DIR_N		1
-#define		DIR_NE		2
-#define		DIR_E		3
-#define		DIR_SE		4
-#define		DIR_S		5
-#define		DIR_SW		6
-#define		DIR_W		7
+#define		DIR_E		2
+#define		DIR_S		3
+#define		DIR_W		4
+#define		DIR_NE		5
+#define		DIR_SE		6
+#define		DIR_SW		7
 #define		DIR_NW		8
 
 #define		MAX_DIR		9
@@ -218,7 +219,6 @@ FILE *road_fp;
 
 main()
 {
-
 	clear_alloc_flag();
 	dir_assert();
 	open_fps();
@@ -254,6 +254,8 @@ main()
 	fprintf(stderr, "highest province = %d\n",
 				map[max_row][max_col]->region);
 	fprintf(stderr, "\n");
+
+	save_seed("randseed");
 
 #if 0
 /*
@@ -343,7 +345,7 @@ map_init()
 
 read_map()
 {
-	char buf[LEN];
+	char buf[LINE_LEN];
 	int row, col;
 	int terrain;
 	int skipnext = FALSE;
@@ -361,7 +363,7 @@ read_map()
 
 	row = 0;
 
-	while (fgets(buf, LEN, fp) != NULL)
+	while (fgets(buf, LINE_LEN, fp) != NULL)
 	{
 		for (col = 0; buf[col] && buf[col] != '\n'; col++)
 		{
@@ -650,6 +652,19 @@ read_map()
 				n = create_a_city(row, col, "Golden City", TRUE);
 
 				fprintf(stderr, "Golden City #%c %s at (%d,%d)\n",
+						buf[col], subloc[n]->name, row, col);
+				break;
+
+			case '9': /* A starting city with a random name */
+			case '0':
+				terrain = terr_forest;
+				color = 19;
+				map[row][col]->safe_haven = TRUE;
+
+				n = create_a_city(row, col, NULL, TRUE);
+				subloc[n]->safe_haven = TRUE;
+
+				fprintf(stderr, "Start city #%c %s at (%d,%d)\n",
 						buf[col], subloc[n]->name, row, col);
 				break;
 
@@ -1094,28 +1109,15 @@ adjacent_tile_water(row, col)
 int row;
 int col;
 {
-	struct tile *p;
+	struct tile *p = NULL;
+	int i;
 
 	randomize_dir_vector();
 
-	p = adjacent_tile_sup(row, col, dir_vector[1]);
+	for (i = 1; !(p && p->terrain == terr_ocean) && i < MAX_DIR; i++)
+		p = adjacent_tile_sup(row, col, dir_vector[i]);
 
-	if (!p || p->terrain != terr_ocean)
-		p = adjacent_tile_sup(row, col, dir_vector[2]);
-	if (!p || p->terrain != terr_ocean)
-		p = adjacent_tile_sup(row, col, dir_vector[3]);
-	if (!p || p->terrain != terr_ocean)
-		p = adjacent_tile_sup(row, col, dir_vector[4]);
-	if (!p || p->terrain != terr_ocean)
-		p = adjacent_tile_sup(row, col, dir_vector[5]);
-	if (!p || p->terrain != terr_ocean)
-		p = adjacent_tile_sup(row, col, dir_vector[6]);
-	if (!p || p->terrain != terr_ocean)
-		p = adjacent_tile_sup(row, col, dir_vector[7]);
-	if (!p || p->terrain != terr_ocean)
-		p = adjacent_tile_sup(row, col, dir_vector[8]);
-
-	return p;
+	return (i < MAX_DIR) ? p : NULL;
 }
 
 
@@ -1124,27 +1126,15 @@ adjacent_tile_terr(row, col)
 int row;
 int col;
 {
-	struct tile *p;
+	struct tile *p = NULL;
+	int i;
 
 	randomize_dir_vector();
 
-	p = adjacent_tile_sup(row, col, dir_vector[1]);
-	if (!p || p->terrain == terr_land || p->terrain == terr_ocean)
-		p = adjacent_tile_sup(row, col, dir_vector[2]);
-	if (!p || p->terrain == terr_land || p->terrain == terr_ocean)
-		p = adjacent_tile_sup(row, col, dir_vector[3]);
-	if (!p || p->terrain == terr_land || p->terrain == terr_ocean)
-		p = adjacent_tile_sup(row, col, dir_vector[4]);
-	if (!p || p->terrain == terr_land || p->terrain == terr_ocean)
-		p = adjacent_tile_sup(row, col, dir_vector[5]);
-	if (!p || p->terrain == terr_land || p->terrain == terr_ocean)
-		p = adjacent_tile_sup(row, col, dir_vector[6]);
-	if (!p || p->terrain == terr_land || p->terrain == terr_ocean)
-		p = adjacent_tile_sup(row, col, dir_vector[7]);
-	if (!p || p->terrain == terr_land || p->terrain == terr_ocean)
-		p = adjacent_tile_sup(row, col, dir_vector[8]);
+	for (i = 1; !(p && p->terrain != terr_land && p->terrain != terr_ocean) && i < MAX_DIR; i++)
+		p = adjacent_tile_sup(row, col, dir_vector[i]);
 
-	return p;
+	return (i < MAX_DIR) ? p : NULL;
 }
 
 
@@ -1262,6 +1252,11 @@ int dir;
 		assert(FALSE);
 	}
 
+	if (col < 0)
+		col = max_col;
+	if (col > max_col)
+		col = 0;
+
 	if (row < 0 || row > 99 || col < 0 || col > 99)
 		return NULL;	/* off the map */
 
@@ -1292,21 +1287,22 @@ int col;
 
 randomize_dir_vector()
 {
-	int i;
-	int one, two, tmp;
+	int i, swap, tmp;
 
 	dir_vector[0] = 0;
 	for (i = 1; i < MAX_DIR; i++)
 		dir_vector[i] = i;
 
-	for (i = 1; i < 20; i++)
+	for (i = 1; i < MAX_DIR; i++)
 	{
-		one = rnd(1, MAX_DIR-1);
-		two = rnd(1, MAX_DIR-1);
+		swap = rnd(i, MAX_DIR - 1);
 
-		tmp = dir_vector[one];
-		dir_vector[one] = dir_vector[two];
-		dir_vector[two] = tmp;
+		if (i != swap)
+		{
+			tmp = dir_vector[i];
+			dir_vector[i] = dir_vector[swap];
+			dir_vector[swap] = tmp;
+		}
 	}
 }
 
@@ -1770,7 +1766,7 @@ void
 set_regions()
 {
 	FILE *fp;
-	char buf[LEN];
+	char buf[LINE_LEN];
 	int row, col;
 	int ins;
 	int land_count = 0;
@@ -1786,7 +1782,7 @@ set_regions()
 		return;
 	}
 
-	while (fgets(buf, LEN, fp) != NULL)
+	while (fgets(buf, LINE_LEN, fp) != NULL)
 	{
 		for (p = buf; *p && *p != '\n'; p++)
 			;
@@ -1945,7 +1941,7 @@ void
 set_province_clumps()
 {
 	FILE *fp;
-	char buf[LEN];
+	char buf[LINE_LEN];
 	int row, col;
 	int count = 0;
 	char *p;
@@ -1959,7 +1955,7 @@ set_province_clumps()
 		return;
 	}
 
-	while (fgets(buf, LEN, fp) != NULL)
+	while (fgets(buf, LINE_LEN, fp) != NULL)
 	{
 		for (p = buf; *p && *p != '\n'; p++)
 			;
@@ -2359,7 +2355,7 @@ random_tile_from_each_region()
 	static struct tile **l = NULL;
 	int i, j;
 
-	plist_clear((ilist *) &l);
+	plist_clear((plist *) &l);
 
 	for (i = 1; i <= inside_top; i++)
 	{
@@ -2369,7 +2365,11 @@ random_tile_from_each_region()
 		if (strcmp(inside_names[i], "Impassable Mountains") == 0)
 			continue;
 
-		j = rnd(0, plist_len(inside_list[i])-1);
+		do
+		{
+			j = rnd(0, plist_len(inside_list[i])-1);
+		}
+		while (inside_list[i][j]->safe_haven);
 
 		plist_append((plist *) &l, inside_list[i][j]);
 	}
@@ -2406,7 +2406,7 @@ struct tile **l;
 			q = adjacent_tile_terr(p->row, p->col);
 		}
 
-		if (q == NULL || q->terrain == terr_ocean)
+		if (q == NULL || q->terrain == terr_ocean || q->safe_haven)
 		{
 			fprintf(stderr, "couldn't shift tour (%d,%d)\n",
 						l[i]->row, l[i]->col);
@@ -2723,7 +2723,7 @@ clear_subloc_marks()
 
 mark_bad_locs()
 {
-	int i, j;
+	int i, j, r, c;
 
 	for (i = 1; i <= inside_top; i++)
 		if (strcmp(inside_names[i], "Impassable Mountains") == 0)
@@ -2731,6 +2731,12 @@ mark_bad_locs()
 			for (j = 0; j < plist_len(inside_list[i]); j++)
 				inside_list[i][j]->mark = 1;
 		}
+
+	/* don't put gates in locations where magic can't be used */
+	for (r = 0; r <= max_row; r++)
+		for (c = 0; c < max_col; c++)
+			if (map[r][c] && map[r][c]->safe_haven)
+				map[r][c]->mark = 1;
 }
 
 
