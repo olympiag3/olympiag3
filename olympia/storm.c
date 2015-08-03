@@ -172,7 +172,7 @@ move_bound_storms(int ship, int where)
 			continue;
 		}
 
-		move_storm(storm, where);
+		move_storm(storm, province(where));
 	}
 }
 
