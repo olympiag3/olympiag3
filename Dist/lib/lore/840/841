@@ -1,5 +1,5 @@
-Spell:  Scry location [9141]
-
+#Spell:  Scry location [9141]
+#
 Usage:  USE @@@@ <location> [aura]
 
 Required aura:  one or more points, as given
