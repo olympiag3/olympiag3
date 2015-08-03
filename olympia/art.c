@@ -735,7 +735,10 @@ v_forge_aura(struct command *c)
 	}
 
 	if (c->a < 1)
-		c->a = 1;
+	{
+		wout(c->who, "No aura-level specified.");
+		return FALSE;
+	}
 	aura = c->a;
 
 	if (!check_aura(c->who, aura))
