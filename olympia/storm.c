@@ -26,6 +26,13 @@ v_bind_storm(struct command *c)
 		return FALSE;
 	}
 
+	if (province(storm) != province(ship))
+	{
+		wout(c->who, "Storm must be in the same province as the ship "
+					"it is to be bound to.");
+		return FALSE;
+	}
+
 	if (!check_aura(c->who, 3))
 		return FALSE;
 
@@ -52,6 +59,13 @@ d_bind_storm(struct command *c)
 	if (!is_ship(ship))
 	{
 		wout(c->who, "%s is no longer on a ship.", box_name(c->who));
+		return FALSE;
+	}
+
+	if (province(storm) != province(ship))
+	{
+		wout(c->who, "Storm is no longer in the same province as the ship "
+					"it is to be bound to.");
 		return FALSE;
 	}
 
