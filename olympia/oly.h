@@ -489,18 +489,19 @@ struct box {
 };
 
 struct entity_player {
-        char *full_name;
-        char *email;
-        char *vis_email;		/* address to put in player list */
-        char *password;
+	char *full_name;
+	char *email;
+	char *vis_email;		/* address to put in player list */
+	char *last_email;		/* where did the last orders come from? */
+	char *password;
 	int first_turn;			/* which turn was their first? */
-	int last_order_turn;		/* last turn orders were submitted */
+	int last_order_turn;	/* last turn orders were submitted */
 	struct order_list **orders;	/* ilist of orders for units in */
-					/* this faction */
+								/* this faction */
 	sparse known;			/* visited, lore seen, encountered */
 
 	ilist units;			/* what units are in our faction? */
-	struct admit **admits;		/* admit permissions list */
+	struct admit **admits;	/* admit permissions list */
 	ilist unformed;			/* nobles as yet unformed */
 
 	int split_lines;		/* split mail at this many lines */

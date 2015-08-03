@@ -466,6 +466,7 @@ do_begin(struct command *c)
 	pl = c->a;
 
 	p_player(pl)->sent_orders = 1;	/* okay, they sent something in */
+	p_player(pl)->last_email = reply_addr;	/* record where from */
 
 #if 0
 /*

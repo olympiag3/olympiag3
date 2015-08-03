@@ -1462,6 +1462,9 @@ print_player(FILE *fp, struct entity_player *p)
 	if (p->vis_email && *(p->vis_email))
 		fprintf(fp, " ve %s\n", p->vis_email);
 
+	if (p->last_email && *(p->last_email))
+		fprintf(fp, " le %s\n", p->last_email);
+
 	if (p->password && *(p->password))
 		fprintf(fp, " pw %s\n", p->password);
 
@@ -1532,6 +1535,7 @@ scan_player(struct entity_player *p, int box_num)
 		case 'fn':	p->full_name = str_save(t);	break;
 		case 'em':	p->email = str_save(t);		break;
 		case 've':	p->vis_email = str_save(t);	break;
+		case 'le':	p->last_email = str_save(t);	break;
 		case 'pw':	p->password = str_save(t);	break;
 		case 'np':	p->noble_points = atoi(t);	break;
 		case 'fs':	p->fast_study = atoi(t);	break;
