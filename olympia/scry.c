@@ -343,8 +343,6 @@ notify_loc_shroud(int where)
 
 	loop_char_here(where, who)
 	{
-		int exp;
-
 		if (has_skill(who, sk_shroud_region))
 		{
 			if (p->shroud > 0)
@@ -395,13 +393,13 @@ d_dispel_region(struct command *c)
 		return FALSE;
 	}
 
+	if (!charge_aura(c->who, 3))
+		return FALSE;
+
 	p = rp_loc(targ_loc);
 
 	if (p && p->shroud > 0)
 	{
-		if (!charge_aura(c->who, 3))
-			return FALSE;
-
 		wout(c->who, "Removed an aura %s magical shroud from %s.",
 						nice_num(p->shroud),
 						box_name(targ_loc));
