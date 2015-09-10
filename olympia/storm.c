@@ -585,7 +585,8 @@ parse_storm_dir(struct command *c, int storm)
 	}
 
 	for (i = 0; i < ilist_len(l); i++)
-		if (l[i]->direction == dir)
+		if (l[i]->direction == dir &&
+				loc_depth(l[i]->destination) == LOC_province)
 			return l[i];
 
 	wout(c->who, "No %s route from %s.",
