@@ -245,7 +245,7 @@ int
 v_shroud_region(struct command *c)
 {
 	int aura;
-	int where = cast_where(c->who);
+	int where = province(cast_where(c->who));
 
 	if (c->a < 1)
 		c->a = 1;
