@@ -1494,8 +1494,10 @@ int col;
 	ne = adjacent_tile_sup(row, col, DIR_NE);
 	se = adjacent_tile_sup(row, col, DIR_SE);
 
-	if (n->mark || s->mark || e->mark || w->mark ||
-	    nw->mark || sw->mark || ne->mark || se->mark)
+	if ((n && n->mark) || (s && s->mark) ||
+		(e && e->mark) || (w && w->mark) ||
+	    (nw && nw->mark) || (sw && sw->mark) ||
+		(ne && ne->mark) || (se && se->mark))
 		return FALSE;
 
 	switch (road_name_cnt++ % 3)
@@ -2437,14 +2439,14 @@ struct tile **l;
 make_gates()
 {
 
-	gate_province_islands(25);
-	random_province_gates(25);
+	gate_province_islands((land_count + 199) / 200);
+	random_province_gates((land_count + 199) / 200);
 	gate_continental_tour();
 	gate_stone_circles();
 
-	gate_land_ring(5);
-	gate_link_islands(9);		/* disjoint */
-	gate_link_islands(3);		/* might cross */
+	gate_land_ring((land_count + 749) / 750);
+	gate_link_islands((num_islands + 149) / 150);		/* disjoint */
+	gate_link_islands(num_islands / 450);		/* might cross */
 
 #if 0
 	show_gate_coverage();
@@ -2576,7 +2578,7 @@ int rings;
 
 	for (j = 1; j <= rings; j++)
 	{
-		num = rnd(6, 12);
+		num = rnd(5, 10);
 
 		first = random_island();
 		n = first;
@@ -2607,7 +2609,7 @@ int rings;
 
 	for (j = 1; j <= rings; j++)
 	{
-		num = rnd(5, 12);
+		num = rnd(5, 10);
 		random_province(&r_first, &c_first, 0);
 
 		r_n = r_first;
@@ -3041,36 +3043,41 @@ struct {
 	int hidden;		/* 0=no, 1=yes, 2=rnd(0,1) */
 } loc_table[] = {
 
-	{terr_desert,		terr_cave,		10,	1},
-	{terr_desert,		terr_oasis,		10,	2},
+	{terr_desert,		terr_cave,			10,	1},
+	{terr_desert,		terr_oasis,			10,	2},
 	{terr_desert,		terr_sand_pit,		10,	2},
 
-	{terr_mountain,		terr_ruins,		10,	1},
-	{terr_mountain,		terr_cave,		10,	1},
-	{terr_mountain,		terr_yew_grove,		10,	2},
-	{terr_mountain,		terr_lair,		10,	2},
+	{terr_mountain,		terr_ruins,			10,	1},
+	{terr_mountain,		terr_cave,			10,	1},
+	{terr_mountain,		terr_yew_grove,		8,	2},
+	{terr_mountain,		terr_tree_cir,		5,	1},
+	{terr_mountain,		terr_pits,			5,	1},
+	{terr_mountain,		terr_lair,			10,	2},
 	{terr_mountain,		terr_battlefield,	6,	2},
 
-	{terr_swamp,		terr_bog,		10,	2},
-	{terr_swamp,		terr_pits,		10,	2},
+	{terr_swamp,		terr_bog,			10,	2},
+	{terr_swamp,		terr_pits,			10,	2},
 	{terr_swamp,		terr_battlefield,	6,	2},
-	{terr_swamp,		terr_lair,		5,	2},
+	{terr_swamp,		terr_lair,			5,	2},
 
-	{terr_forest,		terr_ruins,		10,	1},
+	{terr_forest,		terr_ruins,			10,	1},
+	{terr_forest,		terr_rocky_hill,	10,	0},
 	{terr_forest,		terr_tree_cir,		10,	1},
-	{terr_forest,		terr_ench_for,		10,	1},
+	{terr_forest,		terr_ench_for,		8,	1},
+	{terr_forest,		terr_pasture,		5,	0},
 	{terr_forest,		terr_yew_grove,		10,	2},
-	{terr_forest,		terr_cave,		10,	1},
-	{terr_forest,		terr_grove,		9,	1},
+	{terr_forest,		terr_cave,			10,	1},
+	{terr_forest,		terr_grove,			9,	1},
 	{terr_forest,		terr_battlefield,	6,	2},
-	{terr_swamp,		terr_lair,		3,	1},
+	{terr_forest,		terr_lair,			3,	1},
 
-	{terr_plain,		terr_ruins,		10,	1},
+	{terr_plain,		terr_ruins,			10,	1},
 	{terr_plain,		terr_pasture,		10,	0},
 	{terr_plain,		terr_rocky_hill,	10,	0},
-	{terr_plain,		terr_sac_grove,		10,	2},
+	{terr_plain,		terr_sac_grove,		6,	2},
+	{terr_plain,		terr_tree_cir,		6,	1},
 	{terr_plain,		terr_pop_field,		10,	0},
-	{terr_plain,		terr_cave,		10,	1},
+	{terr_plain,		terr_cave,			10,	1},
 	{terr_plain,		terr_battlefield,	6,	2},
 
 	{0,0,0,0}
