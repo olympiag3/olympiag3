@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -g -I. -I../include
+CFLAGS = -g -I. -I../include -m32
 
 GAME_OBJECTS = add.o adv.o alchem.o art.o basic.o beast.o build.o buy.o \
   c1.o c2.o check.o cloud.o code.o combat.o day.o dir.o display.o eat.o \
