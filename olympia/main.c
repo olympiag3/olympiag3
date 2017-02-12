@@ -650,9 +650,9 @@ main(int argc, char **argv)
 
 	while ((c = getopt(argc, argv, "waeEfirl:pR?sStMTAh")) != EOF) {
 		switch (c) {
-	case 'w':
+		case 'w':
 			win_flag = TRUE;
-		break;
+			break;
 
 		case 'a':
 			add_flag = TRUE;
