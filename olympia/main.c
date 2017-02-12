@@ -746,7 +746,7 @@ main(int argc, char **argv)
 		fprintf(stderr, "	-S		Save the database at completion\n");
 		fprintf(stderr, "	-t		Test ilist code\n");
 		fprintf(stderr, "	-T		Print timing info\n");
-		fprintf(stderr, "	-M		Mail reports\n");
+		fprintf(stderr, "	-M		Mail reports and order acks\n");
 		fprintf(stderr, "	-A		Charge player accounts\n");
 		return 1;
 	}
@@ -754,7 +754,7 @@ main(int argc, char **argv)
 	load_db();
 
 	if (eat_flag) {
-		eat_loop(eat_fast);
+		eat_loop(eat_fast, mail_now);
 		return 0;
 	}
 

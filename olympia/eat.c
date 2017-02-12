@@ -1058,7 +1058,7 @@ int eat_queue_mode = 0;
 
 
 static void
-eat(char *fnam)
+eat(char *fnam, int mail_now)
 {
 	FILE *fp;
 	int ret;
@@ -1094,7 +1094,7 @@ eat(char *fnam)
 
 	reply_addr = parse_reply(fp);
 
-	if (reply_addr)
+	if (mail_now && reply_addr)
 	{
 		if (i_strncmp(reply_addr, "postmaster", 10) == 0 ||
 		    i_strncmp(reply_addr, "root@nyx.net", 12) == 0 ||
@@ -1144,7 +1144,7 @@ eat(char *fnam)
 			ret = system(sout("sendmail conf\\%d", eat_pl));
 			system(sout("del conf\\%d", eat_pl));
 		} else {
-		ret = system(sout("g2rep %s/log/%d | %ssendmail -t -f %s",
+			ret = system(sout("g2rep %s/log/%d | %ssendmail -t -f %s",
 				libdir, eat_pl, entab(eat_pl), from_host));
 		}
 
@@ -1210,13 +1210,16 @@ write_remind_list()
 
 
 static int
-read_spool(int fast)
+read_spool(int eat_fast, int mail_now)
 {
 	DIR *d;
 	struct dirent *e;
 	char fnam[LEN];
-	int ret = !fast;
+	int success = TRUE;
 	int did_one = FALSE;
+
+	if (eat_fast)
+		success = FALSE;
 
 	sprintf(fnam, "%s/spool", libdir);
 	d = opendir(fnam);
@@ -1230,18 +1233,19 @@ read_spool(int fast)
 
 	while ((e = readdir(d)) != NULL)
 	{
+		sprintf(fnam, "%s/spool/%s", libdir, e->d_name);
+
 		if (strncmp(e->d_name, "stop", 4) == 0)
 		{
-			ret = FALSE;
-			unlink(sout("%s/spool/%s", libdir, e->d_name));
+			success = FALSE;
+			unlink(fnam);
 		}
 
 		if (*(e->d_name) == 'm')
 		{
-			sprintf(fnam, "%s/spool/%s", libdir, e->d_name);
-			eat(fnam);
+			eat(fnam, mail_now);
 			unlink(fnam);
-			if (!fast)
+			if (!eat_fast)
 				sleep(5);
 
 			did_one = TRUE;
@@ -1253,12 +1257,12 @@ read_spool(int fast)
 	if (did_one)
 		write_remind_list();
 
-	return ret;
+	return success;
 }
 
 
 void
-eat_loop(int fast)
+eat_loop(int eat_fast, int mail_now)
 {
 
 	setbuf(stdout, NULL);
@@ -1268,7 +1272,7 @@ eat_loop(int fast)
 
 	write_remind_list();
 
-	while (read_spool(fast))
+	while (read_spool(eat_fast, mail_now))
 	{
 		sleep(10);
 	}
