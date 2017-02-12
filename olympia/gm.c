@@ -500,6 +500,10 @@ gm_show_gate_stats(int pl)
 	out_path = MASTER;
 	out_alt_who = OUT_LORE;
 
+	if (n_gates == 0) { /* generated databases often have no gates */
+		return;
+	}
+
 	out(pl, "%d/%d gates found (%d%%)", n_found, n_gates,
 				n_found * 100 / n_gates);
 	out(pl, "    %d sealed (%d%%), %d notify jump (%d%%), %d notify "

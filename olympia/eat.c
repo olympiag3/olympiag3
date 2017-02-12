@@ -1061,7 +1061,7 @@ static void
 eat(char *fnam, int mail_now)
 {
 	FILE *fp;
-	int ret;
+	int ret = 0;
 	int okay_flag = 0;
 	char buf[1025];
 
@@ -1094,7 +1094,7 @@ eat(char *fnam, int mail_now)
 
 	reply_addr = parse_reply(fp);
 
-	if (mail_now && reply_addr)
+	if (reply_addr)
 	{
 		if (i_strncmp(reply_addr, "postmaster", 10) == 0 ||
 		    i_strncmp(reply_addr, "root@nyx.net", 12) == 0 ||
@@ -1127,16 +1127,13 @@ eat(char *fnam, int mail_now)
 		{
 			unlink(sout("%s/orders/%d", libdir, pl));
 			save_player_orders(pl);
-			unlink(sout("%s/fact/%d", libdir, pl));
+			unlink(sout("%s/fact/%d", libdir, pl));	
 			write_player(pl);
 		}
 
 		close_logfile();
 
 #if 0
-		ret = system(sout("g2rep %s/log/%d | %srmail %s g2watch",
-				libdir, eat_pl, entab(eat_pl), who_to));
-#else
 		if (win_flag) {
 			system(sout("g2rep %s\\log\\%d >> conf\\%d", libdir, eat_pl, eat_pl));
 			if (player_notab(eat_pl))
@@ -1144,13 +1141,12 @@ eat(char *fnam, int mail_now)
 			ret = system(sout("sendmail conf\\%d", eat_pl));
 			system(sout("del conf\\%d", eat_pl));
 		} else {
+#endif
+
+		if (mail_now) {
 			ret = system(sout("g2rep %s/log/%d | %ssendmail -t -f %s",
 				libdir, eat_pl, entab(eat_pl), from_host));
 		}
-
-
-
-#endif
 
 		if (ret)
 		{
