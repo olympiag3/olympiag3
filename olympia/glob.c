@@ -12,8 +12,8 @@ char *game_url = "http://olympia.v-labs.be/g3";
 char *rules_url = "http://oly.v-labs.be/g3/node/11";
 char *times_url = "http://oly.v-labs.be/g3/node/409";
 char *htpasswd_loc = "/u/oly/g2/lib/ht-passwords";
-int garrison_pay = 4;
-int army_slow_factor = 10;
+int garrison_pay = 2;
+int army_slow_factor = 20;
 int auto_quit_turns = 0;
 
 struct box **bx;		/* all possible entities */
