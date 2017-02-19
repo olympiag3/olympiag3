@@ -643,6 +643,12 @@ main(int argc, char **argv)
 	int html_flag = FALSE;
 	int startloc_flag = FALSE;
 
+	if (sizeof(int) != sizeof(int *)) {
+		puts("The Olympia C code is not 64-bit clean.");
+		/* at the least: it puts pointers into ilists */
+		exit(1);
+	}
+
 	printf("\tsizeof(struct box) = %d\n", sizeof (struct box));
 	setbuf(stderr, NULL);
 
