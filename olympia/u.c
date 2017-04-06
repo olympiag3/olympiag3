@@ -1873,7 +1873,7 @@ find_nearest_land(int where)
 	int i;
 	int orig_where = where;
 	int dir;
-	int check = 0;
+	int check;
 	int ret = 0;
 	int try_one, try_two;
 
@@ -1904,6 +1904,7 @@ find_nearest_land(int where)
 
 			where = location_direction(where, dir);
 
+			check = 0;
 			while (where == 0)
 			{
 				where = orig_where;
